@@ -6,7 +6,7 @@ public abstract class Usuario {
     private String DNI;
     private String nombre;
     private String apellido;
-    private Eventos[] actividad;
+    private Evento[] actividad;
     private Tutor[] tutor;
 
     // Constructor para crear un nuevo usuario

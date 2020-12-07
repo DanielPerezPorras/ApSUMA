@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.Date;
 
-public class Conferencia extends Eventos{
+public class Conferencia extends Evento {
 
     private String link;
 
