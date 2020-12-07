@@ -1,3 +1,7 @@
+package modelo;
+
+import modelo.Tutor;
+
 public abstract class Usuario {
     private String correo;
     private String DNI;
