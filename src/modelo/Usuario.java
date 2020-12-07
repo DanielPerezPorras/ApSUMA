@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public abstract class Usuario {
 
     private String correo;
@@ -7,7 +9,8 @@ public abstract class Usuario {
     private String nombre;
     private String apellido;
     private String contra;
-    private Evento[] actividad;
+    private ArrayList<Evento> actividad;
+    private ArrayList<Tutor> tutor;
 
     // Constructor para crear un nuevo usuario
     public Usuario(String cor, String dni, String nombr, String apell, String contr){
@@ -17,6 +20,8 @@ public abstract class Usuario {
         nombre = nombr;
         apellido = apell;
         contra = contr;
+        actividad = new ArrayList<>();
+        tutor = new ArrayList<>();
     }
 
     // Constructor para recuperar los datos de un usuario ya existente
@@ -42,6 +47,10 @@ public abstract class Usuario {
         actividad = null;
     }
 
+    public void darseAltaEvento(Evento evento){
+        actividad.add(evento);
+    }
+
     public String getCorreo() {
         return correo;
     }
@@ -58,14 +67,11 @@ public abstract class Usuario {
         return apellido;
     }
 
-    public Evento[] getActividad() {
+    public ArrayList<Evento> getActividad() {
         return actividad;
     }
 
-    public Tutor[] getTutor() {
+    public ArrayList<Tutor> getTutor() {
         return tutor;
     }
-
-    private Tutor[] tutor;
-
 }
