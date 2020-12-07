@@ -51,6 +51,10 @@ public abstract class Usuario {
         actividad.add(evento);
     }
 
+    public void darseBajaEvento(Evento evento){
+        actividad.remove(evento);
+    }
+
     public String getCorreo() {
         return correo;
     }
