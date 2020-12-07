@@ -6,16 +6,17 @@ import java.util.List;
 
 public abstract class Evento {
 
-    private int id;
+    private Integer id;
     private Date Fecha;
     private String Nombre;
     private List<Usuario> usuarios;
     private Usuario creador;
+    private Administrador administrador;
     //TODO private Contenido[] contenido;
 
-    public Evento(int identificador,Date dia, String nom, Usuario dueno) {
+    public Evento(Date dia, String nom, Usuario dueno) {
 
-        id = identificador;
+        id = null;
         Fecha = dia;
         Nombre = nom;
         usuarios = new ArrayList<>();
@@ -38,4 +39,13 @@ public abstract class Evento {
         }
     }
 
+    public void eliminarEvento(){
+        id = null;
+        Fecha = null;
+        Nombre = null;
+        for (Usuario usuario : usuarios){
+            usuario.darseBajaEvento(this);
+        }
+        administrador.darseBajaEvento(this);
+    }
 }
