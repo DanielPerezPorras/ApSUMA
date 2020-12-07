@@ -6,9 +6,12 @@ public class Conferencia extends Evento {
 
     private String link;
 
-    public Conferencia(Date dia, String nom, String link) {
-        super(dia,nom);
+    public Conferencia(int identificador, Date dia, String nom,Usuario dueno,  String link) {
+        super(identificador,dia,nom,dueno);
         this.link = link;
     }
 
+    public Conferencia(int identificador) {
+        super(identificador);
+    }
 }
