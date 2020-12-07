@@ -7,10 +7,11 @@ import java.util.List;
 public class BD {
     private Connection con ;
 
-    public BD(String user, String pass, String databaseName){
+    public BD(String JDBC_DRIVER, String DB_URL, String DB_SCHEMA, String USER, String PASS){
         try {
-            con = DriverManager.getConnection(databaseName,user, pass);
-        } catch(SQLException ex) {
+            Class.forName(JDBC_DRIVER);
+            con = DriverManager.getConnection(DB_URL + "/" + DB_SCHEMA,USER,PASS);
+        } catch(SQLException | ClassNotFoundException ex) {
             throw new ErrorBD("Error al Conectar con la base de datos." + ex.getMessage());
         }
     }
