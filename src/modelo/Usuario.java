@@ -5,20 +5,16 @@ import java.util.ArrayList;
 public abstract class Usuario {
 
     private String correo;
-    private String DNI;
-    private String nombre;
-    private String apellido;
+    private String nombreUsuario;
     private String contra;
     private ArrayList<Evento> actividad;
     private ArrayList<Tutor> tutor;
 
     // Constructor para crear un nuevo usuario
-    public Usuario(String cor, String dni, String nombr, String apell, String contr){
+    public Usuario(String cor, String nombreUs, String contr){
         // Hacer sentencia SQL "INSERT..."
         correo = cor;
-        DNI = dni;
-        nombre = nombr;
-        apellido = apell;
+        nombreUsuario = nombreUs;
         contra = contr;
         actividad = new ArrayList<>();
         tutor = new ArrayList<>();
@@ -30,21 +26,14 @@ public abstract class Usuario {
         correo = cor;
     }
 
-    private void modificarInformacion(String cor, String dni, String nombr, String apell, String contr){
+    private void modificarInformacion(String cor, String nombr, String contr){
         correo = cor;
-        DNI = dni;
-        nombre = nombr;
-        apellido = apell;
+        nombreUsuario = nombr;
         contra = contr;
     }
 
     public void eliminarCuenta(){
-        correo = null;
-        DNI = null;
-        nombre = null;
-        apellido = null;
-        contra = null;
-        actividad = null;
+        modificarInformacion(null, null, null);
     }
 
     public void darseAltaEvento(Evento evento){
@@ -59,16 +48,8 @@ public abstract class Usuario {
         return correo;
     }
 
-    public String getDNI() {
-        return DNI;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
+    public String getNombreUsuario(){
+        return nombreUsuario;
     }
 
     public ArrayList<Evento> getActividad() {

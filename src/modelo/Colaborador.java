@@ -3,12 +3,13 @@ package modelo;
 import java.util.ArrayList;
 
 public abstract class Colaborador extends Usuario{
-    private String nombre;
+    private String correoCorp;
     private ArrayList<Evento> creado;
 
-    public Colaborador(String cor, String dni, String nombr, String apell) {
-        super(cor, dni, nombr, apell);
-            creado = new ArrayList<>();
+    public Colaborador(String correoCorporativo, String cor, String usuario, String contr) {
+        super(cor, usuario, contr);
+        correoCorp = correoCorporativo;
+        creado = new ArrayList<>();
     }
 
     public void crearEvento(Evento evento){
