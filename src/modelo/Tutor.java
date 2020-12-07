@@ -21,6 +21,11 @@ public class Tutor extends Usuario {
         }
     }
 
+    public void modificarInformacionTutor(String corUMA, String cor, String nombr, String contr){
+        this.modificarInformacion(cor, nombr, contr);
+        correoUMA = corUMA;
+    }
+
     public void eliminarCurso(Curso curso){
         propuesto.remove(curso);
         curso.eliminarEvento();
