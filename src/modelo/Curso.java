@@ -8,8 +8,8 @@ public class Curso extends Evento {
     private int duracion;
 
 
-    public Curso(int identificador,Date dia, String nom, Usuario dueno, int num, int duracion) {
-        super(identificador,dia, nom, dueno);
+    public Curso(Date dia, String nom, Usuario dueno, int num, int duracion) {
+        super(dia, nom, dueno);
         clases = num;
         this.duracion = duracion;
     }
