@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Administrador extends Usuario{
 
-    public ArrayList<Usuario> users;
+    private ArrayList<Usuario> users;
 
-    public Administrador(String cor, String dni, String nombr, String apell, String contr) {
-        super(cor, dni, nombr, apell, contr);
+    public Administrador(String cor, String usr, String contr) {
+        super(cor, usr, contr);
         users=new ArrayList<>();
     }
 
@@ -15,9 +15,10 @@ public class Administrador extends Usuario{
         super(cor);
         users=new ArrayList<>();
     }
-
     public void eliminarusuario(Usuario u){
         users.remove(u);
     }
+
+
 
 }
