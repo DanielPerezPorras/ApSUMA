@@ -6,7 +6,7 @@ public class ActividadSocial extends Evento {
 
 
     public ActividadSocial(int identificador,Date dia, String nom,Usuario dueno,  String lugar) {
-        super(identificador,dia,nom, dueno);
+        super(dia,nom, dueno);
         this.Lugar = lugar;
     }
 

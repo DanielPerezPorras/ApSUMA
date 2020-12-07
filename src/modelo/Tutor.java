@@ -9,8 +9,8 @@ public class Tutor extends Usuario {
     private ArrayList<Usuario> usuario;
     private String contra;
 
-    public Tutor(String cUMA, String correo, String DNI, String nombre, String apellido, String contr){
-        super(correo, DNI, nombre, apellido, contr);
+    public Tutor(String cUMA, String correo, String usr, String contr){
+        super(correo, usr, contr);
         correoUMA = cUMA;
     }
 
