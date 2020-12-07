@@ -10,4 +10,10 @@ public abstract class Usuario {
     private Eventos[] actividad;
     private Tutor[] tutor;
 
+    public Usuario(String cor, String dni, String nombr, String apell){
+        correo = cor;
+        DNI = dni;
+        nombre = nombr;
+        apellido = apell;
+    }
 }

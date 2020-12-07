@@ -5,8 +5,8 @@ public class Tutor extends Usuario {
     private Evento[] propuesto;
     private Usuario[] usuario;
 
-    public Tutor(String cUMA){
-        super();
+    public Tutor(String cUMA, String correo, String DNI, String nombre, String apellido){
+        super(correo, DNI, nombre, apellido);
         correoUMA = cUMA;
     }
 }
