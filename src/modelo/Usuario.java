@@ -6,16 +6,18 @@ public abstract class Usuario {
     private String DNI;
     private String nombre;
     private String apellido;
+    private String contra;
     private Evento[] actividad;
     private Tutor[] tutor;
 
     // Constructor para crear un nuevo usuario
-    public Usuario(String cor, String dni, String nombr, String apell){
+    public Usuario(String cor, String dni, String nombr, String apell, String contr){
         // Hacer sentencia SQL "INSERT..."
         correo = cor;
         DNI = dni;
         nombre = nombr;
         apellido = apell;
+        contra = contr;
     }
 
     // Constructor para recuperar los datos de un usuario ya existente
@@ -24,4 +26,11 @@ public abstract class Usuario {
         correo = cor;
     }
 
+    private void modificarInformacion(String cor, String dni, String nombr, String apell, String contr){
+        correo = cor;
+        DNI = dni;
+        nombre = nombr;
+        apellido = apell;
+        contra = contr;
+    }
 }
