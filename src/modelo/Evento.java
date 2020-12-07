@@ -14,6 +14,7 @@ public abstract class Evento {
     //TODO private Contenido[] contenido;
 
     public Evento(int identificador,Date dia, String nom, Usuario dueno) {
+
         id = identificador;
         Fecha = dia;
         Nombre = nom;
