@@ -7,7 +7,6 @@ public class Tutor extends Usuario {
     private String correoUMA;
     private ArrayList<Evento> propuesto;
     private ArrayList<Usuario> usuario;
-    private String contra;
 
     public Tutor(String cUMA, String correo, String usr, String contr){
         super(correo, usr, contr);
@@ -25,5 +24,17 @@ public class Tutor extends Usuario {
     public void eliminarCurso(Curso curso){
         propuesto.remove(curso);
         curso.eliminarEvento();
+    }
+
+    public String getCorreoUMA() {
+        return correoUMA;
+    }
+
+    public ArrayList<Evento> getPropuesto() {
+        return propuesto;
+    }
+
+    public ArrayList<Usuario> getUsuario() {
+        return usuario;
     }
 }

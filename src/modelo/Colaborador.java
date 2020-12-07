@@ -15,4 +15,12 @@ public abstract class Colaborador extends Usuario{
     public void crearEvento(Evento evento){
         creado.add(evento);
     }
+
+    public String getCorreoCorp() {
+        return correoCorp;
+    }
+
+    public ArrayList<Evento> getCreado() {
+        return creado;
+    }
 }
