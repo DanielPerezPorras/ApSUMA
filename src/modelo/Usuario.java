@@ -8,7 +8,6 @@ public abstract class Usuario {
     private String apellido;
     private String contra;
     private Evento[] actividad;
-    private Tutor[] tutor;
 
     // Constructor para crear un nuevo usuario
     public Usuario(String cor, String dni, String nombr, String apell, String contr){
@@ -33,4 +32,40 @@ public abstract class Usuario {
         apellido = apell;
         contra = contr;
     }
+
+    public void eliminarCuenta(){
+        correo = null;
+        DNI = null;
+        nombre = null;
+        apellido = null;
+        contra = null;
+        actividad = null;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public String getDNI() {
+        return DNI;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public Evento[] getActividad() {
+        return actividad;
+    }
+
+    public Tutor[] getTutor() {
+        return tutor;
+    }
+
+    private Tutor[] tutor;
+
 }
