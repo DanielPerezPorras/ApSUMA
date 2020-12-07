@@ -10,7 +10,8 @@ public class ControladorLogin implements ActionListener {
 
     private final VistaLogin vista;
 
-    public ControladorLogin(VistaLogin vista) {
+    public ControladorLogin(VistaLogin vista) 
+    {
         this.vista = vista;
     }
 
