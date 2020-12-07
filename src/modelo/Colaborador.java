@@ -16,6 +16,11 @@ public abstract class Colaborador extends Usuario{
         creado.add(evento);
     }
 
+    public void modificarInfomacionColaborador(String correoCorporativo, String cor, String usuario, String contr){
+        this.modificarInformacion(cor, usuario, contr);
+        correoCorp = correoCorporativo;
+    }
+
     public String getCorreoCorp() {
         return correoCorp;
     }

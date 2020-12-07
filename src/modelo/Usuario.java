@@ -26,7 +26,7 @@ public abstract class Usuario {
         correo = cor;
     }
 
-    private void modificarInformacion(String cor, String nombr, String contr){
+    public void modificarInformacion(String cor, String nombr, String contr){
         correo = cor;
         nombreUsuario = nombr;
         contra = contr;
