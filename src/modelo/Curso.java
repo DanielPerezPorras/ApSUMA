@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.Date;
 
-public class Curso extends Eventos {
+public class Curso extends Evento {
 
     private int clases;
     private int duracion;

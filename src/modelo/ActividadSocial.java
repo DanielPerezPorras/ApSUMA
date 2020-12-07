@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.Date;
 
-public class ActividadSocial extends Eventos {
+public class ActividadSocial extends Evento {
     private String Lugar;
 
     public ActividadSocial(Date dia, String nom, String lugar) {

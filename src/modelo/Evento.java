@@ -2,13 +2,13 @@ package modelo;
 
 import java.util.Date;
 
-public abstract class Eventos {
+public abstract class Evento {
 
     private Date Fecha;
     private String Nombre;
     //TODO private Contenido[] contenido;
 
-    public Eventos(Date dia, String nom) {
+    public Evento(Date dia, String nom) {
         Fecha = dia;
         Nombre = nom;
     }
