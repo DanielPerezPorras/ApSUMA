@@ -6,7 +6,7 @@ import java.util.List;
 
 public class BD {
 
-    private Connection con;
+    private static Connection con = null;
 
     private static final String DB_URL = "jdbc:mysql://ingreq2021-mysql.cobadwnzalab.eu-central-1.rds.amazonaws.com";
     private static final String DB_SCHEMA = "apsgrupo10";
@@ -14,21 +14,21 @@ public class BD {
     private static final String PASS = "guillermoeduardo2021";
     public BD(){
         try {
-            con = DriverManager.getConnection(DB_URL + "/" + DB_SCHEMA,USER,PASS);
+            if (con == null) {
+                con = DriverManager.getConnection(DB_URL + "/" + DB_SCHEMA,USER,PASS);
+            }
         } catch(SQLException ex) {
             throw new ErrorBD("Error al Conectar con la base de datos." + ex.getMessage());
         }
     }
 
-    protected void finalize ()
-    {
-        try
-        {
-            if (con!=null)  con.close();
-        }
-        catch (SQLException ex)
-        {
-            throw new ErrorBD("Error al Cerrar la Conexi�n." + ex.getMessage());
+    public static void cerrarConexiones() {
+        if (con != null) {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                throw new ErrorBD("Error al cerrar la conexión: " + ex.getMessage());
+            }
         }
     }
 

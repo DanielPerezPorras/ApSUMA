@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Usuario {
 
@@ -8,7 +9,6 @@ public abstract class Usuario {
     private String nombreUsuario;
     private String contra;
     private ArrayList<Evento> actividad;
-    private ArrayList<Tutor> tutor;
 
     // Constructor para crear un nuevo usuario
     public Usuario(String cor, String nombreUs, String contr){
@@ -17,24 +17,31 @@ public abstract class Usuario {
         correo = cor;
         nombreUsuario = nombreUs;
         contra = contr;
-        actividad = new ArrayList<>();
-        tutor = new ArrayList<>();
+        actividad = null;
     }
 
     // Constructor para recuperar los datos de un usuario ya existente
     public Usuario(String cor) {
-        BD bd = new BD();
-        Object[] usr = bd.Select("SELECT * FROM Usuario WHERE correo = '" + cor + "';").get(0);
 
-        correo = cor;
-        nombreUsuario = (String) usr[1];
-        contra = (String) usr[2];
-        actividad = new ArrayList<>();
-        tutor = new ArrayList<>();
+        BD bd = new BD();
+        List<Object[]> userList = bd.Select("SELECT * FROM Usuario WHERE correo = '" + cor + "';");
+
+        if (userList.size() > 0) {
+            Object[] user = userList.get(0);
+            correo = cor;
+            nombreUsuario = (String)user[1];
+            contra = (String)user[2];
+            actividad = null;
+        } else {
+            throw new ErrorBD("No se ha encontrado un usuario con correo " + cor);
+        }
+
     }
 
     public void modificarInformacion(String cor, String nombr, String contr){
         // Hacer sentencia SQL "UPDATE..."
+        BD bd = new BD();
+        bd.Update("UPDATE Usuario SET correo = '" + cor + "', nombreUsuario = '" + nombr + "', contra = '" + contr + "';");
         correo = cor;
         nombreUsuario = nombr;
         contra = contr;
@@ -42,6 +49,8 @@ public abstract class Usuario {
 
     public void eliminarCuenta(){
         // Hacer sentencia SQL "DELETE..."
+        BD bd = new BD();
+        bd.Delete("DELETE FROM Usuario WHERE correo = '" + correo + "';");
         correo = null;
         nombreUsuario = null;
         contra = null;
@@ -49,10 +58,14 @@ public abstract class Usuario {
 
     public void darseAltaEvento(Evento evento){
         actividad.add(evento);
+        BD bd = new BD();
+        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + this.getCorreo() + "', '" + evento.getNombre() + "');");
     }
 
     public void darseBajaEvento(Evento evento){
         actividad.remove(evento);
+        BD bd = new BD();
+        bd.Delete("DELETE FROM UsuarioEvento WHERE correo = '" + correo + "';");
     }
 
     public String getCorreo() {
@@ -67,7 +80,24 @@ public abstract class Usuario {
         return actividad;
     }
 
-    public ArrayList<Tutor> getTutor() {
-        return tutor;
+    public static Usuario buscarUsuario(String correo) {
+        Usuario usuario = null;
+        try {
+            usuario = new Estudiante(correo);
+        } catch (ErrorBD ex1) {
+            try {
+                usuario = new Tutor(correo);
+            } catch (ErrorBD ex2) {
+                try {
+                    usuario = new Colaborador(correo);
+                } catch (ErrorBD ex3) {
+                    try {
+                        usuario = new Administrador(correo);
+                    } catch (ErrorBD ignored) { }
+                }
+            }
+        }
+        return usuario;
     }
+
 }
