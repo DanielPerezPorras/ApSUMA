@@ -1,5 +1,6 @@
 package gui;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,7 +18,27 @@ public class ControladorLogin implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Lógica de la pantalla de login...
+        switch (e.getActionCommand()) {
+
+            case "INICIAR":
+                // Comprobar si existe un usuario con el nombre y contraseña dados.
+                // Si existe, iniciar sesión. Si no, mostrar un mensaje.
+                JOptionPane.showMessageDialog(vista,
+                        "Usuario o contraseña incorrectos.",
+                        "Error inicio de sesión",
+                        JOptionPane.ERROR_MESSAGE);
+
+                break;
+
+            case "REGISTRAR":
+                // Ir a la pantalla de Registro.
+                break;
+
+            case "INVITADO":
+                // Abrir como invitado la pantalla principal
+                break;
+
+        }
     }
 
 }
