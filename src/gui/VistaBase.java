@@ -25,7 +25,7 @@ public class VistaBase extends JPanel {
         // Añadimos la pantalla de login
         VistaLogin vistaLogin = new VistaLogin();
         ControladorLogin ctrlLogin = new ControladorLogin(vistaLogin);
-        vistaLogin.asignarControlador(ctrlLogin);
+        vistaLogin.controlador(ctrlLogin);
         add(vistaLogin, PANTALLA_LOGIN);
 
     }
