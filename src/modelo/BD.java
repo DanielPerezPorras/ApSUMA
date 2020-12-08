@@ -5,9 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BD {
-    private Connection con ;
 
-    public BD(String JDBC_DRIVER, String DB_URL, String DB_SCHEMA, String USER, String PASS){
+    private Connection con;
+
+    private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    private static final String DB_URL = "jdbc:mysql://ingreq2021-mysql.cobadwnzalab.eu-central-1.rds.amazonaws.com";
+    private static final String DB_SCHEMA = "apsgrupo10";
+    private static final String USER = "grupo10";
+    private static final String PASS = "guillermoeduardo2021";
+    public BD(){
         try {
             Class.forName(JDBC_DRIVER);
             con = DriverManager.getConnection(DB_URL + "/" + DB_SCHEMA,USER,PASS);
