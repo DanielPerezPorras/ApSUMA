@@ -101,4 +101,21 @@ public class VistaRegistroEstudiante extends JFrame {
 		btnAtras.setActionCommand("ATRAS");
 		btnRegistrarse.setActionCommand("REGISTRO ESTUDIANTE");
 	}
+
+	public String getTextoCorreo() {
+		return tCorreo.getText();
+	}
+
+	public String getTextoUsuario() {
+		return tUsuario.getText();
+	}
+
+	public String getTextoContrasenia() {
+		return pfContr.getText();
+	}
+
+	public String getTextoConfirmaContrasenia() {
+		return pfConfContr.getText();
+	}
+
 }
