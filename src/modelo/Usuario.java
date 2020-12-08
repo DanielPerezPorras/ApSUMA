@@ -17,7 +17,7 @@ public abstract class Usuario {
         correo = cor;
         nombreUsuario = nombreUs;
         contra = contr;
-        actividad = new ArrayList<>();
+        actividad = null;
     }
 
     // Constructor para recuperar los datos de un usuario ya existente
