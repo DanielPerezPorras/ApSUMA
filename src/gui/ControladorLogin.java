@@ -42,7 +42,8 @@ public class ControladorLogin implements ActionListener {
                 break;
 
             case "REGISTRAR":
-                // Ir a la pantalla de Registro.
+                vista.dispose();
+                VistaRegistro.abrirVentana();
                 break;
 
             case "INVITADO":
