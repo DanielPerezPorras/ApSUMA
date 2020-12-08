@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.awt.Container;
 
 import javax.swing.JComboBox;
+import java.awt.SystemColor;
 
 public class VistaPerfilTutor extends JFrame {
 
@@ -34,6 +35,8 @@ public class VistaPerfilTutor extends JFrame {
 	private JComboBox cbMisConferencias;
 	private JComboBox cbMisActividades;
 
+	
+	
 	/**
 	 * Create the frame.
 	 */
@@ -83,18 +86,18 @@ public class VistaPerfilTutor extends JFrame {
 		
 		btModificarDatos = new JButton("Modificar datos");
 		btModificarDatos.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
-		btModificarDatos.setBackground(new Color(0, 0, 0));
+		btModificarDatos.setBackground(SystemColor.activeCaption);
 		btModificarDatos.setBounds(356, 201, 143, 25);
 		panelPrincipal.add(btModificarDatos);
 		
 		btAtrs = new JButton("Atr\u00E1s");
-		btAtrs.setBackground(new Color(0, 0, 0));
+		btAtrs.setBackground(SystemColor.activeCaption);
 		btAtrs.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		btAtrs.setBounds(528, 450, 143, 41);
 		panelPrincipal.add(btAtrs);
 		
 		btCerrarSesin = new JButton("Cerrar sesi\u00F3n");
-		btCerrarSesin.setBackground(new Color(0, 0, 0));
+		btCerrarSesin.setBackground(SystemColor.activeCaption);
 		btCerrarSesin.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		btCerrarSesin.setBounds(12, 450, 143, 41);
 		panelPrincipal.add(btCerrarSesin);
