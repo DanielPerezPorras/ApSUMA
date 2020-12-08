@@ -1,5 +1,3 @@
-import gui.VistaBase;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,20 +8,6 @@ public class Programa {
 
     public static void main(String[] args) {
         System.out.println("Abriendo ApSUMA...");
-        crearGUI();
-    }
-
-    private static void crearGUI() {
-
-        JFrame ventana = new JFrame(TITULO_VENTANA);
-        VistaBase vistaBase = new VistaBase();
-
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setContentPane(vistaBase);
-        ventana.setPreferredSize(TAMANIO_VENTANA);
-        ventana.pack();
-        ventana.setVisible(true);
-
     }
 
 }
