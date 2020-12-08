@@ -30,6 +30,15 @@ public class VistaRegistroTutor extends JFrame {
 	private JButton btnAtrs;
 	private JButton btnSiguiente;
 
+	public static void abrirVentana() {
+		try {
+			VistaRegistroTutor frame = new VistaRegistroTutor();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * Create the frame.
 	 */

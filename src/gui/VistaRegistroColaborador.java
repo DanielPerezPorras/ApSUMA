@@ -30,6 +30,15 @@ public class VistaRegistroColaborador extends JFrame {
 	private JButton btnAtrs;
 	private JButton btnSiguiente;
 
+	public static void abrirVentana() {
+		try {
+			VistaRegistroColaborador frame = new VistaRegistroColaborador();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * Create the frame.
 	 */

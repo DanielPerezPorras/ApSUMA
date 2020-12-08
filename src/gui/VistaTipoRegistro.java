@@ -36,7 +36,7 @@ public class VistaTipoRegistro extends JFrame {
 	public static void abrirVentana() {
 		try {
 			VistaTipoRegistro frame = new VistaTipoRegistro();
-			frame.controlador(new ControladorRegistro(frame));
+			frame.controlador(new ControladorTipoRegistro(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
