@@ -1,15 +1,12 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Color;
 
 public class VistaTipoRegistro extends JFrame {
@@ -34,6 +31,16 @@ public class VistaTipoRegistro extends JFrame {
 				}
 			}
 		});
+	}
+
+	public static void abrirVentana() {
+		try {
+			VistaTipoRegistro frame = new VistaTipoRegistro();
+			frame.controlador(new ControladorRegistro(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -87,4 +94,5 @@ public class VistaTipoRegistro extends JFrame {
 		btInvitado.setActionCommand("INVITADO");
 		btTutor.setActionCommand("TUTOR");
 	}
+
 }
