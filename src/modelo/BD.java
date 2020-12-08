@@ -22,18 +22,6 @@ public class BD {
         }
     }
 
-    /*protected void finalize ()
-    {
-        try
-        {
-            if (con!=null)  con.close();
-        }
-        catch (SQLException ex)
-        {
-            throw new ErrorBD("Error al Cerrar la Conexi�n." + ex.getMessage());
-        }
-    }*/
-
     public static void cerrarConexiones() {
         if (con != null) {
             try {

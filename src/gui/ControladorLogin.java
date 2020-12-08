@@ -1,6 +1,7 @@
 package gui;
 
 import modelo.BD;
+import modelo.Sesion;
 import modelo.Usuario;
 
 import javax.swing.*;
@@ -35,12 +36,9 @@ public class ControladorLogin implements ActionListener {
 
                 if (numUsuarios > 0) {
                     Usuario usuario = Usuario.buscarUsuario(correo);
-                    JOptionPane.showMessageDialog(vista,
-                            "Usuario reconocido: " + usuario.getCorreo(),
-                            "Inicio sesión ok",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    // Tenemos que tener algún sitio para guardar la información de sesión
-                    // al que podamos acceder desde las diferentes pantallas.
+                    Sesion.setUsuarioLogueado(usuario);
+                    System.out.println(usuario.getCorreo() + " acaba de iniciar sesión");
+                    // TODO Cómo movernos a la pantalla principal?
                 } else {
                     JOptionPane.showMessageDialog(vista,
                             "Usuario o contraseña incorrectos.",
