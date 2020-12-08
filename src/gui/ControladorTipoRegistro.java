@@ -16,6 +16,8 @@ public class ControladorTipoRegistro implements ActionListener {
         switch (e.getActionCommand()) {
 
             case "ESTUDIANTE":
+                vista.dispose();
+                VistaRegistroEstudiante.abrirVentana();
                 break;
 
             case "TUTOR":

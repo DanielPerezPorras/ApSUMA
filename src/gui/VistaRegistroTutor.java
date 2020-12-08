@@ -33,6 +33,7 @@ public class VistaRegistroTutor extends JFrame {
 	public static void abrirVentana() {
 		try {
 			VistaRegistroTutor frame = new VistaRegistroTutor();
+			frame.controlador(new ControladorRegistroTutor(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
