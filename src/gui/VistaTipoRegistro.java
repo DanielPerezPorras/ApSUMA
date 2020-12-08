@@ -14,7 +14,7 @@ public class VistaTipoRegistro extends JFrame {
 	private JPanel panelPrincipal;
 	private JButton btTutor;
 	private JButton btEstudiante;
-	private JButton btInvitado;
+	private JButton btColaborador;
 	private JButton btAtras;
 
 	/**
@@ -70,12 +70,12 @@ public class VistaTipoRegistro extends JFrame {
 		btTutor.setBounds(193, 49, 156, 59);
 		panelPrincipal.add(btTutor);
 		
-		btInvitado = new JButton("Colaborador");
-		btInvitado.setBackground(new Color(0, 153, 51));
-		btInvitado.setForeground(new Color(0, 0, 0));
-		btInvitado.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 20));
-		btInvitado.setBounds(374, 49, 156, 59);
-		panelPrincipal.add(btInvitado);
+		btColaborador = new JButton("Colaborador");
+		btColaborador.setBackground(new Color(0, 153, 51));
+		btColaborador.setForeground(new Color(0, 0, 0));
+		btColaborador.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 20));
+		btColaborador.setBounds(374, 49, 156, 59);
+		panelPrincipal.add(btColaborador);
 		
 		btAtras = new JButton("Atr\u00E1s");
 		btAtras.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 15));
@@ -87,11 +87,11 @@ public class VistaTipoRegistro extends JFrame {
 	{
 		btAtras.addActionListener(ctr);
 		btEstudiante.addActionListener(ctr);
-		btInvitado.addActionListener(ctr);
+		btColaborador.addActionListener(ctr);
 		btTutor.addActionListener(ctr);
 		btAtras.setActionCommand("ATRAS");
 		btEstudiante.setActionCommand("ESTUDIANTE");
-		btInvitado.setActionCommand("INVITADO");
+		btColaborador.setActionCommand("COLABORADOR");
 		btTutor.setActionCommand("TUTOR");
 	}
 

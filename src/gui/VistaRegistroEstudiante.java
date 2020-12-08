@@ -1,10 +1,6 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Container;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -14,7 +10,6 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class VistaRegistroEstudiante extends JFrame {
 
@@ -30,7 +25,16 @@ public class VistaRegistroEstudiante extends JFrame {
 	private JButton btnAtras;
 	private JButton btnRegistrarse;
 
-	
+	public static void abrirVentana() {
+		try {
+			VistaRegistroEstudiante frame = new VistaRegistroEstudiante();
+			frame.controlador(new ControladorRegistroEstudiante(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public VistaRegistroEstudiante() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,7 +98,24 @@ public class VistaRegistroEstudiante extends JFrame {
 	public void controlador (ActionListener ctr) {
 		btnAtras.addActionListener(ctr);
 		btnRegistrarse.addActionListener(ctr);
-		btnAtras.setActionCommand("ATRAS");;
+		btnAtras.setActionCommand("ATRAS");
 		btnRegistrarse.setActionCommand("REGISTRO ESTUDIANTE");
 	}
+
+	public String getTextoCorreo() {
+		return tCorreo.getText();
+	}
+
+	public String getTextoUsuario() {
+		return tUsuario.getText();
+	}
+
+	public String getTextoContrasenia() {
+		return pfContr.getText();
+	}
+
+	public String getTextoConfirmaContrasenia() {
+		return pfConfContr.getText();
+	}
+
 }

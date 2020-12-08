@@ -33,6 +33,7 @@ public class VistaRegistroColaborador extends JFrame {
 	public static void abrirVentana() {
 		try {
 			VistaRegistroColaborador frame = new VistaRegistroColaborador();
+			frame.controlador(new ControladorRegistroColaborador(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -10,14 +10,14 @@ import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
-public class VistaConfirmación extends JFrame {
+public class VistaConfirmacion extends JFrame {
 
 	private JPanel contentPane;
 	private JLabel lblConfirmacion;
 	private JButton btnSi;
 	private JButton btnNo;
 
-	public VistaConfirmación() {
+	public VistaConfirmacion() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 231);
