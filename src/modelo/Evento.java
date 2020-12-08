@@ -48,4 +48,20 @@ public abstract class Evento {
         }
         administrador.darseBajaEvento(this);
     }
+
+    public Date getFecha() {
+        return Fecha;
+    }
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public Usuario getCreador() {
+        return creador;
+    }
+
+    public Administrador getAdministrador() {
+        return administrador;
+    }
 }

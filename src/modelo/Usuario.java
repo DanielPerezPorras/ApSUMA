@@ -50,10 +50,14 @@ public abstract class Usuario {
 
     public void darseAltaEvento(Evento evento){
         actividad.add(evento);
+        BD bd = new BD();
+        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + this.getCorreo() + "', '" + evento.getNombre() + "');");
     }
 
     public void darseBajaEvento(Evento evento){
         actividad.remove(evento);
+        BD bd = new BD();
+        bd.Delete("DELETE FROM UsuarioEvento WHERE correo = '" + correo + "';");
     }
 
     public String getCorreo() {
