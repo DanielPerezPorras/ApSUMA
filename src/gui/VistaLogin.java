@@ -1,25 +1,16 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.image.BufferedImage;
-import java.io.File;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import java.awt.Font;
-import java.awt.Image;
-
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class VistaLogin extends JFrame {
 
@@ -66,17 +57,7 @@ public class VistaLogin extends JFrame {
 		
 		lbLogo = new JLabel("");
 		lbLogo.setBounds(148, 42, 61, 62);
-		File archivoAmbulancia = new File(VistaLogin.class.getResource("/recursosApp/ambulancia.png").getPath());
-		try 
-		{
-			BufferedImage buffAmbulancia = ImageIO.read(archivoAmbulancia);
-			Image imgAmbulancia = buffAmbulancia.getScaledInstance(lbLogo.getWidth(), lbLogo.getHeight(), buffAmbulancia.SCALE_SMOOTH);
-			ImageIcon iconoAmbulancia = new ImageIcon(imgAmbulancia);
-			lbLogo.setIcon(iconoAmbulancia);
-		} catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
+		UtilidadesGUI.ajustarImagenALabel(lbLogo, "/recursosApp/ambulancia.png");
 		panelTotal.add(lbLogo);
 		
 		lbTitulo = new JLabel("ApSUma");
@@ -92,17 +73,7 @@ public class VistaLogin extends JFrame {
 		lbImagen = new JLabel("");
 		lbImagen.setBounds(94, 117, 115, 112);
 		lbImagen.setHorizontalAlignment(SwingConstants.CENTER);
-		File archivoGato = new File(VistaLogin.class.getResource("/recursosApp/gato.png").getPath());
-		try 
-		{
-			BufferedImage buffGato = ImageIO.read(archivoGato);
-			Image imgGato = buffGato.getScaledInstance(lbImagen.getWidth(), lbImagen.getHeight(), buffGato.SCALE_SMOOTH);
-			ImageIcon iconoGato = new ImageIcon(imgGato);
-			lbImagen.setIcon(iconoGato);
-		} catch (Exception e) 
-		{
-			e.printStackTrace();
-		}
+		UtilidadesGUI.ajustarImagenALabel(lbImagen, "/recursosApp/gato.png");
 		panelTotal.add(lbImagen);
 		
 		lbUsuario = new JLabel("Usuario");
