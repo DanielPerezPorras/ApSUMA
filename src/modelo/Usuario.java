@@ -32,6 +32,8 @@ public abstract class Usuario {
 
     public void modificarInformacion(String cor, String nombr, String contr){
         // Hacer sentencia SQL "UPDATE..."
+        BD bd = new BD();
+        bd.Update("UPDATE Usuario SET correo = '" + cor + "', nombreUsuario = '" + nombr + "', contra = '" + contr + "';");
         correo = cor;
         nombreUsuario = nombr;
         contra = contr;
@@ -39,6 +41,8 @@ public abstract class Usuario {
 
     public void eliminarCuenta(){
         // Hacer sentencia SQL "DELETE..."
+        BD bd = new BD();
+        bd.Delete("DELETE FROM Usuario WHERE correo = '" + correo + "';");
         correo = null;
         nombreUsuario = null;
         contra = null;
