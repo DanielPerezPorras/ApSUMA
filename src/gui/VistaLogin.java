@@ -35,6 +35,7 @@ public class VistaLogin extends JFrame {
 			public void run() {
 				try {
 					VistaLogin frame = new VistaLogin();
+					frame.controlador(new ControladorLogin(frame));
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -122,4 +123,13 @@ public class VistaLogin extends JFrame {
 		btRegistrarse.setActionCommand("REGISTRAR");
 		btnEntrarComoInvitado.setActionCommand("INVITADO");
 	}
+
+	public String getTextoUsuario() {
+		return tFUsuario.getText();
+	}
+
+	public String getTextoContrasenia() {
+		return passwordField.getText();
+	}
+
 }
