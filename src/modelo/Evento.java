@@ -15,12 +15,12 @@ public abstract class Evento {
 
     // Constructor para crear un nuevo evento
     public Evento(Date dia, String nom, Usuario dueno) {
-        BD bd = new BD();
-        bd.Insert("INSERT INTO Evento (" + dia + "', '" + nom + "', " + dueno.getCorreo() + ");");
-        Fecha = dia;
-        Nombre = nom;
-        usuarios = new ArrayList<>();
-        if (dueno instanceof Tutor || dueno instanceof Colaborador) { //TODO dueno tambien puede ser instancia de colaborador
+        if (dueno instanceof Tutor || dueno instanceof Colaborador) {
+            BD bd = new BD();
+            bd.Insert("INSERT INTO Evento ('" + dia + "', '" + nom + "', '" + dueno.getCorreo() + "');");
+            Fecha = dia;
+            Nombre = nom;
+            usuarios = null;
             creador = dueno;
         } else {
             throw new RuntimeException("El creador debe ser un tutor o un colaborador");
@@ -43,13 +43,25 @@ public abstract class Evento {
     }
 
     public void inscripcionUsuario(Usuario user) {
-        if (usuarios.contains(user)) {
+        if (getUsuarios().contains(user)) {
             throw new RuntimeException("El usuario ya está registrado en el evento");
         } else {
             BD bd = new BD();
-            bd.Insert("INSERT INTO Evento (" + Fecha + "', '" + nombreUs + "', '" + contr + "');");
+            bd.Insert("INSERT INTO UsuarioEvento ('" + user.getCorreo() + "', '" + Nombre + "');");
             usuarios.add(user);
         }
+    }
+
+    public List<Usuario> getUsuarios() {
+        if (usuarios == null) {
+            usuarios = new ArrayList<>();
+            BD bd = new BD();
+            List<Object[]> tuplas = bd.Select("SELECT correo FROM UsuarioEvento WHERE nombre='" + Nombre + "' ");
+            for (Object[] tupla : tuplas) {
+                usuarios.add(Usuario.buscarUsuario((String)tupla[0]));
+            }
+        }
+        return usuarios;
     }
 
     public void eliminarEvento(){
