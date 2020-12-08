@@ -15,6 +15,7 @@ public class VistaRegistroTutor extends JFrame {
 	private JPanel panelPrincipal;
 	private JTextField tCorreoUMA;
 	private JTextField tCorreo;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -80,5 +81,11 @@ public class VistaRegistroTutor extends JFrame {
 		tCorreo.setColumns(10);
 		tCorreo.setBounds(288, 61, 251, 31);
 		panelPrincipal.add(tCorreo);
+		
+		textField = new JTextField();
+		textField.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		textField.setColumns(10);
+		textField.setBounds(288, 110, 251, 31);
+		panelPrincipal.add(textField);
 	}
 }
