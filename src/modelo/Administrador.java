@@ -15,6 +15,19 @@ public class Administrador extends Usuario{
         super(cor);
         users=new ArrayList<>();
     }
+
+    public void modificarInformacionAdministrador(String cor, String usr, String contr){
+        this.modificarInformacion(cor, usr, contr);
+        BD bd = new BD();
+        bd.Update("UPDATE Administrador SET correo = '" + cor + "';");
+    }
+
+    public void eliminarCuentaAdministrador(){
+        this.eliminarCuenta();
+        BD bd = new BD();
+        bd.Delete("DELETE FROM Administrador WHERE correo = '" + this.getCorreo() + "';");
+    }
+
     public void eliminarusuario(Usuario u){
         users.remove(u);
     }

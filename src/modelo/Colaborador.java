@@ -18,7 +18,16 @@ public abstract class Colaborador extends Usuario{
 
     public void modificarInfomacionColaborador(String correoCorporativo, String cor, String usuario, String contr){
         this.modificarInformacion(cor, usuario, contr);
+        BD bd = new BD();
+        bd.Update("UPDATE Colaborador SET correo = '" + cor + "', correoCorp = '" + correoCorporativo + "';");
         correoCorp = correoCorporativo;
+    }
+
+    public void eliminarCuentaColaborador(){
+        this.eliminarCuenta();
+        BD bd = new BD();
+        bd.Delete("DELETE FROM Colaborador WHERE correo = '" + this.getCorreo() + "';");
+        correoCorp = null;
     }
 
     public String getCorreoCorp() {

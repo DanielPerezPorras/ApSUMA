@@ -23,7 +23,16 @@ public class Tutor extends Usuario {
 
     public void modificarInformacionTutor(String corUMA, String cor, String nombr, String contr){
         this.modificarInformacion(cor, nombr, contr);
+        BD bd = new BD();
+        bd.Update("UPDATE Tutor SET correo = '" + cor + "', correoUMA = '" + corUMA + "';");
         correoUMA = corUMA;
+    }
+
+    public void eliminarCuentaTutor(){
+        this.eliminarCuenta();
+        BD bd = new BD();
+        bd.Delete("DELETE FROM Tutor WHERE correo = '" + this.getCorreo() + "';");
+        correoUMA = null;
     }
 
     public void eliminarCurso(Curso curso){

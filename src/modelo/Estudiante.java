@@ -12,5 +12,13 @@ public class Estudiante extends Usuario{
 
     public void modificarInformacionEstudiante(String corr,String usr,String contr){
         this.modificarInformacion(corr, usr, contr);
+        BD bd = new BD();
+        bd.Update("UPDATE Estudiante SET correo = '" + corr + "';");
+    }
+
+    public void eliminarCuentaEstudiante(){
+        this.eliminarCuenta();
+        BD bd = new BD();
+        bd.Delete("DELETE FROM Estudiante WHERE correo = '" + this.getCorreo() + "';");
     }
 }
