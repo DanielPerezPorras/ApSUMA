@@ -27,13 +27,17 @@ public abstract class Usuario {
     }
 
     public void modificarInformacion(String cor, String nombr, String contr){
+        // Hacer sentencia SQL "UPDATE..."
         correo = cor;
         nombreUsuario = nombr;
         contra = contr;
     }
 
     public void eliminarCuenta(){
-        modificarInformacion(null, null, null);
+        // Hacer sentencia SQL "DELETE..."
+        correo = null;
+        nombreUsuario = null;
+        contra = null;
     }
 
     public void darseAltaEvento(Evento evento){
