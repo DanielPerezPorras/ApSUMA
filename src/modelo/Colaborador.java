@@ -10,7 +10,7 @@ public class Colaborador extends Usuario{
     public Colaborador(String correoCorporativo, String cor, String usuario, String contr) {
         super(cor, usuario, contr);
         BD bd = new BD();
-        bd.Insert("INSERT INTO Tutor ('" + cor + "', '" + correoCorporativo + "');");
+        bd.Insert("INSERT INTO Colaborador VALUES ('" + cor + "', '" + correoCorporativo + "');");
         correoCorp = correoCorporativo;
         creado = null;
     }
