@@ -6,7 +6,6 @@ import java.util.List;
 
 public abstract class Evento {
 
-    private Integer id;
     private Date Fecha;
     private String Nombre;
     private List<Usuario> usuarios;
@@ -14,9 +13,10 @@ public abstract class Evento {
     private Administrador administrador;
     //TODO private Contenido[] contenido;
 
+    // Constructor para crear un nuevo evento
     public Evento(Date dia, String nom, Usuario dueno) {
-
-        id = null;
+        BD bd = new BD();
+        bd.Insert("INSERT INTO Evento (" + dia + "', '" + nom + "', " + dueno.getCorreo() + ");");
         Fecha = dia;
         Nombre = nom;
         usuarios = new ArrayList<>();
@@ -27,20 +27,32 @@ public abstract class Evento {
         }
     }
 
-    public Evento(int identificador) {
-        id = identificador;
+    // Constructor para recuperar los datos de un evento ya existente
+    public Evento(String nombre) {
+        BD bd = new BD();
+        List<Object[]> eventList = bd.Select("SELECT * FROM Evento WHERE nombre = '" + nombre + "';");
+
+        if (eventList.size() > 0) {
+            Object[] event = eventList.get(0);
+            Nombre = nombre;
+            Fecha = (Date)event[0];
+            creador = Usuario.buscarUsuario((String)event[2]);
+        } else {
+            throw new ErrorBD("No se ha encontrado un evento con nombre " + nombre);
+        }
     }
 
     public void inscripcionUsuario(Usuario user) {
         if (usuarios.contains(user)) {
             throw new RuntimeException("El usuario ya está registrado en el evento");
         } else {
+            BD bd = new BD();
+            bd.Insert("INSERT INTO Evento (" + Fecha + "', '" + nombreUs + "', '" + contr + "');");
             usuarios.add(user);
         }
     }
 
     public void eliminarEvento(){
-        id = null;
         Fecha = null;
         Nombre = null;
         for (Usuario usuario : usuarios){
