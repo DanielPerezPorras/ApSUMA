@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 
 public class ControladorRegistro implements ActionListener {
 
-    private VistaRegistro vista;
+    private VistaTipoRegistro vista;
 
-    public ControladorRegistro(VistaRegistro vista) {
+    public ControladorRegistro(VistaTipoRegistro vista) {
         this.vista = vista;
     }
 

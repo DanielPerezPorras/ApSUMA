@@ -43,7 +43,7 @@ public class ControladorLogin implements ActionListener {
 
             case "REGISTRAR":
                 vista.dispose();
-                VistaRegistro.abrirVentana();
+                VistaTipoRegistro.abrirVentana();
                 break;
 
             case "INVITADO":
