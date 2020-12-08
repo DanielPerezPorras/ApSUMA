@@ -119,6 +119,6 @@ public class VistaRegistroColaborador extends JFrame {
 		btnAtrs.addActionListener(ctr);
 		btnAtrs.setActionCommand("ATRAS");
 		btnSiguiente.addActionListener(ctr);
-		btnSiguiente.setActionCommand("REGISTRO TUTOR");
+		btnSiguiente.setActionCommand("REGISTRO COLABORADOR");
 	}
 }
