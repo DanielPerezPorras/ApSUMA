@@ -1,5 +1,9 @@
 package gui;
 
+import modelo.Estudiante;
+import modelo.Sesion;
+import modelo.Usuario;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,17 +42,14 @@ public class ControladorRegistroEstudiante implements ActionListener {
                     error = "Hay campos vacíos.";
                 } else if (!contrasenia.equals(confirmaContrasenia)) {
                     error = "Las contraseñas no coinciden";
-                } else if (false) {
-                    // necesito un método para comprobar si un e-mail está ya usado o no.
+                } else if (Usuario.correoEstaUsado(correo)) {
                     error = "Dirección de correo electrónico ya usada.";
                 }
 
                 if (error == null) {
-                    //Usuario nuevoUsuario = new Estudiante();
-                    JOptionPane.showMessageDialog(vista,
-                            "bien!",
-                            "ÉXITO",
-                            JOptionPane.INFORMATION_MESSAGE);
+                    Usuario nuevoUsuario = new Estudiante(correo, usuario, contrasenia);
+                    Sesion.setUsuarioLogueado(nuevoUsuario);
+                    System.out.println("Usuario creado: " + correo + "(" + usuario + ")");
                 } else {
                     JOptionPane.showMessageDialog(vista,
                             error,

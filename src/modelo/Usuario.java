@@ -13,7 +13,7 @@ public abstract class Usuario {
     // Constructor para crear un nuevo usuario
     public Usuario(String cor, String nombreUs, String contr){
         BD bd = new BD();
-        bd.Insert("INSERT INTO Usuario ('" + cor + "', '" + nombreUs + "', '" + contr + "');");
+        bd.Insert("INSERT INTO Usuario VALUES ('" + cor + "', '" + nombreUs + "', '" + contr + "');");
         correo = cor;
         nombreUsuario = nombreUs;
         contra = contr;
@@ -90,6 +90,12 @@ public abstract class Usuario {
             }
         }
         return usuario;
+    }
+
+    public static boolean correoEstaUsado(String correo) {
+        BD bd = new BD();
+        Object cuenta = bd.SelectEscalar("SELECT COUNT(*) FROM Usuario WHERE correo='" + correo + "'");
+        return (long)cuenta > 0;
     }
 
 }

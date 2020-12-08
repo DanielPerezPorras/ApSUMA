@@ -12,7 +12,7 @@ public class Tutor extends Usuario {
     public Tutor(String cUMA, String correo, String usr, String contr){
         super(correo, usr, contr);
         BD bd = new BD();
-        bd.Insert("INSERT INTO Tutor ('" + correo + "', '" + cUMA + "');");
+        bd.Insert("INSERT INTO Tutor VALUES ('" + correo + "', '" + cUMA + "');");
         correoUMA = cUMA;
         propuesto = null;
         usuario = null;

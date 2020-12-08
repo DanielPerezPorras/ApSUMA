@@ -9,7 +9,7 @@ public class Administrador extends Usuario{
     public Administrador(String cor, String usr, String contr) {
         super(cor, usr, contr);
         BD bd = new BD();
-        bd.Insert("INSERT INTO Administrador ('" + cor + "');");
+        bd.Insert("INSERT INTO Administrador VALUES ('" + cor + "');");
         users = null;
     }
 

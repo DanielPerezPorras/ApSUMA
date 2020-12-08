@@ -122,4 +122,25 @@ public class VistaRegistroTutor extends JFrame {
 		btnSiguiente.addActionListener(ctr);
 		btnSiguiente.setActionCommand("REGISTRO TUTOR");
 	}
+
+	public String getTextoCorreo() {
+		return tCorreo.getText();
+	}
+
+	public String getTextoCorreoUMA() {
+		return tCorreoUMA.getText();
+	}
+
+	public String getTextoUsuario() {
+		return tNombre.getText();
+	}
+
+	public String getTextoContrasenia() {
+		return passwordField.getText();
+	}
+
+	public String getTextoConfirmaContrasenia() {
+		return passwordConfirmField.getText();
+	}
+
 }
