@@ -87,7 +87,7 @@ public class VistaPerfilTutor extends JFrame {
 		btModificarDatos = new JButton("Modificar datos");
 		btModificarDatos.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		btModificarDatos.setBackground(SystemColor.activeCaption);
-		btModificarDatos.setBounds(356, 201, 143, 25);
+		btModificarDatos.setBounds(288, 201, 187, 25);
 		panelPrincipal.add(btModificarDatos);
 		
 		btAtrs = new JButton("Atr\u00E1s");
