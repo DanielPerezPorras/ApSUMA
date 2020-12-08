@@ -4,9 +4,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import sun.security.jca.JCAUtil;
-
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
 import javax.swing.JTabbedPane;
+
+import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.JList;
 
@@ -18,7 +21,22 @@ public class VistaPrincipalTutor extends JFrame {
 	private JPanel panelMensajeria;
 	private JList listInscritos;
 	private JList listOrganizados;
+	private JPanel panelCalendario;
 
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					VistaPrincipalTutor frame = new VistaPrincipalTutor();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
 	public VistaPrincipalTutor() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,12 +63,20 @@ public class VistaPrincipalTutor extends JFrame {
 		listOrganizados.setBounds(38, 266, 362, 172);
 		panelEventos.add(listOrganizados);
 		
+		panelCalendario = new JPanel();
+		panelCalendario.setBounds(596, 43, 219, 225);
+		panelEventos.add(panelCalendario);
+		
 		panelMensajeria = new JPanel();
 		tabbedPane.addTab("Mensajeria", null, panelMensajeria, null);
 		
 		tabbedPane.setEnabledAt(1, false);
-
 		
+	
+		UtilDateModel model = new UtilDateModel();
+		JDatePanelImpl datePanel = new JDatePanelImpl(model);
+		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+			
 		
 	}
 }
