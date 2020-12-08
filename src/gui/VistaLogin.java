@@ -123,4 +123,13 @@ public class VistaLogin extends JFrame {
 		btRegistrarse.setActionCommand("REGISTRAR");
 		btnEntrarComoInvitado.setActionCommand("INVITADO");
 	}
+
+	public String getTextoUsuario() {
+		return tFUsuario.getText();
+	}
+
+	public String getTextoContrasenia() {
+		return passwordField.getText();
+	}
+
 }
