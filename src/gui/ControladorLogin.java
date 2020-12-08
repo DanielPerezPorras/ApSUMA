@@ -30,11 +30,15 @@ public class ControladorLogin implements ActionListener {
                 String contrasenia = vista.getTextoContrasenia();
 
                 BD bd = new BD();
-                int numUsuarios = (int)bd.SelectEscalar("SELECT COUNT(*) FROM Usuario WHERE " +
+                long numUsuarios = (long)bd.SelectEscalar("SELECT COUNT(*) FROM Usuario WHERE " +
                         "correo = '" + correo + "' AND contra = '" + contrasenia + "'");
 
                 if (numUsuarios > 0) {
                     Usuario usuario = Usuario.buscarUsuario(correo);
+                    JOptionPane.showMessageDialog(vista,
+                            "Usuario reconocido: " + usuario.getCorreo(),
+                            "Inicio sesión ok",
+                            JOptionPane.INFORMATION_MESSAGE);
                     // Tenemos que tener algún sitio para guardar la información de sesión
                     // al que podamos acceder desde las diferentes pantallas.
                 } else {
