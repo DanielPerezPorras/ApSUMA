@@ -12,7 +12,7 @@ public class Tutor extends Usuario {
     public Tutor(String cUMA, String correo, String usr, String contr){
         super(correo, usr, contr);
         BD bd = new BD();
-        bd.Insert("INSERT INTO Tutor ('" + correo + "', '" + cUMA + "');");
+        bd.Insert("INSERT INTO Tutor VALUES ('" + correo + "', '" + cUMA + "');");
         correoUMA = cUMA;
         propuesto = null;
         usuario = null;
@@ -43,7 +43,16 @@ public class Tutor extends Usuario {
 
     public void modificarInformacionTutor(String corUMA, String cor, String nombr, String contr){
         this.modificarInformacion(cor, nombr, contr);
+        BD bd = new BD();
+        bd.Update("UPDATE Tutor SET correo = '" + cor + "', correoUMA = '" + corUMA + "';");
         correoUMA = corUMA;
+    }
+
+    public void eliminarCuentaTutor(){
+        this.eliminarCuenta();
+        BD bd = new BD();
+        bd.Delete("DELETE FROM Tutor WHERE correo = '" + this.getCorreo() + "';");
+        correoUMA = null;
     }
 
     public void eliminarCurso(Curso curso){

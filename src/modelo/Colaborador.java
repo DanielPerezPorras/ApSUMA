@@ -10,7 +10,7 @@ public class Colaborador extends Usuario{
     public Colaborador(String correoCorporativo, String cor, String usuario, String contr) {
         super(cor, usuario, contr);
         BD bd = new BD();
-        bd.Insert("INSERT INTO Tutor ('" + cor + "', '" + correoCorporativo + "');");
+        bd.Insert("INSERT INTO Colaborador VALUES ('" + cor + "', '" + correoCorporativo + "');");
         correoCorp = correoCorporativo;
         creado = null;
     }
@@ -35,7 +35,16 @@ public class Colaborador extends Usuario{
 
     public void modificarInfomacionColaborador(String correoCorporativo, String cor, String usuario, String contr){
         this.modificarInformacion(cor, usuario, contr);
+        BD bd = new BD();
+        bd.Update("UPDATE Colaborador SET correo = '" + cor + "', correoCorp = '" + correoCorporativo + "';");
         correoCorp = correoCorporativo;
+    }
+
+    public void eliminarCuentaColaborador(){
+        this.eliminarCuenta();
+        BD bd = new BD();
+        bd.Delete("DELETE FROM Colaborador WHERE correo = '" + this.getCorreo() + "';");
+        correoCorp = null;
     }
 
     public String getCorreoCorp() {

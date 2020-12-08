@@ -13,7 +13,7 @@ public abstract class Usuario {
     // Constructor para crear un nuevo usuario
     public Usuario(String cor, String nombreUs, String contr){
         BD bd = new BD();
-        bd.Insert("INSERT INTO Usuario ('" + cor + "', '" + nombreUs + "', '" + contr + "');");
+        bd.Insert("INSERT INTO Usuario VALUES ('" + cor + "', '" + nombreUs + "', '" + contr + "');");
         correo = cor;
         nombreUsuario = nombreUs;
         contra = contr;
@@ -40,6 +40,8 @@ public abstract class Usuario {
 
     public void modificarInformacion(String cor, String nombr, String contr){
         // Hacer sentencia SQL "UPDATE..."
+        BD bd = new BD();
+        bd.Update("UPDATE Usuario SET correo = '" + cor + "', nombreUsuario = '" + nombr + "', contra = '" + contr + "';");
         correo = cor;
         nombreUsuario = nombr;
         contra = contr;
@@ -47,6 +49,8 @@ public abstract class Usuario {
 
     public void eliminarCuenta(){
         // Hacer sentencia SQL "DELETE..."
+        BD bd = new BD();
+        bd.Delete("DELETE FROM Usuario WHERE correo = '" + correo + "';");
         correo = null;
         nombreUsuario = null;
         contra = null;
@@ -54,10 +58,14 @@ public abstract class Usuario {
 
     public void darseAltaEvento(Evento evento){
         actividad.add(evento);
+        BD bd = new BD();
+        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + this.getCorreo() + "', '" + evento.getNombre() + "');");
     }
 
     public void darseBajaEvento(Evento evento){
         actividad.remove(evento);
+        BD bd = new BD();
+        bd.Delete("DELETE FROM UsuarioEvento WHERE correo = '" + correo + "';");
     }
 
     public String getCorreo() {
@@ -90,6 +98,12 @@ public abstract class Usuario {
             }
         }
         return usuario;
+    }
+
+    public static boolean correoEstaUsado(String correo) {
+        BD bd = new BD();
+        Object cuenta = bd.SelectEscalar("SELECT COUNT(*) FROM Usuario WHERE correo='" + correo + "'");
+        return (long)cuenta > 0;
     }
 
 }
