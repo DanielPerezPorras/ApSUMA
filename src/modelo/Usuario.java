@@ -8,7 +8,6 @@ public abstract class Usuario {
     private String nombreUsuario;
     private String contra;
     private ArrayList<Evento> actividad;
-    private ArrayList<Tutor> tutor;
 
     // Constructor para crear un nuevo usuario
     public Usuario(String cor, String nombreUs, String contr){
@@ -18,7 +17,6 @@ public abstract class Usuario {
         nombreUsuario = nombreUs;
         contra = contr;
         actividad = new ArrayList<>();
-        tutor = new ArrayList<>();
     }
 
     // Constructor para recuperar los datos de un usuario ya existente
@@ -30,7 +28,6 @@ public abstract class Usuario {
         nombreUsuario = (String) usr[1];
         contra = (String) usr[2];
         actividad = new ArrayList<>();
-        tutor = new ArrayList<>();
     }
 
     public void modificarInformacion(String cor, String nombr, String contr){
@@ -65,9 +62,5 @@ public abstract class Usuario {
 
     public ArrayList<Evento> getActividad() {
         return actividad;
-    }
-
-    public ArrayList<Tutor> getTutor() {
-        return tutor;
     }
 }
