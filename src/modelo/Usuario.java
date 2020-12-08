@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Usuario {
 
@@ -21,13 +22,20 @@ public abstract class Usuario {
 
     // Constructor para recuperar los datos de un usuario ya existente
     public Usuario(String cor) {
-        BD bd = new BD();
-        Object[] usr = bd.Select("SELECT * FROM Usuario WHERE correo = '" + cor + "';").get(0);
 
-        correo = cor;
-        nombreUsuario = (String) usr[1];
-        contra = (String) usr[2];
-        actividad = new ArrayList<>();
+        BD bd = new BD();
+        List<Object[]> userList = bd.Select("SELECT * FROM Usuario WHERE correo = '" + cor + "';");
+
+        if (userList.size() > 0) {
+            Object[] user = userList.get(0);
+            correo = cor;
+            nombreUsuario = (String)user[1];
+            contra = (String)user[2];
+            actividad = null;
+        } else {
+            throw new ErrorBD("No se ha encontrado un usuario con correo " + cor);
+        }
+
     }
 
     public void modificarInformacion(String cor, String nombr, String contr){
@@ -63,4 +71,25 @@ public abstract class Usuario {
     public ArrayList<Evento> getActividad() {
         return actividad;
     }
+
+    public static Usuario buscarUsuario(String correo) {
+        Usuario usuario = null;
+        try {
+            usuario = new Estudiante(correo);
+        } catch (ErrorBD ex1) {
+            try {
+                usuario = new Tutor(correo);
+            } catch (ErrorBD ex2) {
+                try {
+                    usuario = new Colaborador(correo);
+                } catch (ErrorBD ex3) {
+                    try {
+                        usuario = new Administrador(correo);
+                    } catch (ErrorBD ignored) { }
+                }
+            }
+        }
+        return usuario;
+    }
+
 }

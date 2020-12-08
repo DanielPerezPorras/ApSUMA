@@ -2,6 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Tutor extends Usuario {
     private String correoUMA;
@@ -10,7 +11,26 @@ public class Tutor extends Usuario {
 
     public Tutor(String cUMA, String correo, String usr, String contr){
         super(correo, usr, contr);
+        BD bd = new BD();
+        bd.Insert("INSERT INTO Tutor ('" + correo + "', '" + cUMA + "');");
         correoUMA = cUMA;
+        propuesto = null;
+        usuario = null;
+    }
+
+    public Tutor(String correo) {
+        super(correo);
+        BD bd = new BD();
+        List<Object[]> userList = bd.Select("SELECT correoUMA FROM Tutor WHERE correo = '" + correo + "';");
+
+        if (userList.size() > 0) {
+            Object[] user = userList.get(0);
+            correoUMA = (String)user[0];
+            propuesto = null;
+            usuario = null;
+        } else {
+            throw new ErrorBD("No se ha encontrado un tutor con correo " + correo);
+        }
     }
 
     public void crearCurso(Date dia, String nombre, int numClases, int duracion){
