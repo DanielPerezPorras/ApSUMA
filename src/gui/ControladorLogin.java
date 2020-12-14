@@ -57,6 +57,11 @@ public class ControladorLogin implements ActionListener {
 
             case "INVITADO":
                 // Abrir como invitado la pantalla principal
+                Usuario usuario = Usuario.crearInvitado();
+                Sesion.setUsuarioLogueado(usuario);
+                System.out.println("Invitado acaba de iniciar sesión");
+                vista.dispose();
+                usuario.abrirVentanaPrincipal();
                 break;
 
         }

@@ -16,12 +16,11 @@ import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class VistaPrincipalEstudiante extends JFrame {
+public class VistaPrincipalInvitado extends JFrame {
 
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
 	private JPanel panelEventos;
-	private JPanel panelMensajeria;
 	private JList listInscritos;
 	private JPanel panelCalendario;
 	private JButton bPerfil;
@@ -31,7 +30,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VistaPrincipalEstudiante frame = new VistaPrincipalEstudiante();
+					VistaPrincipalInvitado frame = new VistaPrincipalInvitado();
 					frame.controlador(new ControladorVistaPrincipalTutor(frame));
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -43,7 +42,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 
 	public static void abrirVentana() {
 		try {
-			VistaPrincipalEstudiante frame = new VistaPrincipalEstudiante();
+			VistaPrincipalInvitado frame = new VistaPrincipalInvitado();
 			frame.controlador(new ControladorPrincipalTutor(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
@@ -51,7 +50,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 		}
 	}
 
-	public VistaPrincipalEstudiante() {
+	public VistaPrincipalInvitado() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);
@@ -76,11 +75,6 @@ public class VistaPrincipalEstudiante extends JFrame {
 		panelCalendario = new JPanel();
 		panelCalendario.setBounds(596, 66, 219, 225);
 		panelEventos.add(panelCalendario);
-		
-		panelMensajeria = new JPanel();
-		tabbedPane.addTab("Mensajeria", null, panelMensajeria, null);
-		
-		tabbedPane.setEnabledAt(1, false);
 		
 	
 		UtilDateModel model = new UtilDateModel();

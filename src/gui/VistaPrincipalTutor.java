@@ -14,6 +14,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JList;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 
 public class VistaPrincipalTutor extends JFrame {
 
@@ -24,6 +26,7 @@ public class VistaPrincipalTutor extends JFrame {
 	private JList<Evento> listInscritos;
 	private JList<Evento> listOrganizados;
 	private JPanel panelCalendario;
+	private JButton bPerfil;
 
 	
 	public static void main(String[] args) {
@@ -77,7 +80,7 @@ public class VistaPrincipalTutor extends JFrame {
 		panelEventos.add(listOrganizados);
 		
 		panelCalendario = new JPanel();
-		panelCalendario.setBounds(596, 43, 219, 225);
+		panelCalendario.setBounds(596, 66, 219, 225);
 		panelEventos.add(panelCalendario);
 		
 		panelMensajeria = new JPanel();
@@ -91,6 +94,22 @@ public class VistaPrincipalTutor extends JFrame {
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
 		
 		panelCalendario.add(datePicker);
+		
+		bPerfil = new JButton("");
+		bPerfil.setBounds(753, 11, 62, 49);
+		panelEventos.add(bPerfil);
+		
+		JLabel lblNombrePerfil = new JLabel("");
+		lblNombrePerfil.setBounds(662, 27, 46, 14);
+		panelEventos.add(lblNombrePerfil);
+		
+		JLabel lblDesc = new JLabel("");
+		lblDesc.setBounds(410, 49, 181, 127);
+		panelEventos.add(lblDesc);
+		
+		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar.setBounds(410, 187, 89, 23);
+		panelEventos.add(btnEntrar);
 
 	}
 
@@ -115,5 +134,4 @@ public class VistaPrincipalTutor extends JFrame {
 		listOrganizados.setListData(eventos);
 
 	}
-
 }
