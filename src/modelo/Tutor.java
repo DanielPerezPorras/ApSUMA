@@ -34,11 +34,7 @@ public class Tutor extends Usuario {
     }
 
     public void crearCurso(Date dia, String nombre, int numClases, int duracion){
-        boolean esValido = true;
-        // Comprobar si el nombre del curso es válido
-        if (esValido){
-            Curso curso = new Curso(dia, nombre, this, numClases, duracion);
-        }
+        Curso curso = new Curso(dia, nombre, this, numClases, duracion);
     }
 
     public void modificarInformacionTutor(String corUMA, String cor, String nombr, String contr){
@@ -57,7 +53,7 @@ public class Tutor extends Usuario {
 
     public void eliminarCurso(Curso curso){
         propuesto.remove(curso);
-        curso.eliminarEvento();
+        curso.eliminarCurso();
     }
 
     public String getCorreoUMA() {
