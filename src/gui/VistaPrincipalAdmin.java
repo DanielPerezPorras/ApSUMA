@@ -26,7 +26,7 @@ public class VistaPrincipalAdmin extends JFrame {
 	private JComboBox cbRoles;
 	private JSeparator separator;
 	private JLabel lblBsquedaDeUsuarios;
-	private JLabel lblNewLabel;
+	private JLabel lbNombreUsuario;
 	private JButton btnBuscar;
 	private JTextPane textPane;
 	private JLabel lbFoto;
@@ -72,10 +72,10 @@ public class VistaPrincipalAdmin extends JFrame {
 		lblBsquedaDeUsuarios.setBounds(372, 41, 186, 27);
 		panelPrincipal.add(lblBsquedaDeUsuarios);
 		
-		lblNewLabel = new JLabel("Nombre de usuario:");
-		lblNewLabel.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
-		lblNewLabel.setBounds(400, 81, 144, 27);
-		panelPrincipal.add(lblNewLabel);
+		lbNombreUsuario = new JLabel("Nombre de usuario:");
+		lbNombreUsuario.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
+		lbNombreUsuario.setBounds(400, 81, 144, 27);
+		panelPrincipal.add(lbNombreUsuario);
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
