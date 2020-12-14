@@ -76,7 +76,6 @@ public class Tutor extends Usuario {
                 propuesto.add(Evento.buscarEvento((String)tupla[0]));
             }
         }
-        System.out.println(propuesto.size());
         return propuesto;
     }
 
