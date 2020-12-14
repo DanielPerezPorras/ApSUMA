@@ -76,6 +76,8 @@ public class VistaPrincipalTutor extends JFrame {
 		UtilDateModel model = new UtilDateModel();
 		JDatePanelImpl datePanel = new JDatePanelImpl(model);
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+		
+		panelCalendario.add(datePicker);
 			
 		
 	}
