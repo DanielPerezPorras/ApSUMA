@@ -11,6 +11,7 @@ import javax.swing.JTabbedPane;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionListener;
 import javax.swing.JList;
 
 public class VistaPrincipalTutor extends JFrame {
@@ -29,6 +30,7 @@ public class VistaPrincipalTutor extends JFrame {
 			public void run() {
 				try {
 					VistaPrincipalTutor frame = new VistaPrincipalTutor();
+					frame.controlador(new ControladorVistaPrincipalTutor(frame));
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -80,5 +82,19 @@ public class VistaPrincipalTutor extends JFrame {
 		panelCalendario.add(datePicker);
 			
 		
+	}
+
+	public void controlador(ActionListener ctr){
+
+	}
+
+	public static void abrirVentana() {
+		try {
+			VistaPrincipalTutor frame = new VistaPrincipalTutor();
+			frame.controlador(new ControladorVistaPrincipalTutor(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

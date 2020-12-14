@@ -148,4 +148,7 @@ public class VistaPrincipalAdmin extends JFrame {
 		btnEliminarUsuario.addActionListener(ctr);
 		btnEliminarUsuario.setActionCommand("ELIMINAR");
 	}
+
+    public static void abrirVentana() {
+    }
 }
