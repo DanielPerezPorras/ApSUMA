@@ -32,7 +32,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 			public void run() {
 				try {
 					VistaPrincipalEstudiante frame = new VistaPrincipalEstudiante();
-					frame.controlador(new ControladorVistaPrincipalTutor(frame));
+					//frame.controlador(new ControladorPrincipalEstudiante(frame));
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +44,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 	public static void abrirVentana() {
 		try {
 			VistaPrincipalEstudiante frame = new VistaPrincipalEstudiante();
-			frame.controlador(new ControladorPrincipalTutor(frame));
+			//frame.controlador(new ControladorPrincipalTutor(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();

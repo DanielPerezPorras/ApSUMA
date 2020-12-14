@@ -1,18 +1,19 @@
 package modelo;
 
 import gui.VistaPrincipalEstudiante;
+import gui.VistaPrincipalInvitado;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Invitado extends Usuario{
-    private ArrayList<Evento> ActividadSocial = null;
-    private ArrayList<Evento> Conferencia = null;
+    private ArrayList<Evento> eventos = new ArrayList<>();
 
     public Invitado(){
     }
 
     @Override
     public void abrirVentanaPrincipal() {
-        VistaPrincipalEstudiante.abrirVentana();
+        VistaPrincipalInvitado.abrirVentana(this);
     }
 }

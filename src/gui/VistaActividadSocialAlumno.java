@@ -89,16 +89,26 @@ public class VistaActividadSocialAlumno extends JFrame {
 		pInicio.add(lbHyperLink);
 		tabbedPane.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
 	}
-	
-	public void controlador(ActionListener ctr)
+
+    public static void abrirVentana() {
+		try {
+			VistaActividadSocialAlumno frame = new VistaActividadSocialAlumno();
+			frame.controlador(new ControladorActividadSocialAlumno(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+
+    public void controlador(ActionListener ctr)
 	{
 		btnAnularInscripcin.addActionListener(ctr);
 		btnAnularInscripcin.setActionCommand("ANULAR");
 	}
 	
-	public void controlador(MouseListener ctr)
+	public void controlador(ControladorActividadSocialAlumno ctr)
 	{
-		lbHyperLink.addMouseListener(ctr);
+
 	}
 	
 }
