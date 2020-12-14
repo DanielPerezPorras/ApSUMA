@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelo.*;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -11,7 +12,7 @@ import javax.swing.JTabbedPane;
 
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JList;
 
 public class VistaPrincipalTutor extends JFrame {
@@ -20,8 +21,8 @@ public class VistaPrincipalTutor extends JFrame {
 	private JTabbedPane tabbedPane;
 	private JPanel panelEventos;
 	private JPanel panelMensajeria;
-	private JList listInscritos;
-	private JList listOrganizados;
+	private JList<Evento> listInscritos;
+	private JList<Evento> listOrganizados;
 	private JPanel panelCalendario;
 
 	
@@ -30,7 +31,7 @@ public class VistaPrincipalTutor extends JFrame {
 			public void run() {
 				try {
 					VistaPrincipalTutor frame = new VistaPrincipalTutor();
-					frame.controlador(new ControladorVistaPrincipalTutor(frame));
+					frame.controlador(new ControladorPrincipalTutor(frame));
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,11 +68,11 @@ public class VistaPrincipalTutor extends JFrame {
 		tabbedPane.addTab("Eventos", null, panelEventos, null);
 		panelEventos.setLayout(null);
 		
-		listInscritos = new JList();
+		listInscritos = new JList<>();
 		listInscritos.setBounds(38, 48, 362, 172);
 		panelEventos.add(listInscritos);
 		
-		listOrganizados = new JList();
+		listOrganizados = new JList<>();
 		listOrganizados.setBounds(38, 266, 362, 172);
 		panelEventos.add(listOrganizados);
 		
@@ -94,10 +95,24 @@ public class VistaPrincipalTutor extends JFrame {
 	}
 
 	public void controlador(ControladorPrincipalTutor ctr) {
+		listOrganizados.addListSelectionListener(ctr);
+		Usuario usuarioLogueado = Sesion.getUsuarioLogueado();
+		Evento[] eventos;
+		ArrayList<Evento> listaEventos;
 
-	}
+		if (usuarioLogueado instanceof Tutor) {
+			Tutor tutorLogueado = (Tutor)usuarioLogueado;
+			listaEventos = tutorLogueado.getPropuesto();
 
-	public void controlador(ActionListener ctr){
+		} else if (usuarioLogueado instanceof Colaborador) {
+			Colaborador tutorLogueado = (Colaborador)usuarioLogueado;
+			listaEventos = tutorLogueado.getCreado();
+		} else {
+			throw new RuntimeException("Tipo de usuario no válido para VistaPrincipalTutor");
+		}
+		eventos = new Evento[listaEventos.size()];
+		listaEventos.toArray(eventos);
+		listOrganizados.setListData(eventos);
 
 	}
 

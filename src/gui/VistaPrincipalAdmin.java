@@ -159,4 +159,6 @@ public class VistaPrincipalAdmin extends JFrame {
 		btnEliminarUsuario.setActionCommand("ELIMINAR");
 	}
 
+	public String getNombreUsuario() { return textField.getText(); }
+
 }
