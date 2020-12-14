@@ -21,11 +21,11 @@ public class ControladorConfimacion implements ActionListener {
         switch (e.getActionCommand()) {
 
             case "SI":
-                confirmacion.dispose();
                 JOptionPane.showMessageDialog(confirmacion,
                         "Operación realizada con éxito",
                         "ÉXITO",
                         JOptionPane.INFORMATION_MESSAGE);
+                confirmacion.dispose();
                 break;
 
             case "NO":
