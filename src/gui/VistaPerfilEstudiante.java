@@ -1,7 +1,7 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import modelo.Estudiante;
+import modelo.Usuario;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,7 +11,6 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import java.awt.Color;
 import java.awt.Container;
 
 import javax.swing.JComboBox;
@@ -104,8 +103,18 @@ public class VistaPerfilEstudiante extends JFrame {
 		cbMisActividades.setBounds(352, 288, 179, 34);
 		panelPrincipal.add(cbMisActividades);
 	}
-	
-	public void controlador(ActionListener ctr)
+
+	public static void abrirVentana() {
+		try {
+			VistaPerfilEstudiante frame = new VistaPerfilEstudiante();
+			frame.controlador(new ControladorPerfilEstudiante(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+    public void controlador(ActionListener ctr)
 	{
 		btModificarDatos.addActionListener(ctr);
 		btModificarDatos.setActionCommand("MODIFICAR");

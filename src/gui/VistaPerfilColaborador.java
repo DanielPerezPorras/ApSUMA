@@ -38,6 +38,18 @@ public class VistaPerfilColaborador extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+
+	public static void abrirVentana() {
+		try {
+			VistaPerfilColaborador frame = new VistaPerfilColaborador();
+			frame.controlador(new ControladorPrincipalColaborador(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public VistaPerfilColaborador() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

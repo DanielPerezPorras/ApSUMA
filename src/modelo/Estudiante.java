@@ -1,5 +1,6 @@
 package modelo;
 
+import gui.VistaPerfilEstudiante;
 import gui.VistaPrincipalEstudiante;
 
 import java.util.List;

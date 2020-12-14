@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelo.Estudiante;
+import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -22,29 +24,19 @@ public class VistaPrincipalEstudiante extends JFrame {
 	private JTabbedPane tabbedPane;
 	private JPanel panelEventos;
 	private JPanel panelMensajeria;
-	private JList listInscritos;
 	private JPanel panelCalendario;
 	private JButton bPerfil;
-
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VistaPrincipalEstudiante frame = new VistaPrincipalEstudiante();
-					//frame.controlador(new ControladorPrincipalEstudiante(frame));
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private UtilDateModel model ;
+	private JDatePanelImpl datePanel;
+	private JDatePickerImpl datePicker;
+	private JLabel lblDesc;
+	private JLabel lblNombrePerfil;
+	private JButton btnEntrar;
 
 	public static void abrirVentana() {
 		try {
 			VistaPrincipalEstudiante frame = new VistaPrincipalEstudiante();
-			//frame.controlador(new ControladorPrincipalTutor(frame));
+			frame.controlador(new ControladorPrincipalEstudiante(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,10 +61,6 @@ public class VistaPrincipalEstudiante extends JFrame {
 		tabbedPane.addTab("Eventos", null, panelEventos, null);
 		panelEventos.setLayout(null);
 		
-		listInscritos = new JList();
-		listInscritos.setBounds(38, 48, 362, 172);
-		panelEventos.add(listInscritos);
-		
 		panelCalendario = new JPanel();
 		panelCalendario.setBounds(596, 66, 219, 225);
 		panelEventos.add(panelCalendario);
@@ -83,9 +71,9 @@ public class VistaPrincipalEstudiante extends JFrame {
 		tabbedPane.setEnabledAt(1, false);
 		
 	
-		UtilDateModel model = new UtilDateModel();
-		JDatePanelImpl datePanel = new JDatePanelImpl(model);
-		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+		model = new UtilDateModel();
+		datePanel = new JDatePanelImpl(model);
+		datePicker = new JDatePickerImpl(datePanel);
 		
 		panelCalendario.add(datePicker);
 		
@@ -93,25 +81,36 @@ public class VistaPrincipalEstudiante extends JFrame {
 		bPerfil.setBounds(753, 11, 62, 49);
 		panelEventos.add(bPerfil);
 		
-		JLabel lblNombrePerfil = new JLabel("");
+		lblNombrePerfil = new JLabel("");
 		lblNombrePerfil.setBounds(662, 27, 46, 14);
 		panelEventos.add(lblNombrePerfil);
 		
-		JLabel lblDesc = new JLabel("");
+		lblDesc = new JLabel("");
 		lblDesc.setBounds(410, 49, 181, 127);
 		panelEventos.add(lblDesc);
 		
-		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(410, 187, 89, 23);
 		panelEventos.add(btnEntrar);
 
 	}
 
-	public void controlador(ControladorPrincipalTutor ctr) {
+	public void controlador(ControladorPrincipalEstudiante ctr) {
+		btnEntrar.setActionCommand("ENTRAR");
+		bPerfil.setActionCommand("PERFIL");
+
+		btnEntrar.addActionListener(ctr);
+		bPerfil.addActionListener(ctr);
+
+		datePicker.addActionListener(ctr);
 
 	}
 
-	public void controlador(ActionListener ctr){
-
+	public boolean compruebaFuenteEvento(Object source) {
+		if (source instanceof JDatePicker) {
+			return source.equals(datePicker);
+		} else {
+			return false;
+		}
 	}
 }

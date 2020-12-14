@@ -40,6 +40,7 @@ public class VistaPerfilTutor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+
 	public VistaPerfilTutor() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -122,7 +123,17 @@ public class VistaPerfilTutor extends JFrame {
 		cbMisActividades.setBounds(409, 359, 179, 34);
 		panelPrincipal.add(cbMisActividades);
 	}
-	
+
+	public static void abrirVentana() {
+		try {
+			VistaPerfilTutor frame = new VistaPerfilTutor();
+			frame.controlador(new ControladorPerfilTutor(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void controlador(ActionListener ctr)
 	{
 		btModificarDatos.addActionListener(ctr);

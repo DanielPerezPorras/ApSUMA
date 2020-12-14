@@ -28,21 +28,6 @@ public class VistaPrincipalTutor extends JFrame {
 	private JPanel panelCalendario;
 	private JButton bPerfil;
 
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VistaPrincipalTutor frame = new VistaPrincipalTutor();
-					frame.controlador(new ControladorPrincipalTutor(frame));
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public static void abrirVentana() {
 		try {
 			VistaPrincipalTutor frame = new VistaPrincipalTutor();
