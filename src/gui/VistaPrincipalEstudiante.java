@@ -4,7 +4,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelo.Colaborador;
 import modelo.Estudiante;
+import modelo.Evento;
+import modelo.Sesion;
+import modelo.Tutor;
+import modelo.Usuario;
 import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -14,6 +19,9 @@ import javax.swing.JTabbedPane;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
+
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -32,6 +40,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 	private JLabel lblDesc;
 	private JLabel lblNombrePerfil;
 	private JButton btnEntrar;
+	private JList<Evento> listInscritos;
 
 	public static void abrirVentana() {
 		try {
@@ -79,6 +88,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 		
 		bPerfil = new JButton("");
 		bPerfil.setBounds(753, 11, 62, 49);
+		UtilidadesGUI.ajustarImagenAButton(bPerfil, "/recursosApp/gato.png");
 		panelEventos.add(bPerfil);
 		
 		lblNombrePerfil = new JLabel("");
@@ -92,6 +102,10 @@ public class VistaPrincipalEstudiante extends JFrame {
 		btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(410, 187, 89, 23);
 		panelEventos.add(btnEntrar);
+		
+		listInscritos = new JList<Evento>();
+		listInscritos.setBounds(38, 48, 362, 172);
+		panelEventos.add(listInscritos);
 
 	}
 
@@ -103,14 +117,26 @@ public class VistaPrincipalEstudiante extends JFrame {
 		bPerfil.addActionListener(ctr);
 
 		datePicker.addActionListener(ctr);
-
+		listInscritos.addListSelectionListener(ctr);
+	}
+	
+	public Date fechaSeleccionada() {
+		return (Date) datePicker.getModel().getValue();
 	}
 
 	public boolean compruebaFuenteEvento(Object source) {
-		if (source instanceof JDatePicker) {
-			return source.equals(datePicker);
-		} else {
-			return false;
-		}
+		return source.equals(datePicker);
+	}
+	
+	public void cargarEventos() {
+		Usuario usuarioLogueado = Sesion.getUsuarioLogueado();
+		Evento[] eventos;
+		ArrayList<Evento> listaEventos;
+
+		listaEventos = usuarioLogueado.getPropuesto(this.fechaSeleccionada());
+
+		eventos = new Evento[listaEventos.size()];
+		listaEventos.toArray(eventos);
+		listInscritos.setListData(eventos);
 	}
 }

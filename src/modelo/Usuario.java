@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public abstract class Usuario {
@@ -116,6 +117,19 @@ public abstract class Usuario {
         BD bd = new BD();
         Object cuenta = bd.SelectEscalar("SELECT COUNT(*) FROM Usuario WHERE correo='" + correo + "'");
         return (long)cuenta > 0;
+    }
+    
+    public ArrayList<Evento> getPropuesto(Date fecha) {
+    	java.sql.Date sqlfecha = new java.sql.Date(fecha.getTime());
+    	ArrayList<Evento> eventos = new ArrayList<Evento>();
+
+        BD bd = new BD();
+        List<Object[]> resultados = bd.Select("SELECT nombre FROM Evento WHERE fecha='" + sqlfecha.toString() + "'");
+        for (Object[] tupla : resultados) {
+            eventos.add(Evento.buscarEvento((String)tupla[0]));
+        }
+
+        return eventos;
     }
 
     public abstract void abrirVentanaPrincipal();
