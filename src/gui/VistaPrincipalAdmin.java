@@ -185,10 +185,4 @@ public class VistaPrincipalAdmin extends JFrame {
 		btnEliminarUsuario.addActionListener(ctr);
 		btnEliminarUsuario.setActionCommand("ELIMINAR");
 	}
-<<<<<<< HEAD
-=======
-
-	public String getNombreUsuario() { return textField.getText(); }
-
->>>>>>> branch 'master' of https://github.com/DanielPerezPorras/ApSUMA.git
 }
