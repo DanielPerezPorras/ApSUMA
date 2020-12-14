@@ -39,6 +39,16 @@ public class VistaPrincipalAdmin extends JFrame {
 	private JButton btnPenalizar;
 	private JButton btnEliminarUsuario;
 
+	public static void abrirVentana() {
+		try {
+			VistaPrincipalAdmin frame = new VistaPrincipalAdmin();
+			frame.controlador(new ControladorPrincipalAdmin(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * Create the frame.
 	 */
@@ -148,4 +158,5 @@ public class VistaPrincipalAdmin extends JFrame {
 		btnEliminarUsuario.addActionListener(ctr);
 		btnEliminarUsuario.setActionCommand("ELIMINAR");
 	}
+
 }

@@ -1,5 +1,9 @@
 package modelo;
 
+import gui.VistaPrincipalEstudiante;
+
+import java.util.List;
+
 public class Estudiante extends Usuario{
 
     public Estudiante(String corr, String usr, String contr) {
@@ -10,6 +14,16 @@ public class Estudiante extends Usuario{
 
     public Estudiante(String corr) {
         super(corr);
+        BD bd = new BD();
+        List<Object[]> userList = bd.Select("SELECT * FROM Estudiante WHERE correo = '" + corr + "';");
+        if (userList.size() == 0) {
+            throw new ErrorBD("No se ha encontrado un estudiante con correo " + corr);
+        }
+    }
+
+    @Override
+    public void abrirVentanaPrincipal() {
+        VistaPrincipalEstudiante.abrirVentana();
     }
 
     public void modificarInformacionEstudiante(String corr,String usr,String contr){

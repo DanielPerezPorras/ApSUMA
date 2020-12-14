@@ -1,9 +1,11 @@
 package gui;
 
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ControladorPrincipalTutor implements ActionListener {
+public class ControladorPrincipalTutor implements ActionListener, ListSelectionListener {
 
     private final VistaPrincipalTutor vista;
 
@@ -16,6 +18,11 @@ public class ControladorPrincipalTutor implements ActionListener {
         switch (e.getActionCommand()) {
 
         }
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+
     }
 
 }

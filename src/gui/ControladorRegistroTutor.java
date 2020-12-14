@@ -51,6 +51,9 @@ public class ControladorRegistroTutor implements ActionListener {
                     Usuario nuevoUsuario = new Tutor(correoUMA, correo, usuario, contrasenia);
                     Sesion.setUsuarioLogueado(nuevoUsuario);
                     System.out.println("Usuario creado: " + correo + "(" + usuario + ")");
+
+                    vista.dispose();
+                    nuevoUsuario.abrirVentanaPrincipal();
                 } else {
                     JOptionPane.showMessageDialog(vista,
                             error,

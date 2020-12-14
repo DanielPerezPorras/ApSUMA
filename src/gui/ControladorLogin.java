@@ -1,8 +1,6 @@
 package gui;
 
-import modelo.BD;
-import modelo.Sesion;
-import modelo.Usuario;
+import modelo.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -38,7 +36,11 @@ public class ControladorLogin implements ActionListener {
                     Usuario usuario = Usuario.buscarUsuario(correo);
                     Sesion.setUsuarioLogueado(usuario);
                     System.out.println(usuario.getCorreo() + " acaba de iniciar sesión");
-                    // TODO Cómo movernos a la pantalla principal?
+
+                    // Cambiar ventana
+                    vista.dispose();
+                    usuario.abrirVentanaPrincipal();
+
                 } else {
                     JOptionPane.showMessageDialog(vista,
                             "Usuario o contraseña incorrectos.",

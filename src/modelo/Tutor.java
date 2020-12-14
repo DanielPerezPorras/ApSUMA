@@ -1,5 +1,7 @@
 package modelo;
 
+import gui.VistaPrincipalTutor;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,6 +33,11 @@ public class Tutor extends Usuario {
         } else {
             throw new ErrorBD("No se ha encontrado un tutor con correo " + correo);
         }
+    }
+
+    @Override
+    public void abrirVentanaPrincipal() {
+        VistaPrincipalTutor.abrirVentana();
     }
 
     public void crearCurso(Date dia, String nombre, int numClases, int duracion){

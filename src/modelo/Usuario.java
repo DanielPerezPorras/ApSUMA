@@ -106,4 +106,6 @@ public abstract class Usuario {
         return (long)cuenta > 0;
     }
 
+    public abstract void abrirVentanaPrincipal();
+
 }
