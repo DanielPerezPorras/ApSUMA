@@ -64,4 +64,8 @@ public class VistaNuevoCurso extends JFrame {
 		btnCancelar.setActionCommand("CANCELAR");
 	}
 
+	public String getTextoNombre() {
+		return textField.getText();
+	}
+
 }
