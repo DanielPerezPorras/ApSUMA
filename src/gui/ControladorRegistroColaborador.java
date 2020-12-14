@@ -51,6 +51,9 @@ public class ControladorRegistroColaborador implements ActionListener {
                     Usuario nuevoUsuario = new Colaborador(correoCorp, correo, usuario, contrasenia);
                     Sesion.setUsuarioLogueado(nuevoUsuario);
                     System.out.println("Usuario creado: " + correo + "(" + usuario + ")");
+
+                    vista.dispose();
+                    nuevoUsuario.abrirVentanaPrincipal();
                 } else {
                     JOptionPane.showMessageDialog(vista,
                             error,
