@@ -1,29 +1,15 @@
-import gui.VistaBase;
-
-import javax.swing.*;
+import gui.VistaLogin;
 import java.awt.*;
 
 public class Programa {
 
-    private static final String TITULO_VENTANA = "ApSUMA";
-    private static final Dimension TAMANIO_VENTANA = new Dimension(800, 450);
-
     public static void main(String[] args) {
         System.out.println("Abriendo ApSUMA...");
-        crearGUI();
-    }
-
-    private static void crearGUI() {
-
-        JFrame ventana = new JFrame(TITULO_VENTANA);
-        VistaBase vistaBase = new VistaBase();
-
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ventana.setContentPane(vistaBase);
-        ventana.setPreferredSize(TAMANIO_VENTANA);
-        ventana.pack();
-        ventana.setVisible(true);
-
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                VistaLogin.abrirVentana();
+            }
+        });
     }
 
 }
