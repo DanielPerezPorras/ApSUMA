@@ -1,5 +1,8 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -14,7 +17,7 @@ import javax.swing.JPasswordField;
 public class VistaRegistroColaborador extends JFrame {
 
 	private JPanel panelPrincipal;
-	private JTextField tCorreoCorp;
+	private JTextField tCorreoUMA;
 	private JTextField tCorreo;
 	private JTextField tNombre;
 	private JPasswordField passwordField;
@@ -75,11 +78,11 @@ public class VistaRegistroColaborador extends JFrame {
 		lbConfirmeSuContrasea.setBounds(44, 236, 212, 24);
 		panelPrincipal.add(lbConfirmeSuContrasea);
 		
-		tCorreoCorp = new JTextField();
-		tCorreoCorp.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
-		tCorreoCorp.setBounds(288, 23, 251, 31);
-		panelPrincipal.add(tCorreoCorp);
-		tCorreoCorp.setColumns(10);
+		tCorreoUMA = new JTextField();
+		tCorreoUMA.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		tCorreoUMA.setBounds(288, 23, 251, 31);
+		panelPrincipal.add(tCorreoUMA);
+		tCorreoUMA.setColumns(10);
 		
 		tCorreo = new JTextField();
 		tCorreo.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
@@ -119,23 +122,4 @@ public class VistaRegistroColaborador extends JFrame {
 		btnSiguiente.addActionListener(ctr);
 		btnSiguiente.setActionCommand("REGISTRO COLABORADOR");
 	}
-
-	public String getTextoCorreo() {
-		return tCorreo.getText();
-	}
-
-	public String getTextoCorreoCorp() { return tCorreoCorp.getText();  }
-
-	public String getTextoUsuario() {
-		return tNombre.getText();
-	}
-
-	public String getTextoContrasenia() {
-		return passwordField.getText();
-	}
-
-	public String getTextoConfirmaContrasenia() {
-		return passwordConfirmField.getText();
-	}
-
 }
