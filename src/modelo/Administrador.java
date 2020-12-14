@@ -44,8 +44,14 @@ public class Administrador extends Usuario{
         bd.Delete("DELETE FROM Administrador WHERE correo = '" + this.getCorreo() + "';");
     }
 
-    public void eliminarusuario(Usuario u){
-        users.remove(u);
+    public void eliminarusuario(String correo){
+        BD bd = new BD();
+        long numUsuarios = (long)bd.SelectEscalar("SELECT COUNT(*) FROM Usuario WHERE " +
+                "correo = '" + correo + "';");
+
+        if (numUsuarios > 0){
+            Usuario.buscarUsuario(correo).eliminarCuenta();
+        }
     }
 
 
