@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JSeparator;
@@ -17,6 +19,12 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
+import javax.swing.ListModel;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.DefaultComboBoxModel;
 
 public class VistaPrincipalAdmin extends JFrame {
 
@@ -28,7 +36,6 @@ public class VistaPrincipalAdmin extends JFrame {
 	private JLabel lblBsquedaDeUsuarios;
 	private JLabel lbNombreUsuario;
 	private JButton btnBuscar;
-	private JTextPane textPane;
 	private JLabel lbFoto;
 	private Container lbNombreDeUsuario;
 	private JLabel lblUsuario;
@@ -38,6 +45,7 @@ public class VistaPrincipalAdmin extends JFrame {
 	private JLabel lblUsuarioumaes_1;
 	private JButton btnPenalizar;
 	private JButton btnEliminarUsuario;
+	private JComboBox cbLista;
 
 	public static void abrirVentana() {
 		try {
@@ -52,6 +60,7 @@ public class VistaPrincipalAdmin extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public VistaPrincipalAdmin() 
 	{
 		setResizable(false);
@@ -98,11 +107,6 @@ public class VistaPrincipalAdmin extends JFrame {
 		btnBuscar.setBounds(720, 81, 97, 27);
 		panelPrincipal.add(btnBuscar);
 		
-		textPane = new JTextPane();
-		textPane.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
-		textPane.setBounds(564, 139, 253, 184);
-		panelPrincipal.add(textPane);
-		
 		lbFoto = new JLabel("");
 		lbFoto.setBounds(372, 342, 144, 140);
 		UtilidadesGUI.ajustarImagenALabel(lbFoto, "/recursosApp/gato.png");
@@ -147,6 +151,29 @@ public class VistaPrincipalAdmin extends JFrame {
 		btnEliminarUsuario.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
 		btnEliminarUsuario.setBounds(579, 494, 202, 37);
 		panelPrincipal.add(btnEliminarUsuario);
+		
+		cbLista = new JComboBox();
+		cbLista.setBounds(564, 138, 253, 22);
+		panelPrincipal.add(cbLista);
+	}
+	
+	public String getTextBoxValue()
+	{
+		return textField.getText();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void anyadirTexto(String[] lista)
+	{
+		cbLista.setModel(new DefaultComboBoxModel(lista));
+	}
+	
+	//Muestra el nombre, correo del usuario
+	public void mostrarDatosUsuario(String usuario, String correo, String correoUma)
+	{
+		lblUsuario.setText(usuario);
+		lblCorreoElectrnico.setText(correo);
+		lblUsuarioumaes_1.setText(correoUma);
 	}
 	
 	public void controlador(ActionListener ctr)
@@ -158,7 +185,4 @@ public class VistaPrincipalAdmin extends JFrame {
 		btnEliminarUsuario.addActionListener(ctr);
 		btnEliminarUsuario.setActionCommand("ELIMINAR");
 	}
-
-	public String getNombreUsuario() { return textField.getText(); }
-
 }
