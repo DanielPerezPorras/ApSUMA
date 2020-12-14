@@ -27,22 +27,17 @@ public class VistaLogin extends JFrame {
 	private JButton btRegistrarse;
 	private JButton btnEntrarComoInvitado;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VistaLogin frame = new VistaLogin();
-					frame.controlador(new ControladorLogin(frame));
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+
+	public static void abrirVentana() {
+		try {
+			VistaLogin frame = new VistaLogin();
+			frame.controlador(new ControladorLogin(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+
 
 	/**
 	 * Create the frame.

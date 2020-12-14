@@ -30,4 +30,11 @@ public class Curso extends Evento {
         }
     }
 
+    public void eliminarCurso(){
+        this.eliminarEvento();
+        BD bd = new BD();
+        bd.Delete("DELETE FROM Curso WHERE nombre = '" + this.getNombre() + "';");
+        clases = 0;
+        duracion = 0;
+    }
 }

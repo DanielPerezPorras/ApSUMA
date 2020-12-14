@@ -67,6 +67,8 @@ public abstract class Evento {
     public void eliminarEvento(){
         Fecha = null;
         Nombre = null;
+        BD bd = new BD();
+        bd.Delete("DELETE FROM Evento WHERE nombre = '" + Nombre + "';");
         for (Usuario usuario : usuarios){
             usuario.darseBajaEvento(this);
         }
