@@ -72,7 +72,7 @@ public class VistaLogin extends JFrame {
 		UtilidadesGUI.ajustarImagenALabel(lbImagen, "/recursosApp/gato.png");
 		panelTotal.add(lbImagen);
 		
-		lbUsuario = new JLabel("Usuario");
+		lbUsuario = new JLabel("Correo");
 		lbUsuario.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 20));
 		lbUsuario.setBounds(247, 145, 107, 16);
 		panelTotal.add(lbUsuario);

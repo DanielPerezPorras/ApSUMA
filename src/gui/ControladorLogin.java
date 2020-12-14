@@ -24,7 +24,7 @@ public class ControladorLogin implements ActionListener {
 
             case "INICIAR":
 
-                // Comprobar si existe un usuario con el nombre y contraseña dados.
+                // Comprobar si existe un usuario con el correo y contraseña dados.
                 String correo = vista.getTextoUsuario();
                 String contrasenia = vista.getTextoContrasenia();
 
@@ -43,7 +43,7 @@ public class ControladorLogin implements ActionListener {
 
                 } else {
                     JOptionPane.showMessageDialog(vista,
-                            "Usuario o contraseña incorrectos.",
+                            "correo o contraseña incorrectos.",
                             "Error inicio de sesión",
                             JOptionPane.ERROR_MESSAGE);
                 }

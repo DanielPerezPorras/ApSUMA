@@ -43,10 +43,7 @@ public class VistaPrincipalInvitado extends JFrame {
 	}
 
 	private void cargarActividades() {
-		ArrayList<Evento> eventos = usuario.getActividad();
-		for (Evento evento : eventos){
-			//panelEventos.add();
-		}
+
 	}
 
 	public VistaPrincipalInvitado(Usuario usuario) {
