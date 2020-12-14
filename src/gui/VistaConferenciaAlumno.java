@@ -21,7 +21,7 @@ public class VistaConferenciaAlumno extends JFrame {
 
 	private JPanel panelPrincipal;
 	private JTabbedPane tabbedPane;
-	private JPanel pInformación;
+	private JPanel pInformacion;
 	private JButton btnAnularInscripcin;
 	private JLabel lblbienvenidoAlCurso;
 	private JLabel lblCurso;
@@ -47,46 +47,46 @@ public class VistaConferenciaAlumno extends JFrame {
 		tabbedPane.setBounds(12, 13, 826, 518);
 		panelPrincipal.add(tabbedPane);
 		
-		pInformación = new JPanel();
-		tabbedPane.addTab("Información", null, pInformación, null);
-		pInformación.setLayout(null);
+		pInformacion = new JPanel();
+		tabbedPane.addTab("Informaciï¿½n", null, pInformacion, null);
+		pInformacion.setLayout(null);
 		
 		btnAnularInscripcin = new JButton("Anular Inscripci\u00F3n");
 		btnAnularInscripcin.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
 		btnAnularInscripcin.setBounds(556, 471, 155, 27);
-		pInformación.add(btnAnularInscripcin);
+		pInformacion.add(btnAnularInscripcin);
 		
 		lblbienvenidoAlCurso = new JLabel("\u00A1Bienvenido al curso de ");
 		lblbienvenidoAlCurso.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 20));
 		lblbienvenidoAlCurso.setBounds(137, 13, 221, 50);
-		pInformación.add(lblbienvenidoAlCurso);
+		pInformacion.add(lblbienvenidoAlCurso);
 		
 		lblCurso = new JLabel("CONFERENCIA !");
 		lblCurso.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 20));
 		lblCurso.setBounds(362, 13, 214, 50);
-		pInformación.add(lblCurso);
+		pInformacion.add(lblCurso);
 		
 		lbFoto = new JLabel("");
 		lbFoto.setBounds(12, 77, 147, 144);
 		UtilidadesGUI.ajustarImagenALabel(lbFoto, "/recursosApp/gato.png");
-		pInformación.add(lbFoto);
+		pInformacion.add(lbFoto);
 		
 		lblDescripcion = new JLabel("Descripcion");
 		lblDescripcion.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
 		lblDescripcion.setBounds(209, 76, 481, 286);
-		pInformación.add(lblDescripcion);
+		pInformacion.add(lblDescripcion);
 		
 		lblLinkMeetingCurso = new JLabel("Link Meeting Conferencia:");
 		lblLinkMeetingCurso.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
 		lblLinkMeetingCurso.setBounds(12, 468, 200, 32);
-		pInformación.add(lblLinkMeetingCurso);
+		pInformacion.add(lblLinkMeetingCurso);
 		
 		lbHyperLink = new JLabel("Clase");
 		lbHyperLink.setForeground(Color.BLUE.darker());
 		lbHyperLink.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 16));
 		lbHyperLink.setBounds(228, 473, 292, 27);
 		lbHyperLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		pInformación.add(lbHyperLink);
+		pInformacion.add(lbHyperLink);
 		tabbedPane.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
 	}
 	

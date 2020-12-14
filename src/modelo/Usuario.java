@@ -10,6 +10,8 @@ public abstract class Usuario {
     private String contra;
     private ArrayList<Evento> actividad;
 
+    public Usuario(){}
+
     // Constructor para crear un nuevo usuario
     public Usuario(String cor, String nombreUs, String contr){
         BD bd = new BD();
@@ -96,6 +98,16 @@ public abstract class Usuario {
                     } catch (ErrorBD ignored) { }
                 }
             }
+        }
+        return usuario;
+    }
+
+    public static Usuario crearInvitado(){
+        Usuario usuario = null;
+        try {
+            usuario = new Invitado();
+        } catch (ErrorBD ex1){
+            throw new ErrorBD("No se ha podido registrar invitado");
         }
         return usuario;
     }

@@ -68,6 +68,14 @@ public class Tutor extends Usuario {
     }
 
     public ArrayList<Evento> getPropuesto() {
+        if (propuesto == null) {
+            propuesto = new ArrayList<>();
+            BD bd = new BD();
+            List<Object[]> resultados = bd.Select("SELECT nombre FROM Evento WHERE correo='" + getCorreo() + "'");
+            for (Object[] tupla : resultados) {
+                propuesto.add(Evento.buscarEvento((String)tupla[0]));
+            }
+        }
         return propuesto;
     }
 

@@ -90,4 +90,25 @@ public abstract class Evento {
     public Administrador getAdministrador() {
         return administrador;
     }
+
+    public static Evento buscarEvento(String nombre) {
+        Evento evento = null;
+        try {
+            evento = new Curso(nombre);
+        } catch (ErrorBD ex1) {
+            try {
+                evento = new ActividadSocial(nombre);
+            } catch (ErrorBD ex2) {
+                try {
+                    evento = new Conferencia(nombre);
+                } catch (ErrorBD ignored) { }
+            }
+        }
+        return evento;
+    }
+
+    public String toString() {
+        return Nombre;
+    }
+
 }

@@ -10,6 +10,7 @@ import modelo.BD;
 public class ControladorPrincipalAdmin implements ActionListener 
 {
 
+<<<<<<< HEAD
 private final VistaPrincipalAdmin vista;
 	
 	public ControladorPrincipalAdmin(VistaPrincipalAdmin vista)
@@ -43,5 +44,23 @@ private final VistaPrincipalAdmin vista;
 		}
 		
 	}
+=======
+    public ControladorPrincipalAdmin(VistaPrincipalAdmin vista) {
+        this.vista = vista;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        switch (e.getActionCommand()) {
+
+            case "PENALIZAR":
+                break;
+
+            case "ELIMINAR":
+                break;
+
+        }
+    }
+>>>>>>> branch 'master' of https://github.com/DanielPerezPorras/ApSUMA.git
 
 }
