@@ -26,12 +26,10 @@ public class ControladorConfimacion implements ActionListener {
                         "Operación realizada con éxito",
                         "ÉXITO",
                         JOptionPane.INFORMATION_MESSAGE);
-                VistaTipoRegistro.abrirVentana();
                 break;
 
             case "NO":
                 confirmacion.dispose();
-                VistaTipoRegistro.abrirVentana();
                 break;
         }
     }
