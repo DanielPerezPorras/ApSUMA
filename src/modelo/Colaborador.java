@@ -1,5 +1,7 @@
 package modelo;
 
+import gui.VistaPrincipalTutor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,11 @@ public class Colaborador extends Usuario{
         } else {
             throw new ErrorBD("No se ha encontrado un colaborador con correo " + correo);
         }
+    }
+
+    @Override
+    public void abrirVentanaPrincipal() {
+        VistaPrincipalTutor.abrirVentana();
     }
 
     public void crearEvento(Evento evento){

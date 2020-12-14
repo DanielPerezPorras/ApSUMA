@@ -1,6 +1,10 @@
 package modelo;
 
+import gui.VistaPrincipalAdmin;
+import gui.VistaPrincipalTutor;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Administrador extends Usuario{
 
@@ -15,7 +19,17 @@ public class Administrador extends Usuario{
 
     public Administrador(String cor) {
         super(cor);
+        BD bd = new BD();
+        List<Object[]> userList = bd.Select("SELECT * FROM Administrador WHERE correo = '" + cor + "';");
+        if (userList.size() == 0) {
+            throw new ErrorBD("No se ha encontrado un administrador con correo " + cor);
+        }
         users = null;
+    }
+
+    @Override
+    public void abrirVentanaPrincipal() {
+        VistaPrincipalAdmin.abrirVentana();
     }
 
     public void modificarInformacionAdministrador(String cor, String usr, String contr){

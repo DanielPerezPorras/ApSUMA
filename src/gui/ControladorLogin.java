@@ -38,13 +38,9 @@ public class ControladorLogin implements ActionListener {
                     System.out.println(usuario.getCorreo() + " acaba de iniciar sesión");
 
                     // Cambiar ventana
-                    if (usuario instanceof Estudiante) { VistaPrincipalEstudiante.abrirVentana(); }
-                        else if (usuario instanceof Tutor) { VistaPrincipalTutor.abrirVentana();
-                        System.out.println("OAEUfhaouefhoauefh");}
-                            else if (usuario instanceof Colaborador) { VistaPrincipalTutor.abrirVentana(); }
-                                else { VistaPrincipalAdmin.abrirVentana(); }
-                    System.out.println("No va");
                     vista.dispose();
+                    usuario.abrirVentanaPrincipal();
+
                 } else {
                     JOptionPane.showMessageDialog(vista,
                             "Usuario o contraseña incorrectos.",
