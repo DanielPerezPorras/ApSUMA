@@ -59,6 +59,15 @@ public class Colaborador extends Usuario{
     }
 
     public ArrayList<Evento> getCreado() {
+        if (creado == null) {
+            creado = new ArrayList<>();
+            BD bd = new BD();
+            List<Object[]> resultados = bd.Select("SELECT nombre FROM Evento WHERE correo='" + getCorreo() + "'");
+            for (Object[] tupla : resultados) {
+                creado.add(Evento.buscarEvento((String)tupla[0]));
+            }
+        }
+        System.out.println(creado.size());
         return creado;
     }
 }

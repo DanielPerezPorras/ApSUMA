@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelo.Evento;
+import modelo.Usuario;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -12,46 +14,43 @@ import javax.swing.JTabbedPane;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class VistaPrincipalEstudiante extends JFrame {
+public class VistaPrincipalInvitado extends JFrame {
 
+	private JLabel lblDesc;
+	private JLabel lblNombrePerfil;
+	private JButton btnEntrar;
+	private Usuario usuario;
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
 	private JPanel panelEventos;
-	private JPanel panelMensajeria;
 	private JList listInscritos;
 	private JPanel panelCalendario;
 	private JButton bPerfil;
 
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VistaPrincipalEstudiante frame = new VistaPrincipalEstudiante();
-					//frame.controlador(new ControladorPrincipalEstudiante(frame));
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	public static void abrirVentana() {
+	public static void abrirVentana(Usuario usuario) {
 		try {
-			VistaPrincipalEstudiante frame = new VistaPrincipalEstudiante();
-			//frame.controlador(new ControladorPrincipalTutor(frame));
+			VistaPrincipalInvitado frame = new VistaPrincipalInvitado(usuario);
+			frame.controlador(new ControladorPrincipalInvitado(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public VistaPrincipalEstudiante() {
+	private void cargarActividades() {
+		ArrayList<Evento> eventos = usuario.getActividad();
+		for (Evento evento : eventos){
+			//panelEventos.add();
+		}
+	}
+
+	public VistaPrincipalInvitado(Usuario usuario) {
+		this.usuario = usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);
@@ -77,11 +76,6 @@ public class VistaPrincipalEstudiante extends JFrame {
 		panelCalendario.setBounds(596, 66, 219, 225);
 		panelEventos.add(panelCalendario);
 		
-		panelMensajeria = new JPanel();
-		tabbedPane.addTab("Mensajeria", null, panelMensajeria, null);
-		
-		tabbedPane.setEnabledAt(1, false);
-		
 	
 		UtilDateModel model = new UtilDateModel();
 		JDatePanelImpl datePanel = new JDatePanelImpl(model);
@@ -93,25 +87,24 @@ public class VistaPrincipalEstudiante extends JFrame {
 		bPerfil.setBounds(753, 11, 62, 49);
 		panelEventos.add(bPerfil);
 		
-		JLabel lblNombrePerfil = new JLabel("");
+		lblNombrePerfil = new JLabel("");
 		lblNombrePerfil.setBounds(662, 27, 46, 14);
 		panelEventos.add(lblNombrePerfil);
 		
-		JLabel lblDesc = new JLabel("");
+		lblDesc = new JLabel("");
 		lblDesc.setBounds(410, 49, 181, 127);
 		panelEventos.add(lblDesc);
-		
-		JButton btnEntrar = new JButton("Entrar");
+
+		btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(410, 187, 89, 23);
 		panelEventos.add(btnEntrar);
 
+		cargarActividades();
 	}
 
-	public void controlador(ControladorPrincipalTutor ctr) {
-
+	public void controlador(ControladorPrincipalInvitado ctr) {
+		btnEntrar.addActionListener(ctr);
+		btnEntrar.setActionCommand("ENTRAR");
 	}
 
-	public void controlador(ActionListener ctr){
-
-	}
 }
