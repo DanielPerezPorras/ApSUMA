@@ -38,8 +38,8 @@ public class Administrador extends Usuario{
         bd.Update("UPDATE Administrador SET correo = '" + cor + "';");
     }
 
-    public void eliminarCuentaAdministrador(){
-        this.eliminarCuenta();
+    public void eliminarCuenta(){
+        super.eliminarCuenta();
         BD bd = new BD();
         bd.Delete("DELETE FROM Administrador WHERE correo = '" + this.getCorreo() + "';");
     }

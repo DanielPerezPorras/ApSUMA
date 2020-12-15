@@ -47,8 +47,8 @@ public class Colaborador extends Usuario{
         correoCorp = correoCorporativo;
     }
 
-    public void eliminarCuentaColaborador(){
-        this.eliminarCuenta();
+    public void eliminarCuenta(){
+        super.eliminarCuenta();
         BD bd = new BD();
         bd.Delete("DELETE FROM Colaborador WHERE correo = '" + this.getCorreo() + "';");
         correoCorp = null;

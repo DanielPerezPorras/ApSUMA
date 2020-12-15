@@ -32,8 +32,8 @@ public class Estudiante extends Usuario{
         bd.Update("UPDATE Estudiante SET correo = '" + corr + "';");
     }
 
-    public void eliminarCuentaEstudiante(){
-        this.eliminarCuenta();
+    public void eliminarCuenta(){
+        super.eliminarCuenta();
         BD bd = new BD();
         bd.Delete("DELETE FROM Estudiante WHERE correo = '" + this.getCorreo() + "';");
     }
