@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import modelo.BD;
 import modelo.ErrorBD;
+import modelo.Usuario;
 
 public class ControladorPrincipalAdmin implements ActionListener 
 {
@@ -48,7 +49,9 @@ private final VistaPrincipalAdmin vista;
 			case "PENALIZAR":
 				break;
 			case "ELIMINAR":
-				
+				Usuario usu = vista.darUsuario();
+				usu.eliminarCuenta();
+				vista.limpiar();
 				break;
 			case "ACTUALIZAR":
 				vista.mostrarDatosUsuarioSel();

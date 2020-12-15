@@ -39,9 +39,9 @@ public class Administrador extends Usuario{
     }
 
     public void eliminarCuenta(){
-        super.eliminarCuenta();
         BD bd = new BD();
         bd.Delete("DELETE FROM Administrador WHERE correo = '" + this.getCorreo() + "';");
+        super.eliminarCuenta();
     }
 
     @Override

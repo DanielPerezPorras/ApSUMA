@@ -49,10 +49,10 @@ public class Colaborador extends Usuario{
     }
 
     public void eliminarCuenta(){
-        super.eliminarCuenta();
         BD bd = new BD();
         bd.Delete("DELETE FROM Colaborador WHERE correo = '" + this.getCorreo() + "';");
         correoCorp = null;
+        super.eliminarCuenta();
     }
 
     @Override

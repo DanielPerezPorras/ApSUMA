@@ -35,9 +35,9 @@ public class Estudiante extends Usuario{
     }
 
     public void eliminarCuenta(){
-        super.eliminarCuenta();
         BD bd = new BD();
         bd.Delete("DELETE FROM Estudiante WHERE correo = '" + this.getCorreo() + "';");
+        super.eliminarCuenta();
     }
 
 }

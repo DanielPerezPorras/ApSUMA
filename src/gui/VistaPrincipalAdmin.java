@@ -209,6 +209,20 @@ public class VistaPrincipalAdmin extends JFrame {
 		mostrarDatosUsuario((String) cbLista.getSelectedItem(),(String)  cbLista.getSelectedItem(),(String) cbLista.getSelectedItem());
 	}
 	
+	public Usuario darUsuario()
+	{
+		return Usuario.buscarUsuario(this.getCorreoActual());
+	}
+	
+	public void limpiar()
+	{
+		cbLista.setModel(new DefaultComboBoxModel(new String[] {}));
+		textField.setText("");
+		lblUsuario.setText("");
+		lblUsuarioumaes.setText("");
+		lblUsuarioumaes_1.setText("");
+	}
+	
 	public void controlador(ActionListener ctr)
 	{
 		btnBuscar.addActionListener(ctr);
