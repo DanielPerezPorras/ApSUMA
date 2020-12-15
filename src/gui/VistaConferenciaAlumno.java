@@ -29,10 +29,12 @@ public class VistaConferenciaAlumno extends JFrame {
 	private JLabel lblDescripcion;
 	private JLabel lblLinkMeetingCurso;
 	private JLabel lbHyperLink;
+	private JButton btnVolver;
 
 	public static void abrirVentana() {
 		try {
 			VistaConferenciaAlumno frame = new VistaConferenciaAlumno();
+			frame.controlador(new ControladorConferenciaAlumno(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,18 +98,23 @@ public class VistaConferenciaAlumno extends JFrame {
 		lbHyperLink.setBounds(228, 473, 292, 27);
 		lbHyperLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		pInformacion.add(lbHyperLink);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(12, 434, 89, 23);
+		pInformacion.add(btnVolver);
 		tabbedPane.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
 	}
 	
-	public void controlador(ActionListener ctr)
+	public void controlador(ControladorConferenciaAlumno ctr)
 	{
 		btnAnularInscripcin.addActionListener(ctr);
 		btnAnularInscripcin.setActionCommand("ANULAR");
-	}
-	
-	public void controlador(MouseListener ctr)
-	{
+		
+		btnVolver.addActionListener(ctr);
+		btnVolver.setActionCommand("VOLVER");
+		
 		lbHyperLink.addMouseListener(ctr);
 	}
+	
 	
 }

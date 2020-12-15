@@ -29,6 +29,7 @@ public class VistaActividadSocialAlumno extends JFrame {
 	private JLabel lblDescripcion;
 	private JLabel lblLinkMeetingCurso;
 	private JLabel lbHyperLink;
+	private JButton btnVolver;
 
 	/**
 	 * Create the frame.
@@ -87,6 +88,10 @@ public class VistaActividadSocialAlumno extends JFrame {
 		lbHyperLink.setBounds(228, 473, 292, 27);
 		lbHyperLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		pInicio.add(lbHyperLink);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(10, 434, 89, 23);
+		pInicio.add(btnVolver);
 		tabbedPane.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
 	}
 
@@ -100,15 +105,16 @@ public class VistaActividadSocialAlumno extends JFrame {
 		}
     }
 
-    public void controlador(ActionListener ctr)
+    public void controlador(ControladorActividadSocialAlumno ctr)
 	{
 		btnAnularInscripcin.addActionListener(ctr);
 		btnAnularInscripcin.setActionCommand("ANULAR");
+		
+		btnVolver.addActionListener(ctr);
+		btnVolver.setActionCommand("VOLVER");
+		
+		lbHyperLink.addMouseListener(ctr);
 	}
 	
-	public void controlador(ControladorActividadSocialAlumno ctr)
-	{
-
-	}
 	
 }

@@ -30,6 +30,7 @@ public class VistaCursoAlumno extends JFrame {
 	private JLabel lblLinkMeetingCurso;
 	private JLabel lbHyperLink;
 	private JPanel pForo;
+	private JButton btnVolver;
 
 	/**
 	 * Launch the application.
@@ -50,6 +51,7 @@ public class VistaCursoAlumno extends JFrame {
 	public static void abrirVentana() {
 		try {
 			VistaCursoAlumno frame = new VistaCursoAlumno();
+			frame.controlador(new ControladorCursoAlumno(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -114,6 +116,10 @@ public class VistaCursoAlumno extends JFrame {
 		lbHyperLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		pInicio.add(lbHyperLink);
 		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(10, 434, 89, 23);
+		pInicio.add(btnVolver);
+		
 		pForo = new JPanel();
 		tabbedPane.addTab("Foro", null, pForo, null);
 		tabbedPane.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
@@ -121,15 +127,14 @@ public class VistaCursoAlumno extends JFrame {
 		tabbedPane.setEnabledAt(1, false);
 	}
 	
-	public void controlador(ActionListener ctr)
+	public void controlador(ControladorCursoAlumno ctr)
 	{
 		btnAnularInscripcin.addActionListener(ctr);
 		btnAnularInscripcin.setActionCommand("ANULAR");
-	}
-	
-	public void controlador(MouseListener ctr)
-	{
+		
+		btnVolver.addActionListener(ctr);
+		btnVolver.setActionCommand("VOLVER");
+
 		lbHyperLink.addMouseListener(ctr);
 	}
-	
 }

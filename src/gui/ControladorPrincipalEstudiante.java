@@ -13,6 +13,7 @@ import java.awt.event.WindowListener;
 public class ControladorPrincipalEstudiante implements ActionListener, ListSelectionListener, WindowListener {
 
     private final VistaPrincipalEstudiante vista;
+    private boolean accedeEvento = false;
 
     public ControladorPrincipalEstudiante(VistaPrincipalEstudiante vista) {
         this.vista = vista;
@@ -32,7 +33,9 @@ public class ControladorPrincipalEstudiante implements ActionListener, ListSelec
                 if (vista.getEventoSeleccionado() != null) {
                     int dialogResult = JOptionPane.showConfirmDialog(null,"¿Quieres inscribirte en este evento?");
                     if (dialogResult == JOptionPane.YES_OPTION) {
-                        vista.setVisible(false);
+                        accedeEvento = true;
+                        vista.dispose();
+                        accedeEvento = true;
                         ev.abrirEvento();
 
                     }
@@ -64,7 +67,7 @@ public class ControladorPrincipalEstudiante implements ActionListener, ListSelec
     @Override
     public void windowClosed(WindowEvent e) {
         // TODO Auto-generated method stub
-        if (Sesion.logueadoComoAdmin()) {
+        if (Sesion.logueadoComoAdmin() && !accedeEvento) {
             VistaPrincipalAdmin.abrirVentana();
         }
     }

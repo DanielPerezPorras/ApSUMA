@@ -5,18 +5,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import modelo.Colaborador;
-import modelo.Estudiante;
-import modelo.Invitado;
 import modelo.Sesion;
-import modelo.Tutor;
-import modelo.Usuario;
 
-public class ControladorActividadSocialAlumno implements ActionListener, MouseListener {
+public class ControladorConferenciaAlumno implements ActionListener, MouseListener {
 
-    private final VistaActividadSocialAlumno vista;
+    private final VistaConferenciaAlumno vista;
 
-    public ControladorActividadSocialAlumno(VistaActividadSocialAlumno vista) {
+    public ControladorConferenciaAlumno(VistaConferenciaAlumno vista) {
         this.vista = vista;
     }
 

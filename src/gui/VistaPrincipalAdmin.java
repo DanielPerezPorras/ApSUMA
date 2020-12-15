@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelo.Sesion;
 import modelo.Usuario;
 
 import javax.swing.JLabel;
@@ -52,6 +53,7 @@ public class VistaPrincipalAdmin extends JFrame {
 
 	public static void abrirVentana() {
 		try {
+			Sesion.setPermisos(0);
 			VistaPrincipalAdmin frame = new VistaPrincipalAdmin();
 			frame.controlador(new ControladorPrincipalAdmin(frame));
 			frame.setVisible(true);

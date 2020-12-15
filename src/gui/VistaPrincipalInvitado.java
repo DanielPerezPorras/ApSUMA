@@ -39,6 +39,7 @@ public class VistaPrincipalInvitado extends JFrame {
 	public static void abrirVentana() {
 		try
 		{
+			Sesion.setPermisos(3);
 			VistaPrincipalInvitado frame = new VistaPrincipalInvitado();
 			frame.controlador(new ControladorPrincipalInvitado(frame));
 			frame.setVisible(true);
@@ -134,6 +135,10 @@ public class VistaPrincipalInvitado extends JFrame {
 
 	public Date fechaSeleccionada() {
 		return (Date) datePicker.getModel().getValue();
+	}
+
+	public Evento getEventoSeleccionado() {
+		return listInscritos.getSelectedValue();
 	}
 
 }

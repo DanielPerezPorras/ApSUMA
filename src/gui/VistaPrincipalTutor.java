@@ -43,6 +43,7 @@ public class VistaPrincipalTutor extends JFrame {
 
 	public static void abrirVentana() {
 		try {
+			Sesion.setPermisos(1);
 			VistaPrincipalTutor frame = new VistaPrincipalTutor();
 			frame.controlador(new ControladorPrincipalTutor(frame));
 			frame.rellenarListaOrganizados();

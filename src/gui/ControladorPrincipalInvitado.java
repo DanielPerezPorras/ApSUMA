@@ -5,14 +5,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import modelo.Evento;
 import modelo.Sesion;
 
 public class ControladorPrincipalInvitado implements ActionListener, WindowListener, ListSelectionListener {
 
     private final VistaPrincipalInvitado vista;
+    private boolean accedeEvento = false;
 
     public ControladorPrincipalInvitado(VistaPrincipalInvitado vista) {
         this.vista = vista;
@@ -22,8 +25,18 @@ public class ControladorPrincipalInvitado implements ActionListener, WindowListe
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()){
             case "ENTRAR":
-                vista.dispose();
-                VistaActividadSocialAlumno.abrirVentana();
+            	Evento ev = vista.getEventoSeleccionado();
+                if (vista.getEventoSeleccionado() != null) {
+                    int dialogResult = JOptionPane.showConfirmDialog(null,"¿Quieres inscribirte en este evento?");
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        accedeEvento = true;
+                        vista.dispose();
+                        accedeEvento = true;
+                        ev.abrirEvento();
+
+                    }
+
+                }
                 break;
             case "ADMIN" : vista.dispose();
                 break;

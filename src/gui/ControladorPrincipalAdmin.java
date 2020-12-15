@@ -1,6 +1,7 @@
 package gui;
 
 import modelo.BD;
+import modelo.Sesion;
 import modelo.Usuario;
 
 import javax.swing.*;
@@ -58,14 +59,17 @@ private final VistaPrincipalAdmin vista;
 				String vistaRol = vista.getVerComo();
 				if(vistaRol.equals("Tutor"))
 				{
+					Sesion.setPermisos(1);
 					VistaPrincipalEstudiante.abrirVentana();
 					vista.dispose();
 				}else if(vistaRol.equals("Usuario"))
 				{
+					Sesion.setPermisos(2);
 					VistaPrincipalEstudiante.abrirVentana();
 					vista.dispose();
 				}else if(vistaRol.equals("Invitado"))
 				{
+					Sesion.setPermisos(3);
 					VistaPrincipalInvitado.abrirVentana();
 					vista.dispose();
 				}
