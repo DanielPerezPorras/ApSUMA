@@ -133,7 +133,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 		Evento[] eventos;
 		ArrayList<Evento> listaEventos;
 
-		listaEventos = usuarioLogueado.getPropuesto(this.fechaSeleccionada());
+		listaEventos = usuarioLogueado.getEventosFecha(this.fechaSeleccionada());
 
 		eventos = new Evento[listaEventos.size()];
 		listaEventos.toArray(eventos);

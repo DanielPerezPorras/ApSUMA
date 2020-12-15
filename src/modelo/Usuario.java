@@ -119,7 +119,7 @@ public abstract class Usuario {
         return (long)cuenta > 0;
     }
     
-    public ArrayList<Evento> getPropuesto(Date fecha) {
+    public ArrayList<Evento> getEventosFecha(Date fecha) {
     	java.sql.Date sqlfecha = new java.sql.Date(fecha.getTime());
     	ArrayList<Evento> eventos = new ArrayList<Evento>();
 
