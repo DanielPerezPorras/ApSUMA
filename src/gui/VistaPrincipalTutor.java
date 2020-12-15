@@ -172,7 +172,7 @@ public class VistaPrincipalTutor extends JFrame {
 			Colaborador tutorLogueado = (Colaborador)usuarioLogueado;
 			listaEventos = tutorLogueado.getCreado();
 		} else {
-			throw new RuntimeException("Tipo de usuario no v�lido para VistaPrincipalTutor");
+			throw new RuntimeException("Tipo de usuario no válido para VistaPrincipalTutor");
 		}
 		eventos = new Evento[listaEventos.size()];
 		listaEventos.toArray(eventos);
@@ -183,7 +183,7 @@ public class VistaPrincipalTutor extends JFrame {
 		return listOrganizados;
 	}
 
-	// El evento seleccionado puede ser uno al que el usuario esté inscrito o
+	// El evento seleccionado puede ser uno al que el usuario estÃ© inscrito o
 	// que haya organizado.
 	public Evento getEventoSeleccionado() {
 		Evento ev = listOrganizados.getSelectedValue();
