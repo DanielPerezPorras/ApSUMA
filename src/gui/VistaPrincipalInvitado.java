@@ -96,7 +96,6 @@ public class VistaPrincipalInvitado extends JFrame {
 		btnEntrar.setBounds(410, 187, 89, 23);
 		panelEventos.add(btnEntrar);
 
-		cargarActividades();
 	}
 
 	public void controlador(ControladorPrincipalInvitado ctr) {

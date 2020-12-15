@@ -25,6 +25,17 @@ public class VistaNuevoActividades extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	public static void abrirVentana() {
+		try {
+			VistaNuevoActividades frame = new VistaNuevoActividades();
+			frame.controlador(new ControladorNuevoActividades(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public VistaNuevoActividades() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,6 +73,11 @@ public class VistaNuevoActividades extends JFrame {
 		btnCrearActividades.setActionCommand("CREAR");
 		btnCancelar.addActionListener(ctr);
 		btnCancelar.setActionCommand("CANCELAR");
+	}
+
+	public String getTextoNombre() {
+		// TODO Auto-generated method stub
+		return textField.getText();
 	}
 
 }

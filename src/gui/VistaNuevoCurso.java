@@ -56,6 +56,16 @@ public class VistaNuevoCurso extends JFrame {
 		panalPrincipal.add(btnCrearCurso);
 	}
 	
+	public static void abrirVentana() {
+		try {
+			VistaNuevoCurso frame = new VistaNuevoCurso();
+			frame.controlador(new ControladorNuevoCurso(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void controlador(ActionListener ctr)
 	{
 		btnCrearCurso.addActionListener(ctr);

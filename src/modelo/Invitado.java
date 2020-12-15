@@ -13,6 +13,11 @@ public class Invitado extends Usuario{
     }
 
     @Override
+    public String getCorp() {
+        return null;
+    }
+
+    @Override
     public void abrirVentanaPrincipal() {
         VistaPrincipalInvitado.abrirVentana();
     }

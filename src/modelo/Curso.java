@@ -1,5 +1,7 @@
 package modelo;
 
+import gui.VistaCursoAlumno;
+
 import java.util.Date;
 import java.util.List;
 
@@ -28,6 +30,11 @@ public class Curso extends Evento {
         } else {
             throw new ErrorBD("No se ha encontrado un curso con nombre " + nombre);
         }
+    }
+
+    @Override
+    public void abrirEvento() {
+        VistaCursoAlumno.abrirVentana();
     }
 
     public void eliminarCurso(){

@@ -69,7 +69,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 		panelEventos = new JPanel();
 		tabbedPane.addTab("Eventos", null, panelEventos, null);
 		panelEventos.setLayout(null);
-		
+
 		panelCalendario = new JPanel();
 		panelCalendario.setBounds(596, 66, 219, 225);
 		panelEventos.add(panelCalendario);
@@ -102,7 +102,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 		btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(410, 187, 89, 23);
 		panelEventos.add(btnEntrar);
-		
+
 		listInscritos = new JList<Evento>();
 		listInscritos.setBounds(38, 48, 362, 172);
 		panelEventos.add(listInscritos);
@@ -119,7 +119,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 		datePicker.addActionListener(ctr);
 		listInscritos.addListSelectionListener(ctr);
 	}
-	
+
 	public Date fechaSeleccionada() {
 		return (Date) datePicker.getModel().getValue();
 	}
@@ -127,16 +127,21 @@ public class VistaPrincipalEstudiante extends JFrame {
 	public boolean compruebaFuenteEvento(Object source) {
 		return source.equals(datePicker);
 	}
-	
+
 	public void cargarEventos() {
 		Usuario usuarioLogueado = Sesion.getUsuarioLogueado();
 		Evento[] eventos;
 		ArrayList<Evento> listaEventos;
 
-		listaEventos = usuarioLogueado.getPropuesto(this.fechaSeleccionada());
+		listaEventos = usuarioLogueado.getEventosFecha(this.fechaSeleccionada());
 
 		eventos = new Evento[listaEventos.size()];
 		listaEventos.toArray(eventos);
 		listInscritos.setListData(eventos);
 	}
+
+	public Evento getEventoSeleccionado() {
+		return listInscritos.getSelectedValue();
+	}
+
 }

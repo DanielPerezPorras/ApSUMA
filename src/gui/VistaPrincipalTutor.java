@@ -13,9 +13,13 @@ import javax.swing.JTabbedPane;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Date;
+
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class VistaPrincipalTutor extends JFrame {
 
@@ -33,10 +37,14 @@ public class VistaPrincipalTutor extends JFrame {
 	private UtilDateModel model;
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl datePicker;
+	private JComboBox comboBox;
+	private JButton btnCrear;
+	
 	public static void abrirVentana() {
 		try {
 			VistaPrincipalTutor frame = new VistaPrincipalTutor();
 			frame.controlador(new ControladorPrincipalTutor(frame));
+			frame.rellenarListaOrganizados();
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,11 +69,11 @@ public class VistaPrincipalTutor extends JFrame {
 		tabbedPane.addTab("Eventos", null, panelEventos, null);
 		panelEventos.setLayout(null);
 		
-		listInscritos = new JList<>();
+		listInscritos = new JList<Evento>();
 		listInscritos.setBounds(38, 48, 362, 172);
 		panelEventos.add(listInscritos);
 		
-		listOrganizados = new JList<>();
+		listOrganizados = new JList<Evento>();
 		listOrganizados.setBounds(38, 266, 362, 172);
 		panelEventos.add(listOrganizados);
 		
@@ -101,11 +109,57 @@ public class VistaPrincipalTutor extends JFrame {
 		btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(410, 187, 89, 23);
 		panelEventos.add(btnEntrar);
+		
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Crear Curso", "Crear Actividad", "Crear Conferencia"}));
+		comboBox.setBounds(596, 326, 155, 32);
+		panelEventos.add(comboBox);
+		
+		btnCrear = new JButton("Crear");
+		btnCrear.setBounds(596, 380, 89, 23);
+		panelEventos.add(btnCrear);
 
 	}
 
 	public void controlador(ControladorPrincipalTutor ctr) {
 		listOrganizados.addListSelectionListener(ctr);
+		listInscritos.addListSelectionListener(ctr);
+		btnCrear.addActionListener(ctr);
+		btnCrear.setActionCommand("CREAR");
+		comboBox.addActionListener(ctr);
+		datePicker.addActionListener(ctr);	
+		btnEntrar.addActionListener(ctr);
+		btnEntrar.setActionCommand("ENTRAR EVENTO");
+
+
+	}
+	
+	public int indiceComboBox() {
+		return comboBox.getSelectedIndex();
+	}
+	
+	public Date fechaSeleccionada() {
+		return (Date) datePicker.getModel().getValue();
+	}
+
+	public boolean compruebaFuenteEvento(Object source) {
+		return source.equals(datePicker);
+	}
+	
+	public void cargarEventos() {
+		System.out.println("cargamoseventos");
+		Usuario usuarioLogueado = Sesion.getUsuarioLogueado();
+		Evento[] eventos;
+		ArrayList<Evento> listaEventos;
+
+		listaEventos = usuarioLogueado.getEventosFecha(this.fechaSeleccionada());
+
+		eventos = new Evento[listaEventos.size()];
+		listaEventos.toArray(eventos);
+		listInscritos.setListData(eventos);
+	}
+
+	public void rellenarListaOrganizados() {
 		Usuario usuarioLogueado = Sesion.getUsuarioLogueado();
 		Evento[] eventos;
 		ArrayList<Evento> listaEventos;
@@ -118,11 +172,25 @@ public class VistaPrincipalTutor extends JFrame {
 			Colaborador tutorLogueado = (Colaborador)usuarioLogueado;
 			listaEventos = tutorLogueado.getCreado();
 		} else {
-			throw new RuntimeException("Tipo de usuario no válido para VistaPrincipalTutor");
+			throw new RuntimeException("Tipo de usuario no v�lido para VistaPrincipalTutor");
 		}
 		eventos = new Evento[listaEventos.size()];
 		listaEventos.toArray(eventos);
 		listOrganizados.setListData(eventos);
-
 	}
+	
+	public JList<Evento> getListaOrganizados() {
+		return listOrganizados;
+	}
+
+	// El evento seleccionado puede ser uno al que el usuario esté inscrito o
+	// que haya organizado.
+	public Evento getEventoSeleccionado() {
+		Evento ev = listOrganizados.getSelectedValue();
+		if (ev == null){
+			ev = listInscritos.getSelectedValue();
+		}
+		return ev;
+	}
+
 }

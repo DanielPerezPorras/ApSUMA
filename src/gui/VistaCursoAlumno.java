@@ -47,6 +47,15 @@ public class VistaCursoAlumno extends JFrame {
 		});
 	}
 
+	public static void abrirVentana() {
+		try {
+			VistaCursoAlumno frame = new VistaCursoAlumno();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * Create the frame.
 	 */

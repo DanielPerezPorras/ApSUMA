@@ -25,6 +25,17 @@ public class VistaNuevoConferencia extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	public static void abrirVentana() {
+		try {
+			VistaNuevoConferencia frame = new VistaNuevoConferencia();
+			frame.controlador(new ControladorNuevoConferencia(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public VistaNuevoConferencia() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,6 +73,11 @@ public class VistaNuevoConferencia extends JFrame {
 		btnCrearConferencia.setActionCommand("CREAR");
 		btnCancelar.addActionListener(ctr);
 		btnCancelar.setActionCommand("CANCELAR");
+	}
+	
+	public String getTextoNombre() {
+		// TODO Auto-generated method stub
+		return textField.getText();
 	}
 
 }

@@ -1,4 +1,7 @@
 package modelo;
+import gui.VistaActividadSocialAlumno;
+import gui.VistaConferenciaAlumno;
+
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +27,11 @@ public class ActividadSocial extends Evento {
         } else {
             throw new ErrorBD("No se ha encontrado una actividad social con nombre " + nombre);
         }
+    }
+
+    @Override
+    public void abrirEvento() {
+        VistaActividadSocialAlumno.abrirVentana();
     }
 
 

@@ -111,4 +111,7 @@ public abstract class Evento {
         return Nombre;
     }
 
+    // TODO hacer pantallas de los eventos para tutores/colaboradores.
+    public abstract void abrirEvento();
+
 }

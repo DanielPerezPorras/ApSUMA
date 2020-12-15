@@ -30,6 +30,7 @@ public class ControladorNuevoCurso implements ActionListener {
                             "Curso creado con exito",
                             "ÉXITO",
                             JOptionPane.INFORMATION_MESSAGE);
+                    vista.dispose();
                 }else{
                     JOptionPane.showMessageDialog(vista,
                             error,
