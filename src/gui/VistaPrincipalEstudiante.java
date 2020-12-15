@@ -91,7 +91,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 		UtilidadesGUI.ajustarImagenAButton(bPerfil, "/recursosApp/gato.png");
 		panelEventos.add(bPerfil);
 		
-		lblNombrePerfil = new JLabel("");
+		lblNombrePerfil =  new JLabel(Sesion.getUsuarioLogueado().getNombreUsuario());
 		lblNombrePerfil.setBounds(662, 27, 46, 14);
 		panelEventos.add(lblNombrePerfil);
 		

@@ -1,5 +1,7 @@
 package gui;
 
+import modelo.Sesion;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -70,7 +72,7 @@ public class VistaPerfilTutor extends JFrame {
 		lblCorreoUma.setBounds(288, 151, 146, 27);
 		panelPrincipal.add(lblCorreoUma);
 		
-		lblCampoNombreUsuario = new JLabel("Fulanito");
+		lblCampoNombreUsuario = new JLabel(Sesion.getUsuarioLogueado().getNombreUsuario());
 		lblCampoNombreUsuario.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		lblCampoNombreUsuario.setBounds(475, 34, 146, 27);
 		panelPrincipal.add(lblCampoNombreUsuario);

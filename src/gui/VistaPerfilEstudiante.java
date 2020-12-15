@@ -1,6 +1,7 @@
 package gui;
 
 import modelo.Estudiante;
+import modelo.Sesion;
 import modelo.Usuario;
 
 import javax.swing.JFrame;
@@ -60,7 +61,7 @@ public class VistaPerfilEstudiante extends JFrame {
 		lblCorreo.setBounds(288, 88, 146, 27);
 		panelPrincipal.add(lblCorreo);
 		
-		lblCampoNombreUsuario = new JLabel("Fulanito");
+		lblCampoNombreUsuario =  new JLabel(Sesion.getUsuarioLogueado().getNombreUsuario());
 		lblCampoNombreUsuario.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		lblCampoNombreUsuario.setBounds(475, 34, 146, 27);
 		panelPrincipal.add(lblCampoNombreUsuario);
