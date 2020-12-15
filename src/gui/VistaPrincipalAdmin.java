@@ -167,12 +167,18 @@ public class VistaPrincipalAdmin extends JFrame {
 	public void anyadirTexto(String[] lista)
 	{
 		cbLista.setModel(new DefaultComboBoxModel(lista));
+		mostrarDatosUsuarioSel();
+	}
+	
+	public void mostrarDatosUsuarioSel()
+	{
 		mostrarDatosUsuario((String) cbLista.getSelectedItem(),(String)  cbLista.getSelectedItem(),(String) cbLista.getSelectedItem());
 	}
 	
 	//Muestra el nombre, correo del usuario
 	public void mostrarDatosUsuario(String usuario, String correo, String correoUma)
 	{
+		
 		lblUsuario.setText(usuario);
 		lblUsuarioumaes.setText(correo);
 		lblUsuarioumaes_1.setText(correoUma);
