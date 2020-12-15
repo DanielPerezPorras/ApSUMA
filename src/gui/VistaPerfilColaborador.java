@@ -145,6 +145,22 @@ public class VistaPerfilColaborador extends JFrame {
 		panelPrincipal.add(tfCampoCorp);
 		tfCampoCorp.setColumns(10);
 	}
+
+	public void modificar()
+	{
+		btModificarDatos.setText("Guardar cambios");
+		tfCampoUsuario.setEditable(true);
+		tfCampoCorreo.setEditable(true);
+		tfCampoCorp.setEditable(true);
+	}
+	
+	public void guardarCambios()
+	{
+		btModificarDatos.setText("Modifcar datos");
+		tfCampoUsuario.setEditable(false);
+		tfCampoCorreo.setEditable(false);
+		tfCampoCorp.setEditable(false);
+	}
 	
 	public void controlador(ActionListener ctr)
 	{

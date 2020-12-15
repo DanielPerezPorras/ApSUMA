@@ -125,6 +125,20 @@ public class VistaPerfilEstudiante extends JFrame {
 		}
 	}
 
+	public void modificar()
+	{
+		btModificarDatos.setText("Guardar cambios");
+		tfCampoUsuario.setEditable(true);
+		tfCampoCorreo.setEditable(true);
+	}
+	
+	public void guardarCambios()
+	{
+		btModificarDatos.setText("Modifcar datos");
+		tfCampoUsuario.setEditable(false);
+		tfCampoCorreo.setEditable(false);
+	}
+	
     public void controlador(ActionListener ctr)
 	{
 		btModificarDatos.addActionListener(ctr);
