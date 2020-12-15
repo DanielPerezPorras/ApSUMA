@@ -1,12 +1,15 @@
 package gui;
 
 import modelo.Evento;
+import modelo.Sesion;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class ControladorPrincipalEstudiante implements ActionListener, ListSelectionListener {
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+public class ControladorPrincipalEstudiante implements ActionListener, ListSelectionListener, WindowListener {
 
     private final VistaPrincipalEstudiante vista;
 
@@ -16,10 +19,10 @@ public class ControladorPrincipalEstudiante implements ActionListener, ListSelec
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {    	
-    	switch (e.getActionCommand()) {
+    public void actionPerformed(ActionEvent e) {
+        switch (e.getActionCommand()) {
 
-    	    case "PERFIL":
+            case "PERFIL":
                 VistaPerfilEstudiante.abrirVentana(); //TODO crear ventana perfil
                 break;
 
@@ -30,21 +33,66 @@ public class ControladorPrincipalEstudiante implements ActionListener, ListSelec
                     ev.abrirEvento();
                 }
                 break;
-
+            case "ADMIN" : vista.dispose();
+                break;
             default:
                 vista.cargarEventos();
 
-    	}
-     
+        }
+
     }
 
-	@Override
-	public void valueChanged(ListSelectionEvent evt) {
-		if (!evt.getValueIsAdjusting()) {
-			System.out.println("SELECCIONADISIMO!!!");
-		}
-	}
-	
-	
-	
+    @Override
+    public void valueChanged(ListSelectionEvent evt) {
+        if (!evt.getValueIsAdjusting()) {
+            System.out.println("SELECCIONADISIMO!!!");
+        }
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        // TODO Auto-generated method stub
+        if (Sesion.logueadoComoAdmin()) {
+            VistaPrincipalAdmin.abrirVentana();
+        }
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+
+
 }
