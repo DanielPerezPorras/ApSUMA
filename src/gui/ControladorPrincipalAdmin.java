@@ -1,15 +1,13 @@
 package gui;
 
+import modelo.BD;
+import modelo.Usuario;
+
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JOptionPane;
-
-import modelo.BD;
-import modelo.ErrorBD;
-import modelo.Usuario;
 
 public class ControladorPrincipalAdmin implements ActionListener 
 {

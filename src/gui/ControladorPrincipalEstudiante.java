@@ -3,6 +3,7 @@ package gui;
 import modelo.Evento;
 import modelo.Sesion;
 
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
@@ -29,8 +30,13 @@ public class ControladorPrincipalEstudiante implements ActionListener, ListSelec
             case "ENTRAR":
                 Evento ev = vista.getEventoSeleccionado();
                 if (vista.getEventoSeleccionado() != null) {
-                    vista.dispose();
-                    ev.abrirEvento();
+                    int dialogResult = JOptionPane.showConfirmDialog(null,"¿Quieres inscribirte en este evento?");
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        vista.setVisible(false);
+                        ev.abrirEvento();
+
+                    }
+
                 }
                 break;
             case "ADMIN" : vista.dispose();
