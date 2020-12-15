@@ -77,7 +77,7 @@ public class VistaPerfilTutor extends JFrame {
 		lblCampoNombreUsuario.setBounds(475, 34, 146, 27);
 		panelPrincipal.add(lblCampoNombreUsuario);
 		
-		lblTutorgmailcom = new JLabel("tutor@gmail.com");
+		lblTutorgmailcom = new JLabel(Sesion.getUsuarioLogueado().getCorreo());
 		lblTutorgmailcom.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		lblTutorgmailcom.setBounds(475, 88, 146, 27);
 		panelPrincipal.add(lblTutorgmailcom);
