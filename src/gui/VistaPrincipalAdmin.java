@@ -80,7 +80,7 @@ public class VistaPrincipalAdmin extends JFrame {
 		panelPrincipal.add(lbVerComo);
 		
 		cbRoles = new JComboBox();
-		cbRoles.setModel(new DefaultComboBoxModel(new String[] {"Admin", "Tutor", "Usuario", "Invitado"}));
+		cbRoles.setModel(new DefaultComboBoxModel(new String[] {"Tutor", "Usuario", "Invitado"}));
 		cbRoles.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
 		cbRoles.setBounds(151, 42, 144, 27);
 		panelPrincipal.add(cbRoles);
