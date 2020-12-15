@@ -159,6 +159,26 @@ public class VistaPrincipalTutor extends JFrame {
 		listInscritos.setListData(eventos);
 	}
 
+	public void rellenarListaOrganizados() {
+		Usuario usuarioLogueado = Sesion.getUsuarioLogueado();
+		Evento[] eventos;
+		ArrayList<Evento> listaEventos;
+
+		if (usuarioLogueado instanceof Tutor) {
+			Tutor tutorLogueado = (Tutor)usuarioLogueado;
+			listaEventos = tutorLogueado.getPropuesto();
+
+		} else if (usuarioLogueado instanceof Colaborador) {
+			Colaborador tutorLogueado = (Colaborador)usuarioLogueado;
+			listaEventos = tutorLogueado.getCreado();
+		} else {
+			throw new RuntimeException("Tipo de usuario no válido para VistaPrincipalTutor");
+		}
+		eventos = new Evento[listaEventos.size()];
+		listaEventos.toArray(eventos);
+		listOrganizados.setListData(eventos);
+	}
+	
 	public JList<Evento> getListaOrganizados() {
 		return listOrganizados;
 	}
