@@ -14,6 +14,6 @@ public class Invitado extends Usuario{
 
     @Override
     public void abrirVentanaPrincipal() {
-        VistaPrincipalInvitado.abrirVentana(this);
+        VistaPrincipalInvitado.abrirVentana();
     }
 }

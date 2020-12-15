@@ -24,17 +24,18 @@ public class VistaPrincipalInvitado extends JFrame {
 	private JLabel lblDesc;
 	private JLabel lblNombrePerfil;
 	private JButton btnEntrar;
-	private Usuario usuario;
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
 	private JPanel panelEventos;
 	private JList listInscritos;
 	private JPanel panelCalendario;
 	private JButton bPerfil;
-
-	public static void abrirVentana(Usuario usuario) {
-		try {
-			VistaPrincipalInvitado frame = new VistaPrincipalInvitado(usuario);
+	
+	public static void abrirVentana() 
+	{
+		try 
+		{
+			VistaPrincipalInvitado frame = new VistaPrincipalInvitado();
 			frame.controlador(new ControladorPrincipalInvitado(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
@@ -46,8 +47,7 @@ public class VistaPrincipalInvitado extends JFrame {
 
 	}
 
-	public VistaPrincipalInvitado(Usuario usuario) {
-		this.usuario = usuario;
+	public VistaPrincipalInvitado() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);

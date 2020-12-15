@@ -181,16 +181,27 @@ public class VistaPrincipalAdmin extends JFrame {
 	public void mostrarDatosUsuarioSel()
 	{
 		Usuario usu = Usuario.buscarUsuario(this.getCorreoActual());
-		mostrarDatosUsuario(usu.getNombreUsuario(),usu.getCorreo(),usu.getCorreo());
+		mostrarDatosUsuario(usu.getNombreUsuario(),usu.getCorreo(),usu.getCorp());
 	}
 	
 	//Muestra el nombre, correo del usuario
 	public void mostrarDatosUsuario(String usuario, String correo, String correoUma)
 	{
-		
 		lblUsuario.setText(usuario);
 		lblUsuarioumaes.setText(correo);
+		if(correoUma.equals(""))
+		{
+			lblCorreoUma.setVisible(false);
+		}else
+		{
+			lblCorreoUma.setVisible(true);
+		}
 		lblUsuarioumaes_1.setText(correoUma);
+	}
+	
+	public String getVerComo()
+	{
+		return cbRoles.getSelectedItem().toString();
 	}
 	
 	public void actualizar()
@@ -208,5 +219,7 @@ public class VistaPrincipalAdmin extends JFrame {
 		btnEliminarUsuario.setActionCommand("ELIMINAR");
 		cbLista.addActionListener(ctr);
 		cbLista.setActionCommand("ACTUALIZAR");
+		cbRoles.addActionListener(ctr);
+		cbRoles.setActionCommand("CAMBIAR_ROL");
 	}
 }
