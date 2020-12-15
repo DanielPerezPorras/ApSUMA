@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class ControladorPerfilTutor implements ActionListener {
     private final VistaPerfilTutor vista;
-
+    boolean modificando = false;
     public ControladorPerfilTutor(VistaPerfilTutor vista)
     {
         this.vista = vista;
@@ -20,7 +20,13 @@ public class ControladorPerfilTutor implements ActionListener {
         switch (e.getActionCommand()) {
 
             case "MODIFICAR":
-
+                if (modificando) {
+                    modificando = false;
+                    vista.guardarCambios();
+                } else {
+                    modificando = true;
+                    vista.modificar();
+                }
                 break;
 
             case "CERRAR SESION":
