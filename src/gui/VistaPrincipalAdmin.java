@@ -77,6 +77,7 @@ public class VistaPrincipalAdmin extends JFrame {
 		panelPrincipal.add(lbVerComo);
 		
 		cbRoles = new JComboBox();
+		cbRoles.setModel(new DefaultComboBoxModel(new String[] {"Admin", "Tutor", "Usuario", "Invitado"}));
 		cbRoles.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
 		cbRoles.setBounds(151, 42, 144, 27);
 		panelPrincipal.add(cbRoles);
@@ -166,14 +167,26 @@ public class VistaPrincipalAdmin extends JFrame {
 	public void anyadirTexto(String[] lista)
 	{
 		cbLista.setModel(new DefaultComboBoxModel(lista));
+		mostrarDatosUsuarioSel();
+	}
+	
+	public void mostrarDatosUsuarioSel()
+	{
+		mostrarDatosUsuario((String) cbLista.getSelectedItem(),(String)  cbLista.getSelectedItem(),(String) cbLista.getSelectedItem());
 	}
 	
 	//Muestra el nombre, correo del usuario
 	public void mostrarDatosUsuario(String usuario, String correo, String correoUma)
 	{
+		
 		lblUsuario.setText(usuario);
-		lblCorreoElectrnico.setText(correo);
+		lblUsuarioumaes.setText(correo);
 		lblUsuarioumaes_1.setText(correoUma);
+	}
+	
+	public void actualizar()
+	{
+		mostrarDatosUsuario((String) cbLista.getSelectedItem(),(String)  cbLista.getSelectedItem(),(String) cbLista.getSelectedItem());
 	}
 	
 	public void controlador(ActionListener ctr)
@@ -184,5 +197,7 @@ public class VistaPrincipalAdmin extends JFrame {
 		btnPenalizar.setActionCommand("PENALIZAR");
 		btnEliminarUsuario.addActionListener(ctr);
 		btnEliminarUsuario.setActionCommand("ELIMINAR");
+		cbLista.addActionListener(ctr);
+		cbLista.setActionCommand("ACTUALIZAR");
 	}
 }

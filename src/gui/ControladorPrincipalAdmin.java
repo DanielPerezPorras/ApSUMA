@@ -40,6 +40,9 @@ private final VistaPrincipalAdmin vista;
 			case "ELIMINAR":
 				
 				break;
+			case "ACTUALIZAR":
+				vista.mostrarDatosUsuarioSel();
+				break;
 		}
 		
 	}

@@ -1,7 +1,8 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import modelo.Estudiante;
+import modelo.Sesion;
+import modelo.Usuario;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,7 +12,6 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import java.awt.Color;
 import java.awt.Container;
 
 import javax.swing.JComboBox;
@@ -39,7 +39,7 @@ public class VistaPerfilEstudiante extends JFrame {
 	 */
 	public VistaPerfilEstudiante() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 689, 432);
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -61,12 +61,12 @@ public class VistaPerfilEstudiante extends JFrame {
 		lblCorreo.setBounds(288, 88, 146, 27);
 		panelPrincipal.add(lblCorreo);
 		
-		lblCampoNombreUsuario = new JLabel("Fulanito");
+		lblCampoNombreUsuario =  new JLabel(Sesion.getUsuarioLogueado().getNombreUsuario());
 		lblCampoNombreUsuario.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		lblCampoNombreUsuario.setBounds(475, 34, 146, 27);
 		panelPrincipal.add(lblCampoNombreUsuario);
 		
-		lblTutorgmailcom = new JLabel("tutor@gmail.com");
+		lblTutorgmailcom = new JLabel(Sesion.getUsuarioLogueado().getCorreo());
 		lblTutorgmailcom.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		lblTutorgmailcom.setBounds(475, 88, 146, 27);
 		panelPrincipal.add(lblTutorgmailcom);
@@ -104,8 +104,18 @@ public class VistaPerfilEstudiante extends JFrame {
 		cbMisActividades.setBounds(352, 288, 179, 34);
 		panelPrincipal.add(cbMisActividades);
 	}
-	
-	public void controlador(ActionListener ctr)
+
+	public static void abrirVentana() {
+		try {
+			VistaPerfilEstudiante frame = new VistaPerfilEstudiante();
+			frame.controlador(new ControladorPerfilEstudiante(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+    public void controlador(ActionListener ctr)
 	{
 		btModificarDatos.addActionListener(ctr);
 		btModificarDatos.setActionCommand("MODIFICAR");

@@ -27,22 +27,12 @@ public class VistaPrincipalTutor extends JFrame {
 	private JList<Evento> listOrganizados;
 	private JPanel panelCalendario;
 	private JButton bPerfil;
-
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VistaPrincipalTutor frame = new VistaPrincipalTutor();
-					frame.controlador(new ControladorPrincipalTutor(frame));
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	private JLabel lblNombrePerfil;
+	private JLabel lblDesc;
+	private JButton btnEntrar;
+	private UtilDateModel model;
+	private JDatePanelImpl datePanel;
+	private JDatePickerImpl datePicker;
 	public static void abrirVentana() {
 		try {
 			VistaPrincipalTutor frame = new VistaPrincipalTutor();
@@ -89,25 +79,26 @@ public class VistaPrincipalTutor extends JFrame {
 		tabbedPane.setEnabledAt(1, false);
 		
 	
-		UtilDateModel model = new UtilDateModel();
-		JDatePanelImpl datePanel = new JDatePanelImpl(model);
-		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+		model = new UtilDateModel();
+		datePanel = new JDatePanelImpl(model);
+		datePicker = new JDatePickerImpl(datePanel);
 		
 		panelCalendario.add(datePicker);
 		
 		bPerfil = new JButton("");
 		bPerfil.setBounds(753, 11, 62, 49);
+		UtilidadesGUI.ajustarImagenAButton(bPerfil, "/recursosApp/gato.png");
 		panelEventos.add(bPerfil);
 		
-		JLabel lblNombrePerfil = new JLabel("");
+		lblNombrePerfil = new JLabel(Sesion.getUsuarioLogueado().getNombreUsuario());
 		lblNombrePerfil.setBounds(662, 27, 46, 14);
 		panelEventos.add(lblNombrePerfil);
 		
-		JLabel lblDesc = new JLabel("");
+		lblDesc = new JLabel("");
 		lblDesc.setBounds(410, 49, 181, 127);
 		panelEventos.add(lblDesc);
 		
-		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(410, 187, 89, 23);
 		panelEventos.add(btnEntrar);
 

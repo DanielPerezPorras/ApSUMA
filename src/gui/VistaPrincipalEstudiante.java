@@ -4,6 +4,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelo.Colaborador;
+import modelo.Estudiante;
+import modelo.Evento;
+import modelo.Sesion;
+import modelo.Tutor;
+import modelo.Usuario;
+import net.sourceforge.jdatepicker.JDatePicker;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -12,6 +19,9 @@ import javax.swing.JTabbedPane;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
+
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,29 +32,20 @@ public class VistaPrincipalEstudiante extends JFrame {
 	private JTabbedPane tabbedPane;
 	private JPanel panelEventos;
 	private JPanel panelMensajeria;
-	private JList listInscritos;
 	private JPanel panelCalendario;
 	private JButton bPerfil;
-
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VistaPrincipalEstudiante frame = new VistaPrincipalEstudiante();
-					//frame.controlador(new ControladorPrincipalEstudiante(frame));
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private UtilDateModel model ;
+	private JDatePanelImpl datePanel;
+	private JDatePickerImpl datePicker;
+	private JLabel lblDesc;
+	private JLabel lblNombrePerfil;
+	private JButton btnEntrar;
+	private JList<Evento> listInscritos;
 
 	public static void abrirVentana() {
 		try {
 			VistaPrincipalEstudiante frame = new VistaPrincipalEstudiante();
-			//frame.controlador(new ControladorPrincipalTutor(frame));
+			frame.controlador(new ControladorPrincipalEstudiante(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,10 +70,6 @@ public class VistaPrincipalEstudiante extends JFrame {
 		tabbedPane.addTab("Eventos", null, panelEventos, null);
 		panelEventos.setLayout(null);
 		
-		listInscritos = new JList();
-		listInscritos.setBounds(38, 48, 362, 172);
-		panelEventos.add(listInscritos);
-		
 		panelCalendario = new JPanel();
 		panelCalendario.setBounds(596, 66, 219, 225);
 		panelEventos.add(panelCalendario);
@@ -83,35 +80,63 @@ public class VistaPrincipalEstudiante extends JFrame {
 		tabbedPane.setEnabledAt(1, false);
 		
 	
-		UtilDateModel model = new UtilDateModel();
-		JDatePanelImpl datePanel = new JDatePanelImpl(model);
-		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+		model = new UtilDateModel();
+		datePanel = new JDatePanelImpl(model);
+		datePicker = new JDatePickerImpl(datePanel);
 		
 		panelCalendario.add(datePicker);
 		
 		bPerfil = new JButton("");
 		bPerfil.setBounds(753, 11, 62, 49);
+		UtilidadesGUI.ajustarImagenAButton(bPerfil, "/recursosApp/gato.png");
 		panelEventos.add(bPerfil);
 		
-		JLabel lblNombrePerfil = new JLabel("");
+		lblNombrePerfil =  new JLabel(Sesion.getUsuarioLogueado().getNombreUsuario());
 		lblNombrePerfil.setBounds(662, 27, 46, 14);
 		panelEventos.add(lblNombrePerfil);
 		
-		JLabel lblDesc = new JLabel("");
+		lblDesc = new JLabel("");
 		lblDesc.setBounds(410, 49, 181, 127);
 		panelEventos.add(lblDesc);
 		
-		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(410, 187, 89, 23);
 		panelEventos.add(btnEntrar);
+		
+		listInscritos = new JList<Evento>();
+		listInscritos.setBounds(38, 48, 362, 172);
+		panelEventos.add(listInscritos);
 
 	}
 
-	public void controlador(ControladorPrincipalTutor ctr) {
+	public void controlador(ControladorPrincipalEstudiante ctr) {
+		btnEntrar.setActionCommand("ENTRAR");
+		bPerfil.setActionCommand("PERFIL");
 
+		btnEntrar.addActionListener(ctr);
+		bPerfil.addActionListener(ctr);
+
+		datePicker.addActionListener(ctr);
+		listInscritos.addListSelectionListener(ctr);
+	}
+	
+	public Date fechaSeleccionada() {
+		return (Date) datePicker.getModel().getValue();
 	}
 
-	public void controlador(ActionListener ctr){
+	public boolean compruebaFuenteEvento(Object source) {
+		return source.equals(datePicker);
+	}
+	
+	public void cargarEventos() {
+		Usuario usuarioLogueado = Sesion.getUsuarioLogueado();
+		Evento[] eventos;
+		ArrayList<Evento> listaEventos;
 
+		listaEventos = usuarioLogueado.getPropuesto(this.fechaSeleccionada());
+
+		eventos = new Evento[listaEventos.size()];
+		listaEventos.toArray(eventos);
+		listInscritos.setListData(eventos);
 	}
 }

@@ -2,6 +2,8 @@ package modelo;
 
 import gui.VistaPrincipalEstudiante;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Estudiante extends Usuario{
@@ -37,4 +39,5 @@ public class Estudiante extends Usuario{
         BD bd = new BD();
         bd.Delete("DELETE FROM Estudiante WHERE correo = '" + this.getCorreo() + "';");
     }
+    
 }

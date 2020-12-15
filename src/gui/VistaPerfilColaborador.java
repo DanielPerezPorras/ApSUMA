@@ -1,5 +1,7 @@
 package gui;
 
+import modelo.Sesion;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -38,6 +40,18 @@ public class VistaPerfilColaborador extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+
+	public static void abrirVentana() {
+		try {
+			VistaPerfilColaborador frame = new VistaPerfilColaborador();
+			frame.controlador(new ControladorPrincipalColaborador(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public VistaPerfilColaborador() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -67,12 +81,12 @@ public class VistaPerfilColaborador extends JFrame {
 		lblCorreoCorpo.setBounds(288, 151, 146, 27);
 		panelPrincipal.add(lblCorreoCorpo);
 		
-		lblCampoNombreUsuario = new JLabel("Fulanito");
+		lblCampoNombreUsuario =  new JLabel(Sesion.getUsuarioLogueado().getNombreUsuario());
 		lblCampoNombreUsuario.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		lblCampoNombreUsuario.setBounds(475, 34, 146, 27);
 		panelPrincipal.add(lblCampoNombreUsuario);
 		
-		lblTutorgmailcom = new JLabel("tutor@gmail.com");
+		lblTutorgmailcom = new JLabel(Sesion.getUsuarioLogueado().getCorreo());
 		lblTutorgmailcom.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		lblTutorgmailcom.setBounds(475, 88, 146, 27);
 		panelPrincipal.add(lblTutorgmailcom);

@@ -1,5 +1,7 @@
 package gui;
 
+import modelo.Sesion;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -40,6 +42,7 @@ public class VistaPerfilTutor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+
 	public VistaPerfilTutor() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,12 +72,12 @@ public class VistaPerfilTutor extends JFrame {
 		lblCorreoUma.setBounds(288, 151, 146, 27);
 		panelPrincipal.add(lblCorreoUma);
 		
-		lblCampoNombreUsuario = new JLabel("Fulanito");
+		lblCampoNombreUsuario = new JLabel(Sesion.getUsuarioLogueado().getNombreUsuario());
 		lblCampoNombreUsuario.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		lblCampoNombreUsuario.setBounds(475, 34, 146, 27);
 		panelPrincipal.add(lblCampoNombreUsuario);
 		
-		lblTutorgmailcom = new JLabel("tutor@gmail.com");
+		lblTutorgmailcom = new JLabel(Sesion.getUsuarioLogueado().getCorreo());
 		lblTutorgmailcom.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		lblTutorgmailcom.setBounds(475, 88, 146, 27);
 		panelPrincipal.add(lblTutorgmailcom);
@@ -122,7 +125,17 @@ public class VistaPerfilTutor extends JFrame {
 		cbMisActividades.setBounds(409, 359, 179, 34);
 		panelPrincipal.add(cbMisActividades);
 	}
-	
+
+	public static void abrirVentana() {
+		try {
+			VistaPerfilTutor frame = new VistaPerfilTutor();
+			frame.controlador(new ControladorPerfilTutor(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void controlador(ActionListener ctr)
 	{
 		btModificarDatos.addActionListener(ctr);
