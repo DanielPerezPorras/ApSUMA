@@ -31,6 +31,7 @@ public class VistaPerfilEstudiante extends JFrame {
 	private Container cbMisCursos;
 	private JComboBox cbMisConferencias;
 	private JComboBox cbMisActividades;
+	private JButton btnEliminarCuenta;
 
 	
 	
@@ -103,6 +104,12 @@ public class VistaPerfilEstudiante extends JFrame {
 		cbMisActividades.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		cbMisActividades.setBounds(352, 288, 179, 34);
 		panelPrincipal.add(cbMisActividades);
+		
+		btnEliminarCuenta = new JButton("Eliminar cuenta");
+		btnEliminarCuenta.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
+		btnEliminarCuenta.setBackground(SystemColor.activeCaption);
+		btnEliminarCuenta.setBounds(271, 353, 143, 41);
+		panelPrincipal.add(btnEliminarCuenta);
 	}
 
 	public static void abrirVentana() {
@@ -123,5 +130,7 @@ public class VistaPerfilEstudiante extends JFrame {
 		btCerrarSesin.setActionCommand("CERRAR SESION");
 		btAtrs.addActionListener(ctr);
 		btAtrs.setActionCommand("ATRAS");
+		btnEliminarCuenta.addActionListener(ctr);
+		btnEliminarCuenta.setActionCommand("ELIMINAR CUENTA");
 	}
 }
