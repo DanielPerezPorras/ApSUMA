@@ -1,5 +1,7 @@
 package gui;
 
+import modelo.Evento;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
@@ -16,6 +18,14 @@ public class ControladorPrincipalTutor implements ActionListener, ListSelectionL
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
+
+            case "ENTRAR EVENTO":
+                Evento ev = vista.getEventoSeleccionado();
+                if (ev != null) {
+                    vista.dispose();
+                    ev.abrirEvento();
+                }
+                break;
 
         }
     }
