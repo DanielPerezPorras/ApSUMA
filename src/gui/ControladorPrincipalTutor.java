@@ -1,7 +1,6 @@
 package gui;
 
-import modelo.Evento;
-import modelo.Sesion;
+import modelo.*;
 
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -38,7 +37,14 @@ public class ControladorPrincipalTutor implements ActionListener, ListSelectionL
                     ev.abrirEvento();
                 }
                 break;
-            default : vista.cargarEventos();
+            case "ABRIR":
+                Usuario usuario = Sesion.getUsuarioLogueado();
+                if (usuario instanceof Tutor){
+                    VistaPerfilTutor.abrirVentana(); //TODO crear ventana perfil
+                } else if (usuario instanceof Colaborador){
+                    VistaPerfilColaborador.abrirVentana();
+                }
+                break;
         }
     }
 

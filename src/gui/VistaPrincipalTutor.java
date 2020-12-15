@@ -139,7 +139,8 @@ public class VistaPrincipalTutor extends JFrame {
 		this.addWindowListener(ctr);
 		btnVistaadmin.addActionListener(ctr);
 		btnVistaadmin.setActionCommand("ADMIN");
-
+		bPerfil.addActionListener(ctr);
+		bPerfil.setActionCommand("ABRIR");
 
 	}
 

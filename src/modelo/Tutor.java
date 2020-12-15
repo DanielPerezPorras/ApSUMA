@@ -44,11 +44,12 @@ public class Tutor extends Usuario {
         Curso curso = new Curso(dia, nombre, this, numClases, duracion);
     }
 
-    public void modificarInformacionTutor(String corUMA, String cor, String nombr, String contr){
-        this.modificarInformacion(cor, nombr, contr);
+    public void modificarInformacion(String cor, String nombr, String corUMA){
+        super.modificarInformacion(cor, nombr, null);
         BD bd = new BD();
-        bd.Update("UPDATE Tutor SET correo = '" + cor + "', correoUMA = '" + corUMA + "';");
+        bd.Update("UPDATE Tutor SET correoUMA = '" + corUMA + "';");
         correoUMA = corUMA;
+
     }
 
     public void eliminarCuenta(){

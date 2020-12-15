@@ -28,10 +28,8 @@ public class Estudiante extends Usuario{
         VistaPrincipalEstudiante.abrirVentana();
     }
 
-    public void modificarInformacionEstudiante(String corr,String usr,String contr){
-        this.modificarInformacion(corr, usr, contr);
-        BD bd = new BD();
-        bd.Update("UPDATE Estudiante SET correo = '" + corr + "';");
+    public void modificarInformacion(String corr,String usr, String corCorp){
+        super.modificarInformacion(corr, usr, null);
     }
 
     public void eliminarCuenta(){

@@ -32,10 +32,8 @@ public class Administrador extends Usuario{
         VistaPrincipalAdmin.abrirVentana();
     }
 
-    public void modificarInformacionAdministrador(String cor, String usr, String contr){
-        this.modificarInformacion(cor, usr, contr);
-        BD bd = new BD();
-        bd.Update("UPDATE Administrador SET correo = '" + cor + "';");
+    public void modificarInformacion(String cor, String usr, String corCorp){
+        super.modificarInformacion(cor, usr, corCorp);
     }
 
     public void eliminarCuenta(){

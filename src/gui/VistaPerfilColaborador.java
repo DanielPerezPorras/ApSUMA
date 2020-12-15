@@ -46,7 +46,7 @@ public class VistaPerfilColaborador extends JFrame {
 	public static void abrirVentana() {
 		try {
 			VistaPerfilColaborador frame = new VistaPerfilColaborador();
-			frame.controlador(new ControladorPrincipalColaborador(frame));
+			frame.controlador(new ControladorPerfilColaborador(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -132,18 +132,21 @@ public class VistaPerfilColaborador extends JFrame {
 		tfCampoUsuario.setBounds(475, 34, 146, 27);
 		panelPrincipal.add(tfCampoUsuario);
 		tfCampoUsuario.setColumns(10);
+		tfCampoUsuario.setText(Sesion.getUsuarioLogueado().getNombreUsuario());
 		
 		tfCampoCorreo = new JTextField();
 		tfCampoCorreo.setEditable(false);
 		tfCampoCorreo.setBounds(475, 88, 146, 27);
 		panelPrincipal.add(tfCampoCorreo);
 		tfCampoCorreo.setColumns(10);
+		tfCampoCorreo.setText(Sesion.getUsuarioLogueado().getCorreo());
 		
 		tfCampoCorp = new JTextField();
 		tfCampoCorp.setEditable(false);
 		tfCampoCorp.setBounds(475, 151, 146, 27);
 		panelPrincipal.add(tfCampoCorp);
 		tfCampoCorp.setColumns(10);
+		tfCampoCorp.setText(Sesion.getUsuarioLogueado().getCorp());
 	}
 
 	public void modificar()
@@ -160,6 +163,7 @@ public class VistaPerfilColaborador extends JFrame {
 		tfCampoUsuario.setEditable(false);
 		tfCampoCorreo.setEditable(false);
 		tfCampoCorp.setEditable(false);
+		Sesion.getUsuarioLogueado().modificarInformacion(tfCampoCorreo.getText(), tfCampoUsuario.getText(), tfCampoCorp.getText());
 	}
 	
 	public void controlador(ActionListener ctr)
