@@ -41,6 +41,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 	private JLabel lblNombrePerfil;
 	private JButton btnEntrar;
 	private JList<Evento> listInscritos;
+	private JButton btnVolverAdmin;
 
 	public static void abrirVentana() {
 		try {
@@ -118,6 +119,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 
 		datePicker.addActionListener(ctr);
 		listInscritos.addListSelectionListener(ctr);
+
 	}
 
 	public Date fechaSeleccionada() {
