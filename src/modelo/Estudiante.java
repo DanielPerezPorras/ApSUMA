@@ -39,5 +39,10 @@ public class Estudiante extends Usuario{
         BD bd = new BD();
         bd.Delete("DELETE FROM Estudiante WHERE correo = '" + this.getCorreo() + "';");
     }
-    
+
+    @Override
+    public String getCorp() {
+        return null;
+    }
+
 }

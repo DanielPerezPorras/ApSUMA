@@ -55,6 +55,11 @@ public class Colaborador extends Usuario{
         correoCorp = null;
     }
 
+    @Override
+    public String getCorp() {
+        return this.correoCorp;
+    }
+
     public String getCorreoCorp() {
         return correoCorp;
     }

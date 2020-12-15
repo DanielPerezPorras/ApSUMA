@@ -58,6 +58,11 @@ public class Tutor extends Usuario {
         correoUMA = null;
     }
 
+    @Override
+    public String getCorp() {
+        return this.correoUMA;
+    }
+
     public void eliminarCurso(Curso curso){
         propuesto.remove(curso);
         curso.eliminarCurso();
