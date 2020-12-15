@@ -18,6 +18,7 @@ import java.awt.Container;
 
 import javax.swing.JComboBox;
 import java.awt.SystemColor;
+import javax.swing.JTextField;
 
 public class VistaPerfilTutor extends JFrame {
 
@@ -26,9 +27,6 @@ public class VistaPerfilTutor extends JFrame {
 	private JLabel lblNombreUsuario;
 	private JLabel lblCorreo;
 	private JLabel lblCorreoUma;
-	private JLabel lblCampoNombreUsuario;
-	private JLabel lblTutorgmailcom;
-	private JLabel lblTutorumaes;
 	private JButton btModificarDatos;
 	private JButton btAtrs;
 	private JButton btCerrarSesin;
@@ -37,6 +35,9 @@ public class VistaPerfilTutor extends JFrame {
 	private JComboBox cbMisConferencias;
 	private JComboBox cbMisActividades;
 	private JButton btnEliminarCuenta;
+	private JTextField tfCampoUsuario;
+	private JTextField tfCampoCorreo;
+	private JTextField tfCampoCorp;
 
 	
 	
@@ -72,21 +73,6 @@ public class VistaPerfilTutor extends JFrame {
 		lblCorreoUma.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 15));
 		lblCorreoUma.setBounds(288, 151, 146, 27);
 		panelPrincipal.add(lblCorreoUma);
-		
-		lblCampoNombreUsuario = new JLabel(Sesion.getUsuarioLogueado().getNombreUsuario());
-		lblCampoNombreUsuario.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
-		lblCampoNombreUsuario.setBounds(475, 34, 146, 27);
-		panelPrincipal.add(lblCampoNombreUsuario);
-		
-		lblTutorgmailcom = new JLabel(Sesion.getUsuarioLogueado().getCorreo());
-		lblTutorgmailcom.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
-		lblTutorgmailcom.setBounds(475, 88, 146, 27);
-		panelPrincipal.add(lblTutorgmailcom);
-		
-		lblTutorumaes = new JLabel("tutor@uma.es");
-		lblTutorumaes.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
-		lblTutorumaes.setBounds(475, 151, 146, 27);
-		panelPrincipal.add(lblTutorumaes);
 		
 		btModificarDatos = new JButton("Modificar datos");
 		btModificarDatos.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
@@ -131,6 +117,24 @@ public class VistaPerfilTutor extends JFrame {
 		btnEliminarCuenta.setBackground(SystemColor.activeCaption);
 		btnEliminarCuenta.setBounds(271, 450, 143, 41);
 		panelPrincipal.add(btnEliminarCuenta);
+		
+		tfCampoUsuario = new JTextField();
+		tfCampoUsuario.setEditable(false);
+		tfCampoUsuario.setBounds(475, 34, 146, 27);
+		panelPrincipal.add(tfCampoUsuario);
+		tfCampoUsuario.setColumns(10);
+		
+		tfCampoCorreo = new JTextField();
+		tfCampoCorreo.setEditable(false);
+		tfCampoCorreo.setBounds(475, 88, 146, 27);
+		panelPrincipal.add(tfCampoCorreo);
+		tfCampoCorreo.setColumns(10);
+		
+		tfCampoCorp = new JTextField();
+		tfCampoCorp.setEditable(false);
+		tfCampoCorp.setBounds(475, 151, 146, 27);
+		panelPrincipal.add(tfCampoCorp);
+		tfCampoCorp.setColumns(10);
 	}
 
 	public static void abrirVentana() {

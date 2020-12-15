@@ -16,6 +16,7 @@ import java.awt.Container;
 
 import javax.swing.JComboBox;
 import java.awt.SystemColor;
+import javax.swing.JTextField;
 
 public class VistaPerfilEstudiante extends JFrame {
 
@@ -23,8 +24,6 @@ public class VistaPerfilEstudiante extends JFrame {
 	private JLabel lLogo;
 	private JLabel lblNombreUsuario;
 	private JLabel lblCorreo;
-	private JLabel lblCampoNombreUsuario;
-	private JLabel lblTutorgmailcom;
 	private JButton btModificarDatos;
 	private JButton btAtrs;
 	private JButton btCerrarSesin;
@@ -32,6 +31,8 @@ public class VistaPerfilEstudiante extends JFrame {
 	private JComboBox cbMisConferencias;
 	private JComboBox cbMisActividades;
 	private JButton btnEliminarCuenta;
+	private JTextField tfCampoUsuario;
+	private JTextField tfCampoCorreo;
 
 	
 	
@@ -61,16 +62,6 @@ public class VistaPerfilEstudiante extends JFrame {
 		lblCorreo.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 15));
 		lblCorreo.setBounds(288, 88, 146, 27);
 		panelPrincipal.add(lblCorreo);
-		
-		lblCampoNombreUsuario =  new JLabel(Sesion.getUsuarioLogueado().getNombreUsuario());
-		lblCampoNombreUsuario.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
-		lblCampoNombreUsuario.setBounds(475, 34, 146, 27);
-		panelPrincipal.add(lblCampoNombreUsuario);
-		
-		lblTutorgmailcom = new JLabel(Sesion.getUsuarioLogueado().getCorreo());
-		lblTutorgmailcom.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
-		lblTutorgmailcom.setBounds(475, 88, 146, 27);
-		panelPrincipal.add(lblTutorgmailcom);
 		
 		btModificarDatos = new JButton("Modificar datos");
 		btModificarDatos.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
@@ -110,6 +101,18 @@ public class VistaPerfilEstudiante extends JFrame {
 		btnEliminarCuenta.setBackground(SystemColor.activeCaption);
 		btnEliminarCuenta.setBounds(271, 353, 143, 41);
 		panelPrincipal.add(btnEliminarCuenta);
+		
+		tfCampoUsuario = new JTextField();
+		tfCampoUsuario.setEditable(false);
+		tfCampoUsuario.setBounds(475, 34, 146, 27);
+		panelPrincipal.add(tfCampoUsuario);
+		tfCampoUsuario.setColumns(10);
+		
+		tfCampoCorreo = new JTextField();
+		tfCampoCorreo.setEditable(false);
+		tfCampoCorreo.setBounds(475, 88, 146, 27);
+		panelPrincipal.add(tfCampoCorreo);
+		tfCampoCorreo.setColumns(10);
 	}
 
 	public static void abrirVentana() {
