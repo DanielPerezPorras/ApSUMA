@@ -7,6 +7,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.Usuario;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -118,7 +121,7 @@ public class VistaPrincipalAdmin extends JFrame {
 		lbNombreDeUsuario.setBounds(564, 342, 144, 31);
 		panelPrincipal.add(lbNombreDeUsuario);
 		
-		lblUsuario = new JLabel("usuario");
+		lblUsuario = new JLabel("");
 		lblUsuario.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
 		lblUsuario.setBounds(720, 346, 97, 23);
 		panelPrincipal.add(lblUsuario);
@@ -128,17 +131,17 @@ public class VistaPrincipalAdmin extends JFrame {
 		lblCorreoElectrnico.setBounds(564, 375, 133, 27);
 		panelPrincipal.add(lblCorreoElectrnico);
 		
-		lblUsuarioumaes = new JLabel("usuario@uma.es");
+		lblUsuarioumaes = new JLabel("");
 		lblUsuarioumaes.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
 		lblUsuarioumaes.setBounds(720, 375, 118, 27);
 		panelPrincipal.add(lblUsuarioumaes);
 		
-		lblCorreoUma = new JLabel("Correo UMA:");
+		lblCorreoUma = new JLabel("Correo corp:");
 		lblCorreoUma.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
 		lblCorreoUma.setBounds(564, 412, 133, 27);
 		panelPrincipal.add(lblCorreoUma);
 		
-		lblUsuarioumaes_1 = new JLabel("usuario@uma.es");
+		lblUsuarioumaes_1 = new JLabel("");
 		lblUsuarioumaes_1.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
 		lblUsuarioumaes_1.setBounds(720, 415, 118, 27);
 		panelPrincipal.add(lblUsuarioumaes_1);
@@ -163,6 +166,11 @@ public class VistaPrincipalAdmin extends JFrame {
 		return textField.getText();
 	}
 	
+	public String getCorreoActual()
+	{
+		return cbLista.getSelectedItem().toString();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void anyadirTexto(String[] lista)
 	{
@@ -172,7 +180,8 @@ public class VistaPrincipalAdmin extends JFrame {
 	
 	public void mostrarDatosUsuarioSel()
 	{
-		mostrarDatosUsuario((String) cbLista.getSelectedItem(),(String)  cbLista.getSelectedItem(),(String) cbLista.getSelectedItem());
+		Usuario usu = Usuario.buscarUsuario(this.getCorreoActual());
+		mostrarDatosUsuario(usu.getNombreUsuario(),usu.getCorreo(),usu.getCorreo());
 	}
 	
 	//Muestra el nombre, correo del usuario

@@ -1,5 +1,7 @@
 package gui;
 
+import modelo.Evento;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
@@ -26,8 +28,14 @@ public class ControladorPrincipalTutor implements ActionListener, ListSelectionL
         	break;
         	}
         break;
-        default : vista.cargarEventos();;
-        
+        case "ENTRAR EVENTO":
+            Evento ev = vista.getEventoSeleccionado();
+            if (ev != null) {
+                vista.dispose();
+                ev.abrirEvento();
+            }
+        break;
+        default : vista.cargarEventos();
         }
     }
 

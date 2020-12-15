@@ -51,11 +51,16 @@ public class Tutor extends Usuario {
         correoUMA = corUMA;
     }
 
-    public void eliminarCuentaTutor(){
-        this.eliminarCuenta();
+    public void eliminarCuenta(){
+        super.eliminarCuenta();
         BD bd = new BD();
         bd.Delete("DELETE FROM Tutor WHERE correo = '" + this.getCorreo() + "';");
         correoUMA = null;
+    }
+
+    @Override
+    public String getCorp() {
+        return this.correoUMA;
     }
 
     public void eliminarCurso(Curso curso){

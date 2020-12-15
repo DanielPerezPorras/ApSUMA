@@ -30,6 +30,15 @@ public class VistaConferenciaAlumno extends JFrame {
 	private JLabel lblLinkMeetingCurso;
 	private JLabel lbHyperLink;
 
+	public static void abrirVentana() {
+		try {
+			VistaConferenciaAlumno frame = new VistaConferenciaAlumno();
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * Create the frame.
 	 */

@@ -44,6 +44,7 @@ public class VistaPrincipalTutor extends JFrame {
 		try {
 			VistaPrincipalTutor frame = new VistaPrincipalTutor();
 			frame.controlador(new ControladorPrincipalTutor(frame));
+			frame.rellenarListaOrganizados();
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -127,6 +128,8 @@ public class VistaPrincipalTutor extends JFrame {
 		btnCrear.setActionCommand("CREAR");
 		comboBox.addActionListener(ctr);
 		datePicker.addActionListener(ctr);	
+		btnEntrar.addActionListener(ctr);
+		btnEntrar.setActionCommand("ENTRAR EVENTO");
 
 
 	}
@@ -155,4 +158,19 @@ public class VistaPrincipalTutor extends JFrame {
 		listaEventos.toArray(eventos);
 		listInscritos.setListData(eventos);
 	}
+
+	public JList<Evento> getListaOrganizados() {
+		return listOrganizados;
+	}
+
+	// El evento seleccionado puede ser uno al que el usuario esté inscrito o
+	// que haya organizado.
+	public Evento getEventoSeleccionado() {
+		Evento ev = listOrganizados.getSelectedValue();
+		if (ev == null){
+			ev = listInscritos.getSelectedValue();
+		}
+		return ev;
+	}
+
 }

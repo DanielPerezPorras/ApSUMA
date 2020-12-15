@@ -132,5 +132,7 @@ public abstract class Usuario {
         return eventos;
     }
 
+    public abstract String getCorp();
+
     public abstract void abrirVentanaPrincipal();
 }
