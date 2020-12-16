@@ -29,7 +29,10 @@ public class ControladorPerfilColaborador implements ActionListener {
                 break;
             case "CERRAR SESION":
                 Sesion.setUsuarioLogueado(null);
-                vista.dispose();
+                java.awt.Window[] win = java.awt.Window.getWindows();
+                for (java.awt.Window window : win) {
+                    window.dispose();
+                }
                 VistaLogin.abrirVentana();
                 break;
             case "ATRAS":
@@ -39,7 +42,10 @@ public class ControladorPerfilColaborador implements ActionListener {
                 Usuario usuario = Sesion.getUsuarioLogueado();
                 usuario.eliminarCuenta();
                 Sesion.setUsuarioLogueado(null);
-                vista.dispose();
+                win = java.awt.Window.getWindows();
+                for (java.awt.Window window : win) {
+                    window.dispose();
+                }
                 VistaLogin.abrirVentana();
                 break;
         }
