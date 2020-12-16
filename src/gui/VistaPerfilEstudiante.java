@@ -5,19 +5,14 @@ import modelo.Estudiante;
 import modelo.Sesion;
 import modelo.Usuario;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import java.awt.Container;
 
-import javax.swing.JComboBox;
 import java.awt.SystemColor;
-import javax.swing.JTextField;
 
 public class VistaPerfilEstudiante extends JFrame {
 
@@ -28,7 +23,7 @@ public class VistaPerfilEstudiante extends JFrame {
 	private JButton btModificarDatos;
 	private JButton btAtrs;
 	private JButton btCerrarSesin;
-	private Container cbMisCursos;
+	private JComboBox cbMisCursos;
 	private JComboBox cbMisConferencias;
 	private JComboBox cbMisActividades;
 	private JButton btnEliminarCuenta;
@@ -83,16 +78,19 @@ public class VistaPerfilEstudiante extends JFrame {
 		panelPrincipal.add(btCerrarSesin);
 		
 		cbMisCursos = new JComboBox();
+		cbMisCursos.setModel(new DefaultComboBoxModel(new String[] {"Cursos activos"}));
 		cbMisCursos.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		cbMisCursos.setBounds(352, 194, 179, 34);
 		panelPrincipal.add(cbMisCursos);
 		
 		cbMisConferencias = new JComboBox();
+		cbMisConferencias.setModel(new DefaultComboBoxModel(new String[] {"Conferencias activas"}));
 		cbMisConferencias.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		cbMisConferencias.setBounds(352, 241, 179, 34);
 		panelPrincipal.add(cbMisConferencias);
 		
 		cbMisActividades = new JComboBox();
+		cbMisActividades.setModel(new DefaultComboBoxModel(new String[] {"Actividades activas"}));
 		cbMisActividades.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		cbMisActividades.setBounds(352, 288, 179, 34);
 		panelPrincipal.add(cbMisActividades);

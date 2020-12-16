@@ -18,7 +18,7 @@ public class VistaPerfilTutor extends JFrame {
 	private JButton btAtrs;
 	private JButton btCerrarSesin;
 	private JComboBox cbEventosCreados;
-	private Container cbMisCursos;
+	private JComboBox cbMisCursos;
 	private JComboBox cbMisConferencias;
 	private JComboBox cbMisActividades;
 	private JButton btnEliminarCuenta;
@@ -81,21 +81,25 @@ public class VistaPerfilTutor extends JFrame {
 		panelPrincipal.add(btCerrarSesin);
 		
 		cbEventosCreados = new JComboBox();
+		cbEventosCreados.setModel(new DefaultComboBoxModel(new String[] {"Eventos creados"}));
 		cbEventosCreados.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		cbEventosCreados.setBounds(151, 274, 179, 34);
 		panelPrincipal.add(cbEventosCreados);
 		
 		cbMisCursos = new JComboBox();
+		cbMisCursos.setModel(new DefaultComboBoxModel(new String[] {"Cursos activos"}));
 		cbMisCursos.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		cbMisCursos.setBounds(151, 359, 179, 34);
 		panelPrincipal.add(cbMisCursos);
 		
 		cbMisConferencias = new JComboBox();
+		cbMisConferencias.setModel(new DefaultComboBoxModel(new String[] {"Conferencias activas"}));
 		cbMisConferencias.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		cbMisConferencias.setBounds(409, 274, 179, 34);
 		panelPrincipal.add(cbMisConferencias);
 		
 		cbMisActividades = new JComboBox();
+		cbMisActividades.setModel(new DefaultComboBoxModel(new String[] {"Actividades activas"}));
 		cbMisActividades.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		cbMisActividades.setBounds(409, 359, 179, 34);
 		panelPrincipal.add(cbMisActividades);
