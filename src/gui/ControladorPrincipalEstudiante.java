@@ -54,7 +54,7 @@ public class ControladorPrincipalEstudiante implements ActionListener, ListSelec
     @Override
     public void valueChanged(ListSelectionEvent evt) {
         if (!evt.getValueIsAdjusting()) {
-            System.out.println("SELECCIONADISIMO!!!");
+
         }
     }
 

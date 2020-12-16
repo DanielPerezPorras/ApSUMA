@@ -37,6 +37,7 @@ public class VistaNuevoActividades extends JFrame {
 	}
 	
 	public VistaNuevoActividades() {
+		super("Nueva Actividad");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 559, 158);

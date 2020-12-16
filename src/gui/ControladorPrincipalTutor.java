@@ -54,13 +54,15 @@ public class ControladorPrincipalTutor implements ActionListener, ListSelectionL
                     VistaPerfilColaborador.abrirVentana();
                 }
                 break;
+            default:
+                vista.cargarEventos();
         }
     }
 
     @Override
     public void valueChanged(ListSelectionEvent evt) {
         if (!evt.getValueIsAdjusting()) {
-            System.out.println("SELECCIONADISIMO!!!");
+
         }
     }
 

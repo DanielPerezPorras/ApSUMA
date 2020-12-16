@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import modelo.Curso;
 import modelo.Evento;
 import modelo.Sesion;
 
@@ -28,12 +29,14 @@ public class ControladorPrincipalInvitado implements ActionListener, WindowListe
             	Evento ev = vista.getEventoSeleccionado();
                 if (vista.getEventoSeleccionado() != null) {
                     int dialogResult = JOptionPane.showConfirmDialog(null,"¿Quieres inscribirte en este evento?");
-                    if (dialogResult == JOptionPane.YES_OPTION) {
+                    if (!(ev instanceof Curso) && dialogResult == JOptionPane.YES_OPTION) {
                         accedeEvento = true;
                         vista.dispose();
                         accedeEvento = true;
                         ev.abrirEvento();
 
+                    } else if (ev instanceof Curso && dialogResult == JOptionPane.YES_OPTION) {
+                        JOptionPane.showMessageDialog(null, "Un invitado no puede inscribirse en un curso", "Error",JOptionPane.ERROR_MESSAGE);
                     }
 
                 }
@@ -47,7 +50,6 @@ public class ControladorPrincipalInvitado implements ActionListener, WindowListe
     @Override
     public void valueChanged(ListSelectionEvent evt) {
         if (!evt.getValueIsAdjusting()) {
-            System.out.println("SELECCIONADISIMO!!!");
         }
     }
 

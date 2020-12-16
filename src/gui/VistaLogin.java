@@ -43,6 +43,7 @@ public class VistaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public VistaLogin() {
+		super("Login APS_UMA");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 748, 478);

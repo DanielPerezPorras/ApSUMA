@@ -36,6 +36,7 @@ public class VistaActividadSocialAlumno extends JFrame {
 	 */
 	public VistaActividadSocialAlumno() 
 	{
+		super("Actividad Social");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);

@@ -53,6 +53,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 	}
 
 	public VistaPrincipalEstudiante() {
+		super("APS_UMA");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);

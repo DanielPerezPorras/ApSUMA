@@ -53,6 +53,7 @@ public class VistaPrincipalInvitado extends JFrame {
 	}
 
 	public VistaPrincipalInvitado() {
+		super("APS_UMA");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);
@@ -87,9 +88,10 @@ public class VistaPrincipalInvitado extends JFrame {
 
 		bPerfil = new JButton("");
 		bPerfil.setBounds(753, 11, 62, 49);
+		UtilidadesGUI.ajustarImagenAButton(bPerfil, "/recursosApp/gato.png");
 		panelEventos.add(bPerfil);
 
-		lblNombrePerfil = new JLabel("");
+		lblNombrePerfil = new JLabel("Invitado");
 		lblNombrePerfil.setBounds(662, 27, 46, 14);
 		panelEventos.add(lblNombrePerfil);
 

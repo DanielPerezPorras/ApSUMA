@@ -46,6 +46,7 @@ public class VistaConferenciaAlumno extends JFrame {
 	 */
 	public VistaConferenciaAlumno() 
 	{
+		super("Conferencia");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);

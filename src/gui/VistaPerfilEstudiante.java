@@ -40,6 +40,7 @@ public class VistaPerfilEstudiante extends JFrame {
 	 * Create the frame.
 	 */
 	public VistaPerfilEstudiante() {
+		super("Perfil");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 689, 432);

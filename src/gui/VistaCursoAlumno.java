@@ -35,18 +35,6 @@ public class VistaCursoAlumno extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VistaCursoAlumno frame = new VistaCursoAlumno();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public static void abrirVentana() {
 		try {
@@ -63,6 +51,7 @@ public class VistaCursoAlumno extends JFrame {
 	 */
 	public VistaCursoAlumno() 
 	{
+		super("Curso");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);

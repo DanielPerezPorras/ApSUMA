@@ -37,6 +37,7 @@ public class VistaNuevoConferencia extends JFrame {
 	}
 	
 	public VistaNuevoConferencia() {
+		super("Nueva Conferencia");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 559, 158);

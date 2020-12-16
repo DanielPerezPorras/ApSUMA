@@ -54,6 +54,7 @@ public class VistaPrincipalTutor extends JFrame {
 	}
 
 	public VistaPrincipalTutor() {
+		super("APS_UMA");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);
@@ -131,12 +132,15 @@ public class VistaPrincipalTutor extends JFrame {
 	public void controlador(ControladorPrincipalTutor ctr) {
 		listOrganizados.addListSelectionListener(ctr);
 		listInscritos.addListSelectionListener(ctr);
+
 		btnCrear.addActionListener(ctr);
 		btnCrear.setActionCommand("CREAR");
 		comboBox.addActionListener(ctr);
 		datePicker.addActionListener(ctr);
+
 		btnEntrar.addActionListener(ctr);
 		btnEntrar.setActionCommand("ENTRAR EVENTO");
+
 		this.addWindowListener(ctr);
 		btnVistaadmin.addActionListener(ctr);
 		btnVistaadmin.setActionCommand("ADMIN");
@@ -151,10 +155,6 @@ public class VistaPrincipalTutor extends JFrame {
 
 	public Date fechaSeleccionada() {
 		return (Date) datePicker.getModel().getValue();
-	}
-
-	public boolean compruebaFuenteEvento(Object source) {
-		return source.equals(datePicker);
 	}
 
 	public void cargarEventos() {
