@@ -2,23 +2,10 @@ package gui;
 
 import modelo.Sesion;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.Container;
-
-import javax.swing.JComboBox;
-import java.awt.SystemColor;
-import javax.swing.JTextField;
 
 public class VistaPerfilColaborador extends JFrame {
 
@@ -55,6 +42,7 @@ public class VistaPerfilColaborador extends JFrame {
 	}
 
 	public VistaPerfilColaborador() {
+		super("Perfil");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 689, 539);

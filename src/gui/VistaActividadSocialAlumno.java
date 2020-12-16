@@ -1,21 +1,8 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTabbedPane;
-import javax.swing.JButton;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Color;
-import java.awt.Cursor;
+import java.awt.*;
 
 public class VistaActividadSocialAlumno extends JFrame {
 
@@ -29,12 +16,14 @@ public class VistaActividadSocialAlumno extends JFrame {
 	private JLabel lblDescripcion;
 	private JLabel lblLinkMeetingCurso;
 	private JLabel lbHyperLink;
+	private JButton btnVolver;
 
 	/**
 	 * Create the frame.
 	 */
 	public VistaActividadSocialAlumno() 
 	{
+		super("Actividad Social");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);
@@ -87,6 +76,10 @@ public class VistaActividadSocialAlumno extends JFrame {
 		lbHyperLink.setBounds(228, 473, 292, 27);
 		lbHyperLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		pInicio.add(lbHyperLink);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(10, 434, 89, 23);
+		pInicio.add(btnVolver);
 		tabbedPane.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
 	}
 
@@ -100,15 +93,16 @@ public class VistaActividadSocialAlumno extends JFrame {
 		}
     }
 
-    public void controlador(ActionListener ctr)
+    public void controlador(ControladorActividadSocialAlumno ctr)
 	{
 		btnAnularInscripcin.addActionListener(ctr);
 		btnAnularInscripcin.setActionCommand("ANULAR");
+		
+		btnVolver.addActionListener(ctr);
+		btnVolver.setActionCommand("VOLVER");
+		
+		lbHyperLink.addMouseListener(ctr);
 	}
 	
-	public void controlador(ControladorActividadSocialAlumno ctr)
-	{
-
-	}
 	
 }

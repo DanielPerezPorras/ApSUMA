@@ -1,6 +1,5 @@
 package modelo;
 
-import gui.VistaPerfilColaborador;
 import gui.VistaPrincipalTutor;
 
 import java.util.ArrayList;

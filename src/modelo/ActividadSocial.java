@@ -1,6 +1,6 @@
 package modelo;
+
 import gui.VistaActividadSocialAlumno;
-import gui.VistaConferenciaAlumno;
 
 import java.util.Date;
 import java.util.List;

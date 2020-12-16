@@ -1,21 +1,8 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTabbedPane;
-import javax.swing.JButton;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Color;
-import java.awt.Cursor;
+import java.awt.*;
 
 public class VistaCursoAlumno extends JFrame {
 
@@ -30,26 +17,16 @@ public class VistaCursoAlumno extends JFrame {
 	private JLabel lblLinkMeetingCurso;
 	private JLabel lbHyperLink;
 	private JPanel pForo;
+	private JButton btnVolver;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VistaCursoAlumno frame = new VistaCursoAlumno();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public static void abrirVentana() {
 		try {
 			VistaCursoAlumno frame = new VistaCursoAlumno();
+			frame.controlador(new ControladorCursoAlumno(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,6 +38,7 @@ public class VistaCursoAlumno extends JFrame {
 	 */
 	public VistaCursoAlumno() 
 	{
+		super("Curso");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);
@@ -114,6 +92,10 @@ public class VistaCursoAlumno extends JFrame {
 		lbHyperLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		pInicio.add(lbHyperLink);
 		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(10, 434, 89, 23);
+		pInicio.add(btnVolver);
+		
 		pForo = new JPanel();
 		tabbedPane.addTab("Foro", null, pForo, null);
 		tabbedPane.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
@@ -121,15 +103,14 @@ public class VistaCursoAlumno extends JFrame {
 		tabbedPane.setEnabledAt(1, false);
 	}
 	
-	public void controlador(ActionListener ctr)
+	public void controlador(ControladorCursoAlumno ctr)
 	{
 		btnAnularInscripcin.addActionListener(ctr);
 		btnAnularInscripcin.setActionCommand("ANULAR");
-	}
-	
-	public void controlador(MouseListener ctr)
-	{
+		
+		btnVolver.addActionListener(ctr);
+		btnVolver.setActionCommand("VOLVER");
+
 		lbHyperLink.addMouseListener(ctr);
 	}
-	
 }

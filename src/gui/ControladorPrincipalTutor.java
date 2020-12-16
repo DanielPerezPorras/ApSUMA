@@ -2,6 +2,7 @@ package gui;
 
 import modelo.*;
 
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,7 @@ import java.awt.event.WindowListener;
 public class ControladorPrincipalTutor implements ActionListener, ListSelectionListener, WindowListener {
 
     private final VistaPrincipalTutor vista;
+	private boolean accedeEvento = false;
 
     public ControladorPrincipalTutor(VistaPrincipalTutor vista) {
         this.vista = vista;
@@ -31,10 +33,17 @@ public class ControladorPrincipalTutor implements ActionListener, ListSelectionL
                 }
                 break;
             case "ENTRAR EVENTO":
-                Evento ev = vista.getEventoSeleccionado();
-                if (ev != null) {
-                    vista.dispose();
-                    ev.abrirEvento();
+            	Evento ev = vista.getEventoSeleccionado();
+                if (vista.getEventoSeleccionado() != null) {
+                    int dialogResult = JOptionPane.showConfirmDialog(null,"¿Quieres inscribirte en este evento?");
+                    if (dialogResult == JOptionPane.YES_OPTION) {
+                        accedeEvento = true;
+                        vista.dispose();
+                        accedeEvento = true;
+                        ev.abrirEvento();
+
+                    }
+
                 }
                 break;
             case "ABRIR":
@@ -45,13 +54,15 @@ public class ControladorPrincipalTutor implements ActionListener, ListSelectionL
                     VistaPerfilColaborador.abrirVentana();
                 }
                 break;
+            default:
+                vista.cargarEventos();
         }
     }
 
     @Override
     public void valueChanged(ListSelectionEvent evt) {
         if (!evt.getValueIsAdjusting()) {
-            System.out.println("SELECCIONADISIMO!!!");
+
         }
     }
 
@@ -63,7 +74,7 @@ public class ControladorPrincipalTutor implements ActionListener, ListSelectionL
 
     @Override
     public void windowClosed(WindowEvent arg0) {
-        if (Sesion.logueadoComoAdmin()) {
+        if (Sesion.logueadoComoAdmin() && !accedeEvento ) {
             VistaPrincipalAdmin.abrirVentana();
         }
 

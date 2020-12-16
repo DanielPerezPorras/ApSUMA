@@ -1,4 +1,5 @@
 import gui.VistaLogin;
+
 import java.awt.*;
 
 public class Programa {

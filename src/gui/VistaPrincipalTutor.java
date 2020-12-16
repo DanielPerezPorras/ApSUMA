@@ -1,25 +1,15 @@
 package gui;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import modelo.*;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
-import javax.swing.JTabbedPane;
 
-import java.awt.EventQueue;
-import java.awt.Font;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
-
-import javax.swing.JList;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
 public class VistaPrincipalTutor extends JFrame {
 
@@ -43,6 +33,7 @@ public class VistaPrincipalTutor extends JFrame {
 
 	public static void abrirVentana() {
 		try {
+			Sesion.setPermisos(1);
 			VistaPrincipalTutor frame = new VistaPrincipalTutor();
 			frame.controlador(new ControladorPrincipalTutor(frame));
 			frame.rellenarListaOrganizados();
@@ -53,6 +44,7 @@ public class VistaPrincipalTutor extends JFrame {
 	}
 
 	public VistaPrincipalTutor() {
+		super("APS_UMA");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);
@@ -70,11 +62,11 @@ public class VistaPrincipalTutor extends JFrame {
 		tabbedPane.addTab("Eventos", null, panelEventos, null);
 		panelEventos.setLayout(null);
 
-		listInscritos = new JList<Evento>();
+		listInscritos = new JList<>();
 		listInscritos.setBounds(38, 48, 362, 172);
 		panelEventos.add(listInscritos);
 
-		listOrganizados = new JList<Evento>();
+		listOrganizados = new JList<>();
 		listOrganizados.setBounds(38, 266, 362, 172);
 		panelEventos.add(listOrganizados);
 
@@ -130,12 +122,15 @@ public class VistaPrincipalTutor extends JFrame {
 	public void controlador(ControladorPrincipalTutor ctr) {
 		listOrganizados.addListSelectionListener(ctr);
 		listInscritos.addListSelectionListener(ctr);
+
 		btnCrear.addActionListener(ctr);
 		btnCrear.setActionCommand("CREAR");
 		comboBox.addActionListener(ctr);
 		datePicker.addActionListener(ctr);
+
 		btnEntrar.addActionListener(ctr);
 		btnEntrar.setActionCommand("ENTRAR EVENTO");
+
 		this.addWindowListener(ctr);
 		btnVistaadmin.addActionListener(ctr);
 		btnVistaadmin.setActionCommand("ADMIN");
@@ -150,10 +145,6 @@ public class VistaPrincipalTutor extends JFrame {
 
 	public Date fechaSeleccionada() {
 		return (Date) datePicker.getModel().getValue();
-	}
-
-	public boolean compruebaFuenteEvento(Object source) {
-		return source.equals(datePicker);
 	}
 
 	public void cargarEventos() {

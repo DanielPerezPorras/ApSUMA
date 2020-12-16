@@ -1,24 +1,17 @@
 package gui;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import modelo.Evento;
 import modelo.Sesion;
 import modelo.Usuario;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
-import javax.swing.JTabbedPane;
 
-import java.awt.Font;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
-
-import javax.swing.JList;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 
 public class VistaPrincipalEstudiante extends JFrame {
 
@@ -43,6 +36,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 
 	public static void abrirVentana() {
 		try {
+			Sesion.setPermisos(2);
 			VistaPrincipalEstudiante frame = new VistaPrincipalEstudiante();
 			frame.controlador(new ControladorPrincipalEstudiante(frame));
 			frame.setVisible(true);
@@ -52,6 +46,7 @@ public class VistaPrincipalEstudiante extends JFrame {
 	}
 
 	public VistaPrincipalEstudiante() {
+		super("APS_UMA");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);

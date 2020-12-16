@@ -1,24 +1,17 @@
 package gui;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import modelo.Evento;
 import modelo.Sesion;
 import modelo.Usuario;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
-import javax.swing.JTabbedPane;
 
-import java.awt.Font;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
-
-import javax.swing.JList;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 
 public class VistaPrincipalInvitado extends JFrame {
 
@@ -39,6 +32,7 @@ public class VistaPrincipalInvitado extends JFrame {
 	public static void abrirVentana() {
 		try
 		{
+			Sesion.setPermisos(3);
 			VistaPrincipalInvitado frame = new VistaPrincipalInvitado();
 			frame.controlador(new ControladorPrincipalInvitado(frame));
 			frame.setVisible(true);
@@ -52,6 +46,7 @@ public class VistaPrincipalInvitado extends JFrame {
 	}
 
 	public VistaPrincipalInvitado() {
+		super("APS_UMA");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);
@@ -89,7 +84,7 @@ public class VistaPrincipalInvitado extends JFrame {
 		UtilidadesGUI.ajustarImagenAButton(bPerfil, "/recursosApp/gato.png");
 		panelEventos.add(bPerfil);
 
-		lblNombrePerfil = new JLabel("");
+		lblNombrePerfil = new JLabel("Invitado");
 		lblNombrePerfil.setBounds(662, 27, 46, 14);
 		panelEventos.add(lblNombrePerfil);
 
@@ -135,6 +130,10 @@ public class VistaPrincipalInvitado extends JFrame {
 
 	public Date fechaSeleccionada() {
 		return (Date) datePicker.getModel().getValue();
+	}
+
+	public Evento getEventoSeleccionado() {
+		return listInscritos.getSelectedValue();
 	}
 
 }
