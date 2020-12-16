@@ -1,5 +1,6 @@
 package gui;
 
+import modelo.Curso;
 import modelo.Estudiante;
 import modelo.Sesion;
 import modelo.Usuario;
@@ -34,7 +35,7 @@ public class VistaPerfilEstudiante extends JFrame {
 	private JTextField tfCampoUsuario;
 	private JTextField tfCampoCorreo;
 
-	
+
 	
 	/**
 	 * Create the frame.
@@ -107,12 +108,14 @@ public class VistaPerfilEstudiante extends JFrame {
 		tfCampoUsuario.setBounds(475, 34, 146, 27);
 		panelPrincipal.add(tfCampoUsuario);
 		tfCampoUsuario.setColumns(10);
+		tfCampoUsuario.setText(Sesion.getUsuarioLogueado().getNombreUsuario());
 		
 		tfCampoCorreo = new JTextField();
 		tfCampoCorreo.setEditable(false);
 		tfCampoCorreo.setBounds(475, 88, 146, 27);
 		panelPrincipal.add(tfCampoCorreo);
 		tfCampoCorreo.setColumns(10);
+		tfCampoCorreo.setText(Sesion.getUsuarioLogueado().getCorreo());
 	}
 
 	public static void abrirVentana() {

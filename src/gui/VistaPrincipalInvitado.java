@@ -86,6 +86,7 @@ public class VistaPrincipalInvitado extends JFrame {
 
 		bPerfil = new JButton("");
 		bPerfil.setBounds(753, 11, 62, 49);
+		UtilidadesGUI.ajustarImagenAButton(bPerfil, "/recursosApp/gato.png");
 		panelEventos.add(bPerfil);
 
 		lblNombrePerfil = new JLabel("");
