@@ -2,7 +2,6 @@ package gui;
 
 import modelo.Colaborador;
 import modelo.Sesion;
-import modelo.Tutor;
 import modelo.Usuario;
 
 import javax.swing.*;

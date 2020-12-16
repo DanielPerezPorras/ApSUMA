@@ -1,34 +1,12 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import modelo.Sesion;
 import modelo.Usuario;
 
-import javax.swing.JLabel;
-import java.awt.Font;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JComboBox;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JTextPane;
-import javax.swing.ListModel;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import javax.swing.DefaultListModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.DefaultComboBoxModel;
 
 public class VistaPrincipalAdmin extends JFrame {
 

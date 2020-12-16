@@ -1,13 +1,9 @@
 package gui;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.Color;
 
 public class VistaTipoRegistro extends JFrame {
 
@@ -20,18 +16,6 @@ public class VistaTipoRegistro extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VistaTipoRegistro frame = new VistaTipoRegistro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public static void abrirVentana() {
 		try {

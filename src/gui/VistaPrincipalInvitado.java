@@ -1,24 +1,17 @@
 package gui;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import modelo.Evento;
 import modelo.Sesion;
 import modelo.Usuario;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
-import javax.swing.JTabbedPane;
 
-import java.awt.Font;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
-
-import javax.swing.JList;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 
 public class VistaPrincipalInvitado extends JFrame {
 

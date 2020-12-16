@@ -1,7 +1,6 @@
 package modelo;
 
 import gui.VistaConferenciaAlumno;
-import gui.VistaCursoAlumno;
 
 import java.util.Date;
 

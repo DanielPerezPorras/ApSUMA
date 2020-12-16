@@ -1,6 +1,8 @@
 package gui;
 
-import modelo.*;
+import modelo.BD;
+import modelo.Sesion;
+import modelo.Usuario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

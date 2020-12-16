@@ -1,14 +1,10 @@
 package gui;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
-import javax.swing.JLabel;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-
-import java.awt.Image;
 
 public class UtilidadesGUI {
 

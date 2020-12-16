@@ -1,7 +1,6 @@
 package modelo;
 
 import gui.VistaPrincipalAdmin;
-import gui.VistaPrincipalTutor;
 
 import java.util.ArrayList;
 import java.util.List;

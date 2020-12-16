@@ -1,17 +1,16 @@
 package gui;
 
+import modelo.Curso;
+import modelo.Evento;
+import modelo.Sesion;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-
-import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import modelo.Curso;
-import modelo.Evento;
-import modelo.Sesion;
 
 public class ControladorPrincipalInvitado implements ActionListener, WindowListener, ListSelectionListener {
 

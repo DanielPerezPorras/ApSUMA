@@ -1,24 +1,9 @@
 package gui;
 
-import modelo.Sesion;
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.Container;
-
-import javax.swing.JComboBox;
-import java.awt.SystemColor;
-import javax.swing.JTextField;
 
 public class VistaPerfilTutor extends JFrame {
 

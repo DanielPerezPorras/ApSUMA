@@ -1,16 +1,11 @@
 package gui;
 
+import modelo.Sesion;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import modelo.Colaborador;
-import modelo.Estudiante;
-import modelo.Invitado;
-import modelo.Sesion;
-import modelo.Tutor;
-import modelo.Usuario;
 
 public class ControladorActividadSocialAlumno implements ActionListener, MouseListener {
 
