@@ -22,10 +22,12 @@ public class Sesion {
     public static void setPermisos (int num) {
     	permisos = num;
     }
-    
     public static int getPermisos () {
     	return permisos;
     }
 
+    public static boolean puedoCrearEventos() {
+        return permisos < 2;
+    }
 
 }
