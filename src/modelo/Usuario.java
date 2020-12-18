@@ -9,7 +9,7 @@ public abstract class Usuario {
     private String correo;
     private String nombreUsuario;
     private String contra;
-    private ArrayList<Evento> actividad;
+    private ArrayList<Evento> eventosInscritos;
 
     public Usuario(){}
 
@@ -20,7 +20,7 @@ public abstract class Usuario {
         correo = cor;
         nombreUsuario = nombreUs;
         contra = contr;
-        actividad = null;
+        eventosInscritos = null;
     }
 
     // Constructor para recuperar los datos de un usuario ya existente
@@ -34,7 +34,7 @@ public abstract class Usuario {
             correo = cor;
             nombreUsuario = (String)user[1];
             contra = (String)user[2];
-            actividad = null;
+            eventosInscritos = null;
         } else {
             throw new ErrorBD("No se ha encontrado un usuario con correo " + cor);
         }
@@ -59,13 +59,13 @@ public abstract class Usuario {
     }
 
     public void darseAltaEvento(Evento evento){
-        actividad.add(evento);
+        eventosInscritos.add(evento);
         BD bd = new BD();
         bd.Insert("INSERT INTO UsuarioEvento VALUES('" + this.getCorreo() + "', '" + evento.getNombre() + "');");
     }
 
     public void darseBajaEvento(Evento evento){
-        actividad.remove(evento);
+        eventosInscritos.remove(evento);
         BD bd = new BD();
         bd.Delete("DELETE FROM UsuarioEvento WHERE correo = '" + correo + "';");
     }
@@ -78,8 +78,27 @@ public abstract class Usuario {
         return nombreUsuario;
     }
 
-    public ArrayList<Evento> getActividad() {
-        return actividad;
+    public List<Evento> getEventosInscritos() {
+        if (eventosInscritos == null) {
+            eventosInscritos = new ArrayList<>();
+            BD bd = new BD();
+            List<Object[]> resultados = bd.Select("SELECT nombre FROM UsuarioEvento WHERE correo='" + getCorreo() + "'");
+            for (Object[] tupla : resultados) {
+                eventosInscritos.add(Evento.buscarEvento((String)tupla[0]));
+            }
+        }
+        return eventosInscritos;
+    }
+
+    // Devuelve una lista vacía si se llama en un estudiante.
+    public List<Evento> getEventosCreados() {
+        List<Evento> eventosCreados = new ArrayList<>();
+        BD bd = new BD();
+        List<Object[]> resultados = bd.Select("SELECT nombre FROM Evento WHERE correo='" + getCorreo() + "'");
+        for (Object[] tupla : resultados) {
+            eventosCreados.add(Evento.buscarEvento((String)tupla[0]));
+        }
+        return eventosCreados;
     }
 
     public static Usuario buscarUsuario(String correo) {

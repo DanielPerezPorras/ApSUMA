@@ -36,6 +36,7 @@ public class VistaNuevaPrincipal extends JFrame {
     private JList<Evento> ultimaListaSeleccionada;
 
     public static void main(String[] args) {
+        Sesion.setUsuarioLogueado(Usuario.buscarUsuario("admin"));
         abrirVentana();
     }
 
@@ -48,13 +49,21 @@ public class VistaNuevaPrincipal extends JFrame {
     public VistaNuevaPrincipal() {
         crearGUI();
         cargarEventos();
+        cargarEventosUsuario();
+        if (Sesion.getPermisos() < 3) {
+            setNombreUsuario(Sesion.getUsuarioLogueado().getNombreUsuario());
+        } else {
+            setNombreUsuario("(invitado)");
+        }
     }
 
     public void controlador(ControladorNuevaPrincipal ctr) {
         btnEntrar.setActionCommand("ENTRAR");
         btnPerfil.setActionCommand("PERFIL");
+        cbNuevoEvento.setActionCommand("CREAR EVENTO");
         btnEntrar.addActionListener(ctr);
         btnPerfil.addActionListener(ctr);
+        cbNuevoEvento.addActionListener(ctr);
 
         datePicker.addActionListener(ctr);
 
@@ -92,43 +101,73 @@ public class VistaNuevaPrincipal extends JFrame {
         listaConferencias.setListData(conferencias);
     }
 
+    // cargar los eventos de las listas de la derecha
+    public void cargarEventosUsuario() {
+        Usuario usuario = Sesion.getUsuarioLogueado();
+
+        List<Evento> lInscritos = usuario.getEventosInscritos();
+        Evento[] inscritos = new Evento[lInscritos.size()];
+        lInscritos.toArray(inscritos);
+        listaInscritos.setListData(inscritos);
+
+        if (Sesion.puedoCrearEventos()) {
+            List<Evento> lCreados = usuario.getEventosCreados();
+            Evento[] creados = new Evento[lCreados.size()];
+            lCreados.toArray(creados);
+            listaCreados.setListData(creados);
+        }
+    }
+
     public Date getFechaSeleccionada() {
         return (Date)datePicker.getModel().getValue();
     }
 
-    public Evento getCursoSeleccionado() {
-        return listaCursos.getSelectedValue();
-    }
-    public Evento getActividadSeleccionada() {
-        return listaActividades.getSelectedValue();
-    }
-    public Evento getConferenciaSeleccionada() {
-        return listaConferencias.getSelectedValue();
-    }
     public Evento getEventoSeleccionado() {
-        if (getCursoSeleccionado() != null) {
-            return getCursoSeleccionado();
-        } else if (getActividadSeleccionada() != null) {
-            return getActividadSeleccionada();
+        if (listaCursos.getSelectedValue() != null) {
+            return listaCursos.getSelectedValue();
+        } else if (listaActividades.getSelectedValue() != null) {
+            return listaActividades.getSelectedValue();
+        } else if (listaConferencias.getSelectedValue() != null) {
+            return listaConferencias.getSelectedValue();
+        } else if (listaInscritos.getSelectedValue() != null) {
+            return listaInscritos.getSelectedValue();
+        } else if (listaCreados != null && listaCreados.getSelectedValue() != null) {
+            return listaCreados.getSelectedValue();
         } else {
-            return getConferenciaSeleccionada();
+            return null;
         }
     }
 
     @SuppressWarnings("unchecked")
     public void setUltimaListaSeleccionada(ListSelectionEvent ev) {
         ultimaListaSeleccionada = (JList<Evento>)ev.getSource();
+        int indice = ultimaListaSeleccionada.getSelectedIndex();
 
-        // TODO deseleccionar de las demás lístas (no funciona)
-        if (ultimaListaSeleccionada != listaCursos) {
-            listaCursos.setSelectedIndex(-1);
+        listaCursos.clearSelection();
+        listaActividades.clearSelection();
+        listaConferencias.clearSelection();
+        listaInscritos.clearSelection();
+        if (Sesion.puedoCrearEventos()) {
+            listaCreados.clearSelection();
         }
-        if (ultimaListaSeleccionada != listaActividades) {
-            listaActividades.setSelectedIndex(-1);
+        ultimaListaSeleccionada.setSelectedIndex(indice);
+
+    }
+
+    public void setTextoDescripcion(Evento ev) {
+        if (ev != null) {
+            lblDescripcion.setText("<html>Evento seleccionado: " + ev + "</html>");
+        } else {
+            lblDescripcion.setText("<html>Seleccione un evento para ver detalles aquí.</html>");
         }
-        if (ultimaListaSeleccionada != listaConferencias) {
-            listaConferencias.setSelectedIndex(-1);
-        }
+    }
+
+    public void setNombreUsuario(String nombre) {
+        lblUsuario.setText(nombre);
+    }
+
+    public String getTipoNuevoEvento() {
+        return (String)cbNuevoEvento.getSelectedItem();
     }
 
     // Código para crear la GUI
@@ -251,9 +290,11 @@ public class VistaNuevaPrincipal extends JFrame {
         zonaIconoUsuario.add(Box.createRigidArea(new Dimension(10, 0)));
 
         btnPerfil = new JButton();
-        btnPerfil.setIcon(new ImageIcon("gato.png"));
+        btnPerfil.setSize(new Dimension(50, 50));
         btnPerfil.setPreferredSize(new Dimension(50, 50));
         btnPerfil.setMaximumSize(new Dimension(50, 50));
+        System.out.println(btnPerfil.getSize());
+        UtilidadesGUI.ajustarImagenAButton(btnPerfil, "../recursosApp/gato.png");
         zonaIconoUsuario.add(btnPerfil);
         return zonaIconoUsuario;
     }

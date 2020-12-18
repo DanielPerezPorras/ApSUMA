@@ -8,8 +8,8 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
+import java.util.List;
 
 public class VistaPrincipalTutor extends JFrame {
 
@@ -163,18 +163,7 @@ public class VistaPrincipalTutor extends JFrame {
 	public void rellenarListaOrganizados() {
 		Usuario usuarioLogueado = Sesion.getUsuarioLogueado();
 		Evento[] eventos;
-		ArrayList<Evento> listaEventos;
-
-		if (usuarioLogueado instanceof Tutor) {
-			Tutor tutorLogueado = (Tutor)usuarioLogueado;
-			listaEventos = tutorLogueado.getPropuesto();
-
-		} else if (usuarioLogueado instanceof Colaborador) {
-			Colaborador tutorLogueado = (Colaborador)usuarioLogueado;
-			listaEventos = tutorLogueado.getCreado();
-		} else {
-			throw new RuntimeException("Tipo de usuario no válido para VistaPrincipalTutor");
-		}
+		List<Evento> listaEventos = usuarioLogueado.getEventosCreados();
 		eventos = new Evento[listaEventos.size()];
 		listaEventos.toArray(eventos);
 		listOrganizados.setListData(eventos);

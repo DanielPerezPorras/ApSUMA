@@ -11,6 +11,7 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
 
     private VistaNuevaPrincipal vista;
     private boolean accedeEvento = false;
+    private boolean ejecutandoListListener = false;
 
     public ControladorNuevaPrincipal(VistaNuevaPrincipal vista) {
         this.vista = vista;
@@ -21,13 +22,14 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
         switch (e.getActionCommand()) {
 
             case "PERFIL":
+
                 VistaPerfilEstudiante.abrirVentana(); //TODO crear ventana perfil
                 break;
 
             case "ENTRAR":
                 Evento ev = vista.getEventoSeleccionado();
                 if (vista.getEventoSeleccionado() != null) {
-                    int dialogResult = JOptionPane.showConfirmDialog(null,"¿Quieres inscribirte en este evento?");
+                    int dialogResult = JOptionPane.showConfirmDialog(vista,"¿Quieres inscribirte en este evento?");
                     if (dialogResult == JOptionPane.YES_OPTION) {
                         accedeEvento = true;
                         vista.dispose();
@@ -39,6 +41,26 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
                 break;
 
             case "ADMIN":
+                vista.dispose();
+                break;
+
+            case "CREAR EVENTO":
+                String tipo = vista.getTipoNuevoEvento();
+                switch (tipo) {
+
+                    case "Curso":
+                        VistaNuevoCurso.abrirVentana();
+                        break;
+
+                    case "Actividad social":
+                        VistaNuevoActividades.abrirVentana();
+                        break;
+
+                    case "Conferencia":
+                        VistaNuevoConferencia.abrirVentana();
+                        break;
+
+                }
                 vista.dispose();
                 break;
 
@@ -87,10 +109,14 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        if (!e.getValueIsAdjusting()) {
+        // Si no pongo el "ejecutandoListListener" tendré una StackOverflowException!
+        if (!e.getValueIsAdjusting() && !ejecutandoListListener) {
+            ejecutandoListListener = true;
 
             vista.setUltimaListaSeleccionada(e);
+            vista.setTextoDescripcion(vista.getEventoSeleccionado());
 
+            ejecutandoListListener = false;
         }
     }
 
