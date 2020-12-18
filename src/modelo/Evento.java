@@ -107,6 +107,25 @@ public abstract class Evento {
         return evento;
     }
 
+    // Devuelve todos los eventos si fecha es null, o los eventos en la fecha si la fecha no es null
+    public static List<Evento> getEventos(Date fecha) {
+
+        List<Evento> eventos = new ArrayList<>();
+        BD bd = new BD();
+        String consulta = "SELECT nombre FROM Evento";
+        if (fecha != null) {
+            java.sql.Date sqlfecha = new java.sql.Date(fecha.getTime());
+            consulta += " WHERE fecha='" + sqlfecha.toString() + "'";
+        }
+
+        List<Object[]> resultados = bd.Select(consulta);
+        for (Object[] tupla : resultados) {
+            eventos.add(Evento.buscarEvento((String)tupla[0]));
+        }
+        return eventos;
+
+    }
+
     public String toString() {
         return Nombre;
     }

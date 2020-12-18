@@ -87,7 +87,11 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
+        if (!e.getValueIsAdjusting()) {
 
+            vista.setUltimaListaSeleccionada(e);
+
+        }
     }
 
 }

@@ -1,10 +1,14 @@
 package gui;
 
-import modelo.Evento;
-import modelo.Sesion;
+import modelo.*;
 import net.sourceforge.jdatepicker.impl.*;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
+import java.util.List;
+import java.util.Date;
+import java.util.stream.Collectors;
 
 public class VistaNuevaPrincipal extends JFrame {
 
@@ -29,6 +33,8 @@ public class VistaNuevaPrincipal extends JFrame {
     private JList<Evento> listaCreados;
     private JButton btnAdmin;
 
+    private JList<Evento> ultimaListaSeleccionada;
+
     public static void main(String[] args) {
         abrirVentana();
     }
@@ -41,6 +47,7 @@ public class VistaNuevaPrincipal extends JFrame {
 
     public VistaNuevaPrincipal() {
         crearGUI();
+        cargarEventos();
     }
 
     public void controlador(ControladorNuevaPrincipal ctr) {
@@ -68,12 +75,60 @@ public class VistaNuevaPrincipal extends JFrame {
         }
     }
 
+    // Cargar los eventos de las listas de la izquierda
     public void cargarEventos() {
-
+        List<Evento> listaEventos = Evento.getEventos(getFechaSeleccionada());
+        List<Evento> lCursos = listaEventos.stream().filter(ev -> ev instanceof Curso).collect(Collectors.toList());
+        List<Evento> lActivs = listaEventos.stream().filter(ev -> ev instanceof ActividadSocial).collect(Collectors.toList());
+        List<Evento> lConfs = listaEventos.stream().filter(ev -> ev instanceof Conferencia).collect(Collectors.toList());
+        Evento[] cursos = new Evento[lCursos.size()];
+        Evento[] actividades = new Evento[lActivs.size()];
+        Evento[] conferencias = new Evento[lConfs.size()];
+        lCursos.toArray(cursos);
+        lActivs.toArray(actividades);
+        lConfs.toArray(conferencias);
+        listaCursos.setListData(cursos);
+        listaActividades.setListData(actividades);
+        listaConferencias.setListData(conferencias);
     }
 
+    public Date getFechaSeleccionada() {
+        return (Date)datePicker.getModel().getValue();
+    }
+
+    public Evento getCursoSeleccionado() {
+        return listaCursos.getSelectedValue();
+    }
+    public Evento getActividadSeleccionada() {
+        return listaActividades.getSelectedValue();
+    }
+    public Evento getConferenciaSeleccionada() {
+        return listaConferencias.getSelectedValue();
+    }
     public Evento getEventoSeleccionado() {
-        return null;
+        if (getCursoSeleccionado() != null) {
+            return getCursoSeleccionado();
+        } else if (getActividadSeleccionada() != null) {
+            return getActividadSeleccionada();
+        } else {
+            return getConferenciaSeleccionada();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setUltimaListaSeleccionada(ListSelectionEvent ev) {
+        ultimaListaSeleccionada = (JList<Evento>)ev.getSource();
+
+        // TODO deseleccionar de las demás lístas (no funciona)
+        if (ultimaListaSeleccionada != listaCursos) {
+            listaCursos.setSelectedIndex(-1);
+        }
+        if (ultimaListaSeleccionada != listaActividades) {
+            listaActividades.setSelectedIndex(-1);
+        }
+        if (ultimaListaSeleccionada != listaConferencias) {
+            listaConferencias.setSelectedIndex(-1);
+        }
     }
 
     // Código para crear la GUI
@@ -131,6 +186,7 @@ public class VistaNuevaPrincipal extends JFrame {
         listaCursos = new JList<>();
         listaCursos.setFont(FUENTE);
         JScrollPane listaCursosScroll = new JScrollPane(listaCursos);
+
         listaCursosScroll.setAlignmentX(Component.LEFT_ALIGNMENT);
         zonaCursos.add(listaCursosScroll);
         zonaListasEventos.add(zonaCursos);
