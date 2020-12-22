@@ -1,7 +1,5 @@
 package modelo;
 
-import gui.VistaConferencia;
-
 import java.util.Date;
 
 public class Conferencia extends Evento {
@@ -19,8 +17,4 @@ public class Conferencia extends Evento {
         super(nombre);
     }
 
-    @Override
-    public void abrirEvento() {
-        VistaConferencia.abrirVentana();
-    }
 }

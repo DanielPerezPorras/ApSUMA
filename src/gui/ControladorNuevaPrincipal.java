@@ -39,7 +39,7 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
                     if (dialogResult == JOptionPane.YES_OPTION) {
                         accedeEvento = true;
                         vista.dispose();
-                        ev.abrirEvento();
+                        VistaEvento.abrirVentana(ev);
                     }
 
                 }

@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class ControladorActividadSocial implements ActionListener, MouseListener {
+public class ControladorEvento implements ActionListener, MouseListener {
 
-    private final VistaActividadSocial vista;
+    private final VistaEvento vista;
 
-    public ControladorActividadSocial(VistaActividadSocial vista) {
+    public ControladorEvento(VistaEvento vista) {
         this.vista = vista;
     }
 

@@ -1,10 +1,14 @@
 package gui;
 
+import modelo.Evento;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class VistaCurso extends JFrame {
+public class VistaEvento extends JFrame {
+
+	private Evento evento;
 
 	private JPanel panelPrincipal;
 	private JTabbedPane tabbedPane;
@@ -16,29 +20,16 @@ public class VistaCurso extends JFrame {
 	private JLabel lblDescripcion;
 	private JLabel lblLinkMeetingCurso;
 	private JLabel lbHyperLink;
-	private JPanel pForo;
 	private JButton btnVolver;
-
-	/**
-	 * Launch the application.
-	 */
-
-	public static void abrirVentana() {
-		try {
-			VistaCurso frame = new VistaCurso();
-			frame.controlador(new ControladorCurso(frame));
-			frame.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public VistaCurso()
+	public VistaEvento(Evento evento)
 	{
-		super("Curso");
+		super("Evento: " + evento.getNombre());
+		this.evento = evento;
+
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);
@@ -57,7 +48,7 @@ public class VistaCurso extends JFrame {
 		
 		btnAnularInscripcin = new JButton("Anular Inscripci\u00F3n");
 		btnAnularInscripcin.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
-		btnAnularInscripcin.setBounds(608, 473, 155, 27);
+		btnAnularInscripcin.setBounds(556, 471, 155, 27);
 		pInicio.add(btnAnularInscripcin);
 		
 		lblbienvenidoAlCurso = new JLabel("\u00A1Bienvenido al curso de ");
@@ -65,7 +56,7 @@ public class VistaCurso extends JFrame {
 		lblbienvenidoAlCurso.setBounds(137, 13, 221, 50);
 		pInicio.add(lblbienvenidoAlCurso);
 		
-		lblCurso = new JLabel("CURSO !");
+		lblCurso = new JLabel("ACTIVIDAD !");
 		lblCurso.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 20));
 		lblCurso.setBounds(362, 13, 214, 50);
 		pInicio.add(lblCurso);
@@ -80,37 +71,44 @@ public class VistaCurso extends JFrame {
 		lblDescripcion.setBounds(209, 76, 481, 286);
 		pInicio.add(lblDescripcion);
 		
-		lblLinkMeetingCurso = new JLabel("Link Meeting Curso:");
+		lblLinkMeetingCurso = new JLabel("Link Meeting Actividad:");
 		lblLinkMeetingCurso.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
-		lblLinkMeetingCurso.setBounds(12, 468, 172, 32);
+		lblLinkMeetingCurso.setBounds(12, 468, 200, 32);
 		pInicio.add(lblLinkMeetingCurso);
 		
 		lbHyperLink = new JLabel("Clase");
 		lbHyperLink.setForeground(Color.BLUE.darker());
 		lbHyperLink.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 16));
-		lbHyperLink.setBounds(172, 473, 348, 27);
+		lbHyperLink.setBounds(228, 473, 292, 27);
 		lbHyperLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		pInicio.add(lbHyperLink);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 434, 89, 23);
 		pInicio.add(btnVolver);
-		
-		pForo = new JPanel();
-		tabbedPane.addTab("Foro", null, pForo, null);
 		tabbedPane.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
-		pForo.setLayout(null);
-		tabbedPane.setEnabledAt(1, false);
 	}
-	
-	public void controlador(ControladorCurso ctr)
+
+    public static void abrirVentana(Evento ev) {
+		try {
+			VistaEvento frame = new VistaEvento(ev);
+			frame.controlador(new ControladorEvento(frame));
+			frame.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+
+    public void controlador(ControladorEvento ctr)
 	{
 		btnAnularInscripcin.addActionListener(ctr);
 		btnAnularInscripcin.setActionCommand("ANULAR");
 		
 		btnVolver.addActionListener(ctr);
 		btnVolver.setActionCommand("VOLVER");
-
+		
 		lbHyperLink.addMouseListener(ctr);
 	}
+	
+	
 }
