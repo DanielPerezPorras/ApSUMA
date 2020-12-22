@@ -59,10 +59,15 @@ public class VistaNuevaPrincipal extends JFrame {
     public void controlador(ControladorNuevaPrincipal ctr) {
         btnEntrar.setActionCommand("ENTRAR");
         btnPerfil.setActionCommand("PERFIL");
-        cbNuevoEvento.setActionCommand("CREAR EVENTO");
+
         btnEntrar.addActionListener(ctr);
         btnPerfil.addActionListener(ctr);
-        cbNuevoEvento.addActionListener(ctr);
+
+        if (Sesion.puedoCrearEventos()){
+            cbNuevoEvento.setActionCommand("CREAR EVENTO");
+            cbNuevoEvento.addActionListener(ctr);
+        }
+
 
         datePicker.addActionListener(ctr);
 
