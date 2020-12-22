@@ -28,7 +28,7 @@ public class VistaEvento extends JFrame {
 		this.evento = evento;
 
 		crearGUI();
-		alternarModoEdicion(false);
+		alternarModoEdicion(true);
 
 		/*
 		
@@ -163,6 +163,11 @@ public class VistaEvento extends JFrame {
 		panelModoEdicion = new JPanel();
 		BoxLayout layout = new BoxLayout(panelModoEdicion, BoxLayout.Y_AXIS);
 		panelModoEdicion.setLayout(layout);
+		panelModoEdicion.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+
+		JLabel tituloModoEdicion = new JLabel("Modo Edición");
+		tituloModoEdicion.setFont(UtilidadesGUI.FUENTE_TITULOS);
+		panelModoEdicion.add(tituloModoEdicion);
 
 		panelModoEdicion.setPreferredSize(new Dimension(240, -1));
 	}
