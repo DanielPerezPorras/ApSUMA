@@ -38,7 +38,7 @@ public class VistaPrincipal extends JFrame {
     }
 
     public VistaPrincipal() {
-
+        Sesion.setVistaPrincipal(this);
         crearGUI();
         System.out.println("Cargando eventos...");
         cargarEventos();

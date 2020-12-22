@@ -35,6 +35,12 @@ public class Tutor extends Usuario {
 
     public void crearCurso(Date dia, String nombre, int numClases, int duracion){
         Curso curso = new Curso(dia, nombre, this, numClases, duracion);
+        if (propuesto == null) {
+            propuesto = new ArrayList<>();
+        }
+        propuesto.add(curso);
+        BD bd = new BD();
+        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + nombre + "');");
     }
 
     public void modificarInformacion(String cor, String nombr, String corUMA){
@@ -57,10 +63,6 @@ public class Tutor extends Usuario {
         return this.correoUMA;
     }
 
-    public void eliminarCurso(Curso curso){
-        propuesto.remove(curso);
-        curso.eliminarCurso();
-    }
 
     public String getCorreoUMA() {
         return correoUMA;

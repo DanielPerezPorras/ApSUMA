@@ -1,5 +1,7 @@
 package modelo;
 
+import gui.VistaPrincipal;
+
 /**
  * Información sobre la sesión abierta actualmente.
  */
@@ -7,6 +9,8 @@ public class Sesion {
 	private static int permisos = 0; // 0 Admin, 1 Tutor, 2 Estudiante, 3 Invitado
 	
     private static Usuario usuarioLogueado = null;
+
+    private static VistaPrincipal vista;
 
     public static Usuario getUsuarioLogueado() {
         return usuarioLogueado;
@@ -42,4 +46,6 @@ public class Sesion {
         return permisos < 2;
     }
 
+    public static void setVistaPrincipal(VistaPrincipal vista) { Sesion.vista = vista; }
+    public static VistaPrincipal getVistaPrincipal() { return vista; }
 }

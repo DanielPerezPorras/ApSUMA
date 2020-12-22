@@ -11,7 +11,7 @@ public class Curso extends Evento {
     public Curso(Date dia, String nom, Usuario dueno, int num, int duracion) {
         super(dia, nom, dueno);
         BD bd = new BD();
-        bd.Insert("INSERT INTO Curso ('" + nom + "', " + num + ", " + duracion + ");");
+        bd.Insert("INSERT INTO Curso VALUES('" + nom + "', " + num + ", " + duracion + ");");
         clases = num;
         this.duracion = duracion;
     }
@@ -28,13 +28,5 @@ public class Curso extends Evento {
         } else {
             throw new ErrorBD("No se ha encontrado un curso con nombre " + nombre);
         }
-    }
-
-    public void eliminarCurso(){
-        this.eliminarEvento();
-        BD bd = new BD();
-        bd.Delete("DELETE FROM Curso WHERE nombre = '" + this.getNombre() + "';");
-        clases = 0;
-        duracion = 0;
     }
 }

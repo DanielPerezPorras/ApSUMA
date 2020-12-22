@@ -60,16 +60,7 @@ public abstract class Usuario {
         contra = null;
     }
 
-    public void darseAltaEvento(Evento evento){
-        eventosInscritos.add(evento);
-        BD bd = new BD();
-        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + this.getCorreo() + "', '" + evento.getNombre() + "');");
-    }
-
-    public void darseBajaEvento(Evento evento){
-        eventosInscritos.remove(evento);
-        BD bd = new BD();
-        bd.Delete("DELETE FROM UsuarioEvento WHERE correo = '" + correo + "';");
+    public void crearCurso(Date dia, String nombre, int numClases, int duracion){
     }
 
     public String getCorreo() {

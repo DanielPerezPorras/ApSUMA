@@ -17,7 +17,7 @@ public abstract class Evento {
     public Evento(Date dia, String nom, Usuario dueno) {
         if (dueno instanceof Tutor || dueno instanceof Colaborador) {
             BD bd = new BD();
-            bd.Insert("INSERT INTO Evento ('" + dia + "', '" + nom + "', '" + dueno.getCorreo() + "');");
+            bd.Insert("INSERT INTO Evento VALUES('" + dia + "', '" + nom + "', '" + dueno.getCorreo() + "');");
             Fecha = dia;
             Nombre = nom;
             usuarios = null;
@@ -62,17 +62,6 @@ public abstract class Evento {
             }
         }
         return usuarios;
-    }
-
-    public void eliminarEvento(){
-        Fecha = null;
-        Nombre = null;
-        BD bd = new BD();
-        bd.Delete("DELETE FROM Evento WHERE nombre = '" + Nombre + "';");
-        for (Usuario usuario : usuarios){
-            usuario.darseBajaEvento(this);
-        }
-        administrador.darseBajaEvento(this);
     }
 
     public Date getFecha() {

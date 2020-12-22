@@ -65,9 +65,7 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
                     case "Conferencia":
                         VistaNuevoConferencia.abrirVentana();
                         break;
-
                 }
-                vista.dispose();
                 break;
 
             default:
