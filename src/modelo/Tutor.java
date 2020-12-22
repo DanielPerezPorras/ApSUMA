@@ -42,7 +42,7 @@ public class Tutor extends Usuario {
     public void modificarInformacion(String cor, String nombr, String corUMA){
         super.modificarInformacion(cor, nombr, null);
         BD bd = new BD();
-        bd.Update("UPDATE Tutor SET correoUMA = '" + corUMA + "';");
+        bd.Update("UPDATE Tutor SET correoUMA = '" + corUMA + "' WHERE correo = '" + getCorreo() + "';");
         correoUMA = corUMA;
 
     }

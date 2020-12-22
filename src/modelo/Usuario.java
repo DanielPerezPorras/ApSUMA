@@ -46,7 +46,7 @@ public abstract class Usuario {
     public void modificarInformacion(String cor, String nombr, String corCorp){
         // Hacer sentencia SQL "UPDATE..."
         BD bd = new BD();
-        bd.Update("UPDATE Usuario SET correo = '" + cor + "', nombreUsuario = '" + nombr + "';");
+        bd.Update("UPDATE Usuario SET correo = '" + cor + "', nombreUsuario = '" + nombr + "' WHERE correo = '" + getCorreo() + "' ;");
         correo = cor;
         nombreUsuario = nombr;
     }

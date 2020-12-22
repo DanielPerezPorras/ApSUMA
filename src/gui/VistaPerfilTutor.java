@@ -156,6 +156,7 @@ public class VistaPerfilTutor extends JFrame {
 		tfCampoUsuario.setEditable(false);
 		tfCampoCorreo.setEditable(false);
 		tfCampoCorp.setEditable(false);
+		Sesion.getUsuarioLogueado().modificarInformacion(tfCampoCorreo.getText(), tfCampoUsuario.getText(), tfCampoCorp.getText());
 	}
 	
 	public void controlador(ActionListener ctr)
