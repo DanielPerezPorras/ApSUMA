@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-public class VistaNuevaPrincipal extends JFrame {
+public class VistaPrincipal extends JFrame {
 
     private static final Font FUENTE = new Font("Microsoft JhengHei UI", Font.PLAIN, 15);
     private static final Font FUENTE_TITULOS = new Font("Microsoft JhengHei UI", Font.BOLD, 20);
@@ -34,26 +34,25 @@ public class VistaNuevaPrincipal extends JFrame {
 
     private JList<Evento> ultimaListaSeleccionada;
 
-    public static void main(String[] args) {
-        Sesion.setUsuarioLogueado(Usuario.buscarUsuario("admin"));
-        abrirVentana();
-    }
-
     public static void abrirVentana() {
-        VistaNuevaPrincipal frame = new VistaNuevaPrincipal();
+        VistaPrincipal frame = new VistaPrincipal();
         frame.controlador(new ControladorNuevaPrincipal(frame));
         frame.setVisible(true);
     }
 
-    public VistaNuevaPrincipal() {
+    public VistaPrincipal() {
+
         crearGUI();
+        System.out.println("Cargando eventos...");
         cargarEventos();
         cargarEventosUsuario();
+        System.out.println("Se han cargado los eventos");
         if (Sesion.getPermisos() < 3) {
             setNombreUsuario(Sesion.getUsuarioLogueado().getNombreUsuario());
         } else {
             setNombreUsuario("(invitado)");
         }
+
     }
 
     public void controlador(ControladorNuevaPrincipal ctr) {
@@ -297,7 +296,6 @@ public class VistaNuevaPrincipal extends JFrame {
         btnPerfil.setSize(new Dimension(50, 50));
         btnPerfil.setPreferredSize(new Dimension(50, 50));
         btnPerfil.setMaximumSize(new Dimension(50, 50));
-        System.out.println(btnPerfil.getSize());
         UtilidadesGUI.ajustarImagenAButton(btnPerfil, "../recursosApp/gato.png");
         zonaIconoUsuario.add(btnPerfil);
         return zonaIconoUsuario;

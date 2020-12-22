@@ -1,7 +1,5 @@
 package modelo;
 
-import gui.VistaPrincipalEstudiante;
-
 import java.util.List;
 
 public class Estudiante extends Usuario{

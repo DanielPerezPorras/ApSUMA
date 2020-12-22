@@ -1,6 +1,6 @@
 package modelo;
 
-import gui.VistaNuevaPrincipal;
+import gui.VistaPrincipal;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -158,7 +158,7 @@ public abstract class Usuario {
     }
 
     public void abrirVentanaPrincipal() {
-        VistaNuevaPrincipal.abrirVentana();
+        VistaPrincipal.abrirVentana();
     }
 
 }

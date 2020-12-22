@@ -8,11 +8,11 @@ import java.awt.event.*;
 
 public class ControladorNuevaPrincipal implements ActionListener, ListSelectionListener, WindowListener {
 
-    private VistaNuevaPrincipal vista;
+    private VistaPrincipal vista;
     private boolean accedeEvento = false;
     private boolean ejecutandoListListener = false;
 
-    public ControladorNuevaPrincipal(VistaNuevaPrincipal vista) {
+    public ControladorNuevaPrincipal(VistaPrincipal vista) {
         this.vista = vista;
     }
 
@@ -39,7 +39,6 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
                     if (dialogResult == JOptionPane.YES_OPTION) {
                         accedeEvento = true;
                         vista.dispose();
-                        accedeEvento = true;
                         ev.abrirEvento();
                     }
 

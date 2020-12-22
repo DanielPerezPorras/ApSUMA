@@ -26,16 +26,11 @@ public class ControladorActividadSocialAlumno implements ActionListener, MouseLi
     }
 
 	private void abreventana() {
-		switch (Sesion.getPermisos()) {
-		case 0 : VistaPrincipalAdmin.abrirVentana();
-				 break;
-		case 1 : VistaPrincipalTutor.abrirVentana();
-				 break;
-		case 2 : VistaPrincipalEstudiante.abrirVentana();
-				 break;
-		case 3 : VistaPrincipalInvitado.abrirVentana();
-				 break;
-		}		
+		if (Sesion.logueadoComoAdmin()) {
+			VistaPrincipalAdmin.abrirVentana();
+		} else {
+			VistaPrincipal.abrirVentana();
+		}
 	}
 
 	@Override

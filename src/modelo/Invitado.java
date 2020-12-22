@@ -1,7 +1,5 @@
 package modelo;
 
-import gui.VistaPrincipalInvitado;
-
 import java.util.ArrayList;
 
 public class Invitado extends Usuario{
