@@ -1,18 +1,19 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Colaborador extends Usuario{
     private String correoCorp;
-    private ArrayList<Evento> creado;
+    private ArrayList<Evento> propuesto;
 
     public Colaborador(String correoCorporativo, String cor, String usuario, String contr) {
         super(cor, usuario, contr);
         BD bd = new BD();
         bd.Insert("INSERT INTO Colaborador VALUES ('" + cor + "', '" + correoCorporativo + "');");
         correoCorp = correoCorporativo;
-        creado = null;
+        propuesto = null;
     }
 
     public Colaborador(String correo) {
@@ -23,14 +24,20 @@ public class Colaborador extends Usuario{
         if (userList.size() > 0) {
             Object[] user = userList.get(0);
             correoCorp = (String)user[0];
-            creado = null;
+            propuesto = null;
         } else {
             throw new ErrorBD("No se ha encontrado un colaborador con correo " + correo);
         }
     }
 
-    public void crearEvento(Evento evento){
-        creado.add(evento);
+    public void crearCurso(Date dia, String nombre, int numClases, int duracion){
+        Curso curso = new Curso(dia, nombre, this, numClases, duracion);
+        if (propuesto == null) {
+            propuesto = new ArrayList<>();
+        }
+        propuesto.add(curso);
+        BD bd = new BD();
+        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + nombre + "');");
     }
 
     public void modificarInformacion(String cor, String usuario, String correoCorporativo){

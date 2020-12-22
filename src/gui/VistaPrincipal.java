@@ -156,7 +156,11 @@ public class VistaPrincipal extends JFrame {
 
     public void setTextoDescripcion(Evento ev) {
         if (ev != null) {
-            lblDescripcion.setText("<html>Evento seleccionado: " + ev + "</html>");
+            if (ev.getCreador() == null){
+                lblDescripcion.setText("<html>Evento seleccionado: " + ev + " [" + ev.getFecha() + "]</html>");
+            } else {
+                lblDescripcion.setText("<html>Evento seleccionado: " + ev + " [" + ev.getFecha() + "] (" + ev.getCreador().getNombreUsuario() + ")"+ "</html>");
+            }
         } else {
             lblDescripcion.setText("<html>Seleccione un evento para ver detalles aquí.</html>");
         }
