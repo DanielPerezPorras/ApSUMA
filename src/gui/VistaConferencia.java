@@ -4,11 +4,11 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class VistaCursoAlumno extends JFrame {
+public class VistaConferencia extends JFrame {
 
 	private JPanel panelPrincipal;
 	private JTabbedPane tabbedPane;
-	private JPanel pInicio;
+	private JPanel pInformacion;
 	private JButton btnAnularInscripcin;
 	private JLabel lblbienvenidoAlCurso;
 	private JLabel lblCurso;
@@ -16,17 +16,12 @@ public class VistaCursoAlumno extends JFrame {
 	private JLabel lblDescripcion;
 	private JLabel lblLinkMeetingCurso;
 	private JLabel lbHyperLink;
-	private JPanel pForo;
 	private JButton btnVolver;
-
-	/**
-	 * Launch the application.
-	 */
 
 	public static void abrirVentana() {
 		try {
-			VistaCursoAlumno frame = new VistaCursoAlumno();
-			frame.controlador(new ControladorCursoAlumno(frame));
+			VistaConferencia frame = new VistaConferencia();
+			frame.controlador(new ControladorConferencia(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,9 +31,9 @@ public class VistaCursoAlumno extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VistaCursoAlumno() 
+	public VistaConferencia()
 	{
-		super("Curso");
+		super("Conferencia");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);
@@ -51,66 +46,63 @@ public class VistaCursoAlumno extends JFrame {
 		tabbedPane.setBounds(12, 13, 826, 518);
 		panelPrincipal.add(tabbedPane);
 		
-		pInicio = new JPanel();
-		tabbedPane.addTab("Inicio", null, pInicio, null);
-		pInicio.setLayout(null);
+		pInformacion = new JPanel();
+		tabbedPane.addTab("Informaci�n", null, pInformacion, null);
+		pInformacion.setLayout(null);
 		
 		btnAnularInscripcin = new JButton("Anular Inscripci\u00F3n");
 		btnAnularInscripcin.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
-		btnAnularInscripcin.setBounds(608, 473, 155, 27);
-		pInicio.add(btnAnularInscripcin);
+		btnAnularInscripcin.setBounds(556, 471, 155, 27);
+		pInformacion.add(btnAnularInscripcin);
 		
 		lblbienvenidoAlCurso = new JLabel("\u00A1Bienvenido al curso de ");
 		lblbienvenidoAlCurso.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 20));
 		lblbienvenidoAlCurso.setBounds(137, 13, 221, 50);
-		pInicio.add(lblbienvenidoAlCurso);
+		pInformacion.add(lblbienvenidoAlCurso);
 		
-		lblCurso = new JLabel("CURSO !");
+		lblCurso = new JLabel("CONFERENCIA !");
 		lblCurso.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 20));
 		lblCurso.setBounds(362, 13, 214, 50);
-		pInicio.add(lblCurso);
+		pInformacion.add(lblCurso);
 		
 		lbFoto = new JLabel("");
 		lbFoto.setBounds(12, 77, 147, 144);
 		UtilidadesGUI.ajustarImagenALabel(lbFoto, "/recursosApp/gato.png");
-		pInicio.add(lbFoto);
+		pInformacion.add(lbFoto);
 		
 		lblDescripcion = new JLabel("Descripcion");
 		lblDescripcion.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
 		lblDescripcion.setBounds(209, 76, 481, 286);
-		pInicio.add(lblDescripcion);
+		pInformacion.add(lblDescripcion);
 		
-		lblLinkMeetingCurso = new JLabel("Link Meeting Curso:");
+		lblLinkMeetingCurso = new JLabel("Link Meeting Conferencia:");
 		lblLinkMeetingCurso.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
-		lblLinkMeetingCurso.setBounds(12, 468, 172, 32);
-		pInicio.add(lblLinkMeetingCurso);
+		lblLinkMeetingCurso.setBounds(12, 468, 200, 32);
+		pInformacion.add(lblLinkMeetingCurso);
 		
 		lbHyperLink = new JLabel("Clase");
 		lbHyperLink.setForeground(Color.BLUE.darker());
 		lbHyperLink.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 16));
-		lbHyperLink.setBounds(172, 473, 348, 27);
+		lbHyperLink.setBounds(228, 473, 292, 27);
 		lbHyperLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		pInicio.add(lbHyperLink);
+		pInformacion.add(lbHyperLink);
 		
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(10, 434, 89, 23);
-		pInicio.add(btnVolver);
-		
-		pForo = new JPanel();
-		tabbedPane.addTab("Foro", null, pForo, null);
+		btnVolver.setBounds(12, 434, 89, 23);
+		pInformacion.add(btnVolver);
 		tabbedPane.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
-		pForo.setLayout(null);
-		tabbedPane.setEnabledAt(1, false);
 	}
 	
-	public void controlador(ControladorCursoAlumno ctr)
+	public void controlador(ControladorConferencia ctr)
 	{
 		btnAnularInscripcin.addActionListener(ctr);
 		btnAnularInscripcin.setActionCommand("ANULAR");
 		
 		btnVolver.addActionListener(ctr);
 		btnVolver.setActionCommand("VOLVER");
-
+		
 		lbHyperLink.addMouseListener(ctr);
 	}
+	
+	
 }

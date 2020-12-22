@@ -1,6 +1,6 @@
 package modelo;
 
-import gui.VistaActividadSocialAlumno;
+import gui.VistaActividadSocial;
 
 import java.util.Date;
 import java.util.List;
@@ -31,7 +31,7 @@ public class ActividadSocial extends Evento {
 
     @Override
     public void abrirEvento() {
-        VistaActividadSocialAlumno.abrirVentana();
+        VistaActividadSocial.abrirVentana();
     }
 
 

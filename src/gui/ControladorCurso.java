@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class ControladorConferenciaAlumno implements ActionListener, MouseListener {
+public class ControladorCurso implements ActionListener, MouseListener {
 
-    private final VistaConferenciaAlumno vista;
+    private final VistaCurso vista;
 
-    public ControladorConferenciaAlumno(VistaConferenciaAlumno vista) {
+    public ControladorCurso(VistaCurso vista) {
         this.vista = vista;
     }
 
@@ -34,31 +34,31 @@ public class ControladorConferenciaAlumno implements ActionListener, MouseListen
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
+	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
+	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
+	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
+	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}

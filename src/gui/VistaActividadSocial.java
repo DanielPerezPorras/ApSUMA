@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class VistaActividadSocialAlumno extends JFrame {
+public class VistaActividadSocial extends JFrame {
 
 	private JPanel panelPrincipal;
 	private JTabbedPane tabbedPane;
@@ -21,7 +21,7 @@ public class VistaActividadSocialAlumno extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VistaActividadSocialAlumno() 
+	public VistaActividadSocial()
 	{
 		super("Actividad Social");
 		setResizable(false);
@@ -85,15 +85,15 @@ public class VistaActividadSocialAlumno extends JFrame {
 
     public static void abrirVentana() {
 		try {
-			VistaActividadSocialAlumno frame = new VistaActividadSocialAlumno();
-			frame.controlador(new ControladorActividadSocialAlumno(frame));
+			VistaActividadSocial frame = new VistaActividadSocial();
+			frame.controlador(new ControladorActividadSocial(frame));
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
 
-    public void controlador(ControladorActividadSocialAlumno ctr)
+    public void controlador(ControladorActividadSocial ctr)
 	{
 		btnAnularInscripcin.addActionListener(ctr);
 		btnAnularInscripcin.setActionCommand("ANULAR");
