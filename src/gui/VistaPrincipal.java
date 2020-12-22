@@ -11,9 +11,6 @@ import java.util.stream.Collectors;
 
 public class VistaPrincipal extends JFrame {
 
-    private static final Font FUENTE = new Font("Microsoft JhengHei UI", Font.PLAIN, 15);
-    private static final Font FUENTE_TITULOS = new Font("Microsoft JhengHei UI", Font.BOLD, 20);
-
     private JPanel contentPane;
     private JTabbedPane tabbedPane;
 
@@ -183,7 +180,7 @@ public class VistaPrincipal extends JFrame {
         setContentPane(contentPane);
 
         tabbedPane = new JTabbedPane();
-        tabbedPane.setFont(FUENTE);
+        tabbedPane.setFont(UtilidadesGUI.FUENTE);
         contentPane.add(tabbedPane, BorderLayout.CENTER);
 
         crearPanelEventos();
@@ -220,13 +217,13 @@ public class VistaPrincipal extends JFrame {
         zonaCursos.setLayout(new BoxLayout(zonaCursos, BoxLayout.Y_AXIS));
 
         JLabel lblCursos = new JLabel("Cursos");
-        lblCursos.setFont(FUENTE_TITULOS);
+        lblCursos.setFont(UtilidadesGUI.FUENTE_TITULOS);
         lblCursos.setAlignmentX(Component.LEFT_ALIGNMENT);
         zonaCursos.add(lblCursos);
         zonaCursos.add(Box.createRigidArea(new Dimension(0, 10)));
 
         listaCursos = new JList<>();
-        listaCursos.setFont(FUENTE);
+        listaCursos.setFont(UtilidadesGUI.FUENTE);
         JScrollPane listaCursosScroll = new JScrollPane(listaCursos);
 
         listaCursosScroll.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -238,13 +235,13 @@ public class VistaPrincipal extends JFrame {
         zonaActividades.setLayout(new BoxLayout(zonaActividades, BoxLayout.Y_AXIS));
 
         JLabel lblActividades = new JLabel("Actividades sociales");
-        lblActividades.setFont(FUENTE_TITULOS);
+        lblActividades.setFont(UtilidadesGUI.FUENTE_TITULOS);
         lblActividades.setAlignmentX(Component.LEFT_ALIGNMENT);
         zonaActividades.add(lblActividades);
         zonaActividades.add(Box.createRigidArea(new Dimension(0, 10)));
 
         listaActividades = new JList<>();
-        listaActividades.setFont(FUENTE);
+        listaActividades.setFont(UtilidadesGUI.FUENTE);
         JScrollPane listaActividadesScroll = new JScrollPane(listaActividades);
         listaActividadesScroll.setAlignmentX(Component.LEFT_ALIGNMENT);
         zonaActividades.add(listaActividadesScroll);
@@ -255,13 +252,13 @@ public class VistaPrincipal extends JFrame {
         zonaConferencias.setLayout(new BoxLayout(zonaConferencias, BoxLayout.Y_AXIS));
 
         JLabel lblConferencias = new JLabel("Conferencias");
-        lblConferencias.setFont(FUENTE_TITULOS);
+        lblConferencias.setFont(UtilidadesGUI.FUENTE_TITULOS);
         lblConferencias.setAlignmentX(Component.LEFT_ALIGNMENT);
         zonaConferencias.add(lblConferencias);
         zonaConferencias.add(Box.createRigidArea(new Dimension(0, 10)));
 
         listaConferencias = new JList<>();
-        listaConferencias.setFont(FUENTE);
+        listaConferencias.setFont(UtilidadesGUI.FUENTE);
         JScrollPane listaConferenciasScroll = new JScrollPane(listaConferencias);
         listaConferenciasScroll.setAlignmentX(Component.LEFT_ALIGNMENT);
         zonaConferencias.add(listaConferenciasScroll);
@@ -288,7 +285,7 @@ public class VistaPrincipal extends JFrame {
         zonaIconoUsuario.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
         lblUsuario = new JLabel("Fulanito");
-        lblUsuario.setFont(FUENTE);
+        lblUsuario.setFont(UtilidadesGUI.FUENTE);
         zonaIconoUsuario.add(lblUsuario);
         zonaIconoUsuario.add(Box.createRigidArea(new Dimension(10, 0)));
 
@@ -309,9 +306,9 @@ public class VistaPrincipal extends JFrame {
         zonaDetallesNorte.setLayout(new BoxLayout(zonaDetallesNorte, BoxLayout.X_AXIS));
 
         JLabel lblDetalles = new JLabel("Detalles");
-        lblDetalles.setFont(FUENTE_TITULOS);
+        lblDetalles.setFont(UtilidadesGUI.FUENTE_TITULOS);
         lblDescripcion = new JLabel("<html>Seleccione un evento para ver detalles aquí.</html>");
-        lblDescripcion.setFont(FUENTE);
+        lblDescripcion.setFont(UtilidadesGUI.FUENTE);
         btnEntrar = new JButton("Entrar");
 
         zonaDetallesNorte.add(lblDetalles);
@@ -328,7 +325,7 @@ public class VistaPrincipal extends JFrame {
         panelCalendario.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
         JLabel lblDetalles = new JLabel("Calendario");
-        lblDetalles.setFont(FUENTE_TITULOS);
+        lblDetalles.setFont(UtilidadesGUI.FUENTE_TITULOS);
         panelCalendario.add(lblDetalles);
         panelCalendario.add(Box.createRigidArea(new Dimension(10, 0)));
 
@@ -347,13 +344,13 @@ public class VistaPrincipal extends JFrame {
         norte.setLayout(new BoxLayout(norte, BoxLayout.X_AXIS));
 
         JLabel lblMisEventos = new JLabel("Mis eventos");
-        lblMisEventos.setFont(FUENTE_TITULOS);
+        lblMisEventos.setFont(UtilidadesGUI.FUENTE_TITULOS);
         norte.add(lblMisEventos);
         norte.add(Box.createHorizontalGlue());
 
         if (Sesion.puedoCrearEventos()) {
             cbNuevoEvento = new JComboBox<>(new String[]{"Crear...", "Curso", "Actividad social", "Conferencia"});
-            cbNuevoEvento.setFont(FUENTE);
+            cbNuevoEvento.setFont(UtilidadesGUI.FUENTE);
             norte.add(cbNuevoEvento);
         }
 
@@ -361,16 +358,16 @@ public class VistaPrincipal extends JFrame {
 
 
         JTabbedPane centro = new JTabbedPane();
-        centro.setFont(FUENTE);
+        centro.setFont(UtilidadesGUI.FUENTE);
 
         listaInscritos = new JList<>();
-        listaInscritos.setFont(FUENTE);
+        listaInscritos.setFont(UtilidadesGUI.FUENTE);
         JScrollPane scrollInscritos = new JScrollPane(listaInscritos);
         centro.addTab("Inscritos", null, scrollInscritos);
 
         if (Sesion.puedoCrearEventos()) {
             listaCreados = new JList<>();
-            listaCreados.setFont(FUENTE);
+            listaCreados.setFont(UtilidadesGUI.FUENTE);
             JScrollPane scrollCreados = new JScrollPane(listaCreados);
             centro.addTab("Creados", null, scrollCreados);
         }

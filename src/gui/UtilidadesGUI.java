@@ -8,6 +8,9 @@ import java.io.File;
 
 public class UtilidadesGUI {
 
+    static final Font FUENTE = new Font("Microsoft JhengHei UI", Font.PLAIN, 15);
+    static final Font FUENTE_TITULOS = new Font("Microsoft JhengHei UI", Font.BOLD, 20);
+
     public static void ajustarImagenALabel(JLabel label, String ruta) {
         File archivo = new File(VistaLogin.class.getResource(ruta).getPath());
         try {
