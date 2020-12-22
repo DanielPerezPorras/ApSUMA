@@ -1,7 +1,6 @@
 package gui;
 
-import modelo.Evento;
-import modelo.Sesion;
+import modelo.*;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -22,8 +21,15 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
         switch (e.getActionCommand()) {
 
             case "PERFIL":
+                Usuario us = Sesion.getUsuarioLogueado();
+                if (us instanceof Estudiante){
+                    VistaPerfilEstudiante.abrirVentana(); //TODO crear ventana perfil
+                } else if (us instanceof Tutor){
+                    VistaPerfilTutor.abrirVentana();
+                } else {
+                    VistaPerfilColaborador.abrirVentana();
+                }
 
-                VistaPerfilEstudiante.abrirVentana(); //TODO crear ventana perfil
                 break;
 
             case "ENTRAR":
