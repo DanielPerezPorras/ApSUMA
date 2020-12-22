@@ -3,7 +3,6 @@ package gui;
 import modelo.*;
 import net.sourceforge.jdatepicker.impl.*;
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
 import java.util.List;

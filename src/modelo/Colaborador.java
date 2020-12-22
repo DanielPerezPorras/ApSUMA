@@ -31,11 +31,6 @@ public class Colaborador extends Usuario{
         }
     }
 
-    @Override
-    public void abrirVentanaPrincipal() {
-        VistaPrincipalTutor.abrirVentana();
-    }
-
     public void crearEvento(Evento evento){
         creado.add(evento);
     }

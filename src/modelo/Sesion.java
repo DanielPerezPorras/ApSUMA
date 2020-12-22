@@ -17,8 +17,19 @@ public class Sesion {
 
     public static void setUsuarioLogueado(Usuario usuario) {
         usuarioLogueado = usuario;
+        if (usuario != null) {
+            if (usuarioLogueado instanceof Administrador) {
+                permisos = 0;
+            } else if (usuarioLogueado instanceof Tutor || usuarioLogueado instanceof Colaborador) {
+                permisos = 1;
+            } else {
+                permisos = 2;
+            }
+        } else {
+            permisos = 3;
+        }
     }
-    
+
     public static void setPermisos (int num) {
     	permisos = num;
     }

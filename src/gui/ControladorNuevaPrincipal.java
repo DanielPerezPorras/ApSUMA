@@ -41,6 +41,7 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
                 break;
 
             case "ADMIN":
+                Sesion.setPermisos(0);
                 vista.dispose();
                 break;
 

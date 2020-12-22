@@ -35,11 +35,6 @@ public class Tutor extends Usuario {
         }
     }
 
-    @Override
-    public void abrirVentanaPrincipal() {
-        VistaPrincipalTutor.abrirVentana();
-    }
-
     public void crearCurso(Date dia, String nombre, int numClases, int duracion){
         Curso curso = new Curso(dia, nombre, this, numClases, duracion);
     }

@@ -21,11 +21,6 @@ public class Estudiante extends Usuario{
         }
     }
 
-    @Override
-    public void abrirVentanaPrincipal() {
-        VistaPrincipalEstudiante.abrirVentana();
-    }
-
     public void modificarInformacion(String corr,String usr, String corCorp){
         super.modificarInformacion(corr, usr, null);
     }

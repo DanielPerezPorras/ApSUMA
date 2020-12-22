@@ -31,7 +31,6 @@ public class VistaPrincipalAdmin extends JFrame {
 
 	public static void abrirVentana() {
 		try {
-			Sesion.setPermisos(0);
 			VistaPrincipalAdmin frame = new VistaPrincipalAdmin();
 			frame.controlador(new ControladorPrincipalAdmin(frame));
 			frame.setVisible(true);
