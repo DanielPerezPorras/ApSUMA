@@ -1,6 +1,7 @@
 package gui;
 
 import modelo.Sesion;
+import modelo.Usuario;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -155,7 +156,18 @@ public class VistaPerfilColaborador extends JFrame {
 		tfCampoUsuario.setEditable(false);
 		tfCampoCorreo.setEditable(false);
 		tfCampoCorp.setEditable(false);
-		Sesion.getUsuarioLogueado().modificarInformacion(tfCampoCorreo.getText(), tfCampoUsuario.getText(), tfCampoCorp.getText());
+		if (Usuario.buscarUsuario(tfCampoCorreo.getText()) == null || tfCampoCorreo.getText().equals(Sesion.getUsuarioLogueado().getCorreo())){
+			Sesion.getUsuarioLogueado().modificarInformacion(tfCampoCorreo.getText(), tfCampoUsuario.getText(), tfCampoCorp.getText());
+
+		} else {
+			JOptionPane.showMessageDialog(this,
+					"Correo no válido",
+					"Error modificar datos",
+					JOptionPane.ERROR_MESSAGE);
+			tfCampoUsuario.setText(Sesion.getUsuarioLogueado().getNombreUsuario());
+			tfCampoCorreo.setText(Sesion.getUsuarioLogueado().getCorreo());
+			tfCampoCorp.setText(Sesion.getUsuarioLogueado().getCorp());
+		}
 	}
 	
 	public void controlador(ActionListener ctr)

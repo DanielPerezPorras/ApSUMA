@@ -138,6 +138,16 @@ public class VistaPerfilEstudiante extends JFrame {
 		btModificarDatos.setText("Modifcar datos");
 		tfCampoUsuario.setEditable(false);
 		tfCampoCorreo.setEditable(false);
+		if (Usuario.buscarUsuario(tfCampoCorreo.getText()) == null || tfCampoCorreo.getText().equals(Sesion.getUsuarioLogueado().getCorreo())) {
+			Sesion.getUsuarioLogueado().modificarInformacion(tfCampoCorreo.getText(), tfCampoUsuario.getText(), null);
+		} else {
+			JOptionPane.showMessageDialog(this,
+					"Correo no válido",
+					"Error modificar datos",
+					JOptionPane.ERROR_MESSAGE);
+			tfCampoUsuario.setText(Sesion.getUsuarioLogueado().getNombreUsuario());
+			tfCampoCorreo.setText(Sesion.getUsuarioLogueado().getCorreo());
+		}
 	}
 	
     public void controlador(ActionListener ctr)

@@ -35,7 +35,7 @@ public class Colaborador extends Usuario{
         creado.add(evento);
     }
 
-    public void modificarInfomacion(String cor, String usuario, String correoCorporativo){
+    public void modificarInformacion(String cor, String usuario, String correoCorporativo){
         super.modificarInformacion(cor, usuario, null);
         BD bd = new BD();
         bd.Update("UPDATE Colaborador SET correoCorp = '" + correoCorporativo + "' WHERE correo = '" + getCorreo() + "';");
