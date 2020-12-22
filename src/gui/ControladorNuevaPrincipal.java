@@ -106,7 +106,7 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
 
     @Override
     public void windowActivated(WindowEvent e) {
-
+        vista.recargaDatos();
     }
 
     @Override

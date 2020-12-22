@@ -387,5 +387,8 @@ public class VistaNuevaPrincipal extends JFrame {
         panelMensajeria.add(new JLabel("Próximamente"));
     }
 
+    public void recargaDatos() {
+        lblUsuario.setText(Sesion.getUsuarioLogueado().getNombreUsuario());
+    }
 }
 

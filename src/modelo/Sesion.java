@@ -21,6 +21,7 @@ public class Sesion {
             if (usuarioLogueado instanceof Administrador) {
                 permisos = 0;
             } else if (usuarioLogueado instanceof Tutor || usuarioLogueado instanceof Colaborador) {
+
                 permisos = 1;
             } else {
                 permisos = 2;

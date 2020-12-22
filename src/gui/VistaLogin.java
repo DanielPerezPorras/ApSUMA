@@ -108,7 +108,11 @@ public class VistaLogin extends JFrame {
 		btIniciar.addActionListener(ctr);
 		btRegistrarse.addActionListener(ctr);
 		btnEntrarComoInvitado.addActionListener(ctr);
+		tFUsuario.addActionListener(ctr);
+		passwordField.addActionListener(ctr);
 		btIniciar.setActionCommand("INICIAR");
+		tFUsuario.setActionCommand("INICIAR");
+		passwordField.setActionCommand("INICIAR");
 		btRegistrarse.setActionCommand("REGISTRAR");
 		btnEntrarComoInvitado.setActionCommand("INVITADO");
 	}
