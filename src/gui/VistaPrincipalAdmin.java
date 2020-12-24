@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VistaPrincipalAdmin extends JFrame {
 
@@ -28,6 +29,9 @@ public class VistaPrincipalAdmin extends JFrame {
 	private JButton btnPenalizar;
 	private JButton btnEliminarUsuario;
 	private JComboBox cbLista;
+	private JButton btnAadirNoticia;
+	private JTextArea tfNoticia;
+	private JLabel lbNoticias;
 
 	public static void abrirVentana() {
 		try {
@@ -138,6 +142,28 @@ public class VistaPrincipalAdmin extends JFrame {
 		cbLista = new JComboBox();
 		cbLista.setBounds(564, 138, 253, 22);
 		panelPrincipal.add(cbLista);
+		
+		btnAadirNoticia = new JButton("A\u00F1adir noticia");
+		btnAadirNoticia.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
+		btnAadirNoticia.setBounds(68, 494, 202, 37);
+		panelPrincipal.add(btnAadirNoticia);
+		
+		tfNoticia = new JTextArea();
+		tfNoticia.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
+		tfNoticia.setBounds(42, 324, 253, 158);
+		panelPrincipal.add(tfNoticia);
+		
+		lbNoticias = new JLabel("Noticias actuales:");
+		lbNoticias.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 16));
+		lbNoticias.setBounds(42, 82, 191, 27);
+		panelPrincipal.add(lbNoticias);
+		
+		JTextArea tfNoticiaActuales = new JTextArea();
+		tfNoticiaActuales.setEditable(false);
+		tfNoticiaActuales.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
+		tfNoticiaActuales.setBounds(42, 122, 253, 158);
+		tfNoticiaActuales.setText("Noticia 1: Ayer \n Noticia 2: Hoy \n Noticia 3: Mañana");
+		panelPrincipal.add(tfNoticiaActuales);
 	}
 
 	public String getTextBoxValue()
@@ -149,7 +175,12 @@ public class VistaPrincipalAdmin extends JFrame {
 	{
 		return cbLista.getSelectedItem().toString();
 	}
-
+	
+	private void noticiasActuales()
+	{
+		//Aqui añadiriamos el texto nuevo
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void anyadirTexto(String[] lista)
 	{
@@ -192,6 +223,22 @@ public class VistaPrincipalAdmin extends JFrame {
 	{
 		return Usuario.buscarUsuario(this.getCorreoActual());
 	}
+	
+	public void anyadirNoticia()
+	{
+		String texto = tfNoticia.getText();
+		if(texto.equals(""))
+		{
+			JOptionPane.showMessageDialog(null, new Exception("Necesita asignar titulo a la noticia"), 
+					"Necesita asignar titulo a la noticia", JOptionPane.ERROR_MESSAGE);
+		}else
+		{
+			//Método que la añade a la base de datos
+			tfNoticia.setText("");
+			noticiasActuales();
+			JOptionPane.showMessageDialog(null,"¡Noticia añadida con éxito!");
+		}
+	}
 
 	public void limpiar()
 	{
@@ -214,5 +261,7 @@ public class VistaPrincipalAdmin extends JFrame {
 		cbLista.setActionCommand("ACTUALIZAR");
 		cbRoles.addActionListener(ctr);
 		cbRoles.setActionCommand("CAMBIAR_ROL");
+		btnAadirNoticia.addActionListener(ctr);
+		btnAadirNoticia.setActionCommand("NOTICIA");
 	}
 }

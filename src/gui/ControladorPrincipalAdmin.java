@@ -55,6 +55,9 @@ private final VistaPrincipalAdmin vista;
 			case "ACTUALIZAR":
 				vista.mostrarDatosUsuarioSel();
 				break;
+			case "NOTICIA":
+				vista.anyadirNoticia();
+				break;
 			case "CAMBIAR_ROL":
 				String vistaRol = vista.getVerComo();
 				switch (vistaRol) {
