@@ -1,6 +1,7 @@
 package gui;
 
 import modelo.Evento;
+import modelo.Sesion;
 
 import javax.swing.*;
 import java.awt.*;
@@ -153,7 +154,11 @@ public class VistaEvento extends JFrame {
 
 		panelInferior.add(Box.createHorizontalGlue());
 
-		btnAnularInscripcin = new JButton("Anular Inscripci\u00F3n");
+		if (Sesion.getUsuarioLogueado().getCorreo().equals(evento.getCreador().getCorreo())){
+			btnAnularInscripcin = new JButton(("Eliminar evento"));
+		} else {
+			btnAnularInscripcin = new JButton("Anular Inscripci\u00F3n");
+		}
 		btnAnularInscripcin.setFont(UtilidadesGUI.FUENTE);
 		panelInferior.add(btnAnularInscripcin);
 

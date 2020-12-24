@@ -20,13 +20,19 @@ public class ControladorEvento implements ActionListener, MouseListener {
     	switch (e.getActionCommand()) {
     	case "VOLVER" : vista.dispose();
     					abreventana();
-    					
     					break;
 
-			case "ANULAR" : Sesion.getUsuarioLogueado().desapuntarseEvento(vista.getEvento());
-							vista.dispose();
-							abreventana();
-							break;
+			case "ANULAR" : if (Sesion.getUsuarioLogueado().getCorreo().equals(vista.getEvento().getCreador().getCorreo())){
+				vista.getEvento().eliminar();
+				vista.dispose();
+				abreventana();
+				break;
+			} else {
+				Sesion.getUsuarioLogueado().desapuntarseEvento(vista.getEvento());
+				vista.dispose();
+				abreventana();
+				break;
+			}
     	}
     }
 

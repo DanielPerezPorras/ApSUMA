@@ -34,8 +34,6 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
 
             case "ENTRAR":
                 Evento ev = vista.getEventoSeleccionado();
-                System.out.println("Inscritos: " + Sesion.getUsuarioLogueado().getEventosInscritos());
-                System.out.println("Creados: " + Sesion.getUsuarioLogueado().getEventosCreados());
                 if (vista.getEventoSeleccionado() != null) {
                     if (inscrito(ev)){
                         VistaEvento.abrirVentana(ev);

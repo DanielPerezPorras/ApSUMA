@@ -29,4 +29,13 @@ public class Curso extends Evento {
             throw new ErrorBD("No se ha encontrado un curso con nombre " + nombre);
         }
     }
+
+    @Override
+    public void eliminar() {
+        BD bd = new BD();
+        bd.Delete("DELETE FROM Curso where nombre = '" + getNombre() + "';");
+        clases = 0;
+        duracion = 0;
+        super.eliminar();
+    }
 }

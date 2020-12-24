@@ -12,9 +12,6 @@ public abstract class Usuario {
     private String nombreUsuario;
     private String contra;
     private ArrayList<Evento> eventosInscritos;
-    private ArrayList<Curso> cursosInscritos;
-    private ArrayList<Conferencia> conferenciasInscritos;
-    private ArrayList<ActividadSocial> actividadesInscritos;
 
     public Usuario(){}
 
@@ -69,6 +66,9 @@ public abstract class Usuario {
     public void crearActividad(Date dia, String nombre, String lugar){
     }
     public void crearConferencia(Date dia, String nombre, String link){
+    }
+    //Métodos para eliminar eventos
+    public void eliminarEvento(Evento evento){
     }
 
     public String getCorreo() {

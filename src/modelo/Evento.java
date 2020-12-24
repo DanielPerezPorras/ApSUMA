@@ -42,6 +42,15 @@ public abstract class Evento {
         }
     }
 
+    public void eliminar(){
+        creador.eliminarEvento(this);
+        BD bd = new BD();
+        bd.Delete("DELETE FROM Evento where nombre = '" + getNombre() + "';");
+        Fecha = null;
+        Nombre = null;
+        creador = null;
+    }
+
     public void inscripcionUsuario(Usuario user) {
         if (getUsuarios().contains(user)) {
             throw new RuntimeException("El usuario ya está registrado en el evento");

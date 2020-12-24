@@ -39,6 +39,7 @@ public class Tutor extends Usuario {
             propuesto = new ArrayList<>();
         }
         propuesto.add(curso);
+        super.getEventosInscritos().add(curso);
         BD bd = new BD();
         bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + nombre + "');");
     }
@@ -49,6 +50,7 @@ public class Tutor extends Usuario {
             propuesto = new ArrayList<>();
         }
         propuesto.add(actividad);
+        super.getEventosInscritos().add(actividad);
         BD bd = new BD();
         bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + nombre + "');");
     }
@@ -59,8 +61,16 @@ public class Tutor extends Usuario {
             propuesto = new ArrayList<>();
         }
         propuesto.add(conferencia);
+        super.getEventosInscritos().add(conferencia);
         BD bd = new BD();
         bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + nombre + "');");
+    }
+
+    public void eliminarEvento(Evento evento){
+        if (!(propuesto == null)){
+            propuesto.removeIf(ev -> evento.getNombre().equals(evento.getNombre()));
+            super.getEventosInscritos().remove(evento);
+        }
     }
 
         public void modificarInformacion(String cor, String nombr, String corUMA){
