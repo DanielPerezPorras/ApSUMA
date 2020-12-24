@@ -22,6 +22,11 @@ public class ControladorEvento implements ActionListener, MouseListener {
     					abreventana();
     					
     					break;
+
+			case "ANULAR" : Sesion.getUsuarioLogueado().desapuntarseEvento(vista.getEvento());
+							vista.dispose();
+							abreventana();
+							break;
     	}
     }
 

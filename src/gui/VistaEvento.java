@@ -172,5 +172,5 @@ public class VistaEvento extends JFrame {
 		panelModoEdicion.setPreferredSize(new Dimension(240, -1));
 	}
 	
-	
+	public Evento getEvento(){ return evento; }
 }

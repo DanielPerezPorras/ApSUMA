@@ -111,6 +111,14 @@ public abstract class Usuario {
         eventosInscritos.add(evento);
     }
 
+    public void desapuntarseEvento(Evento evento){
+        BD bd = new BD();
+        bd.Delete("DELETE FROM UsuarioEvento WHERE nombre = '" + evento.getNombre() + "';");
+        if (!(eventosInscritos == null)){
+            eventosInscritos.remove(evento);
+        }
+    }
+
     public static Usuario buscarUsuario(String correo) {
         Usuario usuario = null;
         try {
