@@ -12,7 +12,7 @@ public class ActividadSocial extends Evento {
     public ActividadSocial(Date dia, String nom,Usuario dueno,  String lugar) {
         super(dia, nom, dueno);
         BD bd = new BD();
-        bd.Insert("INSERT INTO ActividadSocial ('" + nom + "', '" + lugar + "');");
+        bd.Insert("INSERT INTO ActividadSocial VALUES('" + nom + "', '" + lugar + "');");
         this.Lugar = lugar;
     }
 

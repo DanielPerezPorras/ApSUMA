@@ -43,7 +43,27 @@ public class Tutor extends Usuario {
         bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + nombre + "');");
     }
 
-    public void modificarInformacion(String cor, String nombr, String corUMA){
+    public void crearActividad(Date dia, String nombre, String lugar) {
+        ActividadSocial actividad = new ActividadSocial(dia, nombre, this, lugar);
+        if (propuesto == null){
+            propuesto = new ArrayList<>();
+        }
+        propuesto.add(actividad);
+        BD bd = new BD();
+        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + nombre + "');");
+    }
+
+    public void crearConferencia(Date dia, String nombre, String link) {
+        Conferencia conferencia = new Conferencia(dia, nombre, this, link);
+        if (propuesto == null){
+            propuesto = new ArrayList<>();
+        }
+        propuesto.add(conferencia);
+        BD bd = new BD();
+        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + nombre + "');");
+    }
+
+        public void modificarInformacion(String cor, String nombr, String corUMA){
         super.modificarInformacion(cor, nombr, null);
         BD bd = new BD();
         bd.Update("UPDATE Tutor SET correoUMA = '" + corUMA + "' WHERE correo = '" + getCorreo() + "';");

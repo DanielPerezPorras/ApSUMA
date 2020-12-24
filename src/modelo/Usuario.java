@@ -62,6 +62,10 @@ public abstract class Usuario {
 
     public void crearCurso(Date dia, String nombre, int numClases, int duracion){
     }
+    public void crearActividad(Date dia, String nombre, String lugar){
+    }
+    public void crearConferencia(Date dia, String nombre, String link){
+    }
 
     public String getCorreo() {
         return correo;

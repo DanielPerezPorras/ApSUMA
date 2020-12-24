@@ -40,6 +40,26 @@ public class Colaborador extends Usuario{
         bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + nombre + "');");
     }
 
+    public void crearConferencia(Date dia, String nombre, String link) {
+        Conferencia conferencia = new Conferencia(dia, nombre, this, link);
+        if (propuesto == null){
+            propuesto = new ArrayList<>();
+        }
+        propuesto.add(conferencia);
+        BD bd = new BD();
+        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + nombre + "');");
+    }
+
+    public void crearActividad(Date dia, String nombre, String lugar) {
+        ActividadSocial actividad = new ActividadSocial(dia, nombre, this, lugar);
+        if (propuesto == null){
+            propuesto = new ArrayList<>();
+        }
+        propuesto.add(actividad);
+        BD bd = new BD();
+        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + nombre + "');");
+    }
+
     public void modificarInformacion(String cor, String usuario, String correoCorporativo){
         super.modificarInformacion(cor, usuario, null);
         BD bd = new BD();
