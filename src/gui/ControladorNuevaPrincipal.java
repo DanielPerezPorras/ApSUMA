@@ -34,14 +34,21 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
 
             case "ENTRAR":
                 Evento ev = vista.getEventoSeleccionado();
+                System.out.println("Inscritos: " + Sesion.getUsuarioLogueado().getEventosInscritos());
+                System.out.println("Creados: " + Sesion.getUsuarioLogueado().getEventosCreados());
                 if (vista.getEventoSeleccionado() != null) {
-                    int dialogResult = JOptionPane.showConfirmDialog(vista,"¿Quieres inscribirte en este evento?");
-                    if (dialogResult == JOptionPane.YES_OPTION) {
-                        accedeEvento = true;
-                        vista.dispose();
+                    if (inscrito(ev)){
                         VistaEvento.abrirVentana(ev);
+                        vista.dispose();
+                    } else {
+                        int dialogResult = JOptionPane.showConfirmDialog(vista,"¿Quieres inscribirte en este evento?");
+                        if (dialogResult == JOptionPane.YES_OPTION) {
+                            accedeEvento = true;
+                            Sesion.getUsuarioLogueado().apuntarseEvento(ev);
+                            vista.dispose();
+                            VistaEvento.abrirVentana(ev);
+                        }
                     }
-
                 }
                 break;
 
@@ -72,6 +79,15 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
                 vista.cargarEventos();
 
         }
+    }
+
+    private boolean inscrito(Evento ev) {
+        for (Evento evento : Sesion.getUsuarioLogueado().getEventosInscritos()){
+            if (ev.getNombre().equals(evento.getNombre())){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

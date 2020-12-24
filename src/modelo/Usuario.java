@@ -12,6 +12,9 @@ public abstract class Usuario {
     private String nombreUsuario;
     private String contra;
     private ArrayList<Evento> eventosInscritos;
+    private ArrayList<Curso> cursosInscritos;
+    private ArrayList<Conferencia> conferenciasInscritos;
+    private ArrayList<ActividadSocial> actividadesInscritos;
 
     public Usuario(){}
 
@@ -60,6 +63,7 @@ public abstract class Usuario {
         contra = null;
     }
 
+    // Métodos para crear los eventos
     public void crearCurso(Date dia, String nombre, int numClases, int duracion){
     }
     public void crearActividad(Date dia, String nombre, String lugar){
@@ -96,6 +100,15 @@ public abstract class Usuario {
             eventosCreados.add(Evento.buscarEvento((String)tupla[0]));
         }
         return eventosCreados;
+    }
+
+    public void apuntarseEvento(Evento evento){
+        BD bd = new BD();
+        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + evento.getNombre() + "');");
+        if (eventosInscritos == null){
+            eventosInscritos = new ArrayList<>();
+        }
+        eventosInscritos.add(evento);
     }
 
     public static Usuario buscarUsuario(String correo) {
