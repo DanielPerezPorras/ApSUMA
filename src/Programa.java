@@ -10,7 +10,9 @@ public class Programa {
             public void run() {
                 VistaLogin.abrirVentana();
             }
+
         });
+
     }
 
 }
