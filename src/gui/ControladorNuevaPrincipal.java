@@ -57,22 +57,8 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
 
             case "CREAR EVENTO":
                 String tipo = vista.getTipoNuevoEvento();
-                switch (tipo) {
-
-                    case "Curso":
-                        VistaNuevoCurso.abrirVentana();
-                        break;
-
-                    case "Actividad social":
-                        VistaNuevoActividades.abrirVentana();
-                        break;
-
-                    case "Conferencia":
-                        VistaNuevoConferencia.abrirVentana();
-                        break;
-                }
+                VistaNuevoEvento.abrirVentana(tipo);
                 break;
-
             default:
                 vista.cargarEventos();
 

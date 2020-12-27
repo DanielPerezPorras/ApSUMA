@@ -9,11 +9,11 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 
 /* Controlador para la pantalla de confirmación.*/
-public class ControladorNuevoCurso implements ActionListener {
+public class ControladorNuevoEvento implements ActionListener {
 
-    private final VistaNuevoCurso vista;
+    private final VistaNuevoEvento vista;
 
-    public ControladorNuevoCurso(VistaNuevoCurso vista)
+    public ControladorNuevoEvento(VistaNuevoEvento vista)
     {
         this.vista = vista;
     }
@@ -34,17 +34,26 @@ public class ControladorNuevoCurso implements ActionListener {
 
                 if(error == null){
                     JOptionPane.showMessageDialog(vista,
-                            "Curso creado con exito",
+                             "Evento creado con exito",
                             "ÉXITO",
                             JOptionPane.INFORMATION_MESSAGE);
-                    Sesion.getUsuarioLogueado().crearCurso(java.sql.Date.valueOf("2020-12-18"), nombre, 3, 4);
+                    String tipo = vista.getTipo();
+                    switch (tipo) {
+                    case "Curso" : Sesion.getUsuarioLogueado().crearCurso (vista.getFecha(), nombre, vista.getClases(), vista.getDuracion());
+                    	break;
+                    case "Conferencia" : Sesion.getUsuarioLogueado().crearConferencia(vista.getFecha(), nombre, vista.getDato());
+                    	break;
+                    case "Actividad" : Sesion.getUsuarioLogueado().crearActividad(vista.getFecha(), nombre, vista.getDato());
+                    	break;
+                    }
+
                     Sesion.getVistaPrincipal().cargarEventos();
                     Sesion.getVistaPrincipal().cargarEventosUsuario();
                     vista.dispose();
                 }else{
                     JOptionPane.showMessageDialog(vista,
                             error,
-                            "Error al crear el curso",
+                            "Error al crear el evento",
                             JOptionPane.ERROR_MESSAGE);
                 }
                 break;
