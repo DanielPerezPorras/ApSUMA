@@ -355,6 +355,7 @@ public class VistaPrincipal extends JFrame {
         if (Sesion.puedoCrearEventos()) {
             cbNuevoEvento = new JComboBox<>(new String[]{"Crear...", "Curso", "Actividad social", "Conferencia"});
             cbNuevoEvento.setFont(UtilidadesGUI.FUENTE);
+            cbNuevoEvento.setEnabled(false);
             norte.add(cbNuevoEvento);
         }
 
@@ -384,6 +385,10 @@ public class VistaPrincipal extends JFrame {
         panelMensajeria = new JPanel();
         panelMensajeria.setLayout(new GridLayout(1, 1));
         panelMensajeria.add(new JLabel("Próximamente"));
+    }
+
+    public void alternarCreacion() {
+        cbNuevoEvento.setEnabled(datePicker.getModel().getValue() != null);
     }
 
     public void recargaDatos() {

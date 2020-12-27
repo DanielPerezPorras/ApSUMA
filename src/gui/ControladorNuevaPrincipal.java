@@ -61,6 +61,7 @@ public class ControladorNuevaPrincipal implements ActionListener, ListSelectionL
                 break;
             default:
                 vista.cargarEventos();
+                vista.alternarCreacion();
 
         }
     }

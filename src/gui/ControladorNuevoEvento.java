@@ -6,7 +6,6 @@ import modelo.Sesion;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 
 /* Controlador para la pantalla de confirmación.*/
 public class ControladorNuevoEvento implements ActionListener {
@@ -31,6 +30,15 @@ public class ControladorNuevoEvento implements ActionListener {
                 if (!(Evento.buscarEvento(nombre) == null)){
                     error = "Ya existe un evento con ese nombre.";
                 }
+                if (vista.getDuracion()<=-1) {
+                    error = "Duración inválida";
+                }
+                if (vista.getClases()<=0) {
+                    error = "Num Clases inválido";
+                }
+                if (vista.getDato()==null) {
+                    error = "Lugar o enlace vacío";
+                }
 
                 if(error == null){
                     JOptionPane.showMessageDialog(vista,
@@ -39,11 +47,11 @@ public class ControladorNuevoEvento implements ActionListener {
                             JOptionPane.INFORMATION_MESSAGE);
                     String tipo = vista.getTipo();
                     switch (tipo) {
-                    case "Curso" : Sesion.getUsuarioLogueado().crearCurso (vista.getFecha(), nombre, vista.getClases(), vista.getDuracion());
+                    case "Curso" : Sesion.getUsuarioLogueado().crearCurso (Sesion.getVistaPrincipal().getFechaSeleccionada(), nombre, vista.getClases(), vista.getDuracion());
                     	break;
-                    case "Conferencia" : Sesion.getUsuarioLogueado().crearConferencia(vista.getFecha(), nombre, vista.getDato());
+                    case "Conferencia" : Sesion.getUsuarioLogueado().crearConferencia(Sesion.getVistaPrincipal().getFechaSeleccionada(), nombre, vista.getDato());
                     	break;
-                    case "Actividad" : Sesion.getUsuarioLogueado().crearActividad(vista.getFecha(), nombre, vista.getDato());
+                    case "Actividad" : Sesion.getUsuarioLogueado().crearActividad(Sesion.getVistaPrincipal().getFechaSeleccionada(), nombre, vista.getDato());
                     	break;
                     }
 
