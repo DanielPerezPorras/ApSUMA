@@ -110,11 +110,11 @@ public class VistaNuevoEvento extends JFrame {
 	}
 
 	public int getClases() {
-		return (tFNumClases.getText()==null) ? -1 : Integer.parseInt(tFNumClases.getText());
+		return (tFNumClases.getText()=="") ? -1 : Integer.parseInt(tFNumClases.getText());
 	}
 	
 	public int getDuracion() {
-		return (tFDuracion.getText()==null) ? -1 : Integer.parseInt(tFDuracion.getText());
+		return (tFDuracion.getText()=="") ? -1 : Integer.parseInt(tFDuracion.getText());
 	}
 	
 	public String getDato() {

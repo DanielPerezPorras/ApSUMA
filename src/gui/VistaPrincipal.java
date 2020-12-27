@@ -6,7 +6,6 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
 import java.util.List;
-import java.util.Date;
 import java.util.stream.Collectors;
 
 public class VistaPrincipal extends JFrame {
@@ -118,8 +117,8 @@ public class VistaPrincipal extends JFrame {
         }
     }
 
-    public Date getFechaSeleccionada() {
-        return (Date)datePicker.getModel().getValue();
+    public java.util.Date getFechaSeleccionada() {
+        return (java.util.Date) datePicker.getModel().getValue();
     }
 
     public Evento getEventoSeleccionado() {
