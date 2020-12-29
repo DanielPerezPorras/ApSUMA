@@ -335,6 +335,7 @@ public class VistaPrincipal extends JFrame {
         UtilDateModel model = new UtilDateModel();
         JDatePanelImpl datePanel = new JDatePanelImpl(model);
         datePicker = new JDatePickerImpl(datePanel);
+        datePicker.setEnabled(false);
         panelCalendario.add(datePicker);
 
         return panelCalendario;
