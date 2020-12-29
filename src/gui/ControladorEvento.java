@@ -24,14 +24,25 @@ public class ControladorEvento implements ActionListener, MouseListener {
     			break;
 
 			case "ANULAR":
-				if (Sesion.getUsuarioLogueado().getCorreo().equals(vista.getEvento().getCreador().getCorreo())){
-					vista.getEvento().eliminar();
+				if (vista.getSoyCreadorEvento()) {
+					vista.alternarModoEdicion();
 				} else {
 					Sesion.getUsuarioLogueado().desapuntarseEvento(vista.getEvento());
+					vista.dispose();
+					abreventana();
 				}
+				break;
+
+			case "ELIMINAR":
+				vista.getEvento().eliminar();
 				vista.dispose();
 				abreventana();
 				break;
+
+			case "NUEVO CONTENIDO":
+				// para añadir contenido al evento
+				break;
+
 		}
     }
 

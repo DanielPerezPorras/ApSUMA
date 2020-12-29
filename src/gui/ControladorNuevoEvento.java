@@ -1,7 +1,9 @@
 package gui;
 
+import modelo.Curso;
 import modelo.Evento;
 import modelo.Sesion;
+import modelo.Usuario;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -49,14 +51,22 @@ public class ControladorNuevoEvento implements ActionListener {
                     String tipo = vista.getTipo();
                     java.sql.Date fecha = new java.sql.Date(Sesion.getVistaPrincipal().getFechaSeleccionada().getTime());
 
+                    Usuario usuarioActual = Sesion.getUsuarioLogueado();
                     switch (tipo) {
-                    case "Curso" : Sesion.getUsuarioLogueado().crearCurso (fecha, nombre, vista.getClases(), vista.getDuracion());
-                    	break;
-                    case "Conferencia" : Sesion.getUsuarioLogueado().crearConferencia(fecha, nombre, vista.getDato());
-                    	break;
-                    case "Actividad" : Sesion.getUsuarioLogueado().crearActividad(fecha, nombre, vista.getDato());
-                    	break;
+                        case "Curso":
+                            usuarioActual.crearCurso (fecha, nombre, vista.getClases(), vista.getDuracion());
+                            break;
+                        case "Conferencia":
+                            usuarioActual.crearConferencia(fecha, nombre, vista.getDato());
+                            break;
+                        case "Actividad":
+                            usuarioActual.crearActividad(fecha, nombre, vista.getDato());
+                            break;
                     }
+
+                    // Para que no aparezca el mensaje "¿Quiere inscribirse?" al entrar al curso
+                    Curso cursoCreado = new Curso(nombre);
+                    cursoCreado.inscripcionUsuario(usuarioActual);
 
                     Sesion.getVistaPrincipal().cargarEventos();
                     Sesion.getVistaPrincipal().cargarEventosUsuario();

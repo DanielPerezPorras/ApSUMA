@@ -56,7 +56,7 @@ public abstract class Evento {
             throw new RuntimeException("El usuario ya está registrado en el evento");
         } else {
             BD bd = new BD();
-            bd.Insert("INSERT INTO UsuarioEvento ('" + user.getCorreo() + "', '" + Nombre + "');");
+            bd.Insert("INSERT INTO UsuarioEvento VALUES ('" + user.getCorreo() + "', '" + Nombre + "');");
             usuarios.add(user);
         }
     }

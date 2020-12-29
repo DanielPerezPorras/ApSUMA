@@ -15,10 +15,16 @@ public class VistaEvento extends JFrame {
 	private JPanel panelContenido;
 	private JPanel panelForos;
 	private JPanel panelInferior;
+	private JScrollPane scrollModoEdicion;
 
 	private JButton btnAnularInscripcin;
 	private JLabel lblTituloCurso;
 	private JButton btnVolver;
+	private JButton btnEliminarEvento;
+	private JComboBox<String> cbNuevoContenido;
+
+	private boolean soyCreadorEvento;
+	private boolean enModoEdicion;
 
 	/**
 	 * Create the frame.
@@ -29,7 +35,11 @@ public class VistaEvento extends JFrame {
 		this.evento = evento;
 
 		crearGUI();
-		alternarModoEdicion(true);
+
+		soyCreadorEvento = Sesion.getUsuarioLogueado().getCorreo().equals(evento.getCreador().getCorreo());
+		if (soyCreadorEvento) {
+			setModoEdicion(false);
+		}
 
 		/*
 		
@@ -86,16 +96,33 @@ public class VistaEvento extends JFrame {
 		
 		btnVolver.addActionListener(ctr);
 		btnVolver.setActionCommand("VOLVER");
+
+		btnEliminarEvento.addActionListener(ctr);
+		btnEliminarEvento.setActionCommand("ELIMINAR");
+
+		cbNuevoContenido.addActionListener(ctr);
+		cbNuevoContenido.setActionCommand("NUEVO CONTENIDO");
 		
 		//lbHyperLink.addMouseListener(ctr);
 	}
 
-	public void alternarModoEdicion(boolean mostrar) {
+	public void setModoEdicion(boolean mostrar) {
+		enModoEdicion = mostrar;
 		if (mostrar) {
-			panelPrincipal.add(panelModoEdicion, BorderLayout.EAST);
+			panelPrincipal.add(scrollModoEdicion, BorderLayout.EAST);
+			btnAnularInscripcin.setText("Ver como alumno");
 		} else {
-			panelPrincipal.remove(panelModoEdicion);
+			panelPrincipal.remove(scrollModoEdicion);
+			btnAnularInscripcin.setText("Editar");
 		}
+	}
+
+	public void alternarModoEdicion() {
+		setModoEdicion(!enModoEdicion);
+	}
+
+	public boolean getSoyCreadorEvento() {
+		return soyCreadorEvento;
 	}
 
 	private void crearGUI() {
@@ -154,11 +181,7 @@ public class VistaEvento extends JFrame {
 
 		panelInferior.add(Box.createHorizontalGlue());
 
-		if (Sesion.getUsuarioLogueado().getCorreo().equals(evento.getCreador().getCorreo())){
-			btnAnularInscripcin = new JButton(("Eliminar evento"));
-		} else {
-			btnAnularInscripcin = new JButton("Anular Inscripci\u00F3n");
-		}
+		btnAnularInscripcin = new JButton("Anular Inscripci\u00F3n");
 		btnAnularInscripcin.setFont(UtilidadesGUI.FUENTE);
 		panelInferior.add(btnAnularInscripcin);
 
@@ -172,9 +195,35 @@ public class VistaEvento extends JFrame {
 
 		JLabel tituloModoEdicion = new JLabel("Modo Edición");
 		tituloModoEdicion.setFont(UtilidadesGUI.FUENTE_TITULOS);
+		tituloModoEdicion.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panelModoEdicion.add(tituloModoEdicion);
 
-		panelModoEdicion.setPreferredSize(new Dimension(240, -1));
+		panelModoEdicion.add(Box.createRigidArea(new Dimension(0, 25)));
+
+		cbNuevoContenido = new JComboBox<>(new String[]{"Añadir contenido...", "Texto", "Enlace"});
+		cbNuevoContenido.setFont(UtilidadesGUI.FUENTE);
+		cbNuevoContenido.setMaximumSize(new Dimension(180, 40));
+		cbNuevoContenido.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panelModoEdicion.add(cbNuevoContenido);
+
+		panelModoEdicion.add(Box.createRigidArea(new Dimension(0, 25)));
+
+		JLabel descripcionModoEdicion = new JLabel(
+				"<html><p>Pulse en los iconos de cada elemento del evento para editarlo o borrarlo.</p></html>");
+		descripcionModoEdicion.setFont(UtilidadesGUI.FUENTE);
+		descripcionModoEdicion.setAlignmentX(Component.LEFT_ALIGNMENT);
+		descripcionModoEdicion.setPreferredSize(new Dimension(180, -1));
+		panelModoEdicion.add(descripcionModoEdicion);
+
+		panelModoEdicion.add(Box.createRigidArea(new Dimension(0, 25)));
+
+		btnEliminarEvento = new JButton("Eliminar evento");
+		btnEliminarEvento.setFont(UtilidadesGUI.FUENTE);
+		btnEliminarEvento.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panelModoEdicion.add(btnEliminarEvento);
+
+		scrollModoEdicion = new JScrollPane(panelModoEdicion);
+		scrollModoEdicion.setPreferredSize(new Dimension(240, -1));
 	}
 	
 	public Evento getEvento(){ return evento; }

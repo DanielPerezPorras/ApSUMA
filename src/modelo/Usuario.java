@@ -11,7 +11,6 @@ public abstract class Usuario {
     private String correo;
     private String nombreUsuario;
     private String contra;
-    private ArrayList<Evento> eventosInscritos;
 
     public Usuario(){}
 
@@ -22,7 +21,6 @@ public abstract class Usuario {
         correo = cor;
         nombreUsuario = nombreUs;
         contra = contr;
-        eventosInscritos = null;
     }
 
     // Constructor para recuperar los datos de un usuario ya existente
@@ -36,7 +34,6 @@ public abstract class Usuario {
             correo = cor;
             nombreUsuario = (String)user[1];
             contra = (String)user[2];
-            eventosInscritos = null;
         } else {
             throw new ErrorBD("No se ha encontrado un usuario con correo " + cor);
         }
@@ -80,13 +77,11 @@ public abstract class Usuario {
     }
 
     public List<Evento> getEventosInscritos() {
-        if (eventosInscritos == null) {
-            eventosInscritos = new ArrayList<>();
-            BD bd = new BD();
-            List<Object[]> resultados = bd.Select("SELECT nombre FROM UsuarioEvento WHERE correo='" + getCorreo() + "'");
-            for (Object[] tupla : resultados) {
-                eventosInscritos.add(Evento.buscarEvento((String)tupla[0]));
-            }
+        ArrayList<Evento> eventosInscritos = new ArrayList<>();
+        BD bd = new BD();
+        List<Object[]> resultados = bd.Select("SELECT nombre FROM UsuarioEvento WHERE correo='" + getCorreo() + "'");
+        for (Object[] tupla : resultados) {
+            eventosInscritos.add(Evento.buscarEvento((String)tupla[0]));
         }
         return eventosInscritos;
     }
@@ -105,18 +100,11 @@ public abstract class Usuario {
     public void apuntarseEvento(Evento evento){
         BD bd = new BD();
         bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + evento.getNombre() + "');");
-        if (eventosInscritos == null){
-            eventosInscritos = new ArrayList<>();
-        }
-        eventosInscritos.add(evento);
     }
 
     public void desapuntarseEvento(Evento evento){
         BD bd = new BD();
         bd.Delete("DELETE FROM UsuarioEvento WHERE nombre = '" + evento.getNombre() + "';");
-        if (!(eventosInscritos == null)){
-            eventosInscritos.remove(evento);
-        }
     }
 
     public static Usuario buscarUsuario(String correo) {
