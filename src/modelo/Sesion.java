@@ -6,7 +6,7 @@ import gui.VistaPrincipal;
  * Información sobre la sesión abierta actualmente.
  */
 public class Sesion {
-	private static int permisos = 0; // 0 Admin, 1 Tutor, 2 Estudiante, 3 Invitado
+	private static int permisos = 0; // 0 Admin, 1 Tutor o Colaborador, 2 Estudiante, 3 Invitado
 	
     private static Usuario usuarioLogueado = null;
 

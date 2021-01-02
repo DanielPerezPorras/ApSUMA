@@ -335,6 +335,7 @@ public class VistaPrincipal extends JFrame {
         UtilDateModel model = new UtilDateModel();
         JDatePanelImpl datePanel = new JDatePanelImpl(model);
         datePicker = new JDatePickerImpl(datePanel);
+        datePicker.setEnabled(false);
         panelCalendario.add(datePicker);
 
         return panelCalendario;
@@ -352,7 +353,13 @@ public class VistaPrincipal extends JFrame {
         norte.add(Box.createHorizontalGlue());
 
         if (Sesion.puedoCrearEventos()) {
-            cbNuevoEvento = new JComboBox<>(new String[]{"Crear...", "Curso", "Actividad social", "Conferencia"});
+            String[] opcionesCreacion;
+            if (Sesion.getUsuarioLogueado() instanceof  Colaborador) {
+                opcionesCreacion = new String[]{"Crear...", "Curso", "Actividad social", "Conferencia"};
+            } else {
+                opcionesCreacion = new String[]{"Crear...", "Curso", "Conferencia"};
+            }
+            cbNuevoEvento = new JComboBox<>(opcionesCreacion);
             cbNuevoEvento.setFont(UtilidadesGUI.FUENTE);
             cbNuevoEvento.setEnabled(false);
             norte.add(cbNuevoEvento);
