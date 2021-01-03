@@ -2,6 +2,7 @@ package modelo;
 
 import gui.VistaEvento;
 
+import javax.swing.*;
 import java.util.Date;
 import java.util.List;
 
@@ -29,5 +30,9 @@ public class ActividadSocial extends Evento {
         }
     }
 
+    @Override
+    public JLabel getSubtituloPaginaEvento() {
+        return new JLabel("[" + formatoFecha.format(Fecha) + "]" + " Lugar: " + Lugar);
+    }
 
 }

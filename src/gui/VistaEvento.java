@@ -1,9 +1,13 @@
 package gui;
 
+import gui.contenido.VistaContenido;
+import gui.contenido.VistaContenidoTexto;
 import modelo.Evento;
 import modelo.Sesion;
 
 import javax.swing.*;
+import java.util.List;
+import java.util.ArrayList;
 import java.awt.*;
 
 public class VistaEvento extends JFrame {
@@ -18,10 +22,13 @@ public class VistaEvento extends JFrame {
 	private JScrollPane scrollModoEdicion;
 
 	private JButton btnAnularInscripcin;
-	private JLabel lblTituloCurso;
 	private JButton btnVolver;
 	private JButton btnEliminarEvento;
 	private JComboBox<String> cbNuevoContenido;
+
+	private JLabel lblTituloCurso;
+	private JLabel lblDatosCurso;
+	private List<VistaContenido> contenidos;
 
 	private boolean soyCreadorEvento;
 	private boolean enModoEdicion;
@@ -41,41 +48,7 @@ public class VistaEvento extends JFrame {
 			setModoEdicion(false);
 		}
 
-		/*
-		
-		lblbienvenidoAlCurso = new JLabel("\u00A1Bienvenido al curso de ");
-		lblbienvenidoAlCurso.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 20));
-		lblbienvenidoAlCurso.setBounds(137, 13, 221, 50);
-		panelContenido.add(lblbienvenidoAlCurso);
-		
-		lblCurso = new JLabel("ACTIVIDAD !");
-		lblCurso.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 20));
-		lblCurso.setBounds(362, 13, 214, 50);
-		panelContenido.add(lblCurso);
-		
-		lbFoto = new JLabel("");
-		lbFoto.setBounds(12, 77, 147, 144);
-		UtilidadesGUI.ajustarImagenALabel(lbFoto, "/recursosApp/gato.png");
-		panelContenido.add(lbFoto);
-		
-		lblDescripcion = new JLabel("Descripcion");
-		lblDescripcion.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
-		lblDescripcion.setBounds(209, 76, 481, 286);
-		panelContenido.add(lblDescripcion);
-		
-		lblLinkMeetingCurso = new JLabel("Link Meeting Actividad:");
-		lblLinkMeetingCurso.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
-		lblLinkMeetingCurso.setBounds(12, 468, 200, 32);
-		panelContenido.add(lblLinkMeetingCurso);
-		
-		lbHyperLink = new JLabel("Clase");
-		lbHyperLink.setForeground(Color.BLUE.darker());
-		lbHyperLink.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 16));
-		lbHyperLink.setBounds(228, 473, 292, 27);
-		lbHyperLink.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		panelContenido.add(lbHyperLink);
-
-		*/
+		cargarContenido();
 
 	}
 
@@ -102,8 +75,6 @@ public class VistaEvento extends JFrame {
 
 		cbNuevoContenido.addActionListener(ctr);
 		cbNuevoContenido.setActionCommand("NUEVO CONTENIDO");
-		
-		//lbHyperLink.addMouseListener(ctr);
 	}
 
 	public void setModoEdicion(boolean mostrar) {
@@ -123,6 +94,20 @@ public class VistaEvento extends JFrame {
 
 	public boolean getSoyCreadorEvento() {
 		return soyCreadorEvento;
+	}
+
+	public void aniadirContenido(VistaContenido contenido) {
+		contenidos.add(contenido);
+		refrescarContenido();
+	}
+
+	public void eliminarContenido(VistaContenido contenido) {
+		contenidos.remove(contenido);
+		refrescarContenido();
+	}
+
+	public void cargarContenido() {
+		// TODO
 	}
 
 	private void crearGUI() {
@@ -161,8 +146,33 @@ public class VistaEvento extends JFrame {
 		// Mostrar el título del evento
 		lblTituloCurso = new JLabel(evento.getNombre());
 		lblTituloCurso.setFont(UtilidadesGUI.FUENTE_TITULOS);
-		lblTituloCurso.setBackground(Color.RED);
-		panelContenido.add(lblTituloCurso);
+		lblTituloCurso.setHorizontalAlignment(JLabel.CENTER);
+
+		// Mostrar algunos datos del evento (duración, número de clases, enlace...)
+		lblDatosCurso = evento.getSubtituloPaginaEvento();
+		lblDatosCurso.setFont(UtilidadesGUI.FUENTE);
+		lblDatosCurso.setHorizontalAlignment(JLabel.CENTER);
+
+		// Añadir contenidos
+		contenidos = new ArrayList<>();
+		refrescarContenido();
+
+		aniadirContenido(new VistaContenidoTexto("Esto es un texto de ejemplo"));
+
+		aniadirContenido(new VistaContenidoTexto("Esto es otro texto"));
+
+		aniadirContenido(new VistaContenidoTexto("Feliz 2021"));
+
+		aniadirContenido(new VistaContenidoTexto(
+				"<h1>Definiciones básicas</h1>" +
+				"<ul>La ingeniería de software es la aplicación de un enfoque sistemático, " +
+				"disciplinado y cuantificable al desarrollo, operación y mantenimiento de software.</ul>" +
+				"<ul>Modelo: Una representación o especificación de un sistema, desde un determinado punto " +
+				"de vista y con un objetivo concreto.</ul>" +
+				"<ul>Diseño: Conjunto de planes y decisiones para definir un producto con los suficientes detalles " +
+				"como para permitir su realización física de acuerdo a unos requisitos</ul>" +
+				"<ul>Patrónde diseño: Una solución probada que se puede aplicar con éxito a un determinado tipo " +
+				"de problemas que aparecen repetidamente en el desarrollo de software.</ul>"));
 
 	}
 
@@ -225,6 +235,20 @@ public class VistaEvento extends JFrame {
 		scrollModoEdicion = new JScrollPane(panelModoEdicion);
 		scrollModoEdicion.setPreferredSize(new Dimension(240, -1));
 	}
-	
+
+	private void refrescarContenido() {
+		panelContenido.removeAll();
+
+		panelContenido.add(lblTituloCurso);
+		lblTituloCurso.setMaximumSize(new Dimension(Integer.MAX_VALUE, lblTituloCurso.getPreferredSize().height));
+
+		panelContenido.add(lblDatosCurso);
+		lblDatosCurso.setMaximumSize(new Dimension(Integer.MAX_VALUE, lblDatosCurso.getPreferredSize().height));
+
+		for (VistaContenido vc : contenidos) {
+			panelContenido.add(vc);
+		}
+	}
+
 	public Evento getEvento(){ return evento; }
 }

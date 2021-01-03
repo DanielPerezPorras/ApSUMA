@@ -65,8 +65,8 @@ public class ControladorNuevoEvento implements ActionListener {
                     }
 
                     // Para que no aparezca el mensaje "¿Quiere inscribirse?" al entrar al curso
-                    Curso cursoCreado = new Curso(nombre);
-                    cursoCreado.inscripcionUsuario(usuarioActual);
+                    Evento eventoCreado = Evento.buscarEvento(nombre);
+                    eventoCreado.inscripcionUsuario(usuarioActual);
 
                     Sesion.getVistaPrincipal().cargarEventos();
                     Sesion.getVistaPrincipal().cargarEventosUsuario();

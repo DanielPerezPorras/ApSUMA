@@ -1,12 +1,16 @@
 package modelo;
 
+import javax.swing.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public abstract class Evento {
 
-    private Date Fecha;
+    protected static final SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
+
+    protected Date Fecha;
     private String Nombre;
     private List<Usuario> usuarios;
     private Usuario creador;
@@ -127,5 +131,7 @@ public abstract class Evento {
     public String toString() {
         return Nombre;
     }
+
+    public abstract JLabel getSubtituloPaginaEvento();
 
 }

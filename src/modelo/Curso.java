@@ -1,5 +1,7 @@
 package modelo;
 
+import javax.swing.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -38,4 +40,10 @@ public class Curso extends Evento {
         duracion = 0;
         super.eliminar();
     }
+
+    @Override
+    public JLabel getSubtituloPaginaEvento() {
+        return new JLabel("[" + formatoFecha.format(Fecha) + "]" + " Número de clases: " + clases + ", duración: " + duracion + " hora(s)");
+    }
+
 }

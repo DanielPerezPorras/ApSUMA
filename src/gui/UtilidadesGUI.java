@@ -8,8 +8,8 @@ import java.io.File;
 
 public class UtilidadesGUI {
 
-    static final Font FUENTE = new Font("Microsoft JhengHei UI", Font.PLAIN, 15);
-    static final Font FUENTE_TITULOS = new Font("Microsoft JhengHei UI", Font.BOLD, 20);
+    public static final Font FUENTE = new Font("Microsoft JhengHei UI", Font.PLAIN, 15);
+    public static final Font FUENTE_TITULOS = new Font("Microsoft JhengHei UI", Font.BOLD, 20);
 
     public static void ajustarImagenALabel(JLabel label, String ruta) {
         File archivo = new File(VistaLogin.class.getResource(ruta).getPath());
@@ -33,6 +33,32 @@ public class UtilidadesGUI {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static String escaparHtml(String entrada) {
+        StringBuilder resultado = new StringBuilder();
+        for (char c : entrada.toCharArray()) {
+            switch (c) {
+
+                case '\n':
+                    resultado.append("<br/>");
+                    break;
+
+                case '<':
+                    resultado.append("&lt;");
+                    break;
+
+                case '>':
+                    resultado.append("&gt;");
+                    break;
+
+                case '&':
+                    resultado.append("&amp;");
+                    break;
+
+            }
+        }
+        return resultado.toString();
     }
 
 }
