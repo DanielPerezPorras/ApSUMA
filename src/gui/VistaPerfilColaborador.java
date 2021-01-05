@@ -45,7 +45,7 @@ public class VistaPerfilColaborador extends JFrame {
 	public VistaPerfilColaborador() {
 		super("Perfil");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 689, 539);
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));

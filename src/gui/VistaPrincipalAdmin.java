@@ -50,7 +50,7 @@ public class VistaPrincipalAdmin extends JFrame {
 	public VistaPrincipalAdmin()
 	{
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(100, 100, 856, 579);
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -162,7 +162,7 @@ public class VistaPrincipalAdmin extends JFrame {
 		tfNoticiaActuales.setEditable(false);
 		tfNoticiaActuales.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		tfNoticiaActuales.setBounds(42, 122, 253, 158);
-		tfNoticiaActuales.setText("Noticia 1: Ayer \n Noticia 2: Hoy \n Noticia 3: Mañana");
+		tfNoticiaActuales.setText("Noticia 1: Ayer \n Noticia 2: Hoy \n Noticia 3: MaÃ±ana");
 		panelPrincipal.add(tfNoticiaActuales);
 	}
 
@@ -178,7 +178,7 @@ public class VistaPrincipalAdmin extends JFrame {
 	
 	private void noticiasActuales()
 	{
-		//Aqui añadiriamos el texto nuevo
+		//Aqui aÃ±adiriamos el texto nuevo
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -233,10 +233,10 @@ public class VistaPrincipalAdmin extends JFrame {
 					"Necesita asignar titulo a la noticia", JOptionPane.ERROR_MESSAGE);
 		}else
 		{
-			//Método que la añade a la base de datos
+			//MÃ©todo que la aÃ±ade a la base de datos
 			tfNoticia.setText("");
 			noticiasActuales();
-			JOptionPane.showMessageDialog(null,"¡Noticia añadida con éxito!");
+			JOptionPane.showMessageDialog(null,"Â¡Noticia aÃ±adida con Ã©xito!");
 		}
 	}
 

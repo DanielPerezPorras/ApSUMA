@@ -39,6 +39,7 @@ public class VistaEvento extends JFrame {
 	public VistaEvento(Evento evento)
 	{
 		super("Evento: " + evento.getNombre());
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.evento = evento;
 
 		crearGUI();

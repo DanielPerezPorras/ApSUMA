@@ -31,12 +31,18 @@ public class VistaPrincipal extends JFrame {
     private JList<Evento> ultimaListaSeleccionada;
 
     public static void abrirVentana() {
-        VistaPrincipal frame = new VistaPrincipal();
-        frame.controlador(new ControladorNuevaPrincipal(frame));
-        frame.setVisible(true);
+        try {
+            VistaPrincipal frame = new VistaPrincipal();
+            frame.controlador(new ControladorNuevaPrincipal(frame));
+            frame.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public VistaPrincipal() {
+        super("ApS_UMA");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         Sesion.setVistaPrincipal(this);
         crearGUI();
         System.out.println("Cargando eventos...");

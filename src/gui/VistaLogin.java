@@ -38,7 +38,7 @@ public class VistaLogin extends JFrame {
 	public VistaLogin() {
 		super("Login APS_UMA");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(100, 100, 748, 478);
 		panelTotal = new JPanel();
 		panelTotal.setBorder(new EmptyBorder(5, 5, 5, 5));

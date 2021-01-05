@@ -37,7 +37,7 @@ public class VistaRegistroTutor extends JFrame {
 	public VistaRegistroTutor() 
 	{
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(100, 100, 568, 367);
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));

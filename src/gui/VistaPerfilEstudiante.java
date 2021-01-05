@@ -37,7 +37,7 @@ public class VistaPerfilEstudiante extends JFrame {
 	 */
 	public VistaPerfilEstudiante() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 689, 432);
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));

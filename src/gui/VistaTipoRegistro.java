@@ -33,7 +33,7 @@ public class VistaTipoRegistro extends JFrame {
 	public VistaTipoRegistro() 
 	{
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(100, 100, 548, 291);
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
