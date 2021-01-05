@@ -15,7 +15,6 @@ public class VistaEvento extends JFrame {
 	private Evento evento;
 
 	private JPanel panelPrincipal;
-	private JPanel panelModoEdicion;
 	private JPanel panelContenido;
 	private JPanel panelForos;
 	private JPanel panelInferior;
@@ -199,7 +198,7 @@ public class VistaEvento extends JFrame {
 	}
 
 	private void crearPanelModoEdicion() {
-		panelModoEdicion = new JPanel();
+		JPanel panelModoEdicion = new JPanel();
 		BoxLayout layout = new BoxLayout(panelModoEdicion, BoxLayout.Y_AXIS);
 		panelModoEdicion.setLayout(layout);
 		panelModoEdicion.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));

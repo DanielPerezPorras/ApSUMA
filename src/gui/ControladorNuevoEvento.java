@@ -30,17 +30,20 @@ public class ControladorNuevoEvento implements ActionListener {
                 if (nombre.length() == 0){
                     error = "El nombre está vacio.";
                 }
-                if (!(Evento.buscarEvento(nombre) == null)){
+                if (Evento.buscarEvento(nombre) != null){
                     error = "Ya existe un evento con ese nombre.";
                 }
-                if (vista.getTipo().equals("Curso") && vista.getDuracion()<=-1) {
-                    error = "Duración inválida";
+                if (vista.getTipo().equals("Curso") && vista.getDuracion() <= -1) {
+                    error = "Duración no válida. Introduzca un valor entero positivo.";
                 }
-                if (vista.getTipo().equals("Curso") && vista.getClases()<=0) {
-                    error = "Num Clases inválido";
+                if (vista.getTipo().equals("Curso") && vista.getClases() <= 0) {
+                    error = "Número de clases no válido. Introduzca un valor entero positivo.";
                 }
-                if (!vista.getTipo().equals("Curso") && vista.getDato()=="") {
-                    error = "Lugar o enlace vacío";
+                if (vista.getTipo().equals("Actividad social") && vista.getDato().length() == 0) {
+                    error = "Lugar de la actividad vacío.";
+                }
+                if (vista.getTipo().equals("Conferencia") && vista.getDato().length() == 0) {
+                    error = "Enlace de la conferencia vacío.";
                 }
 
                 if(error == null){
@@ -59,14 +62,10 @@ public class ControladorNuevoEvento implements ActionListener {
                         case "Conferencia":
                             usuarioActual.crearConferencia(fecha, nombre, vista.getDato());
                             break;
-                        case "Actividad":
+                        case "Actividad social":
                             usuarioActual.crearActividad(fecha, nombre, vista.getDato());
                             break;
                     }
-
-                    // Para que no aparezca el mensaje "¿Quiere inscribirse?" al entrar al curso
-                    Evento eventoCreado = Evento.buscarEvento(nombre);
-                    eventoCreado.inscripcionUsuario(usuarioActual);
 
                     Sesion.getVistaPrincipal().cargarEventos();
                     Sesion.getVistaPrincipal().cargarEventosUsuario();

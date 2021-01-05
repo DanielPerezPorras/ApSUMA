@@ -65,7 +65,7 @@ public class Colaborador extends Usuario{
 
     public void eliminarEvento(Evento evento){
         if (!(propuesto == null)){
-            propuesto.removeIf(ev -> evento.getNombre().equals(evento.getNombre()));
+            propuesto.removeIf(ev -> ev.getNombre().equals(evento.getNombre()));
             super.getEventosInscritos().remove(evento);
         }
     }

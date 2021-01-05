@@ -167,7 +167,13 @@ public class VistaPrincipal extends JFrame {
                 lblDescripcion.setText("<html>Evento seleccionado: " + ev + " [" + ev.getFecha() + "] (" + ev.getCreador().getNombreUsuario() + ")"+ "</html>");
             }
         } else {
-            lblDescripcion.setText("<html>Seleccione un evento para ver detalles aquí.</html>");
+            if (Sesion.puedoCrearEventos()) {
+                lblDescripcion.setText("<html>Seleccione un evento para ver detalles aquí. " +
+                        "Puede crear eventos seleccionando la fecha en el calendario y pulsando " +
+                        "\"Crear...\".</html>");
+            } else {
+                lblDescripcion.setText("<html>Seleccione un evento para ver detalles aquí.</html>");
+            }
         }
     }
 
@@ -316,9 +322,11 @@ public class VistaPrincipal extends JFrame {
 
         JLabel lblDetalles = new JLabel("Detalles");
         lblDetalles.setFont(UtilidadesGUI.FUENTE_TITULOS);
-        lblDescripcion = new JLabel("<html>Seleccione un evento para ver detalles aquí.</html>");
+        lblDescripcion = new JLabel();
+        setTextoDescripcion(null);
         lblDescripcion.setFont(UtilidadesGUI.FUENTE);
         btnEntrar = new JButton("Entrar");
+        btnEntrar.setFont(UtilidadesGUI.FUENTE);
 
         zonaDetallesNorte.add(lblDetalles);
         zonaDetallesNorte.add(Box.createHorizontalGlue());

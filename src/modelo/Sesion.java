@@ -23,20 +23,20 @@ public class Sesion {
         usuarioLogueado = usuario;
         if (usuario != null) {
             if (usuarioLogueado instanceof Administrador) {
-                permisos = 0;
+                setPermisos(0);
             } else if (usuarioLogueado instanceof Tutor || usuarioLogueado instanceof Colaborador) {
-
-                permisos = 1;
+                setPermisos(1);
             } else {
-                permisos = 2;
+                setPermisos(2);
             }
         } else {
-            permisos = 3;
+            setPermisos(3);
         }
     }
 
     public static void setPermisos (int num) {
     	permisos = num;
+    	System.out.println("Nivel de permisos actual: " + permisos);
     }
     public static int getPermisos () {
     	return permisos;
