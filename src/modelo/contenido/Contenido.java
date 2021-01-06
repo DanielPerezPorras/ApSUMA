@@ -34,9 +34,17 @@ public abstract class Contenido {
 
     public static Contenido buscarContenido(int id) {
         Contenido c = null;
-        try {
-            c = new ContenidoTexto(id);
-        } catch (Exception ignored) { }
+        BD bd = new BD();
+        List<Object[]> contenidos = bd.Select("SELECT tipo FROM Contenido WHERE id=" + id);
+        if (contenidos.size() > 0) {
+            switch (contenidos.get(0)[0].toString()) {
+
+                case "texto":
+                    c = new ContenidoTexto(id);
+                    break;
+
+            }
+        }
         return c;
     }
 

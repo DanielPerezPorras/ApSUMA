@@ -109,20 +109,16 @@ public abstract class Usuario {
 
     public static Usuario buscarUsuario(String correo) {
         Usuario usuario = null;
-        try {
+        BD bd = new BD();
+        String where = " WHERE correo='" + correo + "'";
+        if ((long)bd.SelectEscalar("SELECT COUNT(*) FROM Estudiante" + where) > 0) {
             usuario = new Estudiante(correo);
-        } catch (ErrorBD ex1) {
-            try {
-                usuario = new Tutor(correo);
-            } catch (ErrorBD ex2) {
-                try {
-                    usuario = new Colaborador(correo);
-                } catch (ErrorBD ex3) {
-                    try {
-                        usuario = new Administrador(correo);
-                    } catch (ErrorBD ignored) { }
-                }
-            }
+        } else if ((long)bd.SelectEscalar("SELECT COUNT(*) FROM Tutor" + where) > 0) {
+            usuario = new Tutor(correo);
+        } else if ((long)bd.SelectEscalar("SELECT COUNT(*) FROM Colaborador" + where) > 0) {
+            usuario = new Colaborador(correo);
+        } else if ((long)bd.SelectEscalar("SELECT COUNT(*) FROM Administrador" + where) > 0) {
+            usuario = new Administrador(correo);
         }
         return usuario;
     }

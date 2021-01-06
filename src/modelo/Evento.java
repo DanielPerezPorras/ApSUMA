@@ -107,16 +107,14 @@ public abstract class Evento {
 
     public static Evento buscarEvento(String nombre) {
         Evento evento = null;
-        try {
+        BD bd = new BD();
+        String where = " WHERE nombre='" + nombre + "'";
+        if ((long)bd.SelectEscalar("SELECT COUNT(*) FROM Curso" + where) > 0) {
             evento = new Curso(nombre);
-        } catch (ErrorBD ex1) {
-            try {
-                evento = new ActividadSocial(nombre);
-            } catch (ErrorBD ex2) {
-                try {
-                    evento = new Conferencia(nombre);
-                } catch (ErrorBD ignored) { }
-            }
+        } else if ((long)bd.SelectEscalar("SELECT COUNT(*) FROM ActividadSocial" + where) > 0) {
+            evento = new ActividadSocial(nombre);
+        } else if ((long)bd.SelectEscalar("SELECT COUNT(*) FROM Conferencia" + where) > 0) {
+            evento = new Conferencia(nombre);
         }
         return evento;
     }
