@@ -1,18 +1,16 @@
 package gui;
 
-import gui.contenido.VistaContenido;
-import gui.contenido.VistaContenidoTexto;
 import modelo.Evento;
 import modelo.Sesion;
+import modelo.contenido.Contenido;
 
 import javax.swing.*;
 import java.util.List;
-import java.util.ArrayList;
 import java.awt.*;
 
 public class VistaEvento extends JFrame {
 
-	private Evento evento;
+	private final Evento evento;
 
 	private JPanel panelPrincipal;
 	private JPanel panelContenido;
@@ -27,9 +25,8 @@ public class VistaEvento extends JFrame {
 
 	private JLabel lblTituloCurso;
 	private JLabel lblDatosCurso;
-	private List<VistaContenido> contenidos;
 
-	private boolean soyCreadorEvento;
+	private final boolean soyCreadorEvento;
 	private boolean enModoEdicion;
 
 	/**
@@ -47,8 +44,6 @@ public class VistaEvento extends JFrame {
 		if (soyCreadorEvento) {
 			setModoEdicion(false);
 		}
-
-		cargarContenido();
 
 	}
 
@@ -96,20 +91,6 @@ public class VistaEvento extends JFrame {
 		return soyCreadorEvento;
 	}
 
-	public void aniadirContenido(VistaContenido contenido) {
-		contenidos.add(contenido);
-		refrescarContenido();
-	}
-
-	public void eliminarContenido(VistaContenido contenido) {
-		contenidos.remove(contenido);
-		refrescarContenido();
-	}
-
-	public void cargarContenido() {
-		// TODO
-	}
-
 	private void crearGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
@@ -154,25 +135,7 @@ public class VistaEvento extends JFrame {
 		lblDatosCurso.setHorizontalAlignment(JLabel.CENTER);
 
 		// Añadir contenidos
-		contenidos = new ArrayList<>();
 		refrescarContenido();
-
-		aniadirContenido(new VistaContenidoTexto("Esto es un texto de ejemplo"));
-
-		aniadirContenido(new VistaContenidoTexto("Esto es otro texto"));
-
-		aniadirContenido(new VistaContenidoTexto("Feliz 2021"));
-
-		aniadirContenido(new VistaContenidoTexto(
-				"<h1>Definiciones básicas</h1>" +
-				"<ul>La ingeniería de software es la aplicación de un enfoque sistemático, " +
-				"disciplinado y cuantificable al desarrollo, operación y mantenimiento de software.</ul>" +
-				"<ul>Modelo: Una representación o especificación de un sistema, desde un determinado punto " +
-				"de vista y con un objetivo concreto.</ul>" +
-				"<ul>Diseño: Conjunto de planes y decisiones para definir un producto con los suficientes detalles " +
-				"como para permitir su realización física de acuerdo a unos requisitos</ul>" +
-				"<ul>Patrónde diseño: Una solución probada que se puede aplicar con éxito a un determinado tipo " +
-				"de problemas que aparecen repetidamente en el desarrollo de software.</ul>"));
 
 	}
 
@@ -245,9 +208,11 @@ public class VistaEvento extends JFrame {
 		panelContenido.add(lblDatosCurso);
 		lblDatosCurso.setMaximumSize(new Dimension(Integer.MAX_VALUE, lblDatosCurso.getPreferredSize().height));
 
-		for (VistaContenido vc : contenidos) {
-			panelContenido.add(vc);
+		List<Contenido> contenidos = evento.getContenidos();
+		for (Contenido c : contenidos) {
+			panelContenido.add(c.getVista());
 		}
+
 	}
 
 	public Evento getEvento(){ return evento; }

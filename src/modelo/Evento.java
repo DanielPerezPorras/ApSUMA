@@ -1,5 +1,7 @@
 package modelo;
 
+import modelo.contenido.Contenido;
+
 import javax.swing.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,7 +17,6 @@ public abstract class Evento {
     private List<Usuario> usuarios;
     private Usuario creador;
     private Administrador administrador;
-    //TODO private Contenido[] contenido;
 
     // Constructor para crear un nuevo evento
     public Evento(Date dia, String nom, Usuario dueno) {
@@ -91,6 +92,17 @@ public abstract class Evento {
 
     public Administrador getAdministrador() {
         return administrador;
+    }
+
+    public List<Contenido> getContenidos() {
+        List<Contenido> contenidos = new ArrayList<>();
+        BD bd = new BD();
+        String consulta = "SELECT id FROM Contenido WHERE evento='" + Nombre + "'";
+        List<Object[]> resultados = bd.Select(consulta);
+        for (Object[] tupla : resultados) {
+            contenidos.add(Contenido.buscarContenido((int)tupla[0]));
+        }
+        return contenidos;
     }
 
     public static Evento buscarEvento(String nombre) {

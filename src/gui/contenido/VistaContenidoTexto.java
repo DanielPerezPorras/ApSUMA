@@ -13,4 +13,5 @@ public class VistaContenidoTexto extends VistaContenido {
         label.setFont(UtilidadesGUI.FUENTE);
         areaContenido.add(label);
     }
+
 }
