@@ -8,12 +8,14 @@ import java.util.List;
 
 public abstract class Contenido {
 
+    private final int id;
     private final Evento evento;
 
     // Crea un nuevo tipo de contenido
     public Contenido(Evento ev) {
         BD bd = new BD();
-        bd.Insert("INSERT INTO Contenido (evento) VALUES ('" + ev.getNombre() + "')");
+        id = getSiguienteID();
+        bd.Insert("INSERT INTO Contenido (id, evento, tipo) VALUES (" + id + ", '" + ev.getNombre() + "', '" + getTipo() + "')");
         evento = ev;
     }
 
@@ -22,6 +24,7 @@ public abstract class Contenido {
         BD bd = new BD();
         List<Object[]> contenidos = bd.Select("SELECT evento FROM Contenido WHERE id=" + id);
         if (contenidos.size() > 0) {
+            this.id = id;
             evento = Evento.buscarEvento(contenidos.get(0)[0].toString());
         } else {
             throw new ErrorBD("No se ha encontrado un contenido con id " + id);
@@ -30,7 +33,7 @@ public abstract class Contenido {
 
     public abstract String getTipo();
 
-    public abstract VistaContenido getVista();
+    public abstract VistaContenido getVista(boolean modoEdicion);
 
     public static Contenido buscarContenido(int id) {
         Contenido c = null;
@@ -46,6 +49,20 @@ public abstract class Contenido {
             }
         }
         return c;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    private static int getSiguienteID() {
+        BD bd = new BD();
+        Object resultado = bd.SelectEscalar("SELECT MAX(id) FROM Contenido");
+        if (resultado != null) {
+            return (int)resultado + 1;
+        } else {
+            return 0;
+        }
     }
 
 }

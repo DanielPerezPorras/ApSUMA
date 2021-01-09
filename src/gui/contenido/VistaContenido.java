@@ -1,5 +1,9 @@
 package gui.contenido;
 
+import gui.UtilidadesGUI;
+import modelo.Evento;
+import modelo.contenido.Contenido;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,12 +11,31 @@ public abstract class VistaContenido extends JPanel {
 
     protected JPanel areaContenido;
 
-    public VistaContenido() {
+    private JPanel zonaModoEdicion;
+    private JButton btnEliminar;
+
+    private boolean enModoEdicion;
+
+    public VistaContenido(Contenido cont, boolean modoEdicion) {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setAlignmentX(LEFT_ALIGNMENT);
+
         add(Box.createRigidArea(new Dimension(0, 15)));
-        areaContenido = new JPanel(new GridLayout(1, 1));
-        add(areaContenido);
+
+        areaContenido = new JPanel(new BorderLayout());
+        add(areaContenido, BorderLayout.CENTER);
+
+        crearZonaModoEdicion();
+        setModoEdicion(modoEdicion);
+    }
+
+    public void setModoEdicion(boolean mostrar) {
+        enModoEdicion = mostrar;
+        if (mostrar) {
+            add(zonaModoEdicion);
+        } else {
+            remove(zonaModoEdicion);
+        }
     }
 
     public Dimension getPreferredSize() {
@@ -26,6 +49,18 @@ public abstract class VistaContenido extends JPanel {
 
     public Dimension getMaximumSize() {
         return getPreferredSize();
+    }
+
+    private void crearZonaModoEdicion() {
+
+        zonaModoEdicion = new JPanel();
+        zonaModoEdicion.setLayout(new BoxLayout(zonaModoEdicion, BoxLayout.LINE_AXIS));
+
+        btnEliminar = new JButton("Eliminar");
+        btnEliminar.setFont(UtilidadesGUI.FUENTE);
+        zonaModoEdicion.add(btnEliminar);
+        zonaModoEdicion.add(Box.createHorizontalGlue());
+
     }
 
 }

@@ -97,7 +97,7 @@ public abstract class Evento {
     public List<Contenido> getContenidos() {
         List<Contenido> contenidos = new ArrayList<>();
         BD bd = new BD();
-        String consulta = "SELECT id FROM Contenido WHERE evento='" + Nombre + "'";
+        String consulta = "SELECT id FROM Contenido WHERE evento='" + Nombre + "' ORDER BY id";
         List<Object[]> resultados = bd.Select(consulta);
         for (Object[] tupla : resultados) {
             contenidos.add(Contenido.buscarContenido((int)tupla[0]));

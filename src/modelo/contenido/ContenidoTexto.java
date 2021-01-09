@@ -12,9 +12,8 @@ public class ContenidoTexto extends Contenido {
     public ContenidoTexto(Evento ev, String texto) {
         super(ev);
         BD bd = new BD();
-        bd.Insert("UPDATE Contenido SET " +
-                "tipo='" + getTipo() + "', texto='" + texto + "' " +
-                "WHERE evento='" + ev.getNombre() + "'");
+        bd.Insert("UPDATE Contenido SET texto='" + texto + "' " +
+                "WHERE id='" + getId() + "'");
         this.texto = texto;
     }
 
@@ -33,10 +32,12 @@ public class ContenidoTexto extends Contenido {
 
     }
 
+    public String getTexto() { return texto; }
+
     public String getTipo() { return "texto"; }
 
-    public VistaContenido getVista() {
-        return new VistaContenidoTexto(texto);
+    public VistaContenido getVista(boolean modoEdicion) {
+        return new VistaContenidoTexto(this, modoEdicion);
     }
 
 }

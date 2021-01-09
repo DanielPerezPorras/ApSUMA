@@ -1,6 +1,9 @@
 package gui;
 
+import gui.contenido.DialogoNuevoTexto;
 import modelo.Sesion;
+import modelo.contenido.Contenido;
+import modelo.contenido.ContenidoTexto;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,7 +43,18 @@ public class ControladorEvento implements ActionListener, MouseListener {
 				break;
 
 			case "NUEVO CONTENIDO":
-				// para añadir contenido al evento
+				switch (vista.getSeleccionNuevoContenido()) {
+
+					case "Texto":
+						DialogoNuevoTexto dialogo = new DialogoNuevoTexto(vista);
+						dialogo.setVisible(true);
+						if (dialogo.seHaConfirmado()) {
+							new ContenidoTexto(vista.getEvento(), dialogo.getTexto());
+							vista.refrescarContenido();
+						}
+						break;
+
+				}
 				break;
 
 		}

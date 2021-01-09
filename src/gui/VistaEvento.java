@@ -1,10 +1,12 @@
 package gui;
 
+import gui.contenido.VistaContenido;
 import modelo.Evento;
 import modelo.Sesion;
 import modelo.contenido.Contenido;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.*;
 
@@ -25,6 +27,8 @@ public class VistaEvento extends JFrame {
 
 	private JLabel lblTituloCurso;
 	private JLabel lblDatosCurso;
+	private List<VistaContenido> vistasContenidos = new ArrayList<>();
+	private List<Contenido> contenidos;
 
 	private final boolean soyCreadorEvento;
 	private boolean enModoEdicion;
@@ -81,6 +85,9 @@ public class VistaEvento extends JFrame {
 			panelPrincipal.remove(scrollModoEdicion);
 			btnAnularInscripcin.setText("Editar");
 		}
+		for (VistaContenido v : vistasContenidos) {
+			v.setModoEdicion(mostrar);
+		}
 	}
 
 	public void alternarModoEdicion() {
@@ -89,6 +96,10 @@ public class VistaEvento extends JFrame {
 
 	public boolean getSoyCreadorEvento() {
 		return soyCreadorEvento;
+	}
+
+	public String getSeleccionNuevoContenido() {
+		return (String)cbNuevoContenido.getSelectedItem();
 	}
 
 	private void crearGUI() {
@@ -199,7 +210,7 @@ public class VistaEvento extends JFrame {
 		scrollModoEdicion.setPreferredSize(new Dimension(240, -1));
 	}
 
-	private void refrescarContenido() {
+	public void refrescarContenido() {
 		panelContenido.removeAll();
 
 		panelContenido.add(lblTituloCurso);
@@ -208,12 +219,18 @@ public class VistaEvento extends JFrame {
 		panelContenido.add(lblDatosCurso);
 		lblDatosCurso.setMaximumSize(new Dimension(Integer.MAX_VALUE, lblDatosCurso.getPreferredSize().height));
 
-		List<Contenido> contenidos = evento.getContenidos();
+		System.out.println("Recargando contenido...");
+		contenidos = evento.getContenidos();
+		vistasContenidos.clear();
 		for (Contenido c : contenidos) {
-			panelContenido.add(c.getVista());
+			VistaContenido v = c.getVista(enModoEdicion);
+			vistasContenidos.add(v);
+			panelContenido.add(v);
 		}
+		System.out.println("Contenido recargado");
 
+		panelContenido.revalidate();
 	}
 
-	public Evento getEvento(){ return evento; }
+	public Evento getEvento() { return evento; }
 }

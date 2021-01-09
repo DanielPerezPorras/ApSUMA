@@ -1,15 +1,18 @@
 package gui.contenido;
 
 import gui.UtilidadesGUI;
+import modelo.contenido.Contenido;
+import modelo.contenido.ContenidoTexto;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class VistaContenidoTexto extends VistaContenido {
 
-    public VistaContenidoTexto(String texto) {
-        super();
-        JLabel label = new JLabel("<html><div>" + texto + "</div></html>");
+    // Este constructor solo debería ser invocado desde Contenido.getVista()
+    public VistaContenidoTexto(Contenido cont, boolean modoEdicion) {
+        super(cont, modoEdicion);
+        ContenidoTexto contTexto = (ContenidoTexto)cont;
+        JLabel label = new JLabel("<html><div>" + contTexto.getTexto() + "</div></html>");
         label.setFont(UtilidadesGUI.FUENTE);
         areaContenido.add(label);
     }
