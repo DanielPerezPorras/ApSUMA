@@ -26,10 +26,6 @@ public abstract class VistaContenido extends JPanel {
     public void controlador(ActionListener ctr) {
         btnEliminar.setActionCommand("ELIMINAR_CONTENIDO_" + contenido.getId());
         btnEliminar.addActionListener(ctr);
-        btnEliminar.setActionCommand("ELIMINAR_CONTENIDO_" + contenido.getId());
-        btnEliminar.addActionListener(ctr);
-        btnEliminar.setActionCommand("ELIMINAR_CONTENIDO_" + contenido.getId());
-        btnEliminar.addActionListener(ctr);
     }
 
     public void setModoEdicion(boolean mostrar) {

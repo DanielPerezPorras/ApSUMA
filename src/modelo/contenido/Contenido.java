@@ -47,6 +47,10 @@ public abstract class Contenido {
                     c = new ContenidoTexto(id);
                     break;
 
+                case "link":
+                    c = new ContenidoEnlace(id);
+                    break;
+
             }
         }
         return c;

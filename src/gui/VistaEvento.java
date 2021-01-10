@@ -27,18 +27,15 @@ public class VistaEvento extends JFrame {
 
 	private JLabel lblTituloCurso;
 	private JLabel lblDatosCurso;
-	private List<VistaContenido> vistasContenidos = new ArrayList<>();
+	private final List<VistaContenido> vistasContenidos = new ArrayList<>();
 	private List<Contenido> contenidos;
 
 	private final boolean soyCreadorEvento;
 	private ControladorEvento controlador;
 	private boolean enModoEdicion;
 
-	/**
-	 * Create the frame.
-	 */
-	public VistaEvento(Evento evento)
-	{
+	public VistaEvento(Evento evento)  {
+
 		super("Evento: " + evento.getNombre());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.evento = evento;
@@ -61,9 +58,7 @@ public class VistaEvento extends JFrame {
 			e.printStackTrace();
 		}
     }
-
-    public void controlador(ControladorEvento ctr)
-	{
+    public void controlador(ControladorEvento ctr) {
 		controlador = ctr;
 
 		btnAnularInscripcin.addActionListener(ctr);
@@ -104,7 +99,6 @@ public class VistaEvento extends JFrame {
 	public boolean getSoyCreadorEvento() {
 		return soyCreadorEvento;
 	}
-
 	public String getSeleccionNuevoContenido() {
 		return (String)cbNuevoContenido.getSelectedItem();
 	}
@@ -117,7 +111,6 @@ public class VistaEvento extends JFrame {
 			return null;
 		}
 	}
-
 	public int getPosicionDeContenido(Contenido c) {
 		return contenidos.indexOf(c);
 	}
