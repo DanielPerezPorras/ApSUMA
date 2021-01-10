@@ -15,7 +15,7 @@ public class DialogoNuevoEnlace extends JDialog {
 
     // Instanciar el diálogo con el constructor, él crea internamente su controlador.
     public DialogoNuevoEnlace(JFrame propietario) {
-        super(propietario, "Nuevo ítem de texto", true);
+        super(propietario, "Nuevo enlace", true);
         crearGUI();
         asignarControlador(new ControladorDialogoNuevoEnlace(this));
     }
@@ -38,19 +38,33 @@ public class DialogoNuevoEnlace extends JDialog {
 
     private void crearGUI() {
 
-        setSize(400, 200);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setSize(400, 200);
 
         JPanel contenido = new JPanel(new BorderLayout());
         setContentPane(contenido);
 
-        JPanel centro = new JPanel(new GridLayout(1, 1));
+        JPanel centro = new JPanel();
+        centro.setLayout(new BoxLayout(centro, BoxLayout.PAGE_AXIS));
         centro.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 10));
+
+        JLabel lblEnlace = new JLabel("URL del recurso:");
+        lblEnlace.setFont(UtilidadesGUI.FUENTE);
+        lblEnlace.setAlignmentX(Component.LEFT_ALIGNMENT);
         tfEnlace = new JTextField();
         tfEnlace.setFont(UtilidadesGUI.FUENTE);
+        tfEnlace.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JLabel lblTextoVisible = new JLabel("Texto a mostrar:");
+        lblTextoVisible.setFont(UtilidadesGUI.FUENTE);
+        lblTextoVisible.setAlignmentX(Component.LEFT_ALIGNMENT);
         tfTextoVisible = new JTextField();
         tfTextoVisible.setFont(UtilidadesGUI.FUENTE);
+        tfTextoVisible.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        centro.add(lblEnlace);
         centro.add(tfEnlace);
+        centro.add(Box.createRigidArea(new Dimension(0, 10)));
+        centro.add(lblTextoVisible);
         centro.add(tfTextoVisible);
 
         JPanel sur = new JPanel();
