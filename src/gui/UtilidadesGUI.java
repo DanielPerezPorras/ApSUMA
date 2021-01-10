@@ -56,6 +56,8 @@ public class UtilidadesGUI {
                     resultado.append("&amp;");
                     break;
 
+                default:
+                    resultado.append(c);
             }
         }
         return resultado.toString();

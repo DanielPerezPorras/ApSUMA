@@ -12,7 +12,7 @@ public class VistaContenidoTexto extends VistaContenido {
     public VistaContenidoTexto(Contenido cont, boolean modoEdicion) {
         super(cont, modoEdicion);
         ContenidoTexto contTexto = (ContenidoTexto)cont;
-        JLabel label = new JLabel("<html><div>" + contTexto.getTexto() + "</div></html>");
+        JLabel label = new JLabel("<html><div>" + UtilidadesGUI.escaparHtml(contTexto.getTexto()) + "</div></html>");
         label.setFont(UtilidadesGUI.FUENTE);
         areaContenido.add(label);
     }

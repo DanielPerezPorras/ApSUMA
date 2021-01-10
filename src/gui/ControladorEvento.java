@@ -5,6 +5,7 @@ import modelo.Sesion;
 import modelo.contenido.Contenido;
 import modelo.contenido.ContenidoTexto;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -20,7 +21,8 @@ public class ControladorEvento implements ActionListener, MouseListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-    	switch (e.getActionCommand()) {
+    	String comando = e.getActionCommand();
+    	switch (comando) {
     		case "VOLVER":
     			vista.dispose();
     			abreventana();
@@ -56,6 +58,18 @@ public class ControladorEvento implements ActionListener, MouseListener {
 
 				}
 				break;
+
+			default:
+
+				if (comando.startsWith("ELIMINAR_CONTENIDO_")) {
+					int resultadoDialogo = JOptionPane.showConfirmDialog(vista, "¿Desea eliminar este contenido?", "Confirmación",
+							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					if (resultadoDialogo == JOptionPane.YES_OPTION) {
+						int idEliminar = Integer.parseInt(comando.substring("ELIMINAR_CONTENIDO_".length()));
+						Contenido.buscarContenido(idEliminar).borrar();
+						vista.refrescarContenido();
+					}
+				}
 
 		}
     }

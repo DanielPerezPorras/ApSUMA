@@ -5,6 +5,7 @@ import modelo.BD;
 import modelo.ErrorBD;
 import modelo.Evento;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Contenido {
 
@@ -53,6 +54,31 @@ public abstract class Contenido {
 
     public int getId() {
         return id;
+    }
+
+    public void borrar() {
+        BD bd = new BD();
+        bd.Delete("DELETE FROM Contenido WHERE id=" + id);
+    }
+
+    @Override
+    public String toString() {
+        return "Contenido{" +
+                "id=" + id +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Contenido)) return false;
+        Contenido contenido = (Contenido) o;
+        return id == contenido.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     private static int getSiguienteID() {

@@ -31,6 +31,7 @@ public class VistaEvento extends JFrame {
 	private List<Contenido> contenidos;
 
 	private final boolean soyCreadorEvento;
+	private ControladorEvento controlador;
 	private boolean enModoEdicion;
 
 	/**
@@ -63,6 +64,8 @@ public class VistaEvento extends JFrame {
 
     public void controlador(ControladorEvento ctr)
 	{
+		controlador = ctr;
+
 		btnAnularInscripcin.addActionListener(ctr);
 		btnAnularInscripcin.setActionCommand("ANULAR");
 		
@@ -74,8 +77,13 @@ public class VistaEvento extends JFrame {
 
 		cbNuevoContenido.addActionListener(ctr);
 		cbNuevoContenido.setActionCommand("NUEVO CONTENIDO");
+
+		for (VistaContenido v : vistasContenidos) {
+			v.controlador(ctr);
+		}
 	}
 
+	public Evento getEvento() { return evento; }
 	public void setModoEdicion(boolean mostrar) {
 		enModoEdicion = mostrar;
 		if (mostrar) {
@@ -89,7 +97,6 @@ public class VistaEvento extends JFrame {
 			v.setModoEdicion(mostrar);
 		}
 	}
-
 	public void alternarModoEdicion() {
 		setModoEdicion(!enModoEdicion);
 	}
@@ -101,6 +108,46 @@ public class VistaEvento extends JFrame {
 	public String getSeleccionNuevoContenido() {
 		return (String)cbNuevoContenido.getSelectedItem();
 	}
+
+	// pos != id en la BD del contenido!!!
+	public Contenido getContenidoPorPosicion(int pos) {
+		if (pos >= 0 && pos < contenidos.size()) {
+			return contenidos.get(pos);
+		} else {
+			return null;
+		}
+	}
+
+	public int getPosicionDeContenido(Contenido c) {
+		return contenidos.indexOf(c);
+	}
+
+	public void refrescarContenido() {
+		panelContenido.removeAll();
+
+		panelContenido.add(lblTituloCurso);
+		lblTituloCurso.setMaximumSize(new Dimension(Integer.MAX_VALUE, lblTituloCurso.getPreferredSize().height));
+
+		panelContenido.add(lblDatosCurso);
+		lblDatosCurso.setMaximumSize(new Dimension(Integer.MAX_VALUE, lblDatosCurso.getPreferredSize().height));
+
+		System.out.println("Recargando contenido...");
+		contenidos = evento.getContenidos();
+		vistasContenidos.clear();
+		for (Contenido c : contenidos) {
+			VistaContenido v = c.getVista(enModoEdicion);
+			v.controlador(controlador);
+			vistasContenidos.add(v);
+			panelContenido.add(v);
+		}
+		System.out.println("Contenido recargado");
+
+		revalidate();
+		repaint();
+	}
+
+	// CÓDIGO PARA CREAR LA GUI
+	// ------------------------
 
 	private void crearGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -210,27 +257,4 @@ public class VistaEvento extends JFrame {
 		scrollModoEdicion.setPreferredSize(new Dimension(240, -1));
 	}
 
-	public void refrescarContenido() {
-		panelContenido.removeAll();
-
-		panelContenido.add(lblTituloCurso);
-		lblTituloCurso.setMaximumSize(new Dimension(Integer.MAX_VALUE, lblTituloCurso.getPreferredSize().height));
-
-		panelContenido.add(lblDatosCurso);
-		lblDatosCurso.setMaximumSize(new Dimension(Integer.MAX_VALUE, lblDatosCurso.getPreferredSize().height));
-
-		System.out.println("Recargando contenido...");
-		contenidos = evento.getContenidos();
-		vistasContenidos.clear();
-		for (Contenido c : contenidos) {
-			VistaContenido v = c.getVista(enModoEdicion);
-			vistasContenidos.add(v);
-			panelContenido.add(v);
-		}
-		System.out.println("Contenido recargado");
-
-		panelContenido.revalidate();
-	}
-
-	public Evento getEvento() { return evento; }
 }

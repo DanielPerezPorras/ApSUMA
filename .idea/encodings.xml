@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/src/gui/VistaConferenciaAlumno.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/gui/VistaConferencia.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/src/gui/VistaPerfilColaborador.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/gui/VistaPrincipalAdmin.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/gui/VistaPrincipalTutor.java" charset="UTF-8" />
   </component>
 </project>

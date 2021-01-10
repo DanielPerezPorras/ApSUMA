@@ -6,10 +6,12 @@ import modelo.contenido.Contenido;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public abstract class VistaContenido extends JPanel {
 
     protected JPanel areaContenido;
+    protected Contenido contenido;
 
     private JPanel zonaModoEdicion;
     private JButton btnEliminar;
@@ -17,16 +19,17 @@ public abstract class VistaContenido extends JPanel {
     private boolean enModoEdicion;
 
     public VistaContenido(Contenido cont, boolean modoEdicion) {
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        setAlignmentX(LEFT_ALIGNMENT);
+        contenido = cont;
+        crearElemento(modoEdicion);
+    }
 
-        add(Box.createRigidArea(new Dimension(0, 15)));
-
-        areaContenido = new JPanel(new BorderLayout());
-        add(areaContenido, BorderLayout.CENTER);
-
-        crearZonaModoEdicion();
-        setModoEdicion(modoEdicion);
+    public void controlador(ActionListener ctr) {
+        btnEliminar.setActionCommand("ELIMINAR_CONTENIDO_" + contenido.getId());
+        btnEliminar.addActionListener(ctr);
+        btnEliminar.setActionCommand("ELIMINAR_CONTENIDO_" + contenido.getId());
+        btnEliminar.addActionListener(ctr);
+        btnEliminar.setActionCommand("ELIMINAR_CONTENIDO_" + contenido.getId());
+        btnEliminar.addActionListener(ctr);
     }
 
     public void setModoEdicion(boolean mostrar) {
@@ -51,6 +54,19 @@ public abstract class VistaContenido extends JPanel {
         return getPreferredSize();
     }
 
+    private void crearElemento(boolean modoEdicion) {
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        setAlignmentX(LEFT_ALIGNMENT);
+
+        add(Box.createRigidArea(new Dimension(0, 15)));
+
+        areaContenido = new JPanel(new BorderLayout());
+        add(areaContenido, BorderLayout.CENTER);
+
+        crearZonaModoEdicion();
+        setModoEdicion(modoEdicion);
+    }
+
     private void crearZonaModoEdicion() {
 
         zonaModoEdicion = new JPanel();
@@ -59,6 +75,7 @@ public abstract class VistaContenido extends JPanel {
         btnEliminar = new JButton("Eliminar");
         btnEliminar.setFont(UtilidadesGUI.FUENTE);
         zonaModoEdicion.add(btnEliminar);
+
         zonaModoEdicion.add(Box.createHorizontalGlue());
 
     }
