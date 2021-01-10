@@ -15,8 +15,8 @@ public class Correo {
     private static OutputStream out = null;
 
     // Asignamos el usuario y el correo para usar la cuenta de gmail
-    private static final String usuario = "llorornn@gmail.com";
-    private static final String clave = "ejnueiviauqwjyam";
+    private static final String usuario = "fsedenoguerrero@gmail.com";
+    private static final String clave = "vasneauiehbcnpwe";
 
     private static void conectar(){
         try {
