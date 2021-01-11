@@ -26,6 +26,7 @@ public class VistaPrincipal extends JFrame {
     private JComboBox<String> cbNuevoEvento;
     private JList<Evento> listaInscritos;
     private JList<Evento> listaCreados;
+    private JList<Object> listaNoticias;
     private JButton btnAdmin;
 
     private JList<Evento> ultimaListaSeleccionada;
@@ -292,6 +293,8 @@ public class VistaPrincipal extends JFrame {
         zonaUsuario.add(crearCalendario());
         zonaUsuario.add(Box.createRigidArea(new Dimension(0, 10)));
         zonaUsuario.add(crearListaInscritosYPropuestos());
+        zonaUsuario.add(Box.createRigidArea(new Dimension(0, 10)));
+        zonaUsuario.add(crearListaNoticias());
 
         return zonaUsuario;
     }
@@ -403,7 +406,33 @@ public class VistaPrincipal extends JFrame {
         return panel;
     }
 
+    private JPanel crearListaNoticias() {
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
+        JPanel norte = new JPanel();
+        norte.setLayout(new BoxLayout(norte, BoxLayout.X_AXIS));
+
+        JLabel lblMisNoticias = new JLabel("Noticias");
+        lblMisNoticias.setFont(UtilidadesGUI.FUENTE_TITULOS);
+        norte.add(lblMisNoticias);
+        norte.add(Box.createHorizontalGlue());
+
+        panel.add(norte, BorderLayout.NORTH);
+
+
+        JTabbedPane centro = new JTabbedPane();
+        centro.setFont(UtilidadesGUI.FUENTE);
+
+        listaNoticias = new JList<>();
+        listaNoticias.setFont(UtilidadesGUI.FUENTE);
+        JScrollPane scrollInscritos = new JScrollPane(listaNoticias);
+        centro.addTab("Noticias", null, scrollInscritos);
+
+        panel.add(centro, BorderLayout.CENTER);
+
+        return panel;
+    }
 
     private void crearPanelMensajeria() {
         panelMensajeria = new JPanel();
