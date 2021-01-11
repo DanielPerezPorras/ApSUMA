@@ -105,6 +105,16 @@ public abstract class Evento {
         return contenidos;
     }
 
+    public void modificar(Date fecha, String nombre) {
+        BD bd = new BD();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String fechaString = formato.format(fecha);
+        bd.Update("UPDATE Evento SET fecha='" + fechaString + "', nombre='" + nombre + "' WHERE nombre='" + Nombre + "'");
+        System.out.println("sdahflksd");
+        Fecha = fecha;
+        Nombre = nombre;
+    }
+
     public static Evento buscarEvento(String nombre) {
         Evento evento = null;
         BD bd = new BD();

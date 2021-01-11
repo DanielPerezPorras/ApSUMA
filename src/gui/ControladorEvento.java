@@ -2,7 +2,7 @@ package gui;
 
 import gui.contenido.DialogoNuevoEnlace;
 import gui.contenido.DialogoNuevoTexto;
-import modelo.Sesion;
+import modelo.*;
 import modelo.contenido.Contenido;
 import modelo.contenido.ContenidoEnlace;
 import modelo.contenido.ContenidoTexto;
@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Date;
 
 public class ControladorEvento implements ActionListener, MouseListener {
 
@@ -70,8 +71,39 @@ public class ControladorEvento implements ActionListener, MouseListener {
 				}
 				break;
 
+			case "EDITAR_EVENTO":
+				DialogoEditarEvento dialogoEditarEv = new DialogoEditarEvento(vista, vista.getEvento());
+				dialogoEditarEv.setVisible(true);
+				if (dialogoEditarEv.seHaConfirmado()) {
+
+					Date fecha = dialogoEditarEv.getFecha();
+					String nombre = dialogoEditarEv.getTextoNombre();
+					int numClases = dialogoEditarEv.getClases();
+					int duracion = dialogoEditarEv.getDuracion();
+					String dato = dialogoEditarEv.getDato();
+					Evento evento = vista.getEvento();
+
+					if (evento instanceof Curso) {
+						Curso curso = (Curso)evento;
+						curso.modificar(fecha, nombre, numClases, duracion);
+					} else if (evento instanceof ActividadSocial) {
+						ActividadSocial actividad = (ActividadSocial)evento;
+						actividad.modificar(fecha, nombre, dato);
+					} else if (evento instanceof Conferencia) {
+						Conferencia conferencia = (Conferencia)evento;
+						conferencia.modificar(fecha, nombre, dato);
+					} else {
+						throw new RuntimeException("Tipo de evento no reconocido");
+					}
+
+					vista.actualizarTituloEvento();
+					vista.refrescarContenido();
+				}
+				break;
+
 			default:
 
+				// Para eliminar un ítem de contenido
 				if (comando.startsWith("ELIMINAR_CONTENIDO_")) {
 					int resultadoDialogo = JOptionPane.showConfirmDialog(vista, "¿Desea eliminar este contenido?", "Confirmación",
 							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);

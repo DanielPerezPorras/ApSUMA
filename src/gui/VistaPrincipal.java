@@ -33,7 +33,7 @@ public class VistaPrincipal extends JFrame {
     public static void abrirVentana() {
         try {
             VistaPrincipal frame = new VistaPrincipal();
-            frame.controlador(new ControladorNuevaPrincipal(frame));
+            frame.controlador(new ControladorPrincipal(frame));
             frame.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,7 +57,7 @@ public class VistaPrincipal extends JFrame {
 
     }
 
-    public void controlador(ControladorNuevaPrincipal ctr) {
+    public void controlador(ControladorPrincipal ctr) {
         btnEntrar.setActionCommand("ENTRAR");
         btnPerfil.setActionCommand("PERFIL");
 

@@ -33,6 +33,15 @@ public class Conferencia extends Evento {
         }
     }
 
+    public String getEnlace() { return link; }
+
+    public void modificar(Date fecha, String nombre, String enlace) {
+        super.modificar(fecha, nombre);
+        BD bd = new BD();
+        bd.Update("UPDATE Conferencia SET link='" + enlace + "' WHERE nombre='" + getNombre() + "'");
+        link = enlace;
+    }
+
     @Override
     public JLabel getSubtituloPaginaEvento() {
         JLabel resultado = new JLabel("[" + formatoFecha.format(Fecha) + "]" + " Enlace a la conferencia");

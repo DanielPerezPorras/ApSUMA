@@ -6,13 +6,13 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
 
-public class ControladorNuevaPrincipal implements ActionListener, ListSelectionListener, WindowListener {
+public class ControladorPrincipal implements ActionListener, ListSelectionListener, WindowListener {
 
     private VistaPrincipal vista;
     private boolean accedeEvento = false;
     private boolean ejecutandoListListener = false;
 
-    public ControladorNuevaPrincipal(VistaPrincipal vista) {
+    public ControladorPrincipal(VistaPrincipal vista) {
         this.vista = vista;
     }
 

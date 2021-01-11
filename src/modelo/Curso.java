@@ -1,7 +1,6 @@
 package modelo;
 
 import javax.swing.*;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +29,18 @@ public class Curso extends Evento {
         } else {
             throw new ErrorBD("No se ha encontrado un curso con nombre " + nombre);
         }
+    }
+
+    public int getNumClases() { return clases; }
+
+    public int getDuracion() { return duracion; }
+
+    public void modificar(Date fecha, String nombre, int numClases, int duracion) {
+        super.modificar(fecha, nombre);
+        BD bd = new BD();
+        bd.Update("UPDATE Curso SET numClases=" + numClases + ", duracion=" + duracion + " WHERE nombre='" + getNombre() + "'");
+        clases = numClases;
+        this.duracion = duracion;
     }
 
     @Override

@@ -22,6 +22,7 @@ public class VistaEvento extends JFrame {
 
 	private JButton btnAnularInscripcin;
 	private JButton btnVolver;
+	private JButton btnEditarEvento;
 	private JButton btnEliminarEvento;
 	private JComboBox<String> cbNuevoContenido;
 
@@ -66,6 +67,9 @@ public class VistaEvento extends JFrame {
 		
 		btnVolver.addActionListener(ctr);
 		btnVolver.setActionCommand("VOLVER");
+
+		btnEditarEvento.addActionListener(ctr);
+		btnEditarEvento.setActionCommand("EDITAR_EVENTO");
 
 		btnEliminarEvento.addActionListener(ctr);
 		btnEliminarEvento.setActionCommand("ELIMINAR");
@@ -139,12 +143,17 @@ public class VistaEvento extends JFrame {
 		repaint();
 	}
 
+	public void actualizarTituloEvento() {
+		lblTituloCurso.setText(evento.getNombre());
+		crearSubtitulo();
+	}
+
 	// CÓDIGO PARA CREAR LA GUI
 	// ------------------------
 
 	private void crearGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 900, 600);
+		setSize(800, 500);
 		panelPrincipal = new JPanel();
 		panelPrincipal.setLayout(new BorderLayout());
 		setContentPane(panelPrincipal);
@@ -181,9 +190,7 @@ public class VistaEvento extends JFrame {
 		lblTituloCurso.setHorizontalAlignment(JLabel.CENTER);
 
 		// Mostrar algunos datos del evento (duración, número de clases, enlace...)
-		lblDatosCurso = evento.getSubtituloPaginaEvento();
-		lblDatosCurso.setFont(UtilidadesGUI.FUENTE);
-		lblDatosCurso.setHorizontalAlignment(JLabel.CENTER);
+		crearSubtitulo();
 
 		// Añadir contenidos
 		refrescarContenido();
@@ -241,6 +248,13 @@ public class VistaEvento extends JFrame {
 
 		panelModoEdicion.add(Box.createRigidArea(new Dimension(0, 25)));
 
+		btnEditarEvento = new JButton("Cambiar nombre");
+		btnEditarEvento.setFont(UtilidadesGUI.FUENTE);
+		btnEditarEvento.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panelModoEdicion.add(btnEditarEvento);
+
+		panelModoEdicion.add(Box.createRigidArea(new Dimension(0, 25)));
+
 		btnEliminarEvento = new JButton("Eliminar evento");
 		btnEliminarEvento.setFont(UtilidadesGUI.FUENTE);
 		btnEliminarEvento.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -248,6 +262,12 @@ public class VistaEvento extends JFrame {
 
 		scrollModoEdicion = new JScrollPane(panelModoEdicion);
 		scrollModoEdicion.setPreferredSize(new Dimension(240, -1));
+	}
+
+	private void crearSubtitulo() {
+		lblDatosCurso = evento.getSubtituloPaginaEvento();
+		lblDatosCurso.setFont(UtilidadesGUI.FUENTE);
+		lblDatosCurso.setHorizontalAlignment(JLabel.CENTER);
 	}
 
 }

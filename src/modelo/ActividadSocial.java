@@ -1,20 +1,18 @@
 package modelo;
 
-import gui.VistaEvento;
-
 import javax.swing.*;
 import java.util.Date;
 import java.util.List;
 
 public class ActividadSocial extends Evento {
 
-    private String Lugar;
+    private String lugar;
 
     public ActividadSocial(Date dia, String nom,Usuario dueno,  String lugar) {
         super(dia, nom, dueno);
         BD bd = new BD();
         bd.Insert("INSERT INTO ActividadSocial VALUES('" + nom + "', '" + lugar + "');");
-        this.Lugar = lugar;
+        this.lugar = lugar;
     }
 
     public ActividadSocial(String nombre) {
@@ -24,15 +22,24 @@ public class ActividadSocial extends Evento {
 
         if (actividadList.size() > 0) {
             Object[] actividad = actividadList.get(0);
-            Lugar = (String)actividad[0];
+            lugar = (String)actividad[0];
         } else {
             throw new ErrorBD("No se ha encontrado una actividad social con nombre " + nombre);
         }
     }
 
+    public String getLugar() { return lugar; }
+
+    public void modificar(Date fecha, String nombre, String lugar) {
+        super.modificar(fecha, nombre);
+        BD bd = new BD();
+        bd.Update("UPDATE ActividadSocial SET lugar='" + lugar + "' WHERE nombre='" + getNombre() + "'");
+        this.lugar = lugar;
+    }
+
     @Override
     public JLabel getSubtituloPaginaEvento() {
-        return new JLabel("[" + formatoFecha.format(Fecha) + "]" + " Lugar: " + Lugar);
+        return new JLabel("[" + formatoFecha.format(Fecha) + "]" + " Lugar: " + lugar);
     }
 
 }
