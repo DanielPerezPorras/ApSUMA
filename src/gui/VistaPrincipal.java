@@ -445,6 +445,13 @@ public class VistaPrincipal extends JFrame {
     }
 
     public void recargaDatos() {
+        BD bd = new BD();
+        List<Object[]> res = bd.Select("SELECT titulo FROM Noticia");
+        String[] noticias = new String[res.size()];
+        for (int i = 0; i< noticias.length; i++) {
+            noticias[i] = res.get(0)[0].toString();
+        }
+        listaNoticias.setListData(noticias);
         lblUsuario.setText(Sesion.getUsuarioLogueado().getNombreUsuario());
     }
 }
