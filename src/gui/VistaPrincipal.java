@@ -119,6 +119,7 @@ public class VistaPrincipal extends JFrame {
             List<Evento> lCreados = usuario.getEventosCreados();
             Evento[] creados = new Evento[lCreados.size()];
             lCreados.toArray(creados);
+            lCreados.toArray(creados);
             listaCreados.setListData(creados);
         }
     }

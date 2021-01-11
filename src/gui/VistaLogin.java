@@ -19,6 +19,7 @@ public class VistaLogin extends JFrame {
 	private JButton btIniciar;
 	private JButton btRegistrarse;
 	private JButton btnEntrarComoInvitado;
+	private JButton btOlvidar;
 
 
 	public static void abrirVentana() {
@@ -101,6 +102,11 @@ public class VistaLogin extends JFrame {
 		btnEntrarComoInvitado.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 20));
 		btnEntrarComoInvitado.setBounds(443, 310, 275, 25);
 		panelTotal.add(btnEntrarComoInvitado);
+
+		btOlvidar = new JButton("Olvidé mi contraseña");
+		btOlvidar.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
+		btOlvidar.setBounds(530, 410, 190, 25);
+		panelTotal.add(btOlvidar);
 	}
 	
 	public void controlador(ActionListener ctr)
@@ -115,6 +121,8 @@ public class VistaLogin extends JFrame {
 		passwordField.setActionCommand("INICIAR");
 		btRegistrarse.setActionCommand("REGISTRAR");
 		btnEntrarComoInvitado.setActionCommand("INVITADO");
+		btOlvidar.setActionCommand("OLVIDAR");
+		btOlvidar.addActionListener(ctr);
 	}
 
 	public String getTextoUsuario() {

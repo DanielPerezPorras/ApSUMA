@@ -65,6 +65,8 @@ public class ControladorLogin implements ActionListener {
                 vista.dispose();
                 usuario.abrirVentanaPrincipal();
                 break;
+            case "OLVIDAR":
+                VistaOlvidar.abrirVentana();
 
         }
     }
