@@ -1,5 +1,6 @@
 package gui;
 
+import modelo.BD;
 import modelo.Sesion;
 import modelo.Usuario;
 
@@ -8,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 public class VistaPrincipalAdmin extends JFrame {
 
@@ -32,6 +34,7 @@ public class VistaPrincipalAdmin extends JFrame {
 	private JButton btnAadirNoticia;
 	private JTextArea tfNoticia;
 	private JLabel lbNoticias;
+	private JTextArea tfNoticiaActuales;
 
 	public static void abrirVentana() {
 		try {
@@ -142,29 +145,33 @@ public class VistaPrincipalAdmin extends JFrame {
 		cbLista = new JComboBox();
 		cbLista.setBounds(564, 138, 253, 22);
 		panelPrincipal.add(cbLista);
-		
+
 		btnAadirNoticia = new JButton("A\u00F1adir noticia");
 		btnAadirNoticia.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
 		btnAadirNoticia.setBounds(68, 494, 202, 37);
 		panelPrincipal.add(btnAadirNoticia);
-		
+
 		tfNoticia = new JTextArea();
 		tfNoticia.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		tfNoticia.setBounds(42, 324, 253, 158);
+		tfNoticia.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		panelPrincipal.add(tfNoticia);
-		
+
 		lbNoticias = new JLabel("Noticias actuales:");
 		lbNoticias.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 16));
 		lbNoticias.setBounds(42, 82, 191, 27);
 		panelPrincipal.add(lbNoticias);
-		
-		JTextArea tfNoticiaActuales = new JTextArea();
+
+		tfNoticiaActuales = new JTextArea();
 		tfNoticiaActuales.setEditable(false);
 		tfNoticiaActuales.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		tfNoticiaActuales.setBounds(42, 122, 253, 158);
-		tfNoticiaActuales.setText("Noticia 1: Ayer \n Noticia 2: Hoy \n Noticia 3: Mañana");
+		tfNoticiaActuales.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		noticiasActuales();
 		panelPrincipal.add(tfNoticiaActuales);
 	}
+
+
 
 	public String getTextBoxValue()
 	{
@@ -175,10 +182,14 @@ public class VistaPrincipalAdmin extends JFrame {
 	{
 		return cbLista.getSelectedItem().toString();
 	}
-	
+
 	private void noticiasActuales()
 	{
-		//Aqui añadiriamos el texto nuevo
+		tfNoticiaActuales.setText("");
+		BD bd = new BD();
+		for (Object[] not : bd.Select("SELECT titulo FROM Noticia")) {
+			tfNoticiaActuales.append("-" + not[0].toString() + "\n");
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -233,8 +244,16 @@ public class VistaPrincipalAdmin extends JFrame {
 					"Necesita asignar titulo a la noticia", JOptionPane.ERROR_MESSAGE);
 		}else
 		{
-			//Método que la añade a la base de datos
-			tfNoticia.setText("");
+			BD bd = new BD();
+
+			List<Object[]> lista = bd.Select("SELECT MAX(idNoticia) FROM Noticia");
+			int id;
+			try {
+				id = Integer.parseInt(lista.get(0)[0].toString())+1;
+			} catch (NullPointerException ex) {
+				id = 0;
+			}
+			bd.Insert("INSERT INTO Noticia VALUES (" + id + ",'" + texto + "')");
 			noticiasActuales();
 			JOptionPane.showMessageDialog(null,"¡Noticia añadida con éxito!");
 		}

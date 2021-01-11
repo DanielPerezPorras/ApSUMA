@@ -402,6 +402,9 @@ public class VistaPrincipal extends JFrame {
 
         return panel;
     }
+
+
+
     private void crearPanelMensajeria() {
         panelMensajeria = new JPanel();
         panelMensajeria.setLayout(new GridLayout(1, 1));
