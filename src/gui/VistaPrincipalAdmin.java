@@ -283,4 +283,8 @@ public class VistaPrincipalAdmin extends JFrame {
 		btnAadirNoticia.addActionListener(ctr);
 		btnAadirNoticia.setActionCommand("NOTICIA");
 	}
+
+	public void limpiarNoticias() {
+		tfNoticia.setText("");
+	}
 }
