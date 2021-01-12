@@ -53,6 +53,9 @@ public abstract class Contenido {
                 case "prueba":
                     c = new ContenidoTest(id);
                     break;
+                case "documento":
+                    c = new ContenidoDocumento(id);
+                    break;
 
             }
         }
