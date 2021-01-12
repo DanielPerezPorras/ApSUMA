@@ -61,18 +61,24 @@ private final VistaPrincipalAdmin vista;
 			case "CAMBIAR_ROL":
 				String vistaRol = vista.getVerComo();
 				switch (vistaRol) {
+					case "Admin":
+						break;
 					case "Tutor":
 						Sesion.setPermisos(1);
+						VistaPrincipal.abrirVentana();
+						vista.dispose();
 						break;
 					case "Usuario":
 						Sesion.setPermisos(2);
+						VistaPrincipal.abrirVentana();
+						vista.dispose();
 						break;
 					case "Invitado":
 						Sesion.setPermisos(3);
+						VistaPrincipal.abrirVentana();
+						vista.dispose();
 						break;
 				}
-				VistaPrincipal.abrirVentana();
-				vista.dispose();
 				break;
 		}
 		
