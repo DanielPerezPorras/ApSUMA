@@ -26,7 +26,9 @@ public class Sesion {
                 setPermisos(0);
             } else if (usuarioLogueado instanceof Tutor || usuarioLogueado instanceof Colaborador) {
                 setPermisos(1);
-            } else {
+            }else if(usuarioLogueado instanceof Invitado) {
+                setPermisos(3);
+            }else {
                 setPermisos(2);
             }
         } else {
