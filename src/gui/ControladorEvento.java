@@ -1,18 +1,20 @@
 package gui;
 
+import gui.contenido.DialogoNuevoDocumento;
 import gui.contenido.DialogoNuevoEnlace;
+import gui.contenido.DialogoNuevoTest;
 import gui.contenido.DialogoNuevoTexto;
 import modelo.*;
-import modelo.contenido.Contenido;
-import modelo.contenido.ContenidoEnlace;
-import modelo.contenido.ContenidoTexto;
+import modelo.contenido.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ControladorEvento implements ActionListener, MouseListener {
 
@@ -26,6 +28,28 @@ public class ControladorEvento implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
     	String comando = e.getActionCommand();
     	switch (comando) {
+    		//Este primer case contiene lo necesario para buscar un usuario
+			// en el panel Usuario que aún hay que implementar
+
+			/*case "NUEVO ALUMNO":
+				BD bd = new BD();
+				String busqueda = vista.getTextBoxValue();
+
+				List<String> listaNombres = new ArrayList<String>();
+				List<Object[]> listaResultado = bd.Select("SELECT * FROM Usuario WHERE nombreUsuario LIKE '%" + busqueda + "%';");
+				for (Object[] objects : listaResultado)
+				{
+					listaNombres.add((String)objects[0]);
+				}
+				if(listaResultado.size() < 1)
+				{
+					JOptionPane.showMessageDialog(vista, new Exception("Lo siento, no hay usuarios con ese nombre"),
+							"No hay usuarios con ese nombre", JOptionPane.ERROR_MESSAGE);
+				}else
+				{
+					vista.anyadirTexto(listaNombres.toArray(new String[0]));
+				}
+				break;*/
     		case "VOLVER":
     			vista.dispose();
     			abreventana();
@@ -64,6 +88,32 @@ public class ControladorEvento implements ActionListener, MouseListener {
 						dialogoNE.setVisible(true);
 						if (dialogoNE.seHaConfirmado()) {
 							new ContenidoEnlace(vista.getEvento(), dialogoNE.getEnlace(), dialogoNE.getTextoVisible());
+							vista.refrescarContenido();
+						}
+						break;
+
+					case "Test":
+						DialogoNuevoTest dialogoNuevoTest = new DialogoNuevoTest(vista, "Test");
+						dialogoNuevoTest.setVisible(true);
+						if (dialogoNuevoTest.seHaConfirmado()) {
+							new ContenidoTest(vista.getEvento(), dialogoNuevoTest.getEnlace(), dialogoNuevoTest.getTextoVisible());
+							vista.refrescarContenido();
+						}
+						break;
+
+					case "Cuestionario":
+						DialogoNuevoTest dialogoNuevoCuestionario = new DialogoNuevoTest(vista, "Cuestionario");
+						dialogoNuevoCuestionario.setVisible(true);
+						if (dialogoNuevoCuestionario.seHaConfirmado()) {
+							new ContenidoTest(vista.getEvento(), dialogoNuevoCuestionario.getEnlace(), dialogoNuevoCuestionario.getTextoVisible());
+							vista.refrescarContenido();
+						}
+						break;
+					case "Documento":
+						DialogoNuevoDocumento dialogoNuevoDocumento = new DialogoNuevoDocumento(vista);
+						dialogoNuevoDocumento.setVisible(true);
+						if (dialogoNuevoDocumento.seHaConfirmado()) {
+							new ContenidoDocumento(vista.getEvento(), dialogoNuevoDocumento.getEnlace(), dialogoNuevoDocumento.getTextoVisible());
 							vista.refrescarContenido();
 						}
 						break;

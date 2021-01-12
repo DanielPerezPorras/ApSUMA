@@ -3,17 +3,18 @@ package gui.contenido;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ControladorDialogoNuevoEnlace implements ActionListener
+public class ControladorDialogoNuevoDocumento implements ActionListener
 {
 
-    private final DialogoNuevoEnlace dialogo;
+    private final DialogoNuevoDocumento dialogo;
 
-    public ControladorDialogoNuevoEnlace (DialogoNuevoEnlace dialogo) {
+    public ControladorDialogoNuevoDocumento(DialogoNuevoDocumento dialogo) {
         this.dialogo = dialogo;
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e)
+    {
         if (e.getActionCommand().equals("CONFIRMAR")) {
             dialogo.darConfirmacion();
         }

@@ -50,6 +50,12 @@ public abstract class Contenido {
                 case "link":
                     c = new ContenidoEnlace(id);
                     break;
+                case "prueba":
+                    c = new ContenidoTest(id);
+                    break;
+                case "documento":
+                    c = new ContenidoDocumento(id);
+                    break;
 
             }
         }
