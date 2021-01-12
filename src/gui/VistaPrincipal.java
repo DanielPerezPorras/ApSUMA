@@ -48,9 +48,10 @@ public class VistaPrincipal extends JFrame {
         crearGUI();
         System.out.println("Cargando eventos...");
         cargarEventos();
-        cargarEventosUsuario();
-        System.out.println("Se han cargado los eventos");
+
         if (Sesion.getPermisos() < 3) {
+            cargarEventosUsuario();
+            System.out.println("Se han cargado los eventos");
             setNombreUsuario(Sesion.getUsuarioLogueado().getNombreUsuario());
         } else {
             setNombreUsuario("(invitado)");
@@ -76,8 +77,9 @@ public class VistaPrincipal extends JFrame {
         listaCursos.addListSelectionListener(ctr);
         listaActividades.addListSelectionListener(ctr);
         listaConferencias.addListSelectionListener(ctr);
-        listaInscritos.addListSelectionListener(ctr);
-
+        if (Sesion.getPermisos() < 3) {
+            listaInscritos.addListSelectionListener(ctr);
+        }
         addWindowListener(ctr);
 
         if (Sesion.puedoCrearEventos()) {
@@ -292,8 +294,10 @@ public class VistaPrincipal extends JFrame {
         zonaUsuario.add(Box.createRigidArea(new Dimension(0, 10)));
         zonaUsuario.add(crearCalendario());
         zonaUsuario.add(Box.createRigidArea(new Dimension(0, 10)));
-        zonaUsuario.add(crearListaInscritosYPropuestos());
-        zonaUsuario.add(Box.createRigidArea(new Dimension(0, 10)));
+        if (Sesion.getPermisos() < 3) {
+            zonaUsuario.add(crearListaInscritosYPropuestos());
+            zonaUsuario.add(Box.createRigidArea(new Dimension(0, 10)));
+        }
         zonaUsuario.add(crearListaNoticias());
 
         return zonaUsuario;
@@ -420,16 +424,11 @@ public class VistaPrincipal extends JFrame {
 
         panel.add(norte, BorderLayout.NORTH);
 
-
-        JTabbedPane centro = new JTabbedPane();
-        centro.setFont(UtilidadesGUI.FUENTE);
-
         listaNoticias = new JList<>();
         listaNoticias.setFont(UtilidadesGUI.FUENTE);
         JScrollPane scrollInscritos = new JScrollPane(listaNoticias);
-        centro.addTab("Noticias", null, scrollInscritos);
 
-        panel.add(centro, BorderLayout.CENTER);
+        panel.add(scrollInscritos, BorderLayout.CENTER);
 
         return panel;
     }

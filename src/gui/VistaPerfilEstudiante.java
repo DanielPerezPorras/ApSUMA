@@ -23,9 +23,6 @@ public class VistaPerfilEstudiante extends JFrame {
 	private JButton btModificarDatos;
 	private JButton btAtrs;
 	private JButton btCerrarSesin;
-	private JComboBox cbMisCursos;
-	private JComboBox cbMisConferencias;
-	private JComboBox cbMisActividades;
 	private JButton btnEliminarCuenta;
 	private JTextField tfCampoUsuario;
 	private JTextField tfCampoCorreo;
@@ -38,7 +35,7 @@ public class VistaPerfilEstudiante extends JFrame {
 	public VistaPerfilEstudiante() {
 		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 689, 432);
+		setBounds(100, 100, 689, 358);
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panelPrincipal);
@@ -68,37 +65,19 @@ public class VistaPerfilEstudiante extends JFrame {
 		btAtrs = new JButton("Atr\u00E1s");
 		btAtrs.setBackground(SystemColor.activeCaption);
 		btAtrs.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
-		btAtrs.setBounds(529, 353, 143, 41);
+		btAtrs.setBounds(529, 274, 143, 41);
 		panelPrincipal.add(btAtrs);
 		
 		btCerrarSesin = new JButton("Cerrar sesi\u00F3n");
 		btCerrarSesin.setBackground(SystemColor.activeCaption);
 		btCerrarSesin.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
-		btCerrarSesin.setBounds(13, 353, 143, 41);
+		btCerrarSesin.setBounds(13, 274, 143, 41);
 		panelPrincipal.add(btCerrarSesin);
-		
-		cbMisCursos = new JComboBox();
-		cbMisCursos.setModel(new DefaultComboBoxModel(new String[] {"Cursos activos"}));
-		cbMisCursos.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
-		cbMisCursos.setBounds(352, 194, 179, 34);
-		panelPrincipal.add(cbMisCursos);
-		
-		cbMisConferencias = new JComboBox();
-		cbMisConferencias.setModel(new DefaultComboBoxModel(new String[] {"Conferencias activas"}));
-		cbMisConferencias.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
-		cbMisConferencias.setBounds(352, 241, 179, 34);
-		panelPrincipal.add(cbMisConferencias);
-		
-		cbMisActividades = new JComboBox();
-		cbMisActividades.setModel(new DefaultComboBoxModel(new String[] {"Actividades activas"}));
-		cbMisActividades.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
-		cbMisActividades.setBounds(352, 288, 179, 34);
-		panelPrincipal.add(cbMisActividades);
 		
 		btnEliminarCuenta = new JButton("Eliminar cuenta");
 		btnEliminarCuenta.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 15));
 		btnEliminarCuenta.setBackground(SystemColor.activeCaption);
-		btnEliminarCuenta.setBounds(271, 353, 143, 41);
+		btnEliminarCuenta.setBounds(271, 274, 143, 41);
 		panelPrincipal.add(btnEliminarCuenta);
 		
 		tfCampoUsuario = new JTextField();
