@@ -57,6 +57,7 @@ private final VistaPrincipalAdmin vista;
 				break;
 			case "NOTICIA":
 				vista.anyadirNoticia();
+				vista.limpiarNoticias();
 				break;
 			case "CAMBIAR_ROL":
 				String vistaRol = vista.getVerComo();
