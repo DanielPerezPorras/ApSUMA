@@ -424,16 +424,11 @@ public class VistaPrincipal extends JFrame {
 
         panel.add(norte, BorderLayout.NORTH);
 
-
-        JTabbedPane centro = new JTabbedPane();
-        centro.setFont(UtilidadesGUI.FUENTE);
-
         listaNoticias = new JList<>();
         listaNoticias.setFont(UtilidadesGUI.FUENTE);
         JScrollPane scrollInscritos = new JScrollPane(listaNoticias);
-        centro.addTab("Noticias", null, scrollInscritos);
 
-        panel.add(centro, BorderLayout.CENTER);
+        panel.add(scrollInscritos, BorderLayout.CENTER);
 
         return panel;
     }
