@@ -26,8 +26,8 @@ public class MensajeForo {
         List<Object[]> mensajeList = bd.Select("SELECT autor, contenido FROM Foro WHERE id = " + idMensaje + ";");
         if (mensajeList.size() > 0) {
             Object[] user = mensajeList.get(0);
-            autor = (String)user[1];
-            contenido = (String)user[2];
+            autor = (String)user[0];
+            contenido = (String)user[1];
         } else {
             throw new ErrorBD("No se ha encontrado un foro con id " + idMensaje);
         }

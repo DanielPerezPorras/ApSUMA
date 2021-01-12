@@ -26,7 +26,7 @@ public class Foro {
         List<Object[]> foroList = bd.Select("SELECT nombre FROM Foro WHERE id = " + id + ";");
         if (foroList.size() > 0) {
             Object[] user = foroList.get(0);
-            nombre = (String)user[1];
+            nombre = (String)user[0];
             this.id = id;
             cargarMensajes(id);
         } else {
