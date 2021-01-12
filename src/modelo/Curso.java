@@ -1,6 +1,7 @@
 package modelo;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +9,7 @@ public class Curso extends Evento {
 
     private int clases;
     private int duracion;
+    private ArrayList<Foro> foros;
 
     public Curso(Date dia, String nom, Usuario dueno, int num, int duracion) {
         super(dia, nom, dueno);
