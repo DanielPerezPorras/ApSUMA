@@ -155,6 +155,8 @@ public class VistaPrincipalAdmin extends JFrame {
 		tfNoticia.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		tfNoticia.setBounds(42, 324, 253, 158);
 		tfNoticia.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		tfNoticia.setLineWrap(true);
+		tfNoticia.setWrapStyleWord(true);
 		panelPrincipal.add(tfNoticia);
 
 		lbNoticias = new JLabel("Noticias actuales:");
@@ -167,8 +169,11 @@ public class VistaPrincipalAdmin extends JFrame {
 		tfNoticiaActuales.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
 		tfNoticiaActuales.setBounds(42, 122, 253, 158);
 		tfNoticiaActuales.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		tfNoticiaActuales.setLineWrap(true);
+		tfNoticiaActuales.setWrapStyleWord(true);
 		noticiasActuales();
 		panelPrincipal.add(tfNoticiaActuales);
+
 	}
 
 
