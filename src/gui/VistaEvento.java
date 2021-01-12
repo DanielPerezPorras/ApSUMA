@@ -1,11 +1,11 @@
 package gui;
 
 import gui.contenido.VistaContenido;
-import modelo.Evento;
-import modelo.Sesion;
+import modelo.*;
 import modelo.contenido.Contenido;
 
 import javax.swing.*;
+import javax.swing.text.StyledDocument;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.*;
@@ -25,6 +25,12 @@ public class VistaEvento extends JFrame {
 	private JButton btnEditarEvento;
 	private JButton btnEliminarEvento;
 	private JComboBox<String> cbNuevoContenido;
+
+	private JList<Foro> listaForos;
+	private JLabel lblNombreForo;
+	private JTextField tfMensaje;
+	private JButton btnEnviar;
+	private JTextPane tpMensajes;
 
 	private JLabel lblTituloCurso;
 	private JLabel lblDatosCurso;
@@ -193,12 +199,72 @@ public class VistaEvento extends JFrame {
 		crearSubtitulo();
 
 		// Añadir contenidos
-		refrescarContenido();
+		//refrescarContenido();
 
 	}
 
 	private void crearPanelForos() {
-		panelForos = new JPanel();
+		panelForos = new JPanel(new GridLayout(1, 2));
+		panelForos.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+		JPanel izda = new JPanel();
+		izda.setLayout(new BoxLayout(izda, BoxLayout.Y_AXIS));
+		izda.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+		JLabel tituloListaForos = new JLabel("Foros");
+		tituloListaForos.setFont(UtilidadesGUI.FUENTE_TITULOS);
+		tituloListaForos.setAlignmentX(Component.LEFT_ALIGNMENT);
+		izda.add(tituloListaForos);
+		izda.add(Box.createRigidArea(new Dimension(0, 10)));
+
+		listaForos = new JList<>();
+		listaForos.setFont(UtilidadesGUI.FUENTE);
+		listaForos.setAlignmentX(Component.LEFT_ALIGNMENT);
+		izda.add(new JScrollPane(listaForos));
+
+		if (soyCreadorEvento) {
+			JPanel panelGestionarForos = new JPanel();
+			// TODO continuará.
+		}
+
+		JPanel dcha = new JPanel();
+		dcha.setLayout(new BorderLayout());
+		dcha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+		JPanel dchaNorte = new JPanel();
+		dchaNorte.setLayout(new BoxLayout(dchaNorte, BoxLayout.X_AXIS));
+
+		lblNombreForo = new JLabel("Seleccione un foro...");
+		lblNombreForo.setFont(UtilidadesGUI.FUENTE_TITULOS);
+		dchaNorte.add(lblNombreForo, BorderLayout.NORTH);
+
+		JPanel dchaCentro = new JPanel(new GridLayout(1, 1));
+		dchaCentro.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+
+		tpMensajes = new JTextPane();
+		tpMensajes.setContentType("text/html");
+		tpMensajes.setText("<html></html>");
+		tpMensajes.setEditable(false);
+		dchaCentro.add(new JScrollPane(tpMensajes));
+
+		JPanel dchaSur = new JPanel();
+		dchaSur.setLayout(new BoxLayout(dchaSur, BoxLayout.X_AXIS));
+
+		tfMensaje = new JTextField();
+		tfMensaje.setFont(UtilidadesGUI.FUENTE);
+		dchaSur.add(tfMensaje);
+		btnEnviar = new JButton("Enviar");
+		btnEnviar.setFont(UtilidadesGUI.FUENTE);
+		dchaSur.add(btnEnviar);
+
+		dcha.add(dchaNorte, BorderLayout.NORTH);
+		dcha.add(dchaCentro, BorderLayout.CENTER);
+		dcha.add(dchaSur, BorderLayout.SOUTH);
+
+
+		panelForos.add(izda);
+		panelForos.add(dcha);
+
 	}
 
 	private void crearPanelInferior() {
