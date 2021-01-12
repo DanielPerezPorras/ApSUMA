@@ -1,10 +1,12 @@
 package gui;
 
 import gui.contenido.DialogoNuevoEnlace;
+import gui.contenido.DialogoNuevoTest;
 import gui.contenido.DialogoNuevoTexto;
 import modelo.*;
 import modelo.contenido.Contenido;
 import modelo.contenido.ContenidoEnlace;
+import modelo.contenido.ContenidoTest;
 import modelo.contenido.ContenidoTexto;
 
 import javax.swing.*;
@@ -64,6 +66,24 @@ public class ControladorEvento implements ActionListener, MouseListener {
 						dialogoNE.setVisible(true);
 						if (dialogoNE.seHaConfirmado()) {
 							new ContenidoEnlace(vista.getEvento(), dialogoNE.getEnlace(), dialogoNE.getTextoVisible());
+							vista.refrescarContenido();
+						}
+						break;
+
+					case "Test":
+						DialogoNuevoTest dialogoNuevoTest = new DialogoNuevoTest(vista, "Test");
+						dialogoNuevoTest.setVisible(true);
+						if (dialogoNuevoTest.seHaConfirmado()) {
+							new ContenidoTest(vista.getEvento(), dialogoNuevoTest.getEnlace(), dialogoNuevoTest.getTextoVisible());
+							vista.refrescarContenido();
+						}
+						break;
+
+					case "Cuestionario":
+						DialogoNuevoTest dialogoNuevoCuestionario = new DialogoNuevoTest(vista, "Cuestionario");
+						dialogoNuevoCuestionario.setVisible(true);
+						if (dialogoNuevoCuestionario.seHaConfirmado()) {
+							new ContenidoTest(vista.getEvento(), dialogoNuevoCuestionario.getEnlace(), dialogoNuevoCuestionario.getTextoVisible());
 							vista.refrescarContenido();
 						}
 						break;

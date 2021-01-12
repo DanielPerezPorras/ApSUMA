@@ -231,7 +231,7 @@ public class VistaEvento extends JFrame {
 
 		panelModoEdicion.add(Box.createRigidArea(new Dimension(0, 25)));
 
-		cbNuevoContenido = new JComboBox<>(new String[]{"Añadir contenido...", "Texto", "Enlace"});
+		cbNuevoContenido = new JComboBox<>(new String[]{"Añadir contenido...", "Texto", "Enlace", "Test", "Cuestionario"});
 		cbNuevoContenido.setFont(UtilidadesGUI.FUENTE);
 		cbNuevoContenido.setMaximumSize(new Dimension(180, 40));
 		cbNuevoContenido.setAlignmentX(Component.LEFT_ALIGNMENT);
