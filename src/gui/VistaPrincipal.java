@@ -424,16 +424,11 @@ public class VistaPrincipal extends JFrame {
 
         panel.add(norte, BorderLayout.NORTH);
 
-
-        JTabbedPane centro = new JTabbedPane();
-        centro.setFont(UtilidadesGUI.FUENTE);
-
         listaNoticias = new JList<>();
         listaNoticias.setFont(UtilidadesGUI.FUENTE);
         JScrollPane scrollInscritos = new JScrollPane(listaNoticias);
-        centro.addTab("Noticias", null, scrollInscritos);
 
-        panel.add(centro, BorderLayout.CENTER);
+        panel.add(scrollInscritos, BorderLayout.CENTER);
 
         return panel;
     }
@@ -453,7 +448,7 @@ public class VistaPrincipal extends JFrame {
         List<Object[]> res = bd.Select("SELECT titulo FROM Noticia");
         String[] noticias = new String[res.size()];
         for (int i = 0; i< noticias.length; i++) {
-            noticias[i] = res.get(0)[0].toString();
+            noticias[i] = res.get(i)[0].toString();
         }
         listaNoticias.setListData(noticias);
         lblUsuario.setText(Sesion.getUsuarioLogueado().getNombreUsuario());

@@ -14,7 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ControladorEvento implements ActionListener, MouseListener {
 
@@ -28,6 +30,28 @@ public class ControladorEvento implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
     	String comando = e.getActionCommand();
     	switch (comando) {
+    		//Este primer case contiene lo necesario para buscar un usuario
+			// en el panel Usuario que aún hay que implementar
+
+			/*case "NUEVO ALUMNO":
+				BD bd = new BD();
+				String busqueda = vista.getTextBoxValue();
+
+				List<String> listaNombres = new ArrayList<String>();
+				List<Object[]> listaResultado = bd.Select("SELECT * FROM Usuario WHERE nombreUsuario LIKE '%" + busqueda + "%';");
+				for (Object[] objects : listaResultado)
+				{
+					listaNombres.add((String)objects[0]);
+				}
+				if(listaResultado.size() < 1)
+				{
+					JOptionPane.showMessageDialog(vista, new Exception("Lo siento, no hay usuarios con ese nombre"),
+							"No hay usuarios con ese nombre", JOptionPane.ERROR_MESSAGE);
+				}else
+				{
+					vista.anyadirTexto(listaNombres.toArray(new String[0]));
+				}
+				break;*/
     		case "VOLVER":
     			vista.dispose();
     			abreventana();

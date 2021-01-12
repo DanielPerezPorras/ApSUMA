@@ -3,6 +3,7 @@ package gui;
 import gui.contenido.VistaContenido;
 import modelo.Evento;
 import modelo.Sesion;
+import modelo.Usuario;
 import modelo.contenido.Contenido;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ public class VistaEvento extends JFrame {
 	private JPanel panelPrincipal;
 	private JPanel panelContenido;
 	private JPanel panelForos;
+	private JPanel panelUsuarios;
 	private JPanel panelInferior;
 	private JScrollPane scrollModoEdicion;
 
@@ -28,12 +30,20 @@ public class VistaEvento extends JFrame {
 
 	private JLabel lblTituloCurso;
 	private JLabel lblDatosCurso;
+	private JLabel lblTituloUsuarios;
 	private final List<VistaContenido> vistasContenidos = new ArrayList<>();
 	private List<Contenido> contenidos;
 
 	private final boolean soyCreadorEvento;
 	private ControladorEvento controlador;
 	private boolean enModoEdicion;
+
+	private JTextField textField;
+	private JComboBox cbLista;
+	private JLabel lblUsuario;
+	private JLabel lblCorreoUma;
+	private JLabel lblUsuarioumaes_1;
+	private JLabel lblUsuarioumaes;
 
 	public VistaEvento(Evento evento)  {
 
@@ -171,10 +181,27 @@ public class VistaEvento extends JFrame {
 		crearPanelForos();
 		tabbedPane.addTab("Foros", null, panelForos);
 
+		crearPanelUsuarios();
+		tabbedPane.addTab("Usuarios", null, panelUsuarios);
+
 		crearPanelInferior();
 		panelCentral.add(panelInferior, BorderLayout.SOUTH);
 
 		crearPanelModoEdicion();
+
+	}
+
+	private void crearPanelUsuarios() {
+		panelUsuarios = new JPanel();
+		BoxLayout layout = new BoxLayout(panelContenido, BoxLayout.Y_AXIS);
+		panelContenido.setLayout(layout);
+		panelContenido.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+
+		// Mostrar título de la pestaña
+		lblTituloUsuarios = new JLabel("Usuarios");
+		lblTituloUsuarios.setFont(UtilidadesGUI.FUENTE_TITULOS);
+		lblTituloUsuarios.setHorizontalAlignment(JLabel.CENTER);
+		panelUsuarios.add(lblTituloUsuarios);
 
 	}
 
@@ -270,4 +297,34 @@ public class VistaEvento extends JFrame {
 		lblDatosCurso.setHorizontalAlignment(JLabel.CENTER);
 	}
 
+    public String getTextBoxValue() {
+			return textField.getText();
+    }
+
+	public void anyadirTexto(String[] lista) {
+		cbLista.setModel(new DefaultComboBoxModel(lista));
+		mostrarDatosUsuarioSel();
+	}
+
+	private void mostrarDatosUsuarioSel() {
+		Usuario usu = Usuario.buscarUsuario(this.getCorreoActual());
+		mostrarDatosUsuario(usu.getNombreUsuario(),usu.getCorreo(),usu.getCorp());
+	}
+
+	private void mostrarDatosUsuario(String usuario, String correo, String correoUma) {
+		lblUsuario.setText(usuario);
+		lblUsuarioumaes.setText(correo);
+		if(correoUma.equals(""))
+		{
+			lblCorreoUma.setVisible(false);
+		}else
+		{
+			lblCorreoUma.setVisible(true);
+		}
+		lblUsuarioumaes_1.setText(correoUma);
+	}
+
+	private String getCorreoActual() {
+		return cbLista.getSelectedItem().toString();
+	}
 }
