@@ -81,6 +81,9 @@ private final VistaPrincipalAdmin vista;
 						break;
 				}
 				break;
+			case "PERFIL" :
+				VistaPerfilTutor.abrirVentana();
+				break;
 		}
 		
 	}

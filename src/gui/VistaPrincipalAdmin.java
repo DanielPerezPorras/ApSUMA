@@ -35,6 +35,8 @@ public class VistaPrincipalAdmin extends JFrame {
 	private JTextArea tfNoticia;
 	private JLabel lbNoticias;
 	private JTextArea tfNoticiaActuales;
+	private JLabel lblPerfil;
+	private JButton btnPerfil;
 
 	public static void abrirVentana() {
 		try {
@@ -169,6 +171,20 @@ public class VistaPrincipalAdmin extends JFrame {
 		tfNoticiaActuales.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		noticiasActuales();
 		panelPrincipal.add(tfNoticiaActuales);
+
+		lblPerfil = new JLabel("Admin");
+		lblPerfil.setFont(UtilidadesGUI.FUENTE);
+		lblPerfil.setBounds(700, 20, 186, 27);
+		panelPrincipal.add(lblPerfil);
+
+		btnPerfil = new JButton();
+		btnPerfil.setSize(new Dimension(50, 50));
+		btnPerfil.setPreferredSize(new Dimension(50, 50));
+		btnPerfil.setMaximumSize(new Dimension(50, 50));
+		btnPerfil.setBounds(775, 10, 50, 50);
+		UtilidadesGUI.ajustarImagenAButton(btnPerfil, "../recursosApp/gato.png");
+
+		panelPrincipal.add(btnPerfil);
 	}
 
 
@@ -282,6 +298,8 @@ public class VistaPrincipalAdmin extends JFrame {
 		cbRoles.setActionCommand("CAMBIAR_ROL");
 		btnAadirNoticia.addActionListener(ctr);
 		btnAadirNoticia.setActionCommand("NOTICIA");
+		btnPerfil.addActionListener(ctr);
+		btnPerfil.setActionCommand("PERFIL");
 	}
 
 	public void limpiarNoticias() {
