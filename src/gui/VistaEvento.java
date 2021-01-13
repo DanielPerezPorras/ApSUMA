@@ -92,6 +92,9 @@ public class VistaEvento extends JFrame {
 
 		listaForos.addListSelectionListener(ctr);
 
+		btnEnviar.addActionListener(ctr);
+		btnEnviar.setActionCommand("ENVIAR MENSAJE");
+
 		if (soyCreadorEvento) {
 			btnCrearForo.addActionListener(ctr);
 			btnCrearForo.setActionCommand("CREAR FORO");
@@ -178,11 +181,27 @@ public class VistaEvento extends JFrame {
 	public void cargarMensajes() {
 		if (getForoSeleccionado() != null) {
 			StringBuilder documento = new StringBuilder();
-			documento.append(getForoSeleccionado().getNombre());
+
+			List<MensajeForo> mensajes = getForoSeleccionado().getMensajes();
+			if (mensajes.size() > 0) {
+				for (MensajeForo m : mensajes) {
+					documento.append(m.getHtml());
+				}
+			} else {
+				documento.append("No hay mensajes en este foro");
+			}
+
+
 			tpMensajes.setText("<html>" + documento + "</html>");
 		} else {
 			tpMensajes.setText("<html>Seleccione un foro para visualizar aquí los mensajes.</html>");
 		}
+	}
+	public String getTextoAEnviar() {
+		return tfMensaje.getText();
+	}
+	public void vaciarTextoAEnviar() {
+		tfMensaje.setText("");
 	}
 
 	// CÓDIGO PARA CREAR LA GUI

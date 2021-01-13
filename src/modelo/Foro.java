@@ -6,7 +6,7 @@ import java.util.List;
 public class Foro {
     private String nombre;
     private int id;
-    private ArrayList<MensajeForo> mensajes;
+    private List<MensajeForo> mensajes = new ArrayList<>();
 
     public Foro(String nombre, String evento){
         BD bd = new BD();
@@ -28,13 +28,14 @@ public class Foro {
             Object[] user = foroList.get(0);
             nombre = (String)user[0];
             this.id = id;
-            cargarMensajes(id);
+            cargarMensajes();
         } else {
             throw new ErrorBD("No se ha encontrado un foro con id " + id);
         }
     }
 
-    private void cargarMensajes(int id){
+    public void cargarMensajes(){
+        mensajes.clear();
         BD bd = new BD();
         List<Object[]> mensajeList = bd.Select("SELECT idMensajeForo FROM MensajeForo WHERE foro = " + id + ";");
         for (Object[] tupla : mensajeList)
@@ -43,10 +44,9 @@ public class Foro {
             mensajes.add(mensaje);
         }
     }
-
     public String getNombre(){ return this.nombre; }
     public int getId(){ return this.id; }
-    public ArrayList<MensajeForo> getMensajes(){ return this.mensajes; }
+    public List<MensajeForo> getMensajes() { return this.mensajes; }
 
     public void eliminarForo(){
         BD bd = new BD();

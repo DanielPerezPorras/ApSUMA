@@ -1,5 +1,7 @@
 package modelo;
 
+import gui.UtilidadesGUI;
+
 import java.util.List;
 
 public class MensajeForo {
@@ -16,23 +18,28 @@ public class MensajeForo {
             id = 0;
         }
         bd = new BD();
-        bd.Insert("INSERT INTO MensajeForo(" + id + ", '" + autor + "', '" + contenido + "', " + idForo + ");");
+        bd.Insert("INSERT INTO MensajeForo VALUES (" + id + ", '" + autor + "', '" + contenido + "', " + idForo + ");");
         this.autor = autor;
         this.contenido = contenido;
     }
 
     public MensajeForo(int idMensaje){
         BD bd = new BD();
-        List<Object[]> mensajeList = bd.Select("SELECT autor, contenido FROM Foro WHERE id = " + idMensaje + ";");
+        List<Object[]> mensajeList = bd.Select("SELECT autor, contenido FROM MensajeForo WHERE idMensajeForo = " + idMensaje + ";");
         if (mensajeList.size() > 0) {
             Object[] user = mensajeList.get(0);
             autor = (String)user[0];
             contenido = (String)user[1];
         } else {
-            throw new ErrorBD("No se ha encontrado un foro con id " + idMensaje);
+            throw new ErrorBD("No se ha encontrado un mensaje de foro con id " + idMensaje);
         }
     }
 
     public String getAutor(){ return this.autor; }
     public String getContenido(){ return this.contenido; }
+
+    public String getHtml() {
+        return "<b>" + UtilidadesGUI.escaparHtml(autor) + "</b><br/>" + UtilidadesGUI.escaparHtml(contenido) + "<br/><br/>";
+    }
+
 }

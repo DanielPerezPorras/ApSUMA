@@ -136,6 +136,29 @@ public class ControladorEvento implements ActionListener, MouseListener, ListSel
 				}
 				break;
 
+			case "ENVIAR MENSAJE":
+				Foro selForo = vista.getForoSeleccionado();
+				if (selForo != null) {
+					String texto = vista.getTextoAEnviar();
+					if (texto != null && texto.length() > 0) {
+						new MensajeForo(texto, Sesion.getUsuarioLogueado().getNombreUsuario(), selForo.getId());
+						selForo.cargarMensajes();
+						vista.cargarMensajes();
+						vista.vaciarTextoAEnviar();
+					} else {
+						JOptionPane.showMessageDialog(vista,
+								"Introduzca el texto a enviar.",
+								"Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					JOptionPane.showMessageDialog(vista,
+							"Seleccione el foro al que desea enviar.",
+							"Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				break;
+
 			default:
 
 				// Para eliminar un ítem de contenido
