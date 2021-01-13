@@ -36,6 +36,9 @@ public class VistaPrincipal extends JFrame {
     private JTextField tfAsunto;
     private JTextField tfContenido;
     private JButton btnEnviar;
+    private JButton btnActualizar;
+    private JTextField tfBuzon;
+    private JTextArea taContenido;
 
     public static void abrirVentana() {
         try {
@@ -441,10 +444,11 @@ public class VistaPrincipal extends JFrame {
 
     private void crearPanelMensajeria() {
         panelMensajeria = new JPanel();
-        panelMensajeria.setLayout(new BorderLayout());
+        panelMensajeria.setLayout(new BoxLayout(panelMensajeria, BoxLayout.X_AXIS));//setLayout(new BorderLayout());
         panelMensajeria.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
         JPanel panelIzq = new JPanel();
+        panelIzq.setBorder(BorderFactory.createEmptyBorder(0,0,0,20));
         panelIzq.setMaximumSize(new Dimension(250, Integer.MAX_VALUE));
         panelIzq.setPreferredSize(new Dimension(250, -1));
         panelIzq.setLayout(new BoxLayout(panelIzq,BoxLayout.Y_AXIS));
@@ -523,11 +527,35 @@ public class VistaPrincipal extends JFrame {
 
         JPanel panelCentro = new JPanel();
         panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
+        panelCentro.setBorder(BorderFactory.createEmptyBorder(0,20,0,0));
 
+        JPanel panelBuzonActualizar = new JPanel();
+        panelBuzonActualizar.setBorder(BorderFactory.createEmptyBorder(0,0,20,0));;
+        panelBuzonActualizar.setLayout(new BoxLayout(panelBuzonActualizar, BoxLayout.X_AXIS));
         JLabel lbBuzon = new JLabel("Buzón");
         lbBuzon.setFont(UtilidadesGUI.FUENTE);
-        lbBuzon.setAlignmentX(LEFT_ALIGNMENT);
-        panelCentro.add(lbBuzon);
+        btnActualizar = new JButton("Actualizar");
+        panelBuzonActualizar.add(lbBuzon);
+        panelBuzonActualizar.add(Box.createRigidArea(new Dimension(20, 10)));
+        panelBuzonActualizar.add(btnActualizar);
+        panelCentro.add(panelBuzonActualizar);
+
+        tfBuzon = new JTextField();
+        panelCentro.add(tfBuzon);
+
+        JLabel lbContenidoDer = new JLabel("Contenido");
+        lbContenidoDer.setFont(UtilidadesGUI.FUENTE);
+        lbContenidoDer.setAlignmentX(LEFT_ALIGNMENT);
+        panelCentro.add(lbContenidoDer);
+
+        taContenido = new JTextArea();
+        taContenido.setFont(UtilidadesGUI.FUENTE);
+        taContenido.setLineWrap(true);
+        taContenido.setWrapStyleWord(true);
+        panelCentro.add(taContenido);
+
+        panelMensajeria.add(new JSeparator(SwingConstants.VERTICAL));
+        panelMensajeria.add(panelCentro);
     }
 
     public void alternarCreacion() {
