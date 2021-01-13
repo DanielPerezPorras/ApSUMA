@@ -1,6 +1,7 @@
 package gui;
 
 import modelo.BD;
+import modelo.Correo;
 import modelo.Sesion;
 import modelo.Usuario;
 

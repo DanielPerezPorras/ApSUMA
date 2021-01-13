@@ -2,6 +2,9 @@ package modelo;
 
 import gui.VistaPrincipal;
 
+import java.io.IOException;
+import java.util.List;
+
 /**
  * Información sobre la sesión abierta actualmente.
  */

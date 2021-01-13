@@ -1,4 +1,5 @@
 import gui.VistaLogin;
+import modelo.Correo;
 
 import java.awt.*;
 
@@ -11,6 +12,10 @@ public class Programa {
                 VistaLogin.abrirVentana();
             }
         });
+
+        /*Correo c = new Correo();
+        Thread t = new Thread(c);
+        t.start();*/
 
     }
 

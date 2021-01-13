@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-public class Correo {
+public class Correo implements Runnable{
     // Socket para las comunicaciones
     private static SSLSocket socket = null;
     // Streams para el envío y recepción
@@ -28,7 +28,6 @@ public class Correo {
 
         } catch (IOException e) {
             System.out.println("Error al conectar al servidor: " + e.getMessage());
-            System.exit(-1);
         }
     }
 
@@ -41,7 +40,6 @@ public class Correo {
 
         } catch (IOException e) {
             System.out.println("Error al cerrar la conexión con el servidor: " + e.getMessage());
-            System.exit(-1);
         }
     }
 
@@ -59,7 +57,6 @@ public class Correo {
             out.flush();
         } catch (IOException e) {
             System.out.println("Error al enviar: " + e.getMessage());
-            System.exit(-1);
         }
     }
 
@@ -71,7 +68,6 @@ public class Correo {
 
         } catch (IOException e) {
             System.out.println("Error al recibir: " + e.getMessage());
-            System.exit(-1);
         }
         // Convertimos el mensaje recibido a String ...
         String recv = new String(buffer,0,buffer.length);
@@ -87,7 +83,6 @@ public class Correo {
             enviar("QUIT");
             // Desconectamos del servidor
             desconectar();
-            System.exit(0);
         }
     }
 
@@ -118,7 +113,7 @@ public class Correo {
         recibir();
 
         // Enviamos origen del mensaje (entre <>)y su recibimos su respuesta
-        enviar("MAIL FROM: <" + "llorornn@gmail.com" + ">" );
+        enviar("MAIL FROM: <" + "fsedenoguerrero@gmail.com" + ">" );
         recibir();
 
         // Enviamos los destinos del mensaje (entre <>) y recibimos su respuesta
@@ -133,7 +128,7 @@ public class Correo {
 
         // Cabeceras:
         // Enviar la cabecera From: (no hay que recibir respuesta)
-        enviar("From: Ornn <" + usuario + ">");
+        enviar("From: APS_UMA <" + usuario + ">");
 
         // Enviar las cabeceras To: (no hay que recibir respuesta)
         enviar("To: <" + correo + ">");
@@ -159,5 +154,27 @@ public class Correo {
         // Nos desconectamos del servidor
         desconectar();
 
+    }
+
+    private void notificar() {
+        BD bd = new BD();
+        List<Object[]> lista = bd.Select("SELECT ue.correo,e.nombre FROM UsuarioEvento ue join Evento e on (ue.nombre = e.nombre)  WHERE notificado=0 and DATEDIFF(e.fecha,CURDATE()) <=1;");
+        for (Object[] ob : lista) {
+            String correo = ob[0].toString();
+            String nombre = ob[1].toString();
+            System.out.println(correo+nombre);
+            try {
+                Correo.mandarCorreo(correo,"Aviso sobre " + nombre,"El evento " + nombre +  " comenzará pronto, ¡No te lo pierdas!");
+                bd.Update("UPDATE UsuarioEvento SET notificado=1 WHERE correo='" + correo + "' and nombre = '" + nombre + "';");
+            } catch (Exception e) {
+                System.out.println("errorsito");
+            }
+
+        }
+    }
+
+    @Override
+    public void run() {
+        this.notificar();
     }
 }
