@@ -47,6 +47,11 @@ public class Foro {
     public String getNombre(){ return this.nombre; }
     public int getId(){ return this.id; }
     public List<MensajeForo> getMensajes() { return this.mensajes; }
+    public boolean hayMensajesNuevos() {
+        BD bd = new BD();
+        long cuentaMensajes = (long)bd.SelectEscalar("SELECT COUNT(*) FROM MensajeForo WHERE foro = " + id + ";");
+        return cuentaMensajes > mensajes.size();
+    }
 
     public void eliminarForo(){
         BD bd = new BD();

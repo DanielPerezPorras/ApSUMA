@@ -28,6 +28,7 @@ public class VistaEvento extends JFrame {
 	private JList<Foro> listaForos;
 	private JLabel lblNombreForo;
 	private JTextField tfMensaje;
+	private JButton btnActualizar;
 	private JButton btnEnviar;
 	private JTextPane tpMensajes;
 	private JButton btnCrearForo;
@@ -91,6 +92,9 @@ public class VistaEvento extends JFrame {
 		}
 
 		listaForos.addListSelectionListener(ctr);
+
+		btnActualizar.addActionListener(ctr);
+		btnActualizar.setActionCommand("ACTUALIZAR");
 
 		btnEnviar.addActionListener(ctr);
 		btnEnviar.setActionCommand("ENVIAR MENSAJE");
@@ -296,7 +300,13 @@ public class VistaEvento extends JFrame {
 
 		lblNombreForo = new JLabel(" ");
 		lblNombreForo.setFont(UtilidadesGUI.FUENTE_TITULOS);
+
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.setFont(UtilidadesGUI.FUENTE);
+
 		dchaNorte.add(lblNombreForo, BorderLayout.NORTH);
+		dchaNorte.add(Box.createHorizontalGlue());
+		dchaNorte.add(btnActualizar);
 
 		JPanel dchaCentro = new JPanel(new GridLayout(1, 1));
 		dchaCentro.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));

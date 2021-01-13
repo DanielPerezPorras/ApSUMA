@@ -136,12 +136,29 @@ public class ControladorEvento implements ActionListener, MouseListener, ListSel
 				}
 				break;
 
+			case "ACTUALIZAR":
+				Foro foroAActualizar = vista.getForoSeleccionado();
+				if (foroAActualizar != null) {
+
+					if (foroAActualizar.hayMensajesNuevos()) {
+						foroAActualizar.cargarMensajes();
+						vista.refrescarListaForos();
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(vista,
+							"Seleccione un foro.",
+							"Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				break;
+
 			case "ENVIAR MENSAJE":
 				Foro selForo = vista.getForoSeleccionado();
 				if (selForo != null) {
 					String texto = vista.getTextoAEnviar();
 					if (texto != null && texto.length() > 0) {
-						new MensajeForo(texto, Sesion.getUsuarioLogueado().getNombreUsuario(), selForo.getId());
+						new MensajeForo(texto, Sesion.getUsuarioLogueado().getCorreo(), selForo.getId());
 						selForo.cargarMensajes();
 						vista.cargarMensajes();
 						vista.vaciarTextoAEnviar();
