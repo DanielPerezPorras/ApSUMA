@@ -5,6 +5,7 @@ import net.sourceforge.jdatepicker.impl.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,12 +69,45 @@ public class VistaPrincipal extends JFrame {
 
     }
 
+    public String getBusqueda(){
+        return tfBuscar.getText();
+    }
+
+    public void anyadirBusqueda(String[] lista){
+        cbUsuario.setModel(new DefaultComboBoxModel(lista));
+    }
+
+    public String getReceptor(){
+        return (String)cbUsuario.getSelectedItem();
+    }
+
+    public String getAsunto(){
+        return tfAsunto.getText();
+    }
+
+    public String getContenido(){
+        return tfContenido.getText();
+    }
+
+    public void limpiarEnviar(){
+        tfBuscar.setText("");
+        cbUsuario.setModel(new DefaultComboBoxModel(new String[1]));
+        tfAsunto.setText("");
+        tfContenido.setText("");
+    }
+
     public void controlador(ControladorPrincipal ctr) {
         btnEntrar.setActionCommand("ENTRAR");
         btnPerfil.setActionCommand("PERFIL");
+        btnBuscar.setActionCommand("BUSCAR");
+        btnEnviar.setActionCommand("ENVIAR");
+        btnActualizar.setActionCommand("ACTUALIZAR");
 
         btnEntrar.addActionListener(ctr);
         btnPerfil.addActionListener(ctr);
+        btnBuscar.addActionListener(ctr);
+        btnEnviar.addActionListener(ctr);
+        btnActualizar.addActionListener(ctr);
 
         if (Sesion.puedoCrearEventos()){
             cbNuevoEvento.setActionCommand("CREAR EVENTO");

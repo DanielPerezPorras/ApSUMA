@@ -5,6 +5,8 @@ import modelo.*;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControladorPrincipal implements ActionListener, ListSelectionListener, WindowListener {
 
@@ -48,6 +50,43 @@ public class ControladorPrincipal implements ActionListener, ListSelectionListen
                         }
                     }
                 }
+                break;
+
+            case "BUSCAR":
+                String busqueda = vista.getBusqueda();
+
+                List<String> listaNombres = new ArrayList<String>();
+                BD bd = new BD();
+                List<Object[]> listaResultado = bd.Select("SELECT * FROM Usuario WHERE nombreUsuario LIKE '%" + busqueda + "%' AND correo != '" + Sesion.getUsuarioLogueado().getCorreo() + "';");
+                for (Object[] objects : listaResultado)
+                {
+                    listaNombres.add((String)objects[0]);
+                }
+                if(listaResultado.size() < 1) {
+                    JOptionPane.showMessageDialog(vista, new Exception("Lo siento, no hay usuarios con ese nombre"),
+                            "No hay usuarios con ese nombre", JOptionPane.ERROR_MESSAGE);
+                }else
+                {
+                    vista.anyadirBusqueda(listaNombres.toArray(new String[0]));
+                }
+                break;
+
+            case "ACTUALIZAR":
+                break;
+
+            case "ENVIAR":
+                String receptor = vista.getReceptor();
+                String asunto = vista.getAsunto();
+                String contenido = vista.getContenido();
+
+                if (receptor == null || asunto == null || contenido == null){
+                    JOptionPane.showMessageDialog(new JFrame(), "Error a la hora de enviar el mensaje, campos incompletos.", "Error!?",
+                            JOptionPane.ERROR_MESSAGE);
+                } else {
+                    MensajeDirecto mensaje = new MensajeDirecto(Sesion.getUsuarioLogueado().getCorreo(), receptor, contenido, asunto);
+                    JOptionPane.showMessageDialog(Sesion.getVistaPrincipal(), "¡Mensaje enviado con éxito!");
+                }
+                vista.limpiarEnviar();
                 break;
 
             case "ADMIN":

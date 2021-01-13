@@ -18,7 +18,7 @@ public class MensajeDirecto {
             id = 0;
         }
         bd = new BD();
-        bd.Insert("INSERT INTO MensajeDirecto(" + id + ", '" + emisor + "', '" + receptor + "', '" + contenido + "', '" + asunto + "');");
+        bd.Insert("INSERT INTO MensajeDirecto VALUES (" + id + ", '" + emisor + "', '" + receptor + "', '" + contenido + "', '" + asunto + "');");
         this.emisor = emisor;
         this.receptor = receptor;
         this.contenido = contenido;
