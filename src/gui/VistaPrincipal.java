@@ -75,6 +75,7 @@ public class VistaPrincipal extends JFrame {
 
     public void anyadirBusqueda(String[] lista){
         cbUsuario.setModel(new DefaultComboBoxModel(lista));
+        cbUsuario.setMaximumSize(new Dimension(200, 50));
     }
 
     public String getReceptor(){
@@ -501,6 +502,8 @@ public class VistaPrincipal extends JFrame {
         panelBuscar.setLayout(new BoxLayout(panelBuscar, BoxLayout.X_AXIS));
         btnBuscar = new JButton("Buscar");
         tfBuscar = new JTextField();
+        tfBuscar.setMinimumSize(new Dimension(300, 80));
+        tfBuscar.setMaximumSize(new Dimension(300, 80));
         //tfBuscar.setPreferredSize(new Dimension(290, 10));
         panelBarraBuscar.add(Box.createRigidArea(new Dimension(0, 10)));
         panelBarraBuscar.add(tfBuscar);
@@ -517,6 +520,7 @@ public class VistaPrincipal extends JFrame {
         JLabel lbPara = new JLabel("Para");
         lbPara.setFont(UtilidadesGUI.FUENTE);
         cbUsuario = new JComboBox<>();
+        cbUsuario.setMaximumSize(new Dimension(200, 50));
         panelPara.add(lbPara);
         panelPara.add(Box.createRigidArea(new Dimension(20, 10)));
         panelPara.add(cbUsuario);
@@ -530,7 +534,7 @@ public class VistaPrincipal extends JFrame {
         JLabel lbAsunto = new JLabel("Asunto");
         lbAsunto.setFont(UtilidadesGUI.FUENTE);
         tfAsunto = new JTextField();
-        tfAsunto.setPreferredSize(new Dimension(290, 50));
+        tfAsunto.setMaximumSize(new Dimension(300, 50));
         panelAsunto.add(lbAsunto);
         panelAsunto.add(Box.createRigidArea(new Dimension(20, 10)));
         panelAsunto.add(tfAsunto);
