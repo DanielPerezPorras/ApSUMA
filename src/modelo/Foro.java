@@ -23,7 +23,7 @@ public class Foro {
 
     public Foro(int id){
         BD bd = new BD();
-        List<Object[]> foroList = bd.Select("SELECT nombre FROM Foro WHERE id = " + id + ";");
+        List<Object[]> foroList = bd.Select("SELECT nombre FROM Foro WHERE idForo = " + id + ";");
         if (foroList.size() > 0) {
             Object[] user = foroList.get(0);
             nombre = (String)user[0];
@@ -51,8 +51,13 @@ public class Foro {
     public void eliminarForo(){
         BD bd = new BD();
         bd.Delete("DELETE FROM Foro WHERE idForo = " + id + ";");
-        this.id = 0;
+        this.id = -1;
         this.nombre = null;
         this.mensajes = null;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
 }

@@ -99,7 +99,7 @@ public abstract class Usuario {
 
     public void apuntarseEvento(Evento evento){
         BD bd = new BD();
-        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + evento.getNombre() + "');");
+        bd.Insert("INSERT INTO UsuarioEvento (correo, nombre) VALUES('" + getCorreo() + "', '" + evento.getNombre() + "');");
     }
 
     public void desapuntarseEvento(Evento evento){

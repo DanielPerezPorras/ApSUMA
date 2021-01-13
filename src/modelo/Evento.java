@@ -105,6 +105,17 @@ public abstract class Evento {
         return contenidos;
     }
 
+    public List<Foro> getForos() {
+        List<Foro> foros = new ArrayList<>();
+        BD bd = new BD();
+        String consulta = "SELECT idForo FROM Foro WHERE evento='" + Nombre + "'";
+        List<Object[]> resultados = bd.Select(consulta);
+        for (Object[] tupla : resultados) {
+            foros.add(new Foro((int)tupla[0]));
+        }
+        return foros;
+    }
+
     public void modificar(Date fecha, String nombre) {
         BD bd = new BD();
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");

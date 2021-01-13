@@ -5,7 +5,6 @@ import modelo.*;
 import modelo.contenido.Contenido;
 
 import javax.swing.*;
-import javax.swing.text.StyledDocument;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.*;
@@ -31,11 +30,15 @@ public class VistaEvento extends JFrame {
 	private JTextField tfMensaje;
 	private JButton btnEnviar;
 	private JTextPane tpMensajes;
+	private JButton btnCrearForo;
+	private JButton btnEliminarForo;
 
 	private JLabel lblTituloCurso;
 	private JLabel lblDatosCurso;
 	private final List<VistaContenido> vistasContenidos = new ArrayList<>();
 	private List<Contenido> contenidos;
+	private JPanel panelGestionarForos;
+	private JPanel panelForosIzquierda;
 
 	private final boolean soyCreadorEvento;
 	private ControladorEvento controlador;
@@ -47,9 +50,9 @@ public class VistaEvento extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.evento = evento;
 
+		soyCreadorEvento = Sesion.getUsuarioLogueado().getCorreo().equals(evento.getCreador().getCorreo());
 		crearGUI();
 
-		soyCreadorEvento = Sesion.getUsuarioLogueado().getCorreo().equals(evento.getCreador().getCorreo());
 		if (soyCreadorEvento) {
 			setModoEdicion(false);
 		}
@@ -86,17 +89,30 @@ public class VistaEvento extends JFrame {
 		for (VistaContenido v : vistasContenidos) {
 			v.controlador(ctr);
 		}
+
+		listaForos.addListSelectionListener(ctr);
+
+		if (soyCreadorEvento) {
+			btnCrearForo.addActionListener(ctr);
+			btnCrearForo.setActionCommand("CREAR FORO");
+			btnEliminarForo.addActionListener(ctr);
+			btnEliminarForo.setActionCommand("ELIMINAR FORO");
+		}
+
 	}
 
 	public Evento getEvento() { return evento; }
+
 	public void setModoEdicion(boolean mostrar) {
 		enModoEdicion = mostrar;
 		if (mostrar) {
 			panelPrincipal.add(scrollModoEdicion, BorderLayout.EAST);
 			btnAnularInscripcin.setText("Ver como alumno");
+			panelForosIzquierda.add(panelGestionarForos, BorderLayout.SOUTH);
 		} else {
 			panelPrincipal.remove(scrollModoEdicion);
 			btnAnularInscripcin.setText("Editar");
+			panelForosIzquierda.remove(panelGestionarForos);
 		}
 		for (VistaContenido v : vistasContenidos) {
 			v.setModoEdicion(mostrar);
@@ -112,8 +128,6 @@ public class VistaEvento extends JFrame {
 	public String getSeleccionNuevoContenido() {
 		return (String)cbNuevoContenido.getSelectedItem();
 	}
-
-	// pos != id en la BD del contenido!!!
 	public Contenido getContenidoPorPosicion(int pos) {
 		if (pos >= 0 && pos < contenidos.size()) {
 			return contenidos.get(pos);
@@ -124,7 +138,6 @@ public class VistaEvento extends JFrame {
 	public int getPosicionDeContenido(Contenido c) {
 		return contenidos.indexOf(c);
 	}
-
 	public void refrescarContenido() {
 		panelContenido.removeAll();
 
@@ -148,10 +161,28 @@ public class VistaEvento extends JFrame {
 		revalidate();
 		repaint();
 	}
-
 	public void actualizarTituloEvento() {
 		lblTituloCurso.setText(evento.getNombre());
 		crearSubtitulo();
+	}
+
+	public void refrescarListaForos() {
+		List<Foro> foros = evento.getForos();
+		Foro[] forosArray = new Foro[foros.size()];
+		foros.toArray(forosArray);
+		listaForos.setListData(forosArray);
+	}
+	public Foro getForoSeleccionado() {
+		return listaForos.getSelectedValue();
+	}
+	public void cargarMensajes() {
+		if (getForoSeleccionado() != null) {
+			StringBuilder documento = new StringBuilder();
+			documento.append(getForoSeleccionado().getNombre());
+			tpMensajes.setText("<html>" + documento + "</html>");
+		} else {
+			tpMensajes.setText("<html>Seleccione un foro para visualizar aquí los mensajes.</html>");
+		}
 	}
 
 	// CÓDIGO PARA CREAR LA GUI
@@ -199,7 +230,7 @@ public class VistaEvento extends JFrame {
 		crearSubtitulo();
 
 		// Añadir contenidos
-		//refrescarContenido();
+		refrescarContenido();
 
 	}
 
@@ -207,24 +238,34 @@ public class VistaEvento extends JFrame {
 		panelForos = new JPanel(new GridLayout(1, 2));
 		panelForos.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-		JPanel izda = new JPanel();
-		izda.setLayout(new BoxLayout(izda, BoxLayout.Y_AXIS));
-		izda.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		panelForosIzquierda = new JPanel(new BorderLayout());
+		panelForosIzquierda.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		JLabel tituloListaForos = new JLabel("Foros");
 		tituloListaForos.setFont(UtilidadesGUI.FUENTE_TITULOS);
 		tituloListaForos.setAlignmentX(Component.LEFT_ALIGNMENT);
-		izda.add(tituloListaForos);
-		izda.add(Box.createRigidArea(new Dimension(0, 10)));
+		panelForosIzquierda.add(tituloListaForos, BorderLayout.NORTH);
+
+		JPanel izdaCentro = new JPanel(new GridLayout(1, 1));
+		izdaCentro.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 
 		listaForos = new JList<>();
 		listaForos.setFont(UtilidadesGUI.FUENTE);
 		listaForos.setAlignmentX(Component.LEFT_ALIGNMENT);
-		izda.add(new JScrollPane(listaForos));
+		izdaCentro.add(new JScrollPane(listaForos));
+		panelForosIzquierda.add(izdaCentro, BorderLayout.CENTER);
 
 		if (soyCreadorEvento) {
-			JPanel panelGestionarForos = new JPanel();
-			// TODO continuará.
+			panelGestionarForos = new JPanel(new GridLayout(1, 2));
+			panelGestionarForos.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+
+			btnCrearForo = new JButton("Crear foro");
+			btnCrearForo.setFont(UtilidadesGUI.FUENTE);
+			panelGestionarForos.add(btnCrearForo);
+
+			btnEliminarForo = new JButton("Eliminar foro");
+			btnEliminarForo.setFont(UtilidadesGUI.FUENTE);
+			panelGestionarForos.add(btnEliminarForo);
 		}
 
 		JPanel dcha = new JPanel();
@@ -234,7 +275,7 @@ public class VistaEvento extends JFrame {
 		JPanel dchaNorte = new JPanel();
 		dchaNorte.setLayout(new BoxLayout(dchaNorte, BoxLayout.X_AXIS));
 
-		lblNombreForo = new JLabel("Seleccione un foro...");
+		lblNombreForo = new JLabel(" ");
 		lblNombreForo.setFont(UtilidadesGUI.FUENTE_TITULOS);
 		dchaNorte.add(lblNombreForo, BorderLayout.NORTH);
 
@@ -243,7 +284,7 @@ public class VistaEvento extends JFrame {
 
 		tpMensajes = new JTextPane();
 		tpMensajes.setContentType("text/html");
-		tpMensajes.setText("<html></html>");
+		tpMensajes.setText("<html>Seleccione un foro para visualizar aquí los mensajes.</html>");
 		tpMensajes.setEditable(false);
 		dchaCentro.add(new JScrollPane(tpMensajes));
 
@@ -262,8 +303,10 @@ public class VistaEvento extends JFrame {
 		dcha.add(dchaSur, BorderLayout.SOUTH);
 
 
-		panelForos.add(izda);
+		panelForos.add(panelForosIzquierda);
 		panelForos.add(dcha);
+
+		refrescarListaForos();
 
 	}
 

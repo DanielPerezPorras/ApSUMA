@@ -8,13 +8,15 @@ import modelo.contenido.ContenidoEnlace;
 import modelo.contenido.ContenidoTexto;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Date;
 
-public class ControladorEvento implements ActionListener, MouseListener {
+public class ControladorEvento implements ActionListener, MouseListener, ListSelectionListener {
 
     private final VistaEvento vista;
 
@@ -101,6 +103,39 @@ public class ControladorEvento implements ActionListener, MouseListener {
 				}
 				break;
 
+			case "CREAR FORO":
+				String nombre = JOptionPane.showInputDialog(
+						vista,
+						"Introduzca un nombre para el foro",
+						"Crear foro",
+						JOptionPane.PLAIN_MESSAGE);
+				if (nombre != null) {
+					new Foro(nombre, vista.getEvento().getNombre());
+					vista.refrescarListaForos();
+				}
+				break;
+
+			case "ELIMINAR FORO":
+				Foro sel = vista.getForoSeleccionado();
+				if (sel != null) {
+					String[] opciones = {"Sí", "No"};
+					int n = JOptionPane.showOptionDialog(vista,
+							"¿Desea eliminar el foro \"" + sel.getNombre() + "\"?",
+							"Eliminar foro",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
+					if (n == 0) {
+						sel.eliminarForo();
+						vista.refrescarListaForos();
+					}
+				} else {
+					JOptionPane.showMessageDialog(vista,
+							"Seleccione el foro que desea eliminar.",
+							"Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+				break;
+
 			default:
 
 				// Para eliminar un ítem de contenido
@@ -126,32 +161,24 @@ public class ControladorEvento implements ActionListener, MouseListener {
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseClicked(MouseEvent e) { }
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent e) { }
 
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseExited(MouseEvent e) { }
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mousePressed(MouseEvent e) { }
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mouseReleased(MouseEvent e) { }
+
+	@Override
+	// Cuando cambia la selección de la lista de foros.
+	public void valueChanged(ListSelectionEvent e) {
+		vista.cargarMensajes();
 	}
+
 }
