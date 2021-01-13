@@ -214,7 +214,10 @@ public class VistaEvento extends JFrame {
 		tabbedPane.addTab("Foros", null, panelForos);
 
 		crearPanelUsuarios();
-		tabbedPane.addTab("Usuarios", null, panelUsuarios);
+
+		if (Sesion.getPermisos()<=1) {
+			tabbedPane.addTab("Usuarios", null, panelUsuarios);
+		}
 		
 		panelBusqueda = new JPanel();
 		panelBusqueda.setMaximumSize(new Dimension(90000, 23));
