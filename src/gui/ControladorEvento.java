@@ -5,6 +5,8 @@ import modelo.*;
 import modelo.contenido.*;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -13,9 +15,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ControladorEvento implements ActionListener, MouseListener {
+public class ControladorEvento implements ActionListener, MouseListener, ListSelectionListener {
 
     private final VistaEvento vista;
+	private boolean ejecutandoListListener = false;
+	private Usuario seleccionado;
 
     public ControladorEvento(VistaEvento vista) {
         this.vista = vista;
@@ -25,18 +29,19 @@ public class ControladorEvento implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
     	String comando = e.getActionCommand();
     	switch (comando) {
-    		//Este primer case contiene lo necesario para buscar un usuario
-			// en el panel Usuario que aún hay que implementar
 
-			/*case "NUEVO ALUMNO":
+			case "BUSCAR":
 				BD bd = new BD();
 				String busqueda = vista.getTextBoxValue();
 
-				List<String> listaNombres = new ArrayList<String>();
+				String[] nombres;
 				List<Object[]> listaResultado = bd.Select("SELECT * FROM Usuario WHERE nombreUsuario LIKE '%" + busqueda + "%';");
+				nombres = new String[listaResultado.size()];
+				int i = 0;
 				for (Object[] objects : listaResultado)
 				{
-					listaNombres.add((String)objects[0]);
+					nombres[i] =  (String)objects[0];
+					i++;
 				}
 				if(listaResultado.size() < 1)
 				{
@@ -44,9 +49,10 @@ public class ControladorEvento implements ActionListener, MouseListener {
 							"No hay usuarios con ese nombre", JOptionPane.ERROR_MESSAGE);
 				}else
 				{
-					vista.anyadirTexto(listaNombres.toArray(new String[0]));
+					vista.resultadoBusqueda(nombres);
 				}
-				break;*/
+				vista.limpiar();
+				break;
     		case "VOLVER":
     			vista.dispose();
     			abreventana();
@@ -155,7 +161,24 @@ public class ControladorEvento implements ActionListener, MouseListener {
 					vista.refrescarContenido();
 				}
 				break;
-
+			case "ELIM_SANCION" :
+				bd = new BD();
+				bd.Update("UPDATE Usuario SET fechaSancion = null WHERE correo = '" + seleccionado.getCorreo() + "';");
+				JOptionPane.showMessageDialog(null, "Sanción Eliminada");
+				break;
+			case "SANCION" :
+				bd = new BD();
+				bd.Update("UPDATE Usuario SET fechaSancion = DATE_ADD(CURDATE(), INTERVAL 5 DAY) WHERE correo = '" + seleccionado.getCorreo() + "';");
+				JOptionPane.showMessageDialog(null, "Usuario Sancionado");
+				break;
+			case "EXPULSAR" :
+				seleccionado.desapuntarseEvento(vista.getEvento());
+				JOptionPane.showMessageDialog(null, "Usuario Expulsado del Curso");
+				break;
+			case "ANYADIR" :
+				seleccionado.apuntarseEvento(vista.getEvento());
+				JOptionPane.showMessageDialog(null, "Usuario añadido al Curso");
+				break;
 			default:
 
 				// Para eliminar un ítem de contenido
@@ -208,5 +231,16 @@ public class ControladorEvento implements ActionListener, MouseListener {
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		if (vista.selectedRows()>=1 && !e.getValueIsAdjusting() && !ejecutandoListListener) {
+			ejecutandoListListener = true;
+			seleccionado =  Usuario.buscarUsuario(vista.getValorLista());
+			vista.datosUsuario(seleccionado);
+
+			ejecutandoListListener = false;
+		}
 	}
 }

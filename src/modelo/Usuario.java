@@ -11,6 +11,7 @@ public abstract class Usuario {
     private String correo;
     private String nombreUsuario;
     private String contra;
+    private boolean sancion;
 
     public Usuario(){}
 
@@ -34,6 +35,7 @@ public abstract class Usuario {
             correo = cor;
             nombreUsuario = (String)user[1];
             contra = (String)user[2];
+            sancion = user[3]!=null;
         } else {
             throw new ErrorBD("No se ha encontrado un usuario con correo " + cor);
         }
@@ -104,7 +106,7 @@ public abstract class Usuario {
 
     public void desapuntarseEvento(Evento evento){
         BD bd = new BD();
-        bd.Delete("DELETE FROM UsuarioEvento WHERE nombre = '" + evento.getNombre() + "';");
+        bd.Delete("DELETE FROM UsuarioEvento WHERE nombre = '" + evento.getNombre() + "' and correo = '" + correo + "';");
     }
 
     public static Usuario buscarUsuario(String correo) {
@@ -159,6 +161,9 @@ public abstract class Usuario {
 
     public void abrirVentanaPrincipal() {
         VistaPrincipal.abrirVentana();
+    }
+    public boolean getSancion() {
+        return sancion;
     }
 
 }

@@ -35,11 +35,11 @@ public class ControladorPrincipal implements ActionListener, ListSelectionListen
             case "ENTRAR":
                 Evento ev = vista.getEventoSeleccionado();
                 if (vista.getEventoSeleccionado() != null) {
-                    if (inscrito(ev)){
+                    if (inscrito(ev) && !Sesion.getUsuarioLogueado().getSancion()){
                         vista.dispose();
                         VistaEvento.abrirVentana(ev);
 
-                    } else {
+                    } else if (!Sesion.getUsuarioLogueado().getSancion()){
                         int dialogResult = JOptionPane.showConfirmDialog(vista,"¿Quieres inscribirte en este evento?");
                         if (dialogResult == JOptionPane.YES_OPTION) {
                             accedeEvento = true;
@@ -47,6 +47,8 @@ public class ControladorPrincipal implements ActionListener, ListSelectionListen
                             vista.dispose();
                             VistaEvento.abrirVentana(ev);
                         }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Usted ha sido sancionado recientemente y no puede acceder","Imposible acceder",1);
                     }
                 }
                 break;

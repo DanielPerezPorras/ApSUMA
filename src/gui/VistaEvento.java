@@ -1,6 +1,7 @@
 package gui;
 
 import gui.contenido.VistaContenido;
+import modelo.BD;
 import modelo.Evento;
 import modelo.Sesion;
 import modelo.Usuario;
@@ -38,14 +39,6 @@ public class VistaEvento extends JFrame {
 	private ControladorEvento controlador;
 	private boolean enModoEdicion;
 
-	private JTextField tFUsuario;
-	private JButton btnBuscar;
-	private JButton btnSancionar;
-	private JButton btnExpulsarUsuario;
-	private JLabel lblUsuarioBuscar;
-	private JLabel lblCorreo;
-	private JLabel lblUsuariouma;
-	private JComboBox cbLista;
 	private JPanel panelBusqueda;
 	private JTextField textField;
 	private JButton btnBuscar_1;
@@ -63,9 +56,6 @@ public class VistaEvento extends JFrame {
 	private JButton btAdd;
 	private JLabel lblCorreoUsuario;
 	private JLabel lblCorreoCorpUsuario;
-
-
-
 
 	public VistaEvento(Evento evento)  {
 
@@ -108,6 +98,26 @@ public class VistaEvento extends JFrame {
 
 		cbNuevoContenido.addActionListener(ctr);
 		cbNuevoContenido.setActionCommand("NUEVO CONTENIDO");
+
+		btnBuscar_1.addActionListener(ctr);
+		btnBuscar_1.setActionCommand("BUSCAR");
+
+		textField.addActionListener(ctr);
+		textField.setActionCommand("BUSCAR");
+
+		btSancionar.addActionListener(ctr);
+		btSancionar.setActionCommand("SANCION");
+
+		btElimSanc.addActionListener(ctr);
+		btElimSanc.setActionCommand("ELIM_SANCION");
+
+		btKick.addActionListener(ctr);
+		btKick.setActionCommand("EXPULSAR");
+
+		btAdd.addActionListener(ctr);
+		btAdd.setActionCommand("ANYADIR");
+
+		listResultado.addListSelectionListener(ctr);
 
 		for (VistaContenido v : vistasContenidos) {
 			v.controlador(ctr);
@@ -207,7 +217,7 @@ public class VistaEvento extends JFrame {
 		tabbedPane.addTab("Usuarios", null, panelUsuarios);
 		
 		panelBusqueda = new JPanel();
-		panelBusqueda.setMaximumSize(new Dimension(400, 23));
+		panelBusqueda.setMaximumSize(new Dimension(90000, 23));
 		panelUsuarios.add(panelBusqueda);
 		panelBusqueda.setLayout(new BoxLayout(panelBusqueda, BoxLayout.X_AXIS));
 		
@@ -221,8 +231,9 @@ public class VistaEvento extends JFrame {
 		listResultado = new JList();
 		listResultado.setPreferredSize(new Dimension(500, 150));
 		listResultado.setMaximumSize(new Dimension(500, 500));
-		panelUsuarios.add(listResultado);
-		
+		JScrollPane listaCursosScroll = new JScrollPane(listResultado);
+		panelUsuarios.add(listaCursosScroll);
+
 		panelDatos = new JPanel();
 		panelUsuarios.add(panelDatos);
 		panelDatos.setLayout(new BorderLayout(0, 0));
@@ -231,23 +242,22 @@ public class VistaEvento extends JFrame {
 		panelDatos.add(panel);
 		panel.setLayout(new GridLayout(3, 2, 0, 0));
 		
-		lblCC = new JLabel("CorreoCorp: ");
-		panel.add(lblCC);
-		
+
+		lblNU = new JLabel("Nombre de Usuario: ");
+		panel.add(lblNU);
+
 		lblNombreUsuario = new JLabel("");
 		panel.add(lblNombreUsuario);
 		
 		lblCU = new JLabel("Correo: ");
 		panel.add(lblCU);
-		lblCU.setBackground(Color.ORANGE);
 		
 		lblCorreoUsuario = new JLabel("");
 		panel.add(lblCorreoUsuario);
-		
-		lblNU = new JLabel("Nombre de Usuario: ");
-		panel.add(lblNU);
-		lblNU.setBackground(Color.RED);
-		
+
+		lblCC = new JLabel("CorreoCorp: ");
+		panel.add(lblCC);
+
 		lblCorreoCorpUsuario = new JLabel("");
 		panel.add(lblCorreoCorpUsuario);
 		
@@ -266,6 +276,8 @@ public class VistaEvento extends JFrame {
 		
 		btAdd = new JButton("A\u00F1adir al curso");
 		panelBotones.add(btAdd);
+
+		limpiar();
 
 		crearPanelInferior();
 		panelCentral.add(panelInferior, BorderLayout.SOUTH);
@@ -387,33 +399,57 @@ public class VistaEvento extends JFrame {
 	}
 
     public String getTextBoxValue() {
-			return tFUsuario.getText();
+			return textField.getText();
     }
 
-	public void anyadirTexto(String[] lista) {
-		cbLista.setModel(new DefaultComboBoxModel(lista));
-		mostrarDatosUsuarioSel();
+	public void resultadoBusqueda(String[] nombres) {
+		listResultado.setListData(nombres);
 	}
 
-	private void mostrarDatosUsuarioSel() {
-		Usuario usu = Usuario.buscarUsuario(this.getCorreoActual());
-		mostrarDatosUsuario(usu.getNombreUsuario(),usu.getCorreo(),usu.getCorp());
+	public String getValorLista() {
+		return listResultado.getSelectedValue().toString();
 	}
 
-	private void mostrarDatosUsuario(String usuario, String correo, String correoUma) {
-		lblUsuarioBuscar.setText(usuario);
-		lblCorreo.setText(correo);
-		if(correoUma.equals(""))
-		{
-			lblUsuariouma.setVisible(false);
-		}else
-		{
-			lblUsuariouma.setVisible(true);
+	public void datosUsuario(Usuario user) {
+
+		lblNombreUsuario.setText(user.getNombreUsuario());
+		lblCorreoUsuario.setText(user.getCorreo());
+		lblCorreoCorpUsuario.setText(user.getCorp());
+		if (inscrito(user,this.evento)) {
+			btSancionar.setVisible(true);
+			btElimSanc.setVisible(true);
+			btKick.setVisible(true);
+			btAdd.setVisible(false);
+		} else {
+			btSancionar.setVisible(false);
+			btElimSanc.setVisible(false);
+			btKick.setVisible(false);
+			btAdd.setVisible(true);
 		}
-		lblUsuariouma.setText(correoUma);
+
 	}
 
-	private String getCorreoActual() {
-		return cbLista.getSelectedItem().toString();
+	public int selectedRows() {
+		return listResultado.getSelectedIndices().length;
+	}
+
+	private boolean inscrito(Usuario user, Evento ev) {
+		for (Evento evento : user.getEventosInscritos()){
+			if (ev.getNombre().equals(evento.getNombre())){
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	public void limpiar() {
+		lblNombreUsuario.setText("");
+		lblCorreoUsuario.setText("");
+		lblCorreoCorpUsuario.setText("");
+		btSancionar.setVisible(false);
+		btElimSanc.setVisible(false);
+		btKick.setVisible(false);
+		btAdd.setVisible(false);
 	}
 }
