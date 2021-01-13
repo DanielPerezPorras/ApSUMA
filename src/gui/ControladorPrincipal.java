@@ -36,8 +36,9 @@ public class ControladorPrincipal implements ActionListener, ListSelectionListen
                 Evento ev = vista.getEventoSeleccionado();
                 if (vista.getEventoSeleccionado() != null) {
                     if (inscrito(ev)){
-                        VistaEvento.abrirVentana(ev);
                         vista.dispose();
+                        VistaEvento.abrirVentana(ev);
+
                     } else {
                         int dialogResult = JOptionPane.showConfirmDialog(vista,"¿Quieres inscribirte en este evento?");
                         if (dialogResult == JOptionPane.YES_OPTION) {
