@@ -30,7 +30,7 @@ public class VistaEvento extends JFrame {
 
 	private JLabel lblTituloCurso;
 	private JLabel lblDatosCurso;
-	private JLabel lblTituloUsuarios;
+	private JLabel lblBuscaUsuarios;
 	private final List<VistaContenido> vistasContenidos = new ArrayList<>();
 	private List<Contenido> contenidos;
 
@@ -46,6 +46,23 @@ public class VistaEvento extends JFrame {
 	private JLabel lblCorreo;
 	private JLabel lblUsuariouma;
 	private JComboBox cbLista;
+	private JPanel panelBusqueda;
+	private JTextField textField;
+	private JButton btnBuscar_1;
+	private JList listResultado;
+	private JPanel panelDatos;
+	private JLabel lblNU;
+	private JLabel lblCU;
+	private JLabel lblCC;
+	private JLabel lblNombreUsuario;
+	private JPanel panel;
+	private JButton btSancionar;
+	private JButton btElimSanc;
+	private JButton btKick;
+	private JPanel panelBotones;
+	private JButton btAdd;
+	private JLabel lblCorreoUsuario;
+	private JLabel lblCorreoCorpUsuario;
 
 
 
@@ -188,6 +205,67 @@ public class VistaEvento extends JFrame {
 
 		crearPanelUsuarios();
 		tabbedPane.addTab("Usuarios", null, panelUsuarios);
+		
+		panelBusqueda = new JPanel();
+		panelBusqueda.setMaximumSize(new Dimension(400, 23));
+		panelUsuarios.add(panelBusqueda);
+		panelBusqueda.setLayout(new BoxLayout(panelBusqueda, BoxLayout.X_AXIS));
+		
+		textField = new JTextField();
+		panelBusqueda.add(textField);
+		textField.setColumns(10);
+		
+		btnBuscar_1 = new JButton("Buscar");
+		panelBusqueda.add(btnBuscar_1);
+		
+		listResultado = new JList();
+		listResultado.setPreferredSize(new Dimension(500, 150));
+		listResultado.setMaximumSize(new Dimension(500, 500));
+		panelUsuarios.add(listResultado);
+		
+		panelDatos = new JPanel();
+		panelUsuarios.add(panelDatos);
+		panelDatos.setLayout(new BorderLayout(0, 0));
+		
+		panel = new JPanel();
+		panelDatos.add(panel);
+		panel.setLayout(new GridLayout(3, 2, 0, 0));
+		
+		lblCC = new JLabel("CorreoCorp: ");
+		panel.add(lblCC);
+		
+		lblNombreUsuario = new JLabel("");
+		panel.add(lblNombreUsuario);
+		
+		lblCU = new JLabel("Correo: ");
+		panel.add(lblCU);
+		lblCU.setBackground(Color.ORANGE);
+		
+		lblCorreoUsuario = new JLabel("");
+		panel.add(lblCorreoUsuario);
+		
+		lblNU = new JLabel("Nombre de Usuario: ");
+		panel.add(lblNU);
+		lblNU.setBackground(Color.RED);
+		
+		lblCorreoCorpUsuario = new JLabel("");
+		panel.add(lblCorreoCorpUsuario);
+		
+		panelBotones = new JPanel();
+		panelDatos.add(panelBotones, BorderLayout.EAST);
+		panelBotones.setLayout(new GridLayout(2, 2, 0, 0));
+		
+		btSancionar = new JButton("Sancionar");
+		panelBotones.add(btSancionar);
+		
+		btElimSanc = new JButton("Eliminar Sancion");
+		panelBotones.add(btElimSanc);
+		
+		btKick = new JButton("Expulsar");
+		panelBotones.add(btKick);
+		
+		btAdd = new JButton("A\u00F1adir al curso");
+		panelBotones.add(btAdd);
 
 		crearPanelInferior();
 		panelCentral.add(panelInferior, BorderLayout.SOUTH);
@@ -202,88 +280,15 @@ public class VistaEvento extends JFrame {
 		BoxLayout layout = new BoxLayout(panelContenido, BoxLayout.Y_AXIS);
 		panelContenido.setLayout(layout);
 		panelContenido.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+		panelUsuarios.setLayout(new BoxLayout(panelUsuarios, BoxLayout.PAGE_AXIS));
 
 		// Mostrar título de la pestaña
-		lblTituloUsuarios = new JLabel("Usuarios");
-		lblTituloUsuarios.setFont(UtilidadesGUI.FUENTE_TITULOS);
-		lblTituloUsuarios.setHorizontalAlignment(JLabel.CENTER);
-		panelUsuarios.add(lblTituloUsuarios);
+		lblBuscaUsuarios = new JLabel("B\u00FAsqueda de Usuarios");
+		lblBuscaUsuarios.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
+		lblBuscaUsuarios.setHorizontalAlignment(JLabel.CENTER);
+		panelUsuarios.add(lblBuscaUsuarios);
 
-		JLabel lblBsquedaDeUsuarios = new JLabel("B\u00FAsqueda de usuarios");
-		lblBsquedaDeUsuarios.setFont(new Font("Microsoft JhengHei UI", Font.BOLD | Font.ITALIC, 16));
-		lblBsquedaDeUsuarios.setBounds(372, 41, 186, 27);
-		panelUsuarios.add(lblBsquedaDeUsuarios);
-
-		JPanel panelBusqueda = new JPanel();
-		BoxLayout layout1 = new BoxLayout(panelBusqueda, BoxLayout.X_AXIS);
-		panelBusqueda.setLayout(layout1);
-		panelBusqueda.setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
-
-		JLabel lblUsuario = new JLabel("Nombre de usuario:");
-		lblUsuario.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
-		lblUsuario.setBounds(400, 81, 144, 27);
-		panelBusqueda.add(lblUsuario);
-		panelContenido.add(panelBusqueda);
-
-		tFUsuario = new JTextField();
-		tFUsuario.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
-		tFUsuario.setBounds(564, 81, 144, 27);
-		panelBusqueda.add(tFUsuario);
-		tFUsuario.setColumns(10);
-
-		btnBuscar = new JButton("Buscar");
-		btnBuscar.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 13));
-		btnBuscar.setBounds(720, 81, 97, 27);
-		panelBusqueda.add(btnBuscar);
-
-		JLabel lbFoto = new JLabel("");
-		lbFoto.setBounds(372, 342, 144, 140);
-		UtilidadesGUI.ajustarImagenALabel(lbFoto, "/recursosApp/gato.png");
-		panelUsuarios.add(lbFoto);
-
-		JLabel lbNombreDeUsuario = new JLabel("Nombre de usuario:");
-		lbNombreDeUsuario.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
-		lbNombreDeUsuario.setBounds(564, 342, 144, 31);
-		panelUsuarios.add(lbNombreDeUsuario);
-
-		lblUsuarioBuscar = new JLabel("");
-		lblUsuarioBuscar.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
-		lblUsuarioBuscar.setBounds(720, 346, 97, 23);
-		panelUsuarios.add(lblUsuarioBuscar);
-
-		JLabel lblCorreoElectrnico = new JLabel("Correo electr\u00F3nico:");
-		lblCorreoElectrnico.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
-		lblCorreoElectrnico.setBounds(564, 375, 133, 27);
-		panelUsuarios.add(lblCorreoElectrnico);
-
-		lblCorreo = new JLabel("");
-		lblCorreo.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
-		lblCorreo.setBounds(720, 375, 118, 27);
-		panelUsuarios.add(lblCorreo);
-
-		JLabel lblCU = new JLabel("Correo corp:");
-		lblCU.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 14));
-		lblCU.setBounds(564, 412, 133, 27);
-		panelUsuarios.add(lblCU);
-
-		lblUsuariouma= new JLabel("");
-		lblUsuariouma.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 14));
-		lblUsuariouma.setBounds(720, 415, 118, 27);
-		panelUsuarios.add(lblUsuariouma);
-
-		btnSancionar = new JButton("Sancionar");
-		btnSancionar.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
-		btnSancionar.setBounds(372, 494, 118, 37);
-		panelUsuarios.add(btnSancionar);
-
-		btnExpulsarUsuario = new JButton("Expulsar usuario");
-		btnExpulsarUsuario.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 16));
-		btnExpulsarUsuario.setBounds(579, 494, 202, 37);
-		panelUsuarios.add(btnExpulsarUsuario);
-
-		cbLista = new JComboBox();
-		cbLista.setBounds(564, 138, 253, 22);
-		panelUsuarios.add(cbLista);
+		
 
 	}
 
@@ -340,7 +345,9 @@ public class VistaEvento extends JFrame {
 
 		panelModoEdicion.add(Box.createRigidArea(new Dimension(0, 25)));
 
-		cbNuevoContenido = new JComboBox<>(new String[]{"Añadir contenido...", "Texto", "Enlace", "Test", "Cuestionario", "Documento", "Llamada"});
+		//cbNuevoContenido = new JComboBox<>(new String[]{"Añadir contenido...", "Texto", "Enlace", "Test", "Cuestionario", "Documento", "Llamada"});
+		//TODO CAMBIAR ESTO
+					cbNuevoContenido = new JComboBox<>();
 		cbNuevoContenido.setFont(UtilidadesGUI.FUENTE);
 		cbNuevoContenido.setMaximumSize(new Dimension(180, 40));
 		cbNuevoContenido.setAlignmentX(Component.LEFT_ALIGNMENT);
