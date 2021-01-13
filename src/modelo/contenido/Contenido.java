@@ -56,6 +56,9 @@ public abstract class Contenido {
                 case "documento":
                     c = new ContenidoDocumento(id);
                     break;
+                case "llamada":
+                    c = new ContenidoLlamada(id);
+                    break;
 
             }
         }

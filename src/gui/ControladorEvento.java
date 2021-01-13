@@ -1,9 +1,6 @@
 package gui;
 
-import gui.contenido.DialogoNuevoDocumento;
-import gui.contenido.DialogoNuevoEnlace;
-import gui.contenido.DialogoNuevoTest;
-import gui.contenido.DialogoNuevoTexto;
+import gui.contenido.*;
 import modelo.*;
 import modelo.contenido.*;
 
@@ -114,6 +111,14 @@ public class ControladorEvento implements ActionListener, MouseListener {
 						dialogoNuevoDocumento.setVisible(true);
 						if (dialogoNuevoDocumento.seHaConfirmado()) {
 							new ContenidoDocumento(vista.getEvento(), dialogoNuevoDocumento.getEnlace(), dialogoNuevoDocumento.getTextoVisible());
+							vista.refrescarContenido();
+						}
+						break;
+					case "Llamada":
+						DialogoNuevoLlamada dialogoNuevoLlamada = new DialogoNuevoLlamada(vista);
+						dialogoNuevoLlamada.setVisible(true);
+						if (dialogoNuevoLlamada.seHaConfirmado()) {
+							new ContenidoLlamada(vista.getEvento(), dialogoNuevoLlamada.getEnlace(), dialogoNuevoLlamada.getTextoVisible());
 							vista.refrescarContenido();
 						}
 						break;
