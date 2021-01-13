@@ -142,7 +142,7 @@ public class ControladorEvento implements ActionListener, MouseListener, ListSel
 
 					if (foroAActualizar.hayMensajesNuevos()) {
 						foroAActualizar.cargarMensajes();
-						vista.refrescarListaForos();
+						vista.cargarMensajes();
 					}
 
 				} else {

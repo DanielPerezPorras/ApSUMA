@@ -99,6 +99,9 @@ public class VistaEvento extends JFrame {
 		btnEnviar.addActionListener(ctr);
 		btnEnviar.setActionCommand("ENVIAR MENSAJE");
 
+		tfMensaje.addActionListener(ctr);
+		tfMensaje.setActionCommand("ENVIAR MENSAJE");
+
 		if (soyCreadorEvento) {
 			btnCrearForo.addActionListener(ctr);
 			btnCrearForo.setActionCommand("CREAR FORO");
