@@ -3,6 +3,7 @@ package modelo;
 import gui.VistaPrincipal;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public abstract class Usuario {
             correo = cor;
             nombreUsuario = (String)user[1];
             contra = (String)user[2];
-            sancion = user[3]!=null;
+            sancion = user[3]!=null && ((java.sql.Date) user[3]).after(new java.sql.Date(Calendar.getInstance().getTime().getTime()) );;
         } else {
             throw new ErrorBD("No se ha encontrado un usuario con correo " + cor);
         }
