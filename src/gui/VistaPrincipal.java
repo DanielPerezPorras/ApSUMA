@@ -30,6 +30,12 @@ public class VistaPrincipal extends JFrame {
     private JButton btnAdmin;
 
     private JList<Evento> ultimaListaSeleccionada;
+    private JTextField tfBuscar;
+    private JButton btnBuscar;
+    private JComboBox cbUsuario;
+    private JTextField tfAsunto;
+    private JTextField tfContenido;
+    private JButton btnEnviar;
 
     public static void abrirVentana() {
         try {
@@ -435,8 +441,93 @@ public class VistaPrincipal extends JFrame {
 
     private void crearPanelMensajeria() {
         panelMensajeria = new JPanel();
-        panelMensajeria.setLayout(new GridLayout(1, 1));
-        panelMensajeria.add(new JLabel("Próximamente"));
+        panelMensajeria.setLayout(new BorderLayout());
+        panelMensajeria.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+
+        JPanel panelIzq = new JPanel();
+        panelIzq.setMaximumSize(new Dimension(250, Integer.MAX_VALUE));
+        panelIzq.setPreferredSize(new Dimension(250, -1));
+        panelIzq.setLayout(new BoxLayout(panelIzq,BoxLayout.Y_AXIS));
+
+        JLabel lbEnviarMensaje = new JLabel("Enviar mensaje");
+        lbEnviarMensaje.setFont(UtilidadesGUI.FUENTE);
+        panelIzq.add(lbEnviarMensaje);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JPanel panelBarraBuscar = new JPanel();
+        panelBarraBuscar.setLayout(new BoxLayout(panelBarraBuscar, BoxLayout.Y_AXIS));
+
+
+        JPanel panelBuscar = new JPanel();
+        panelBuscar.setPreferredSize(new Dimension(290, 40));
+        panelBuscar.setLayout(new BoxLayout(panelBuscar, BoxLayout.X_AXIS));
+        btnBuscar = new JButton("Buscar");
+        tfBuscar = new JTextField();
+        //tfBuscar.setPreferredSize(new Dimension(290, 10));
+        panelBarraBuscar.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelBarraBuscar.add(tfBuscar);
+        panelBarraBuscar.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelBuscar.add(panelBarraBuscar);
+        panelBuscar.add(Box.createRigidArea(new Dimension(20, 10)));
+        panelBuscar.add(btnBuscar);
+        panelIzq.add(panelBuscar);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JPanel panelPara = new JPanel();
+        panelPara.setPreferredSize(new Dimension(290, 40));
+        panelPara.setLayout(new BoxLayout(panelPara, BoxLayout.X_AXIS));
+        JLabel lbPara = new JLabel("Para");
+        lbPara.setFont(UtilidadesGUI.FUENTE);
+        cbUsuario = new JComboBox<>();
+        panelPara.add(lbPara);
+        panelPara.add(Box.createRigidArea(new Dimension(20, 10)));
+        panelPara.add(cbUsuario);
+        panelPara.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelIzq.add(panelPara);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JPanel panelAsunto = new JPanel();
+        panelAsunto.setPreferredSize(new Dimension(290, 40));
+        panelAsunto.setLayout(new BoxLayout(panelAsunto, BoxLayout.X_AXIS));
+        JLabel lbAsunto = new JLabel("Asunto");
+        lbAsunto.setFont(UtilidadesGUI.FUENTE);
+        tfAsunto = new JTextField();
+        tfAsunto.setPreferredSize(new Dimension(290, 50));
+        panelAsunto.add(lbAsunto);
+        panelAsunto.add(Box.createRigidArea(new Dimension(20, 10)));
+        panelAsunto.add(tfAsunto);
+        panelIzq.add(panelAsunto);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        JLabel lbContenido = new JLabel("Contenido");
+        lbContenido.setFont(UtilidadesGUI.FUENTE);
+        lbContenido.setAlignmentX(LEFT_ALIGNMENT);
+        panelIzq.add(lbContenido);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+        
+        tfContenido = new JTextField();
+        panelIzq.add(tfContenido);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        btnEnviar = new JButton("Enviar");
+        btnEnviar.setAlignmentX(LEFT_ALIGNMENT);
+        btnEnviar.setPreferredSize(new Dimension(80, 20));
+        panelIzq.add(btnEnviar);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        panelMensajeria.add(Box.createRigidArea(new Dimension(20, 10)));
+        panelMensajeria.add(panelIzq, BorderLayout.WEST);
+        panelMensajeria.add(Box.createRigidArea(new Dimension(20, 10)));
+
+        /* -- DERECHA -- */
+
+        JPanel panelCentro = new JPanel();
+        panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
+
+        JLabel lbBuzon = new JLabel("Buzón");
+        lbBuzon.setFont(UtilidadesGUI.FUENTE);
+        lbBuzon.setAlignmentX(LEFT_ALIGNMENT);
+        panelCentro.add(lbBuzon);
     }
 
     public void alternarCreacion() {
