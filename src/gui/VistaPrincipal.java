@@ -79,7 +79,6 @@ public class VistaPrincipal extends JFrame {
     }
 
     public void cargarMensaje(MensajeDirecto md){
-        System.out.println("eo");
         if (md != null){
             taContenido.setText(md.getContenido());
         } else {

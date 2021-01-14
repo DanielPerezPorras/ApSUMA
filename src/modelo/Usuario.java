@@ -70,9 +70,7 @@ public abstract class Usuario {
     }
 
     public void cargarMensajes(){
-        if (mensajesDirectos == null){
-            mensajesDirectos = new ArrayList<>();
-        }
+        mensajesDirectos = new ArrayList<>();
 
         BD bd = new BD();
         List<Object[]> idMensajes = bd.Select("SELECT idMensaje FROM MensajeDirecto WHERE receptor = '" + Sesion.getUsuarioLogueado().getCorreo() + "';");

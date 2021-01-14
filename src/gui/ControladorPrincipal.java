@@ -158,7 +158,6 @@ public class ControladorPrincipal implements ActionListener, ListSelectionListen
     public void valueChanged(ListSelectionEvent e) {
         // Si no pongo el "ejecutandoListListener" tendré una StackOverflowException!
         if (vista.getTabbedPane() == 0){
-            System.out.println("maincra");
             if (!e.getValueIsAdjusting() && !ejecutandoListListener) {
                 ejecutandoListListener = true;
 
@@ -168,7 +167,6 @@ public class ControladorPrincipal implements ActionListener, ListSelectionListen
                 ejecutandoListListener = false;
             }
         } else {
-            System.out.println("bruh");
             vista.cargarMensaje(vista.getSelectedIndex());
         }
     }
