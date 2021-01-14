@@ -63,4 +63,8 @@ public class UtilidadesGUI {
         return resultado.toString();
     }
 
+    public static String escaparComillas(String entrada) {
+        return entrada.replace("'", "\\'");
+    }
+
 }
