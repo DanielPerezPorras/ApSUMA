@@ -5,6 +5,7 @@ import net.sourceforge.jdatepicker.impl.*;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,15 @@ public class VistaPrincipal extends JFrame {
     private JButton btnAdmin;
 
     private JList<Evento> ultimaListaSeleccionada;
+    private JTextField tfBuscar;
+    private JButton btnBuscar;
+    private JComboBox cbUsuario;
+    private JTextField tfAsunto;
+    private JTextArea taContenidoIzq;
+    private JButton btnEnviar;
+    private JButton btnActualizar;
+    private JList<MensajeDirecto> listaBuzon;
+    private JTextArea taContenido;
 
     public static void abrirVentana() {
         try {
@@ -48,6 +58,7 @@ public class VistaPrincipal extends JFrame {
         crearGUI();
         System.out.println("Cargando eventos...");
         cargarEventos();
+        cargarBuzon();
 
         if (Sesion.getPermisos() < 3) {
             cargarEventosUsuario();
@@ -59,18 +70,78 @@ public class VistaPrincipal extends JFrame {
 
     }
 
+    public int getTabbedPane(){
+        return tabbedPane.getSelectedIndex();
+    }
+
+    public MensajeDirecto getSelectedIndex(){
+        return listaBuzon.getSelectedValue();
+    }
+
+    public void cargarMensaje(MensajeDirecto md){
+        if (md != null){
+            taContenido.setText(md.getContenido());
+        } else {
+            taContenido.setText("Seleccione un mensaje del buzón");
+        }
+    }
+
+    public void cargarBuzon(){
+        StringBuilder buzon = new StringBuilder();
+        Sesion.getUsuarioLogueado().cargarMensajes();
+        ArrayList<MensajeDirecto> mensajes = Sesion.getUsuarioLogueado().getMensajesDirectos();
+        MensajeDirecto[] arrayMD = new MensajeDirecto[mensajes.size()];
+        mensajes.toArray(arrayMD);
+        listaBuzon.setListData(arrayMD);
+    }
+
+    public String getBusqueda(){
+        return tfBuscar.getText();
+    }
+
+    public void anyadirBusqueda(String[] lista){
+        cbUsuario.setModel(new DefaultComboBoxModel(lista));
+        cbUsuario.setMaximumSize(new Dimension(200, 50));
+    }
+
+    public String getReceptor(){
+        return (String)cbUsuario.getSelectedItem();
+    }
+
+    public String getAsunto(){
+        return tfAsunto.getText();
+    }
+
+    public String getContenido(){
+        return taContenidoIzq.getText();
+    }
+
+    public void limpiarEnviar(){
+        tfBuscar.setText("");
+        cbUsuario.setModel(new DefaultComboBoxModel(new String[1]));
+        tfAsunto.setText("");
+        taContenidoIzq.setText("");
+    }
+
     public void controlador(ControladorPrincipal ctr) {
         btnEntrar.setActionCommand("ENTRAR");
         btnPerfil.setActionCommand("PERFIL");
+        btnBuscar.setActionCommand("BUSCAR");
+        btnEnviar.setActionCommand("ENVIAR");
+        btnActualizar.setActionCommand("ACTUALIZAR");
 
         btnEntrar.addActionListener(ctr);
         btnPerfil.addActionListener(ctr);
+        btnBuscar.addActionListener(ctr);
+        btnEnviar.addActionListener(ctr);
+        btnActualizar.addActionListener(ctr);
 
         if (Sesion.puedoCrearEventos()){
             cbNuevoEvento.setActionCommand("CREAR EVENTO");
             cbNuevoEvento.addActionListener(ctr);
         }
 
+        listaBuzon.addListSelectionListener(ctr);
 
         datePicker.addActionListener(ctr);
 
@@ -435,8 +506,156 @@ public class VistaPrincipal extends JFrame {
 
     private void crearPanelMensajeria() {
         panelMensajeria = new JPanel();
-        panelMensajeria.setLayout(new GridLayout(1, 1));
-        panelMensajeria.add(new JLabel("Próximamente"));
+        panelMensajeria.setLayout(new BoxLayout(panelMensajeria, BoxLayout.X_AXIS));//setLayout(new BorderLayout());
+        panelMensajeria.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+
+        // PANEL IZQUIERDO
+
+        JPanel panelIzq = new JPanel() {
+
+            public Dimension getSize() {
+                return new Dimension(320, super.getHeight());
+            }
+
+        };
+        panelIzq.setBorder(BorderFactory.createEmptyBorder(0,0,0,20));
+        panelIzq.setLayout(new BoxLayout(panelIzq,BoxLayout.Y_AXIS));
+
+        JLabel lbEnviarMensaje = new JLabel("Enviar mensaje");
+        lbEnviarMensaje.setFont(UtilidadesGUI.FUENTE_TITULOS);
+        lbEnviarMensaje.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        JPanel panelBuscar = new JPanel();
+        panelBuscar.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+        panelBuscar.setLayout(new BoxLayout(panelBuscar, BoxLayout.X_AXIS));
+        panelBuscar.setAlignmentX(Component.LEFT_ALIGNMENT);
+        tfBuscar = new JTextField();
+        tfBuscar.setFont(UtilidadesGUI.FUENTE);
+        btnBuscar = new JButton("Buscar");
+        btnBuscar.setFont(UtilidadesGUI.FUENTE);
+        panelBuscar.add(tfBuscar);
+        panelBuscar.add(Box.createRigidArea(new Dimension(10, 0)));
+        panelBuscar.add(btnBuscar);
+
+        JPanel panelPara = new JPanel();
+        panelPara.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+        panelPara.setLayout(new BoxLayout(panelPara, BoxLayout.X_AXIS));
+        panelPara.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JLabel lbPara = new JLabel("Para: ");
+        lbPara.setFont(UtilidadesGUI.FUENTE);
+        cbUsuario = new JComboBox<>();
+        cbUsuario.setFont(UtilidadesGUI.FUENTE);
+        cbUsuario.setSize(280, 40);
+        panelPara.add(lbPara);
+        panelPara.add(Box.createHorizontalGlue());
+        panelPara.add(cbUsuario);
+
+        JPanel panelAsunto = new JPanel();
+        panelAsunto.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+        panelAsunto.setLayout(new BoxLayout(panelAsunto, BoxLayout.X_AXIS));
+        panelAsunto.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        JLabel lbAsunto = new JLabel("Asunto");
+        lbAsunto.setFont(UtilidadesGUI.FUENTE);
+        tfAsunto = new JTextField();
+        tfAsunto.setFont(UtilidadesGUI.FUENTE);
+        panelAsunto.add(lbAsunto);
+        panelAsunto.add(Box.createRigidArea(new Dimension(10, 0)));
+        panelAsunto.add(tfAsunto);
+
+        JLabel lbContenido = new JLabel("Contenido");
+        lbContenido.setFont(UtilidadesGUI.FUENTE);
+        lbContenido.setAlignmentX(LEFT_ALIGNMENT);
+
+        taContenidoIzq = new JTextArea();
+        taContenidoIzq.setFont(UtilidadesGUI.FUENTE);
+        taContenidoIzq.setLineWrap(true);
+        taContenidoIzq.setWrapStyleWord(true);
+        JScrollPane scrollContenidoIzq = new JScrollPane(taContenidoIzq);
+        scrollContenidoIzq.setAlignmentX(LEFT_ALIGNMENT);
+
+        btnEnviar = new JButton("Enviar");
+        btnEnviar.setFont(UtilidadesGUI.FUENTE);
+        btnEnviar.setAlignmentX(LEFT_ALIGNMENT);
+
+
+        panelIzq.add(lbEnviarMensaje);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelIzq.add(panelBuscar);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelIzq.add(panelPara);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelIzq.add(panelAsunto);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelIzq.add(lbContenido);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelIzq.add(scrollContenidoIzq);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelIzq.add(btnEnviar);
+
+
+        // EL CENTRO
+
+        JPanel panelCentro = new JPanel() {
+
+            public Dimension getPreferredSize() {
+                return new Dimension(getParent().getWidth() - 300, super.getPreferredSize().height);
+            }
+
+        };
+        panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
+        panelCentro.setBorder(BorderFactory.createEmptyBorder(0,20,0,0));
+
+        JPanel panelBuzonActualizar = new JPanel();
+        panelBuzonActualizar.setBorder(BorderFactory.createEmptyBorder(0,0,20,0));;
+        panelBuzonActualizar.setLayout(new BoxLayout(panelBuzonActualizar, BoxLayout.X_AXIS));
+        JLabel lbBuzon = new JLabel("Buzón");
+        lbBuzon.setFont(UtilidadesGUI.FUENTE_TITULOS);
+        btnActualizar = new JButton("Actualizar");
+        btnActualizar.setFont(UtilidadesGUI.FUENTE);
+        panelBuzonActualizar.add(lbBuzon);
+        panelBuzonActualizar.add(Box.createHorizontalGlue());
+        panelBuzonActualizar.add(btnActualizar);
+        panelBuzonActualizar.setAlignmentX(LEFT_ALIGNMENT);
+
+
+        listaBuzon = new JList<>();
+        listaBuzon.setFont(UtilidadesGUI.FUENTE);
+        JScrollPane scrollBuzon = new JScrollPane(listaBuzon);
+        scrollBuzon.setAlignmentX(LEFT_ALIGNMENT);
+
+        JLabel lbContenidoDer = new JLabel("Contenido");
+        lbContenidoDer.setFont(UtilidadesGUI.FUENTE);
+        lbContenidoDer.setAlignmentX(LEFT_ALIGNMENT);
+
+        taContenido = new JTextArea();
+        taContenido.setFont(UtilidadesGUI.FUENTE);
+        taContenido.setLineWrap(true);
+        taContenido.setWrapStyleWord(true);
+        taContenido.setEditable(false);
+        JScrollPane scrollContenidoMensajeria = new JScrollPane(taContenido);
+        scrollContenidoMensajeria.setAlignmentX(LEFT_ALIGNMENT);
+
+        panelCentro.add(panelBuzonActualizar);
+        panelCentro.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelCentro.add(scrollBuzon);
+        panelCentro.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelCentro.add(lbContenidoDer);
+        panelCentro.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelCentro.add(scrollContenidoMensajeria);
+
+
+        // -----------------
+
+        panelMensajeria.add(Box.createRigidArea(new Dimension(20, 0)));
+        panelMensajeria.add(panelIzq);
+        panelMensajeria.add(Box.createRigidArea(new Dimension(10, 0)));
+        panelMensajeria.add(new JSeparator(SwingConstants.VERTICAL));
+        panelMensajeria.add(Box.createRigidArea(new Dimension(10, 0)));
+        panelMensajeria.add(Box.createHorizontalGlue());
+        panelMensajeria.add(panelCentro);
+        panelMensajeria.add(Box.createRigidArea(new Dimension(20, 0)));
+
     }
 
     public void alternarCreacion() {

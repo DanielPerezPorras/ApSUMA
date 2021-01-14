@@ -12,6 +12,7 @@ public abstract class Usuario {
     private String correo;
     private String nombreUsuario;
     private String contra;
+    private ArrayList<MensajeDirecto> mensajesDirectos;
     private boolean sancion;
 
     public Usuario(){}
@@ -71,6 +72,27 @@ public abstract class Usuario {
     public void eliminarEvento(Evento evento){
     }
 
+    public void cargarMensajes(){
+        mensajesDirectos = new ArrayList<>();
+
+        BD bd = new BD();
+        List<Object[]> idMensajes = bd.Select("SELECT idMensaje FROM MensajeDirecto WHERE receptor = '" + Sesion.getUsuarioLogueado().getCorreo() + "';");
+        for (Object[] mensaje : idMensajes){
+            MensajeDirecto md = new MensajeDirecto((int)mensaje[0]);
+            mensajesDirectos.add(md);
+        }
+    }
+
+    public ArrayList<MensajeDirecto> getMensajesDirectos(){
+        return mensajesDirectos;
+    }
+
+    public boolean hayMensajesNuevos() {
+        BD bd = new BD();
+        long cuentaMensajes = (long)bd.SelectEscalar("SELECT COUNT(*) FROM MensajeDirecto WHERE receptor = '" + this.getCorreo() + "';");
+        return cuentaMensajes > mensajesDirectos.size();
+    }
+
     public String getCorreo() {
         return correo;
     }
@@ -82,7 +104,7 @@ public abstract class Usuario {
     public List<Evento> getEventosInscritos() {
         ArrayList<Evento> eventosInscritos = new ArrayList<>();
         BD bd = new BD();
-        List<Object[]> resultados = bd.Select("SELECT nombre FROM UsuarioEvento WHERE correo='" + getCorreo() + "'");
+        List<Object[]> resultados = bd.Select("SELECT nombre FROM UsuarioEvento WHERE correo ='" + getCorreo() + "'");
         for (Object[] tupla : resultados) {
             eventosInscritos.add(Evento.buscarEvento((String)tupla[0]));
         }
@@ -102,7 +124,7 @@ public abstract class Usuario {
 
     public void apuntarseEvento(Evento evento){
         BD bd = new BD();
-        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + evento.getNombre() + "',0 );");
+        bd.Insert("INSERT INTO UsuarioEvento (correo, nombre) VALUES('" + getCorreo() + "', '" + evento.getNombre() + "');");
     }
 
     public void desapuntarseEvento(Evento evento){

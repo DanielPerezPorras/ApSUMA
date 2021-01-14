@@ -1,10 +1,7 @@
 package gui;
 
 import gui.contenido.VistaContenido;
-import modelo.BD;
-import modelo.Evento;
-import modelo.Sesion;
-import modelo.Usuario;
+import modelo.*;
 import modelo.contenido.Contenido;
 
 import javax.swing.*;
@@ -22,6 +19,7 @@ public class VistaEvento extends JFrame {
 	private JPanel panelUsuarios;
 	private JPanel panelInferior;
 	private JScrollPane scrollModoEdicion;
+	private JTabbedPane tabbedPane;
 
 	private JButton btnAnularInscripcin;
 	private JButton btnVolver;
@@ -29,11 +27,22 @@ public class VistaEvento extends JFrame {
 	private JButton btnEliminarEvento;
 	private JComboBox<String> cbNuevoContenido;
 
+	private JList<Foro> listaForos;
+	private JLabel lblNombreForo;
+	private JTextField tfMensaje;
+	private JButton btnActualizar;
+	private JButton btnEnviar;
+	private JTextPane tpMensajes;
+	private JButton btnCrearForo;
+	private JButton btnEliminarForo;
+
 	private JLabel lblTituloCurso;
 	private JLabel lblDatosCurso;
 	private JLabel lblBuscaUsuarios;
 	private final List<VistaContenido> vistasContenidos = new ArrayList<>();
 	private List<Contenido> contenidos;
+	private JPanel panelGestionarForos;
+	private JPanel panelForosIzquierda;
 
 	private final boolean soyCreadorEvento;
 	private ControladorEvento controlador;
@@ -63,9 +72,9 @@ public class VistaEvento extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.evento = evento;
 
+		soyCreadorEvento = Sesion.getUsuarioLogueado().getCorreo().equals(evento.getCreador().getCorreo());
 		crearGUI();
 
-		soyCreadorEvento = Sesion.getUsuarioLogueado().getCorreo().equals(evento.getCreador().getCorreo());
 		if (soyCreadorEvento) {
 			setModoEdicion(false);
 		}
@@ -122,17 +131,39 @@ public class VistaEvento extends JFrame {
 		for (VistaContenido v : vistasContenidos) {
 			v.controlador(ctr);
 		}
+
+		listaForos.addListSelectionListener(ctr);
+
+		btnActualizar.addActionListener(ctr);
+		btnActualizar.setActionCommand("ACTUALIZAR");
+
+		btnEnviar.addActionListener(ctr);
+		btnEnviar.setActionCommand("ENVIAR MENSAJE");
+
+		tfMensaje.addActionListener(ctr);
+		tfMensaje.setActionCommand("ENVIAR MENSAJE");
+
+		if (soyCreadorEvento) {
+			btnCrearForo.addActionListener(ctr);
+			btnCrearForo.setActionCommand("CREAR FORO");
+			btnEliminarForo.addActionListener(ctr);
+			btnEliminarForo.setActionCommand("ELIMINAR FORO");
+		}
+
 	}
 
 	public Evento getEvento() { return evento; }
+
 	public void setModoEdicion(boolean mostrar) {
 		enModoEdicion = mostrar;
 		if (mostrar) {
 			panelPrincipal.add(scrollModoEdicion, BorderLayout.EAST);
 			btnAnularInscripcin.setText("Ver como alumno");
+			panelForosIzquierda.add(panelGestionarForos, BorderLayout.SOUTH);
 		} else {
 			panelPrincipal.remove(scrollModoEdicion);
 			btnAnularInscripcin.setText("Editar");
+			panelForosIzquierda.remove(panelGestionarForos);
 		}
 		for (VistaContenido v : vistasContenidos) {
 			v.setModoEdicion(mostrar);
@@ -148,8 +179,6 @@ public class VistaEvento extends JFrame {
 	public String getSeleccionNuevoContenido() {
 		return (String)cbNuevoContenido.getSelectedItem();
 	}
-
-	// pos != id en la BD del contenido!!!
 	public Contenido getContenidoPorPosicion(int pos) {
 		if (pos >= 0 && pos < contenidos.size()) {
 			return contenidos.get(pos);
@@ -160,7 +189,6 @@ public class VistaEvento extends JFrame {
 	public int getPosicionDeContenido(Contenido c) {
 		return contenidos.indexOf(c);
 	}
-
 	public void refrescarContenido() {
 		panelContenido.removeAll();
 
@@ -184,10 +212,44 @@ public class VistaEvento extends JFrame {
 		revalidate();
 		repaint();
 	}
-
 	public void actualizarTituloEvento() {
 		lblTituloCurso.setText(evento.getNombre());
 		crearSubtitulo();
+	}
+
+	public void refrescarListaForos() {
+		List<Foro> foros = evento.getForos();
+		Foro[] forosArray = new Foro[foros.size()];
+		foros.toArray(forosArray);
+		listaForos.setListData(forosArray);
+	}
+	public Foro getForoSeleccionado() {
+		return listaForos.getSelectedValue();
+	}
+	public void cargarMensajes() {
+		if (getForoSeleccionado() != null) {
+			StringBuilder documento = new StringBuilder();
+
+			List<MensajeForo> mensajes = getForoSeleccionado().getMensajes();
+			if (mensajes.size() > 0) {
+				for (MensajeForo m : mensajes) {
+					documento.append(m.getHtml());
+				}
+			} else {
+				documento.append("No hay mensajes en este foro");
+			}
+
+
+			tpMensajes.setText("<html>" + documento + "</html>");
+		} else {
+			tpMensajes.setText("<html>Seleccione un foro para visualizar aquí los mensajes.</html>");
+		}
+	}
+	public String getTextoAEnviar() {
+		return tfMensaje.getText();
+	}
+	public void vaciarTextoAEnviar() {
+		tfMensaje.setText("");
 	}
 
 	// CÓDIGO PARA CREAR LA GUI
@@ -203,7 +265,7 @@ public class VistaEvento extends JFrame {
 		JPanel panelCentral = new JPanel(new BorderLayout());
 		panelPrincipal.add(panelCentral, BorderLayout.CENTER);
 
-		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane = new JTabbedPane();
 		tabbedPane.setFont(UtilidadesGUI.FUENTE);
 		panelCentral.add(tabbedPane, BorderLayout.CENTER);
 
@@ -218,19 +280,19 @@ public class VistaEvento extends JFrame {
 		if (Sesion.getPermisos()<=1) {
 			tabbedPane.addTab("Usuarios", null, panelUsuarios);
 		}
-		
+
 		panelBusqueda = new JPanel();
 		panelBusqueda.setMaximumSize(new Dimension(90000, 23));
 		panelUsuarios.add(panelBusqueda);
 		panelBusqueda.setLayout(new BoxLayout(panelBusqueda, BoxLayout.X_AXIS));
-		
+
 		textField = new JTextField();
 		panelBusqueda.add(textField);
 		textField.setColumns(10);
-		
+
 		btnBuscar_1 = new JButton("Buscar");
 		panelBusqueda.add(btnBuscar_1);
-		
+
 		listResultado = new JList();
 		listResultado.setPreferredSize(new Dimension(500, 150));
 		listResultado.setMaximumSize(new Dimension(500, 500));
@@ -240,21 +302,21 @@ public class VistaEvento extends JFrame {
 		panelDatos = new JPanel();
 		panelUsuarios.add(panelDatos);
 		panelDatos.setLayout(new BorderLayout(0, 0));
-		
+
 		panel = new JPanel();
 		panelDatos.add(panel);
 		panel.setLayout(new GridLayout(3, 2, 0, 0));
-		
+
 
 		lblNU = new JLabel("Nombre de Usuario: ");
 		panel.add(lblNU);
 
 		lblNombreUsuario = new JLabel("");
 		panel.add(lblNombreUsuario);
-		
+
 		lblCU = new JLabel("Correo: ");
 		panel.add(lblCU);
-		
+
 		lblCorreoUsuario = new JLabel("");
 		panel.add(lblCorreoUsuario);
 
@@ -263,20 +325,20 @@ public class VistaEvento extends JFrame {
 
 		lblCorreoCorpUsuario = new JLabel("");
 		panel.add(lblCorreoCorpUsuario);
-		
+
 		panelBotones = new JPanel();
 		panelDatos.add(panelBotones, BorderLayout.EAST);
 		panelBotones.setLayout(new GridLayout(2, 2, 0, 0));
-		
+
 		btSancionar = new JButton("Sancionar");
 		panelBotones.add(btSancionar);
-		
+
 		btElimSanc = new JButton("Eliminar Sancion");
 		panelBotones.add(btElimSanc);
-		
+
 		btKick = new JButton("Expulsar");
 		panelBotones.add(btKick);
-		
+
 		btAdd = new JButton("A\u00F1adir al curso");
 		panelBotones.add(btAdd);
 
@@ -303,7 +365,7 @@ public class VistaEvento extends JFrame {
 		lblBuscaUsuarios.setHorizontalAlignment(JLabel.CENTER);
 		panelUsuarios.add(lblBuscaUsuarios);
 
-		
+
 
 	}
 
@@ -327,7 +389,85 @@ public class VistaEvento extends JFrame {
 	}
 
 	private void crearPanelForos() {
-		panelForos = new JPanel();
+		panelForos = new JPanel(new GridLayout(1, 2));
+		panelForos.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+		panelForosIzquierda = new JPanel(new BorderLayout());
+		panelForosIzquierda.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+		JLabel tituloListaForos = new JLabel("Foros");
+		tituloListaForos.setFont(UtilidadesGUI.FUENTE_TITULOS);
+		tituloListaForos.setAlignmentX(Component.LEFT_ALIGNMENT);
+		panelForosIzquierda.add(tituloListaForos, BorderLayout.NORTH);
+
+		JPanel izdaCentro = new JPanel(new GridLayout(1, 1));
+		izdaCentro.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+
+		listaForos = new JList<>();
+		listaForos.setFont(UtilidadesGUI.FUENTE);
+		listaForos.setAlignmentX(Component.LEFT_ALIGNMENT);
+		izdaCentro.add(new JScrollPane(listaForos));
+		panelForosIzquierda.add(izdaCentro, BorderLayout.CENTER);
+
+		if (soyCreadorEvento) {
+			panelGestionarForos = new JPanel(new GridLayout(1, 2));
+			panelGestionarForos.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+
+			btnCrearForo = new JButton("Crear foro");
+			btnCrearForo.setFont(UtilidadesGUI.FUENTE);
+			panelGestionarForos.add(btnCrearForo);
+
+			btnEliminarForo = new JButton("Eliminar foro");
+			btnEliminarForo.setFont(UtilidadesGUI.FUENTE);
+			panelGestionarForos.add(btnEliminarForo);
+		}
+
+		JPanel dcha = new JPanel();
+		dcha.setLayout(new BorderLayout());
+		dcha.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+		JPanel dchaNorte = new JPanel();
+		dchaNorte.setLayout(new BoxLayout(dchaNorte, BoxLayout.X_AXIS));
+
+		lblNombreForo = new JLabel(" ");
+		lblNombreForo.setFont(UtilidadesGUI.FUENTE_TITULOS);
+
+		btnActualizar = new JButton("Actualizar");
+		btnActualizar.setFont(UtilidadesGUI.FUENTE);
+
+		dchaNorte.add(lblNombreForo, BorderLayout.NORTH);
+		dchaNorte.add(Box.createHorizontalGlue());
+		dchaNorte.add(btnActualizar);
+
+		JPanel dchaCentro = new JPanel(new GridLayout(1, 1));
+		dchaCentro.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+
+		tpMensajes = new JTextPane();
+		tpMensajes.setContentType("text/html");
+		tpMensajes.setText("<html>Seleccione un foro para visualizar aquí los mensajes.</html>");
+		tpMensajes.setEditable(false);
+		dchaCentro.add(new JScrollPane(tpMensajes));
+
+		JPanel dchaSur = new JPanel();
+		dchaSur.setLayout(new BoxLayout(dchaSur, BoxLayout.X_AXIS));
+
+		tfMensaje = new JTextField();
+		tfMensaje.setFont(UtilidadesGUI.FUENTE);
+		dchaSur.add(tfMensaje);
+		btnEnviar = new JButton("Enviar");
+		btnEnviar.setFont(UtilidadesGUI.FUENTE);
+		dchaSur.add(btnEnviar);
+
+		dcha.add(dchaNorte, BorderLayout.NORTH);
+		dcha.add(dchaCentro, BorderLayout.CENTER);
+		dcha.add(dchaSur, BorderLayout.SOUTH);
+
+
+		panelForos.add(panelForosIzquierda);
+		panelForos.add(dcha);
+
+		refrescarListaForos();
+
 	}
 
 	private void crearPanelInferior() {
@@ -361,8 +501,6 @@ public class VistaEvento extends JFrame {
 		panelModoEdicion.add(Box.createRigidArea(new Dimension(0, 25)));
 
 		cbNuevoContenido = new JComboBox<>(new String[]{"Añadir contenido...", "Texto", "Enlace", "Test", "Cuestionario", "Documento", "Llamada"});
-		//TODO CAMBIAR ESTO
-		//cbNuevoContenido = new JComboBox<>();
 		cbNuevoContenido.setFont(UtilidadesGUI.FUENTE);
 		cbNuevoContenido.setMaximumSize(new Dimension(180, 40));
 		cbNuevoContenido.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -455,4 +593,8 @@ public class VistaEvento extends JFrame {
 		btKick.setVisible(false);
 		btAdd.setVisible(false);
 	}
+
+    public int indiceTab() {
+	    return tabbedPane.getSelectedIndex();
+    }
 }
