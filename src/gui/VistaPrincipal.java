@@ -542,6 +542,7 @@ public class VistaPrincipal extends JFrame {
         JPanel panelPara = new JPanel();
         panelPara.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         panelPara.setLayout(new BoxLayout(panelPara, BoxLayout.X_AXIS));
+        panelPara.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         JLabel lbPara = new JLabel("Para: ");
         lbPara.setFont(UtilidadesGUI.FUENTE);
@@ -557,6 +558,7 @@ public class VistaPrincipal extends JFrame {
         JPanel panelAsunto = new JPanel();
         panelAsunto.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         panelAsunto.setLayout(new BoxLayout(panelAsunto, BoxLayout.X_AXIS));
+        panelAsunto.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         JLabel lbAsunto = new JLabel("Asunto");
         lbAsunto.setFont(UtilidadesGUI.FUENTE);
@@ -575,6 +577,10 @@ public class VistaPrincipal extends JFrame {
         panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
         
         taContenidoIzq = new JTextArea();
+        taContenidoIzq.setFont(UtilidadesGUI.FUENTE);
+        taContenidoIzq.setAlignmentX(LEFT_ALIGNMENT);
+        taContenidoIzq.setLineWrap(true);
+        taContenidoIzq.setWrapStyleWord(true);
         panelIzq.add(taContenidoIzq);
         panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
 
@@ -600,12 +606,16 @@ public class VistaPrincipal extends JFrame {
         lbBuzon.setFont(UtilidadesGUI.FUENTE);
         btnActualizar = new JButton("Actualizar");
         panelBuzonActualizar.add(lbBuzon);
-        panelBuzonActualizar.add(Box.createRigidArea(new Dimension(20, 10)));
+        panelBuzonActualizar.add(Box.createHorizontalGlue());
         panelBuzonActualizar.add(btnActualizar);
+        panelBuzonActualizar.setAlignmentX(LEFT_ALIGNMENT);
         panelCentro.add(panelBuzonActualizar);
 
         listaBuzon = new JList<>();
         listaBuzon.setFont(UtilidadesGUI.FUENTE);
+        listaBuzon.setMaximumSize(new Dimension(Integer.MAX_VALUE, 200));
+        listaBuzon.setPreferredSize(new Dimension(-1, 200));
+        listaBuzon.setAlignmentX(LEFT_ALIGNMENT);
         panelCentro.add(listaBuzon);
 
         JLabel lbContenidoDer = new JLabel("Contenido");
@@ -617,6 +627,7 @@ public class VistaPrincipal extends JFrame {
         taContenido.setFont(UtilidadesGUI.FUENTE);
         taContenido.setLineWrap(true);
         taContenido.setWrapStyleWord(true);
+        taContenido.setAlignmentX(LEFT_ALIGNMENT);
         panelCentro.add(taContenido);
 
         panelMensajeria.add(new JSeparator(SwingConstants.VERTICAL));
