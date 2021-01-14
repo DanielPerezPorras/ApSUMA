@@ -56,11 +56,19 @@ public class UtilidadesGUI {
                     resultado.append("&amp;");
                     break;
 
+                case '\'':
+                    resultado.append("&apos;");
+                    break;
+
                 default:
                     resultado.append(c);
             }
         }
         return resultado.toString();
+    }
+
+    public static String escaparComillas(String entrada) {
+        return entrada.replace("'", "\\'");
     }
 
 }
