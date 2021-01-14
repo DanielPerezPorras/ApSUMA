@@ -56,6 +56,10 @@ public class UtilidadesGUI {
                     resultado.append("&amp;");
                     break;
 
+                case '\'':
+                    resultado.append("&apos;");
+                    break;
+
                 default:
                     resultado.append(c);
             }
