@@ -72,6 +72,9 @@ public class ControladorPrincipal implements ActionListener, ListSelectionListen
                 break;
 
             case "ACTUALIZAR":
+                if (Sesion.getUsuarioLogueado().hayMensajesNuevos()){
+                    vista.cargarBuzon();
+                }
                 break;
 
             case "ENVIAR":
@@ -154,13 +157,19 @@ public class ControladorPrincipal implements ActionListener, ListSelectionListen
     @Override
     public void valueChanged(ListSelectionEvent e) {
         // Si no pongo el "ejecutandoListListener" tendré una StackOverflowException!
-        if (!e.getValueIsAdjusting() && !ejecutandoListListener) {
-            ejecutandoListListener = true;
+        if (vista.getTabbedPane() == 0){
+            System.out.println("maincra");
+            if (!e.getValueIsAdjusting() && !ejecutandoListListener) {
+                ejecutandoListListener = true;
 
-            vista.setUltimaListaSeleccionada(e);
-            vista.setTextoDescripcion(vista.getEventoSeleccionado());
+                vista.setUltimaListaSeleccionada(e);
+                vista.setTextoDescripcion(vista.getEventoSeleccionado());
 
-            ejecutandoListListener = false;
+                ejecutandoListListener = false;
+            }
+        } else {
+            System.out.println("bruh");
+            vista.cargarMensaje(vista.getSelectedIndex());
         }
     }
 

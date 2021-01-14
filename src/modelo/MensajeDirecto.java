@@ -1,5 +1,7 @@
 package modelo;
 
+import gui.UtilidadesGUI;
+
 import java.util.List;
 
 public class MensajeDirecto {
@@ -27,7 +29,7 @@ public class MensajeDirecto {
 
     public MensajeDirecto(int id){
         BD bd = new BD();
-        List<Object[]> mensajeList = bd.Select("SELECT emisor, receptor, contenido, asunto FROM Foro WHERE id = " + id + ";");
+        List<Object[]> mensajeList = bd.Select("SELECT emisor, receptor, contenido, asunto FROM MensajeDirecto WHERE idMensaje = " + id + ";");
         if (mensajeList.size() > 0) {
             Object[] user = mensajeList.get(0);
             this.emisor = (String)user[0];
@@ -37,6 +39,10 @@ public class MensajeDirecto {
         } else {
             throw new ErrorBD("No se ha encontrado un mensaje con id " + id);
         }
+    }
+
+    public String toString(){
+        return this.getEmisor() + " : " + this.getAsunto();
     }
 
     public String getAsunto() {

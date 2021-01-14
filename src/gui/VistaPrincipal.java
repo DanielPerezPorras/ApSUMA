@@ -35,10 +35,10 @@ public class VistaPrincipal extends JFrame {
     private JButton btnBuscar;
     private JComboBox cbUsuario;
     private JTextField tfAsunto;
-    private JTextField tfContenido;
+    private JTextArea taContenidoIzq;
     private JButton btnEnviar;
     private JButton btnActualizar;
-    private JTextField tfBuzon;
+    private JList<MensajeDirecto> listaBuzon;
     private JTextArea taContenido;
 
     public static void abrirVentana() {
@@ -58,6 +58,7 @@ public class VistaPrincipal extends JFrame {
         crearGUI();
         System.out.println("Cargando eventos...");
         cargarEventos();
+        cargarBuzon();
 
         if (Sesion.getPermisos() < 3) {
             cargarEventosUsuario();
@@ -67,6 +68,32 @@ public class VistaPrincipal extends JFrame {
             setNombreUsuario("(invitado)");
         }
 
+    }
+
+    public int getTabbedPane(){
+        return tabbedPane.getSelectedIndex();
+    }
+
+    public MensajeDirecto getSelectedIndex(){
+        return listaBuzon.getSelectedValue();
+    }
+
+    public void cargarMensaje(MensajeDirecto md){
+        System.out.println("eo");
+        if (md != null){
+            taContenido.setText(md.getContenido());
+        } else {
+            taContenido.setText("Seleccione un mensaje del buzón");
+        }
+    }
+
+    public void cargarBuzon(){
+        StringBuilder buzon = new StringBuilder();
+        Sesion.getUsuarioLogueado().cargarMensajes();
+        ArrayList<MensajeDirecto> mensajes = Sesion.getUsuarioLogueado().getMensajesDirectos();
+        MensajeDirecto[] arrayMD = new MensajeDirecto[mensajes.size()];
+        mensajes.toArray(arrayMD);
+        listaBuzon.setListData(arrayMD);
     }
 
     public String getBusqueda(){
@@ -87,14 +114,14 @@ public class VistaPrincipal extends JFrame {
     }
 
     public String getContenido(){
-        return tfContenido.getText();
+        return taContenidoIzq.getText();
     }
 
     public void limpiarEnviar(){
         tfBuscar.setText("");
         cbUsuario.setModel(new DefaultComboBoxModel(new String[1]));
         tfAsunto.setText("");
-        tfContenido.setText("");
+        taContenidoIzq.setText("");
     }
 
     public void controlador(ControladorPrincipal ctr) {
@@ -115,6 +142,7 @@ public class VistaPrincipal extends JFrame {
             cbNuevoEvento.addActionListener(ctr);
         }
 
+        listaBuzon.addListSelectionListener(ctr);
 
         datePicker.addActionListener(ctr);
 
@@ -547,8 +575,8 @@ public class VistaPrincipal extends JFrame {
         panelIzq.add(lbContenido);
         panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
         
-        tfContenido = new JTextField();
-        panelIzq.add(tfContenido);
+        taContenidoIzq = new JTextArea();
+        panelIzq.add(taContenidoIzq);
         panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
 
         btnEnviar = new JButton("Enviar");
@@ -577,8 +605,9 @@ public class VistaPrincipal extends JFrame {
         panelBuzonActualizar.add(btnActualizar);
         panelCentro.add(panelBuzonActualizar);
 
-        tfBuzon = new JTextField();
-        panelCentro.add(tfBuzon);
+        listaBuzon = new JList<>();
+        listaBuzon.setFont(UtilidadesGUI.FUENTE);
+        panelCentro.add(listaBuzon);
 
         JLabel lbContenidoDer = new JLabel("Contenido");
         lbContenidoDer.setFont(UtilidadesGUI.FUENTE);
