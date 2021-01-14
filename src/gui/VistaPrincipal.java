@@ -509,51 +509,46 @@ public class VistaPrincipal extends JFrame {
         panelMensajeria.setLayout(new BoxLayout(panelMensajeria, BoxLayout.X_AXIS));//setLayout(new BorderLayout());
         panelMensajeria.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
-        JPanel panelIzq = new JPanel();
+        // PANEL IZQUIERDO
+
+        JPanel panelIzq = new JPanel() {
+
+            public Dimension getSize() {
+                return new Dimension(320, super.getHeight());
+            }
+
+        };
         panelIzq.setBorder(BorderFactory.createEmptyBorder(0,0,0,20));
-        panelIzq.setMaximumSize(new Dimension(250, Integer.MAX_VALUE));
-        panelIzq.setPreferredSize(new Dimension(250, -1));
         panelIzq.setLayout(new BoxLayout(panelIzq,BoxLayout.Y_AXIS));
 
         JLabel lbEnviarMensaje = new JLabel("Enviar mensaje");
         lbEnviarMensaje.setFont(UtilidadesGUI.FUENTE_TITULOS);
         lbEnviarMensaje.setAlignmentX(Component.LEFT_ALIGNMENT);
-        panelIzq.add(lbEnviarMensaje);
-
-        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel panelBuscar = new JPanel();
         panelBuscar.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         panelBuscar.setLayout(new BoxLayout(panelBuscar, BoxLayout.X_AXIS));
         panelBuscar.setAlignmentX(Component.LEFT_ALIGNMENT);
-
         tfBuscar = new JTextField();
         tfBuscar.setFont(UtilidadesGUI.FUENTE);
         btnBuscar = new JButton("Buscar");
         btnBuscar.setFont(UtilidadesGUI.FUENTE);
-
         panelBuscar.add(tfBuscar);
         panelBuscar.add(Box.createRigidArea(new Dimension(10, 0)));
         panelBuscar.add(btnBuscar);
-        panelIzq.add(panelBuscar);
-
-        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel panelPara = new JPanel();
         panelPara.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         panelPara.setLayout(new BoxLayout(panelPara, BoxLayout.X_AXIS));
         panelPara.setAlignmentX(Component.LEFT_ALIGNMENT);
-
         JLabel lbPara = new JLabel("Para: ");
         lbPara.setFont(UtilidadesGUI.FUENTE);
         cbUsuario = new JComboBox<>();
         cbUsuario.setFont(UtilidadesGUI.FUENTE);
+        cbUsuario.setSize(280, 40);
         panelPara.add(lbPara);
-        panelPara.add(Box.createRigidArea(new Dimension(10, 0)));
+        panelPara.add(Box.createHorizontalGlue());
         panelPara.add(cbUsuario);
-
-        panelIzq.add(panelPara);
-        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel panelAsunto = new JPanel();
         panelAsunto.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
@@ -567,35 +562,47 @@ public class VistaPrincipal extends JFrame {
         panelAsunto.add(lbAsunto);
         panelAsunto.add(Box.createRigidArea(new Dimension(10, 0)));
         panelAsunto.add(tfAsunto);
-        panelIzq.add(panelAsunto);
-        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JLabel lbContenido = new JLabel("Contenido");
         lbContenido.setFont(UtilidadesGUI.FUENTE);
         lbContenido.setAlignmentX(LEFT_ALIGNMENT);
-        panelIzq.add(lbContenido);
-        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
-        
+
         taContenidoIzq = new JTextArea();
         taContenidoIzq.setFont(UtilidadesGUI.FUENTE);
-        taContenidoIzq.setAlignmentX(LEFT_ALIGNMENT);
         taContenidoIzq.setLineWrap(true);
         taContenidoIzq.setWrapStyleWord(true);
-        panelIzq.add(taContenidoIzq);
-        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+        JScrollPane scrollContenidoIzq = new JScrollPane(taContenidoIzq);
+        scrollContenidoIzq.setAlignmentX(LEFT_ALIGNMENT);
 
         btnEnviar = new JButton("Enviar");
         btnEnviar.setFont(UtilidadesGUI.FUENTE);
         btnEnviar.setAlignmentX(LEFT_ALIGNMENT);
+
+
+        panelIzq.add(lbEnviarMensaje);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelIzq.add(panelBuscar);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelIzq.add(panelPara);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelIzq.add(panelAsunto);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelIzq.add(lbContenido);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelIzq.add(scrollContenidoIzq);
+        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
         panelIzq.add(btnEnviar);
 
-        panelMensajeria.add(Box.createRigidArea(new Dimension(20, 10)));
-        panelMensajeria.add(panelIzq, BorderLayout.WEST);
-        panelMensajeria.add(Box.createRigidArea(new Dimension(20, 10)));
 
-        /* -- DERECHA -- */
+        // EL CENTRO
 
-        JPanel panelCentro = new JPanel();
+        JPanel panelCentro = new JPanel() {
+
+            public Dimension getPreferredSize() {
+                return new Dimension(getParent().getWidth() - 300, super.getPreferredSize().height);
+            }
+
+        };
         panelCentro.setLayout(new BoxLayout(panelCentro, BoxLayout.Y_AXIS));
         panelCentro.setBorder(BorderFactory.createEmptyBorder(0,20,0,0));
 
@@ -603,35 +610,52 @@ public class VistaPrincipal extends JFrame {
         panelBuzonActualizar.setBorder(BorderFactory.createEmptyBorder(0,0,20,0));;
         panelBuzonActualizar.setLayout(new BoxLayout(panelBuzonActualizar, BoxLayout.X_AXIS));
         JLabel lbBuzon = new JLabel("Buzón");
-        lbBuzon.setFont(UtilidadesGUI.FUENTE);
+        lbBuzon.setFont(UtilidadesGUI.FUENTE_TITULOS);
         btnActualizar = new JButton("Actualizar");
+        btnActualizar.setFont(UtilidadesGUI.FUENTE);
         panelBuzonActualizar.add(lbBuzon);
         panelBuzonActualizar.add(Box.createHorizontalGlue());
         panelBuzonActualizar.add(btnActualizar);
         panelBuzonActualizar.setAlignmentX(LEFT_ALIGNMENT);
-        panelCentro.add(panelBuzonActualizar);
+
 
         listaBuzon = new JList<>();
         listaBuzon.setFont(UtilidadesGUI.FUENTE);
-        listaBuzon.setMaximumSize(new Dimension(Integer.MAX_VALUE, 200));
-        listaBuzon.setPreferredSize(new Dimension(-1, 200));
-        listaBuzon.setAlignmentX(LEFT_ALIGNMENT);
-        panelCentro.add(listaBuzon);
+        JScrollPane scrollBuzon = new JScrollPane(listaBuzon);
+        scrollBuzon.setAlignmentX(LEFT_ALIGNMENT);
 
         JLabel lbContenidoDer = new JLabel("Contenido");
         lbContenidoDer.setFont(UtilidadesGUI.FUENTE);
         lbContenidoDer.setAlignmentX(LEFT_ALIGNMENT);
-        panelCentro.add(lbContenidoDer);
 
         taContenido = new JTextArea();
         taContenido.setFont(UtilidadesGUI.FUENTE);
         taContenido.setLineWrap(true);
         taContenido.setWrapStyleWord(true);
-        taContenido.setAlignmentX(LEFT_ALIGNMENT);
-        panelCentro.add(taContenido);
+        taContenido.setEditable(false);
+        JScrollPane scrollContenidoMensajeria = new JScrollPane(taContenido);
+        scrollContenidoMensajeria.setAlignmentX(LEFT_ALIGNMENT);
 
+        panelCentro.add(panelBuzonActualizar);
+        panelCentro.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelCentro.add(scrollBuzon);
+        panelCentro.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelCentro.add(lbContenidoDer);
+        panelCentro.add(Box.createRigidArea(new Dimension(0, 10)));
+        panelCentro.add(scrollContenidoMensajeria);
+
+
+        // -----------------
+
+        panelMensajeria.add(Box.createRigidArea(new Dimension(20, 0)));
+        panelMensajeria.add(panelIzq);
+        panelMensajeria.add(Box.createRigidArea(new Dimension(10, 0)));
         panelMensajeria.add(new JSeparator(SwingConstants.VERTICAL));
+        panelMensajeria.add(Box.createRigidArea(new Dimension(10, 0)));
+        panelMensajeria.add(Box.createHorizontalGlue());
         panelMensajeria.add(panelCentro);
+        panelMensajeria.add(Box.createRigidArea(new Dimension(20, 0)));
+
     }
 
     public void alternarCreacion() {
