@@ -488,51 +488,54 @@ public class VistaPrincipal extends JFrame {
         panelIzq.setLayout(new BoxLayout(panelIzq,BoxLayout.Y_AXIS));
 
         JLabel lbEnviarMensaje = new JLabel("Enviar mensaje");
-        lbEnviarMensaje.setFont(UtilidadesGUI.FUENTE);
+        lbEnviarMensaje.setFont(UtilidadesGUI.FUENTE_TITULOS);
+        lbEnviarMensaje.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelIzq.add(lbEnviarMensaje);
+
         panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        JPanel panelBarraBuscar = new JPanel();
-        panelBarraBuscar.setLayout(new BoxLayout(panelBarraBuscar, BoxLayout.Y_AXIS));
-
-
         JPanel panelBuscar = new JPanel();
-        panelBuscar.setPreferredSize(new Dimension(290, 40));
+        panelBuscar.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         panelBuscar.setLayout(new BoxLayout(panelBuscar, BoxLayout.X_AXIS));
-        btnBuscar = new JButton("Buscar");
+        panelBuscar.setAlignmentX(Component.LEFT_ALIGNMENT);
+
         tfBuscar = new JTextField();
-        //tfBuscar.setPreferredSize(new Dimension(290, 10));
-        panelBarraBuscar.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelBarraBuscar.add(tfBuscar);
-        panelBarraBuscar.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelBuscar.add(panelBarraBuscar);
-        panelBuscar.add(Box.createRigidArea(new Dimension(20, 10)));
+        tfBuscar.setFont(UtilidadesGUI.FUENTE);
+        btnBuscar = new JButton("Buscar");
+        btnBuscar.setFont(UtilidadesGUI.FUENTE);
+
+        panelBuscar.add(tfBuscar);
+        panelBuscar.add(Box.createRigidArea(new Dimension(10, 0)));
         panelBuscar.add(btnBuscar);
         panelIzq.add(panelBuscar);
+
         panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel panelPara = new JPanel();
-        panelPara.setPreferredSize(new Dimension(290, 40));
+        panelPara.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         panelPara.setLayout(new BoxLayout(panelPara, BoxLayout.X_AXIS));
-        JLabel lbPara = new JLabel("Para");
+
+        JLabel lbPara = new JLabel("Para: ");
         lbPara.setFont(UtilidadesGUI.FUENTE);
         cbUsuario = new JComboBox<>();
+        cbUsuario.setFont(UtilidadesGUI.FUENTE);
         panelPara.add(lbPara);
-        panelPara.add(Box.createRigidArea(new Dimension(20, 10)));
+        panelPara.add(Box.createRigidArea(new Dimension(10, 0)));
         panelPara.add(cbUsuario);
-        panelPara.add(Box.createRigidArea(new Dimension(0, 10)));
+
         panelIzq.add(panelPara);
         panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel panelAsunto = new JPanel();
-        panelAsunto.setPreferredSize(new Dimension(290, 40));
+        panelAsunto.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         panelAsunto.setLayout(new BoxLayout(panelAsunto, BoxLayout.X_AXIS));
+
         JLabel lbAsunto = new JLabel("Asunto");
         lbAsunto.setFont(UtilidadesGUI.FUENTE);
         tfAsunto = new JTextField();
-        tfAsunto.setPreferredSize(new Dimension(290, 50));
+        tfAsunto.setFont(UtilidadesGUI.FUENTE);
         panelAsunto.add(lbAsunto);
-        panelAsunto.add(Box.createRigidArea(new Dimension(20, 10)));
+        panelAsunto.add(Box.createRigidArea(new Dimension(10, 0)));
         panelAsunto.add(tfAsunto);
         panelIzq.add(panelAsunto);
         panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
@@ -548,10 +551,9 @@ public class VistaPrincipal extends JFrame {
         panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
 
         btnEnviar = new JButton("Enviar");
+        btnEnviar.setFont(UtilidadesGUI.FUENTE);
         btnEnviar.setAlignmentX(LEFT_ALIGNMENT);
-        btnEnviar.setPreferredSize(new Dimension(80, 20));
         panelIzq.add(btnEnviar);
-        panelIzq.add(Box.createRigidArea(new Dimension(0, 10)));
 
         panelMensajeria.add(Box.createRigidArea(new Dimension(20, 10)));
         panelMensajeria.add(panelIzq, BorderLayout.WEST);
