@@ -1,8 +1,11 @@
 package gui;
 
-import gui.contenido.*;
+import gui.contenido.DialogoNuevoEnlace;
+import gui.contenido.DialogoNuevoTexto;
 import modelo.*;
-import modelo.contenido.*;
+import modelo.contenido.Contenido;
+import modelo.contenido.ContenidoEnlace;
+import modelo.contenido.ContenidoTexto;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -11,15 +14,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ControladorEvento implements ActionListener, MouseListener, ListSelectionListener {
 
     private final VistaEvento vista;
-	private boolean ejecutandoListListener = false;
-	private Usuario seleccionado;
 
     public ControladorEvento(VistaEvento vista) {
         this.vista = vista;
@@ -29,30 +28,6 @@ public class ControladorEvento implements ActionListener, MouseListener, ListSel
     public void actionPerformed(ActionEvent e) {
     	String comando = e.getActionCommand();
     	switch (comando) {
-
-			case "BUSCAR":
-				BD bd = new BD();
-				String busqueda = vista.getTextBoxValue();
-
-				String[] nombres;
-				List<Object[]> listaResultado = bd.Select("SELECT * FROM Usuario WHERE nombreUsuario LIKE '%" + busqueda + "%';");
-				nombres = new String[listaResultado.size()];
-				int i = 0;
-				for (Object[] objects : listaResultado)
-				{
-					nombres[i] =  (String)objects[0];
-					i++;
-				}
-				if(listaResultado.size() < 1)
-				{
-					JOptionPane.showMessageDialog(vista, new Exception("Lo siento, no hay usuarios con ese nombre"),
-							"No hay usuarios con ese nombre", JOptionPane.ERROR_MESSAGE);
-				}else
-				{
-					vista.resultadoBusqueda(nombres);
-				}
-				vista.limpiar();
-				break;
     		case "VOLVER":
     			vista.dispose();
     			abreventana();
@@ -95,40 +70,6 @@ public class ControladorEvento implements ActionListener, MouseListener, ListSel
 						}
 						break;
 
-					case "Test":
-						DialogoNuevoTest dialogoNuevoTest = new DialogoNuevoTest(vista, "Test");
-						dialogoNuevoTest.setVisible(true);
-						if (dialogoNuevoTest.seHaConfirmado()) {
-							new ContenidoTest(vista.getEvento(), dialogoNuevoTest.getEnlace(), dialogoNuevoTest.getTextoVisible());
-							vista.refrescarContenido();
-						}
-						break;
-
-					case "Cuestionario":
-						DialogoNuevoTest dialogoNuevoCuestionario = new DialogoNuevoTest(vista, "Cuestionario");
-						dialogoNuevoCuestionario.setVisible(true);
-						if (dialogoNuevoCuestionario.seHaConfirmado()) {
-							new ContenidoTest(vista.getEvento(), dialogoNuevoCuestionario.getEnlace(), dialogoNuevoCuestionario.getTextoVisible());
-							vista.refrescarContenido();
-						}
-						break;
-					case "Documento":
-						DialogoNuevoDocumento dialogoNuevoDocumento = new DialogoNuevoDocumento(vista);
-						dialogoNuevoDocumento.setVisible(true);
-						if (dialogoNuevoDocumento.seHaConfirmado()) {
-							new ContenidoDocumento(vista.getEvento(), dialogoNuevoDocumento.getEnlace(), dialogoNuevoDocumento.getTextoVisible());
-							vista.refrescarContenido();
-						}
-						break;
-					case "Llamada":
-						DialogoNuevoLlamada dialogoNuevoLlamada = new DialogoNuevoLlamada(vista);
-						dialogoNuevoLlamada.setVisible(true);
-						if (dialogoNuevoLlamada.seHaConfirmado()) {
-							new ContenidoLlamada(vista.getEvento(), dialogoNuevoLlamada.getEnlace(), dialogoNuevoLlamada.getTextoVisible());
-							vista.refrescarContenido();
-						}
-						break;
-
 				}
 				break;
 
@@ -161,24 +102,80 @@ public class ControladorEvento implements ActionListener, MouseListener, ListSel
 					vista.refrescarContenido();
 				}
 				break;
-			case "ELIM_SANCION" :
-				bd = new BD();
-				bd.Update("UPDATE Usuario SET fechaSancion = null WHERE correo = '" + seleccionado.getCorreo() + "';");
-				JOptionPane.showMessageDialog(null, "Sanción Eliminada");
+
+			case "CREAR FORO":
+				String nombre = JOptionPane.showInputDialog(
+						vista,
+						"Introduzca un nombre para el foro",
+						"Crear foro",
+						JOptionPane.PLAIN_MESSAGE);
+				if (nombre != null) {
+					new Foro(nombre, vista.getEvento().getNombre());
+					vista.refrescarListaForos();
+				}
 				break;
-			case "SANCION" :
-				bd = new BD();
-				bd.Update("UPDATE Usuario SET fechaSancion = DATE_ADD(CURDATE(), INTERVAL 5 DAY) WHERE correo = '" + seleccionado.getCorreo() + "';");
-				JOptionPane.showMessageDialog(null, "Usuario Sancionado");
+
+			case "ELIMINAR FORO":
+				Foro sel = vista.getForoSeleccionado();
+				if (sel != null) {
+					String[] opciones = {"Sí", "No"};
+					int n = JOptionPane.showOptionDialog(vista,
+							"¿Desea eliminar el foro \"" + sel.getNombre() + "\"?",
+							"Eliminar foro",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[1]);
+					if (n == 0) {
+						sel.eliminarForo();
+						vista.refrescarListaForos();
+					}
+				} else {
+					JOptionPane.showMessageDialog(vista,
+							"Seleccione el foro que desea eliminar.",
+							"Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
 				break;
-			case "EXPULSAR" :
-				seleccionado.desapuntarseEvento(vista.getEvento());
-				JOptionPane.showMessageDialog(null, "Usuario Expulsado del Curso");
+
+			case "ACTUALIZAR":
+				Foro foroAActualizar = vista.getForoSeleccionado();
+				if (foroAActualizar != null) {
+
+					if (foroAActualizar.hayMensajesNuevos()) {
+						foroAActualizar.cargarMensajes();
+						vista.cargarMensajes();
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(vista,
+							"Seleccione un foro.",
+							"Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
 				break;
-			case "ANYADIR" :
-				seleccionado.apuntarseEvento(vista.getEvento());
-				JOptionPane.showMessageDialog(null, "Usuario añadido al Curso");
+
+			case "ENVIAR MENSAJE":
+				Foro selForo = vista.getForoSeleccionado();
+				if (selForo != null) {
+					String texto = vista.getTextoAEnviar();
+					if (texto != null && texto.length() > 0) {
+						new MensajeForo(texto, Sesion.getUsuarioLogueado().getCorreo(), selForo.getId());
+						selForo.cargarMensajes();
+						vista.cargarMensajes();
+						vista.vaciarTextoAEnviar();
+					} else {
+						JOptionPane.showMessageDialog(vista,
+								"Introduzca el texto a enviar.",
+								"Error",
+								JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					JOptionPane.showMessageDialog(vista,
+							"Seleccione el foro al que desea enviar.",
+							"Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
 				break;
+
 			default:
 
 				// Para eliminar un ítem de contenido
@@ -204,43 +201,24 @@ public class ControladorEvento implements ActionListener, MouseListener, ListSel
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseClicked(MouseEvent e) { }
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent e) { }
 
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseExited(MouseEvent e) { }
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mousePressed(MouseEvent e) { }
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseReleased(MouseEvent e) { }
 
 	@Override
+	// Cuando cambia la selección de la lista de foros.
 	public void valueChanged(ListSelectionEvent e) {
-		if (vista.selectedRows()>=1 && !e.getValueIsAdjusting() && !ejecutandoListListener) {
-			ejecutandoListListener = true;
-			seleccionado =  Usuario.buscarUsuario(vista.getValorLista());
-			vista.datosUsuario(seleccionado);
-
-			ejecutandoListListener = false;
-		}
+		vista.cargarMensajes();
 	}
+
 }
