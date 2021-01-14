@@ -38,7 +38,7 @@ public class Colaborador extends Usuario{
         propuesto.add(curso);
         super.getEventosInscritos().add(curso);
         BD bd = new BD();
-        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + nombre + "');");
+        bd.Insert("INSERT INTO UsuarioEvento (correo, nombre) VALUES('" + getCorreo() + "', '" + nombre + "');");
     }
 
     public void crearConferencia(Date dia, String nombre, String link) {
@@ -49,7 +49,7 @@ public class Colaborador extends Usuario{
         propuesto.add(conferencia);
         super.getEventosInscritos().add(conferencia);
         BD bd = new BD();
-        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + nombre + "');");
+        bd.Insert("INSERT INTO UsuarioEvento (correo, nombre) VALUES('" + getCorreo() + "', '" + nombre + "');");
     }
 
     public void crearActividad(Date dia, String nombre, String lugar) {
@@ -60,7 +60,7 @@ public class Colaborador extends Usuario{
         propuesto.add(actividad);
         super.getEventosInscritos().add(actividad);
         BD bd = new BD();
-        bd.Insert("INSERT INTO UsuarioEvento VALUES('" + getCorreo() + "', '" + nombre + "');");
+        bd.Insert("INSERT INTO UsuarioEvento (correo, nombre) VALUES('" + getCorreo() + "', '" + nombre + "');");
     }
 
     public void eliminarEvento(Evento evento){
